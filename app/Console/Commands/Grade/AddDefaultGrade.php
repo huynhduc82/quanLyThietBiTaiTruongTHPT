@@ -22,7 +22,7 @@ class AddDefaultGrade extends Command
     {
         try {
             $grade = [10,11,12];
-            $this->output->title('Starting import');
+            $this->output->title('Starting import Default Grade');
             DB::beginTransaction();
             foreach ($grade as $g)
             {

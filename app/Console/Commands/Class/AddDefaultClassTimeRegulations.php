@@ -35,7 +35,7 @@ class AddDefaultClassTimeRegulations extends Command
                 11 => ['start' => '15:45', 'end' => '16:30'],
                 12 => ['start' => '16:30', 'end' => '17:15'],
             ];
-            $this->output->title('Starting import');
+            $this->output->title('Starting import Class Time Regulations');
             DB::beginTransaction();
             $lesson = 1;
             foreach ($classTimeRegulations as $classTimeRegulation)
