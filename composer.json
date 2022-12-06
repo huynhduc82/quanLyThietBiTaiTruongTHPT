@@ -42,13 +42,7 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi",
-            "@php artisan optimize",
-            "@php artisan config:clear",
-            "@php artisan cache:clear",
-            "@php artisan migrate --force",
-            "@php artisan grade:import-default-grade",
-            "@php artisan class:import-class-time-regulations"
+            "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
