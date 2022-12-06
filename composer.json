@@ -52,6 +52,24 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "php-artisan-optimize": [
+            "@php artisan optimize"
+        ],
+        "php-artisan-config-clear": [
+            "@php artisan config:clear"
+        ],
+        "php-artisan-cache-clear": [
+            "@php artisan cache:clear"
+        ],
+        "php-artisan-migrate-force": [
+            "@php artisan migrate --force"
+        ],
+        "php-artisan-grade-import-default-grade": [
+            "@php artisan grade:import-default-grade"
+        ],
+        "php-artisan-class-import-class-time-regulations": [
+            "@php artisan class:import-class-time-regulations"
         ]
     },
     "extra": {
