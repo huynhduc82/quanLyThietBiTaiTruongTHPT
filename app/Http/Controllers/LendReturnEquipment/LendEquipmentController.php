@@ -35,7 +35,7 @@ class LendEquipmentController extends Controller
 
     public function show($id)
     {
-
+        $this->response('ok');
     }
 
 
