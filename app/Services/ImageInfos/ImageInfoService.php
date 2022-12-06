@@ -17,8 +17,9 @@ class ImageInfoService extends BaseService
 
     public function store(UploadedFile $images, $component): array
     {
+        $newName = 'IMG' . Str::random(27);
         $param = [];
-        $name = $images->getClientOriginalName();
+        $name = $newName;
         $path = Storage::putFileAs('public/images/'.$component,$images,$name);
         $url = asset(Storage::url($path));
         $data = getimagesize($images);
@@ -27,7 +28,7 @@ class ImageInfoService extends BaseService
 
         $param['image_name'] = $name;
         $param['image_path'] = $path;
-        $param['image_references'] = 'IMG' . Str::random(27);
+        $param['image_references'] = $newName;
         $param['disk'] = 'local';
         $param['image_type'] = $images->getClientMimeType();
         $param['image_size'] = $images->getSize();
