@@ -18,6 +18,6 @@ class LendReturnEquipmentDetailsRepo extends BaseEloquentRepository implements I
     {
         $query = $this->model->newQuery();
 
-        $query->create($input);
+        return $query->create($input);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\LendReturnEquipment;
 
 use App\Http\Controllers\Controller;
 use App\Services\LendReturnEquipments\LendEquipmentService;
+use App\Transformers\LendReturnEquipment\LendReturnEquipmentTransformer;
 use Illuminate\Support\Facades\Request;
 
 class LendEquipmentController extends Controller
@@ -17,10 +18,12 @@ class LendEquipmentController extends Controller
     public function index()
     {
         $include = [
-
+            'details',
+            'details.equipments'
         ];
 
-        $this->lendEquipmentService->index($include);
+        return $this->response($this->transform($this->lendEquipmentService->index($include),
+            LendReturnEquipmentTransformer::class, $include));
     }
 
     public function store(Request $request)
@@ -33,7 +36,7 @@ class LendEquipmentController extends Controller
         return $this->response($input);
     }
 
-    public function show($id)
+    public function show()
     {
         $this->response('ok');
     }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TypeOfEquipments\TypeOfEquipment;
+
 class HomeController extends Controller
 {
     /**
@@ -11,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
 
     /**
@@ -21,6 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $include = [
+            'imagesInfo'
+        ];
+        $type = TypeOfEquipment::query()->where('id',5)->with($include)->first();
+
+        return view('welcome')->with(compact('type'));
     }
 }

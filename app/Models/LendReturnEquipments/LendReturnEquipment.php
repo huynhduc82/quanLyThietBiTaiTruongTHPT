@@ -3,7 +3,14 @@
 namespace App\Models\LendReturnEquipments;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
+/**
+ *
+ * @property ?LendReturnEquipmentDetails $details
+ */
+
 
 class LendReturnEquipment extends BaseModel
 {
@@ -34,4 +41,9 @@ class LendReturnEquipment extends BaseModel
         'room_id',
         'return_appointment_time',
     ];
+
+    public function details() : HasMany
+    {
+        return $this->hasMany(LendReturnEquipmentDetails::class, 'lend_return_equipment_id', 'id');
+    }
 }

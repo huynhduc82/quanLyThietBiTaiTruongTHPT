@@ -19,6 +19,11 @@ class LendEquipmentService extends BaseService
         return ILendReturnEquipmentRepo::class;
     }
 
+    public function index($include = [])
+    {
+        return $this->repository->index($include);
+    }
+
     /**
      * @throws Exception
      */

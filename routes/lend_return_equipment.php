@@ -6,7 +6,7 @@ Route::group([
     'prefix' => 'lend',
 ], function (){
     Route::get('/',[
-        'uses' => 'Equipment\EquipmentController@index'
+        'uses' => 'LendReturnEquipment\LendEquipmentController@index'
     ]);
     Route::post('/', [
         'uses' => 'LendReturnEquipment\LendEquipmentController@store'

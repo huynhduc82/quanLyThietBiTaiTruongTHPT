@@ -5,6 +5,9 @@ namespace App\Repositories\Eloquents\LendReturnEquipment;
 use App\Models\LendReturnEquipments\LendReturnEquipment;
 use App\Repositories\BaseEloquentRepository;
 use App\Repositories\Contracts\LendReturnEquipment\ILendReturnEquipmentRepo;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class LendReturnEquipmentRepo extends BaseEloquentRepository implements ILendReturnEquipmentRepo
 {
@@ -14,7 +17,14 @@ class LendReturnEquipmentRepo extends BaseEloquentRepository implements ILendRet
         return LendReturnEquipment::class;
     }
 
-    public function store($input = [])
+    public function index($include = []): Collection|array
+    {
+        $query = $this->model->newQuery();
+
+        return $query->with($include)->orderBy('id')->get();
+    }
+
+    public function store($input = []): Model|Builder
     {
         $query = $this->model->newQuery();
 

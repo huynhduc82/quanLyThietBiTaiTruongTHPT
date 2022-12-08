@@ -35,7 +35,8 @@ class LendEquipmentDetailsService extends BaseService
 //            else {
 //                $lendDetails['equipment_status_id'] = null;
 //            }
-            $this->repository->store($lendDetails);
+            $result = $this->repository->store($lendDetails);
+            $result->equipments()->attach(array_values($item['equipment_details']));
         }
 
     }
