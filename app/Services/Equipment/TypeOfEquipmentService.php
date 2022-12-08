@@ -33,7 +33,7 @@ class TypeOfEquipmentService extends BaseService
 
         $images = $input['images'];
 
-        $param = app(ImageInfoService::class)->store($images, ImageInfo::COMPONENT_EQUIPMENT);
+        $param = app(ImageInfoService::class)->uploadDrive($images, ImageInfo::COMPONENT_EQUIPMENT);
 
         $input['images'] = $param['image_name'];
         $input['image_references'] = $param['image_references'];

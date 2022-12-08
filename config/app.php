@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\RepositoryServiceProvider;
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -187,7 +188,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
-        \App\Providers\RepositoryServiceProvider::class,
+        RepositoryServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -201,7 +202,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        App\Providers\GoogleDriveServiceProvider::class,
     ],
 
     /*
