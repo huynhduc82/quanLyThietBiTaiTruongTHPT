@@ -15,6 +15,6 @@ class EquipmentStatusController extends Controller
 
     public function store()
     {
-        $this->equipmentStatusService;
+        $this->equipmentStatusService();
     }
 }
