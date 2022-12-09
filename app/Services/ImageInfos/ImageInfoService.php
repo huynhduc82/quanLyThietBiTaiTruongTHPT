@@ -63,7 +63,7 @@ class ImageInfoService extends BaseService
         $param['image_name'] = $name;
         $param['image_path'] = $path;
         $param['image_references'] = $newName;
-        $param['disk'] = 'local';
+        $param['disk'] = 'google';
         $param['image_type'] = $images->getClientMimeType();
         $param['image_size'] = $images->getSize();
         $param['image_width'] = $width;
@@ -76,5 +76,14 @@ class ImageInfoService extends BaseService
         $result['image_references'] = $model->image_references;
 
         return $result;
+    }
+
+    public function deleteUnusedImage($path = null)
+    {
+        $gDisk = Storage::disk('google');
+
+        $gDisk->delete($path);
+
+        $this->repository->delete($path);
     }
 }

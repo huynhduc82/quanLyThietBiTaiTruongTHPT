@@ -52,7 +52,38 @@ class TypeOfEquipmentValidator extends AbstractValidator implements IValidatorRu
     public function ruleUpdate(): array
     {
         // TODO: Implement ruleUpdate() method.
-        return $this->ruleCreate();
+        return [
+            'name' => [
+                'nullable',
+                'string',
+                'min:' . TypeOfEquipment::NAME_MIN_LENGTH,
+                'max:' . TypeOfEquipment::NAME_MAX_LENGTH,
+            ],
+            'price' => [
+                'nullable',
+                'int',
+                'min:' . TypeOfEquipment::PRICE_MIN,
+                'max:' . TypeOfEquipment::PRICE_MAX,
+            ],
+            'unit' => [
+                'nullable',
+                'string',
+                'min:' . TypeOfEquipment::UNIT_MIN_LENGTH,
+                'max:' . TypeOfEquipment::UNIT_MAX_LENGTH,
+            ],
+            'describe' => [
+                'nullable',
+                'string',
+                'min:' . TypeOfEquipment::DESCRIBE_MIN_LENGTH,
+                'max:' . TypeOfEquipment::DESCRIBE_MAX_LENGTH,
+            ],
+            'images' => [
+                'nullable',
+                'image',
+                'mimes:' . implode(',', ImageInfo::IMAGE_MIMES),
+                'max:' . ImageInfo::IMAGE_MAX_SIZE,
+            ],
+        ];
     }
 
     public function message(): array

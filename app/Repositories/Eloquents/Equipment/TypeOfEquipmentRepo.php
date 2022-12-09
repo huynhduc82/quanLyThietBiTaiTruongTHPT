@@ -6,7 +6,9 @@ use App\Models\Equipments\Equipment;
 use App\Models\TypeOfEquipments\TypeOfEquipment;
 use App\Repositories\BaseEloquentRepository;
 use App\Repositories\Contracts\Equipment\ITypeOfEquipmentRepo;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class TypeOfEquipmentRepo extends BaseEloquentRepository implements ITypeOfEquipmentRepo
 {
@@ -23,18 +25,18 @@ class TypeOfEquipmentRepo extends BaseEloquentRepository implements ITypeOfEquip
         return $query->with($withs)->orderBy('id')->get();
     }
 
-    public function details($id = null, array $withs = [])
+    public function details($id = null, array $withs = []): Collection|array
     {
         $query = $this->model->newQuery();
 
         return $query->where('id', $id)->with($withs)->get();
     }
 
-    public function store(array $input=[])
+    public function store(array $input=[]): Model|Builder
     {
         $query = $this->model->newQuery();
-        $model = $query->create($input);
-        return $model;
+
+        return $query->create($input);
     }
 
     public function updateQuantity($id)
@@ -47,5 +49,12 @@ class TypeOfEquipmentRepo extends BaseEloquentRepository implements ITypeOfEquip
             ->where('can_rent', '=', true)
             ->count();
         $query->update(['quantity' => $quantity, 'quantity_can_rent' => $quantityCanRent]);
+    }
+
+    public function edit($input, $id): int
+    {
+        $query = $this->model->newQuery();
+
+        return $query->where('id', $id)->update($input);
     }
 }

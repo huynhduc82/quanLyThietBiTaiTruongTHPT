@@ -5,35 +5,44 @@ namespace App\Repositories\Eloquents\Equipment;
 use App\Models\Equipments\Equipment;
 use App\Repositories\BaseEloquentRepository;
 use App\Repositories\Contracts\Equipment\IEquipmentRepo;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class EquipmentRepo extends BaseEloquentRepository implements IEquipmentRepo
 {
-    public function model()
+    public function model(): string
     {
         // TODO: Implement model() method.
         return Equipment::class;
     }
 
-    public function index(array $with=[]): Collection
+    public function index(array $include = []): Collection
     {
         $query = $this->model->newQuery();
 
-        return $query->with($with)->orderBy('id')->get();
+        return $query->with($include)->orderBy('id')->get();
     }
 
-    public function store($input)
+    public function details($id, array $include = []): Model|Builder|null
     {
         $query = $this->model->newQuery();
 
-        $model = $query->create($input);
-
-        return $model;
+        return $query->where('id', $id)->with($include)->first();
     }
 
-    public function edit($input)
+    public function store($input): Model|Builder
     {
-        return $this->model->newQuery()->with(['equipments', 'equipments.status'])->get();
+        $query = $this->model->newQuery();
+
+        return $query->create($input);
+    }
+
+    public function edit($input, $id): int
+    {
+        $query = $this->model->newQuery();
+
+        return $query->where('id', $id)->update($input);
     }
 
 
@@ -44,5 +53,10 @@ class EquipmentRepo extends BaseEloquentRepository implements IEquipmentRepo
         $query->whereIn('id', $input);
 
         $query->update(['can_rent' => !$rent]);
+    }
+
+    public function delete($id): int
+    {
+        return $this->model->newQuery()->where('id', $id)->delete();
     }
 }

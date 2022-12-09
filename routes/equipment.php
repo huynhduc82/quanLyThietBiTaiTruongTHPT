@@ -8,11 +8,17 @@ Route::group([
     Route::get('/',[
         'uses' => 'Equipment\EquipmentController@index'
     ]);
+    Route::get('/{id}',[
+        'uses' => 'Equipment\EquipmentController@details'
+    ]);
     Route::post('/', [
         'uses' => 'Equipment\EquipmentController@store'
     ]);
     Route::post('/{id}', [
         'uses' => 'Equipment\EquipmentController@edit'
+    ]);
+    Route::delete('/{id}', [
+        'uses' => 'Equipment\EquipmentController@delete'
     ]);
 });
 

@@ -20,9 +20,14 @@ class EquipmentService extends BaseService
         return IEquipmentRepo::class;
     }
 
-    public function index(array $withs = [])
+    public function index(array $include = [])
     {
-        return $this->repository->index($withs);
+        return $this->repository->index($include);
+    }
+
+    public function details($id = 0, $include = [])
+    {
+        return $this->repository->details($id, $include);
     }
 
     public function store($input)
@@ -40,9 +45,11 @@ class EquipmentService extends BaseService
         return $result;
     }
 
-    public function edit($input)
+    public function edit($input, $id)
     {
-        return $this->repository->edit($input);
+        $this->validatorCreateUpdate($input, $id);
+
+        return $this->repository->edit($input, $id);
     }
 
     protected function validatorCreateUpdate(array $params = [], ?int $id = null): void
@@ -73,5 +80,10 @@ class EquipmentService extends BaseService
         {
             app(TypeOfEquipmentService::class)->updateQuantity($id);
         }
+    }
+
+    public function delete($id): int
+    {
+        return $this->repository->delete($id);
     }
 }

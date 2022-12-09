@@ -55,4 +55,20 @@ class TypeOfEquipmentService extends BaseService
     {
         return $this->repository->updateQuantity($id);
     }
+
+    public function edit($input = [], $id = 0)
+    {
+        $this->validatorCreateUpdate($input, $id);
+
+        if(!empty($input['images'])) {
+            $images = $input['images'];
+
+            $param = app(ImageInfoService::class)->uploadDrive($images, ImageInfo::COMPONENT_EQUIPMENT);
+
+            $input['images'] = $param['image_name'];
+            $input['image_references'] = $param['image_references'];
+        }
+
+        return $this->repository->edit($input, $id);
+    }
 }
