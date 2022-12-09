@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('equipment_reservation_pivot', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->integer('equipment_id')->unsigned()->index();
-            $table->foreign('equipment_id')->references('id')->on('equipment')
+            $table->integer('equipment_details')->unsigned()->index();
+            $table->foreign('equipment_details')->references('id')->on('equipment')
                 ->onDelete('cascade');
 
             $table->integer('reservation_id')->unsigned()->index();

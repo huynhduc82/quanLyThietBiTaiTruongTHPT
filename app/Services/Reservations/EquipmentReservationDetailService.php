@@ -22,7 +22,7 @@ class EquipmentReservationDetailService extends BaseService
             $reservationDetails['equipment_reservation_id'] = $input['equipment_reservation_id'];
             $reservationDetails['type_of_equipment_id'] =  $item['type_of_equipment_id'];
             $reservationDetails['quantity'] = count($item['equipment_details']);
-            $reservationDetails['equipment_id'] = implode(Helpers::SEPARATOR, $item['equipment_details']);
+            $reservationDetails['equipment_details'] = implode(Helpers::SEPARATOR, $item['equipment_details']);
             $result = $this->repository->store($reservationDetails);
             $result->equipments()->attach(array_values($item['equipment_details']));
         }

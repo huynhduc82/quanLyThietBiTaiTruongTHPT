@@ -28,4 +28,11 @@ class EquipmentReservationRepo extends BaseEloquentRepository
 
         return $query->create($input);
     }
+
+    public function updateStatus($id, $status)
+    {
+        $query = $this->model->newQuery();
+
+        $query->where('id', $id)->update(['status' => $status]);
+    }
 }

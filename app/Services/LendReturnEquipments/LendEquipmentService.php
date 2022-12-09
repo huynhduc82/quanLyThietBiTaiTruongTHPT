@@ -2,9 +2,11 @@
 
 namespace App\Services\LendReturnEquipments;
 
+use App\Models\EquipmentReservations\EquipmentReservation;
 use App\Models\LendReturnEquipments\LendReturnEquipment;
 use App\Repositories\Contracts\LendReturnEquipment\ILendReturnEquipmentRepo;
 use App\Services\Equipment\EquipmentService;
+use App\Services\Reservations\EquipmentReservationService;
 use App\Services\Response\BaseService;
 use App\Validators\LendReturnEquipments\LendEquipmentValidators;
 use Exception;
@@ -56,5 +58,21 @@ class LendEquipmentService extends BaseService
             $validator->setId($id);
         }
         $validator->passesOrFail($id === null ? ValidatorInterface::RULE_CREATE : ValidatorInterface::RULE_UPDATE);
+    }
+
+    public function approved($id = 0)
+    {
+        $reservation = EquipmentReservation::with('details')->find($id)->toArray();
+
+        $result = $this->repository->store(Arr::only($reservation, LendReturnEquipment::ATTRIBUTE_TO_LEND));
+
+        $input['lend_return_equipment_id'] = $result->id;
+        $input['equipment'] = $reservation['details'];
+
+        app(LendEquipmentDetailsService::class)->store($input);
+
+        app(EquipmentService::class)->updateRentQuantity($input, true);
+
+        app(EquipmentReservationService::class)->updateStatus($id, EquipmentReservation::STATUS_APPROVED);
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Equipment;
 use App\Http\Controllers\Controller;
 use App\Services\Equipment\TypeOfEquipmentService;
 use App\Transformers\Equipment\TypeOfEquipmentTransformers;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class TypeOfEquipmentController extends Controller
 {
@@ -41,7 +41,7 @@ class TypeOfEquipmentController extends Controller
 
     public function store(Request $request)
     {
-        $input = $request::all();
+        $input = $request->all();
 
         $result = $this->typeOfEquipmentService->store($input);
 

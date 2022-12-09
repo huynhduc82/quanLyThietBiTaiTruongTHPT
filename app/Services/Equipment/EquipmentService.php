@@ -2,6 +2,7 @@
 
 namespace App\Services\Equipment;
 
+use App\Helpers;
 use App\Models\EquipmentStatus\EquipmentStatus;
 use App\Repositories\Contracts\Equipment\IEquipmentRepo;
 use App\Services\EquipmentStatus\EquipmentStatusServices;
@@ -9,6 +10,7 @@ use App\Services\Response\BaseService;
 use App\Validators\Equipment\EquipmentValidator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\Array_;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
 class EquipmentService extends BaseService
@@ -59,6 +61,10 @@ class EquipmentService extends BaseService
         $ids = [];
         foreach ($input['equipment'] as $item)
         {
+            if (!$item['equipment_details'] instanceof Array_)
+            {
+                $item['equipment_details'] = explode(Helpers::SEPARATOR, $item['equipment_details']);
+            }
             $param[] = $item['equipment_details'];
             $ids[] = $item['type_of_equipment_id'];
         }

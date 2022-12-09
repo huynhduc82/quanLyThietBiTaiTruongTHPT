@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('pick_up_time');
             $table->timestamp('return_appointment_time')->nullable();
             $table->string('status');
+            $table->bigInteger('room_id')->nullable();
             $table->bigInteger('created_by')->nullable()->unsigned();
             $table->bigInteger('updated_by')->nullable()->unsigned();
             $table->softDeletes();

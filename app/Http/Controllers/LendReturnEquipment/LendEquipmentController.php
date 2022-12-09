@@ -41,6 +41,13 @@ class LendEquipmentController extends Controller
         $this->response('ok');
     }
 
+    public function approved($id)
+    {
+        $this->lendEquipmentService->approved($id);
+
+        return $this->response('',200);
+    }
+
 
     public function update()
     {

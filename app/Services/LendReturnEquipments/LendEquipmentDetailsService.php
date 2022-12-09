@@ -5,6 +5,7 @@ namespace App\Services\LendReturnEquipments;
 use App\Helpers;
 use App\Repositories\Contracts\LendReturnEquipment\ILendReturnEquipmentDetailsRepo;
 use App\Services\Response\BaseService;
+use phpDocumentor\Reflection\Types\Array_;
 
 class LendEquipmentDetailsService extends BaseService
 {
@@ -18,9 +19,14 @@ class LendEquipmentDetailsService extends BaseService
     {
         foreach ($input['equipment'] as $item)
         {
+            if (!$item['equipment_details'] instanceof Array_)
+            {
+                $item['equipment_details'] = explode(Helpers::SEPARATOR, $item['equipment_details']);
+            }
             $lendDetails = [];
             $lendDetails['lend_return_equipment_id'] = $input['lend_return_equipment_id'];
             $lendDetails['type_of_equipment_id'] =  $item['type_of_equipment_id'];
+
             $lendDetails['quantity'] = count($item['equipment_details']);
 //            if(!empty($item['recoup_id'])) {
 //                $lendDetails['recoup_id'] = implode(Helpers::SEPARATOR, $item['recoup_id']);

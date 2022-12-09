@@ -11,8 +11,8 @@ Route::group([
     Route::post('/', [
         'uses' => 'LendReturnEquipment\LendEquipmentController@store'
     ]);
-    Route::post('/{id}', [
-        'uses' => 'Equipment\EquipmentController@edit'
+    Route::post('/approved/{id}', [
+        'uses' => 'LendReturnEquipment\LendEquipmentController@approved'
     ]);
 });
 

@@ -22,7 +22,7 @@ class EquipmentReservationDetails extends BaseModel
     protected $fillable = [
         'type_of_equipment_id',
         'equipment_reservation_id',
-        'equipment_id',
+        'equipment_details',
         'quantity',
     ];
 
@@ -32,7 +32,7 @@ class EquipmentReservationDetails extends BaseModel
             Equipment::class,
             'equipment_reservation_pivot',
             'reservation_id',
-            'equipment_id');
+            'equipment_details');
     }
 
     public function getEquipmentIDAttribute($value): ?array

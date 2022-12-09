@@ -18,7 +18,7 @@ return new class extends Migration
             $table->bigInteger('equipment_reservation_id');
             $table->bigInteger('type_of_equipment_id');
             $table->bigInteger('quantity')->unsigned();
-            $table->string('equipment_id')->nullable();
+            $table->string('equipment_details')->nullable();
             $table->bigInteger('created_by')->nullable()->unsigned();
             $table->bigInteger('updated_by')->nullable()->unsigned();
             $table->softDeletes();
