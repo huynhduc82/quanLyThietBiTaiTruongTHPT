@@ -67,9 +67,9 @@
                             </div>
                             <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
                                 <div class="bg-gradient-primary border-radius-lg h-100">
-                                    <img src="../assets/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
+                                    <img src="{{asset('assets/img/shapes/waves-white.svg')}}" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
                                     <div class="position-relative d-flex align-items-center justify-content-center h-100">
-                                        <img class="w-100 position-relative z-index-2 pt-4" src="../assets/img/illustrations/rocket-white.png" alt="rocket">
+                                        <img class="w-100 position-relative z-index-2 pt-4" src="{{asset('assets/img/illustrations/rocket-white.png" alt="rocket')}}">
                                     </div>
                                 </div>
                             </div>
@@ -463,7 +463,7 @@
     }
 </script>
 <!-- Github buttons -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script async defer src="{{asset('https://buttons.github.io/buttons.js')}}"></script>
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.6"></script>
+<script src="{{asset('assets/js/soft-ui-dashboard.min.js?v=1.0.6')}}"></script>
 @endsection
