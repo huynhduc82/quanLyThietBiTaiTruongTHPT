@@ -27,7 +27,7 @@
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div>
-                                                <img src="../assets/img/5.jpg" class="avatar avatar-sm me-3" alt="user1">
+                                                <img src="{{asset('assets/img/5.jpg')}}" class="avatar avatar-sm me-3" alt="user1">
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">Ống nghiệm</h6>
