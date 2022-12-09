@@ -4,8 +4,6 @@
     <section class="content">
         @yield('content')
     </section>
-</main>
-
 @yield('footer_scripts')
 
 @endsection
