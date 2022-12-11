@@ -18,7 +18,7 @@ class EquipmentReservation extends BaseModel
     const STATUS_APPROVED = 'approved';
     const STATUS_CHECKED = 'checked';
 
-    const ATTRIBUTE_STORE = [
+    const ATTRIBUTE = [
         'user_id',
         'pick_up_time',
         'return_appointment_time',

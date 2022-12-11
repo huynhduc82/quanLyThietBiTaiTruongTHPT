@@ -30,7 +30,7 @@ class EquipmentReservationService extends BaseService
         try {
 //            DB::beginTransaction();
             $input['status'] = EquipmentReservation::STATUS_NEW;
-            $result = $this->repository->store(Arr::only($input, EquipmentReservation::ATTRIBUTE_STORE));
+            $result = $this->repository->store(Arr::only($input, EquipmentReservation::ATTRIBUTE));
 
             $input['equipment_reservation_id'] = $result->id;
             app(EquipmentReservationDetailService::class)->store($input);
@@ -59,5 +59,29 @@ class EquipmentReservationService extends BaseService
     public function updateStatus($id, $status)
     {
         $this->repository->updateStatus($id, $status);
+    }
+
+    public function details($id = 0, $include = [])
+    {
+        return $this->repository->details($id, $include);
+    }
+
+    public function edit($input = [], $id = 0)
+    {
+        $this->validatorCreateUpdate($input);
+
+        $result = $this->repository->edit(Arr::only($input, EquipmentReservation::ATTRIBUTE));
+
+        if(!empty($input['equipment'])) {
+            app(EquipmentReservationDetailService::class)->edit($input, $id);
+        }
+
+        return $result;
+    }
+
+    public function delete($id = 0)
+    {
+        app(EquipmentReservationDetailService::class)->delete($id);
+        return $this->repository->delete($id);
     }
 }

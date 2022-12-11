@@ -25,6 +25,6 @@ class ImageInfoRepo extends BaseEloquentRepository
     {
         $query = $this->model->newQuery();
 
-        return $query->where('path', $path)->delete();
+        return $query->where('image_path', $path)->delete();
     }
 }

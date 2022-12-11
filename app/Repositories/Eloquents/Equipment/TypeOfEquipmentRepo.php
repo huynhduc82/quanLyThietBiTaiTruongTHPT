@@ -57,4 +57,11 @@ class TypeOfEquipmentRepo extends BaseEloquentRepository implements ITypeOfEquip
 
         return $query->where('id', $id)->update($input);
     }
+
+    public function delete($id)
+    {
+        $query = $this->model->newQuery();
+
+        return $query->where('id', $id)->delete();
+    }
 }
