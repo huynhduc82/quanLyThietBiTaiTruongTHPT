@@ -26,6 +26,17 @@ class EquipmentReservationController extends Controller
             EquipmentReservationTransformer::class, $include));
     }
 
+    public function details($id)
+    {
+        $include = [
+            'details',
+            'details.equipments'
+        ];
+
+        return $this->response($this->transform($this->equipmentReservationService->details($id, $include),
+            EquipmentReservationTransformer::class, $include));
+    }
+
     public function store(Request $request)
     {
         $input = $request::all();
@@ -35,19 +46,19 @@ class EquipmentReservationController extends Controller
         return $this->response($result);
     }
 
-    public function show($id)
+    public function edit(Request $request, $id)
     {
+        $input = $request::all();
 
+        $result = $this->equipmentReservationService->edit($input, $id);
+
+        return $this->response($result);
     }
 
-
-    public function update()
+    public function delete($id)
     {
+        $result = $this->equipmentReservationService->delete($id);
 
-    }
-
-    public function destroy($id)
-    {
-
+        return $this->response($result);
     }
 }

@@ -58,8 +58,10 @@ class TypeOfEquipmentController extends Controller
         return $this->response($result);
     }
 
-    public function delete()
+    public function delete($id)
     {
+        $result = $this->typeOfEquipmentService->delete($id);
 
+        return $this->response($result);
     }
 }

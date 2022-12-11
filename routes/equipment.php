@@ -37,4 +37,7 @@ Route::group([
     Route::post('/{id}', [
         'uses' => 'Equipment\TypeOfEquipmentController@edit'
     ]);
+    Route::delete('/{id}', [
+        'uses' => 'Equipment\TypeOfEquipmentController@delete'
+    ]);
 });
