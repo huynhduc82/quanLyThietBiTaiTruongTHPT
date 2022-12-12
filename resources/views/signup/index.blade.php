@@ -1,82 +1,9 @@
-<!--
-=========================================================
-* Soft UI Dashboard - v1.0.6
-=========================================================
+@extends('layout.signlayout')
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
 
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('assets/img/apple-icon.png')}}">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-    <title>
-        Soft UI Dashboard by Creative Tim
-    </title>
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <!-- Nucleo Icons -->
-    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- CSS Files -->
-    <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
-</head>
-
-<body class="">
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
-    <div class="container-fluid pe-0">
-        <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="../pages/dashboard.html">
-            Quản lý thiết bị
-        </a>
-        <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon mt-2">
-          <span class="navbar-toggler-bar bar1"></span>
-          <span class="navbar-toggler-bar bar2"></span>
-          <span class="navbar-toggler-bar bar3"></span>
-        </span>
-        </button>
-        <div class="collapse navbar-collapse" id="navigation">
-            <ul class="navbar-nav mx-auto ms-xl-auto me-xl-7">
-                <li class="nav-item">
-                    <a class="nav-link me-2" href="../pages/profile.html">
-                        <i class="fa fa-user opacity-6 text-dark me-1"></i>
-                        Hồ Sơ
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link me-2" href="../pages/sign-up.html">
-                        <i class="fas fa-user-circle opacity-6 text-dark me-1"></i>
-                        Đăng ký
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link me-2" href="../pages/sign-in.html">
-                        <i class="fas fa-key opacity-6 text-dark me-1"></i>
-                        Đăng Nhập
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<!-- End Navbar -->
-<main class="main-content  mt-0">
+@section('content')
     <section class="min-vh-100 mb-8">
-        <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('../assets/img/6.jpg');">
+        <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url({{ asset('assets/img/6.jpg') }});">
 
             <div class="container">
                 <div class="row justify-content-center">
@@ -96,8 +23,8 @@
                         </div>
                         <div class="row px-xl-5 px-sm-4 px-3">
                             <div class="col-3 ms-auto px-1">
-                                <a class="btn btn-outline-light w-100" href="javascript:;">
-                                    <svg width="24px" height="32px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink32">
+                                <a class="btn btn-outline-light w-100" href="javascript:">
+                                    <svg width="24px" height="32px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink32">
                                         <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                             <g id="facebook-3" transform="translate(3.000000, 3.000000)" fill-rule="nonzero">
                                                 <circle fill="#3C5A9A" cx="29.5091719" cy="29.4927506" r="29.4882047"></circle>
@@ -107,20 +34,9 @@
                                     </svg>
                                 </a>
                             </div>
-                            <div class="col-3 px-1">
-                                <a class="btn btn-outline-light w-100" href="javascript:;">
-                                    <svg width="24px" height="32px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <g id="apple-black" transform="translate(7.000000, 0.564551)" fill="#000000" fill-rule="nonzero">
-                                                <path d="M40.9233048,32.8428307 C41.0078713,42.0741676 48.9124247,45.146088 49,45.1851909 C48.9331634,45.4017274 47.7369821,49.5628653 44.835501,53.8610269 C42.3271952,57.5771105 39.7241148,61.2793611 35.6233362,61.356042 C31.5939073,61.431307 30.2982233,58.9340578 25.6914424,58.9340578 C21.0860585,58.9340578 19.6464932,61.27947 15.8321878,61.4314159 C11.8738936,61.5833617 8.85958554,57.4131833 6.33064852,53.7107148 C1.16284874,46.1373849 -2.78641926,32.3103122 2.51645059,22.9768066 C5.15080028,18.3417501 9.85858819,15.4066355 14.9684701,15.3313705 C18.8554146,15.2562145 22.5241194,17.9820905 24.9003639,17.9820905 C27.275104,17.9820905 31.733383,14.7039812 36.4203248,15.1854154 C38.3824403,15.2681959 43.8902255,15.9888223 47.4267616,21.2362369 C47.1417927,21.4153043 40.8549638,25.1251794 40.9233048,32.8428307 M33.3504628,10.1750144 C35.4519466,7.59650964 36.8663676,4.00699306 36.4804992,0.435448578 C33.4513624,0.558856931 29.7884601,2.48154382 27.6157341,5.05863265 C25.6685547,7.34076135 23.9632549,10.9934525 24.4233742,14.4943068 C27.7996959,14.7590956 31.2488715,12.7551531 33.3504628,10.1750144" id="Shape"></path>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </a>
-                            </div>
                             <div class="col-3 me-auto px-1">
-                                <a class="btn btn-outline-light w-100" href="javascript:;">
-                                    <svg width="24px" height="32px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <a class="btn btn-outline-light w-100" href="javascript:">
+                                    <svg width="24px" height="32px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                         <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                             <g id="google-icon" transform="translate(3.000000, 2.000000)" fill-rule="nonzero">
                                                 <path d="M57.8123233,30.1515267 C57.8123233,27.7263183 57.6155321,25.9565533 57.1896408,24.1212666 L29.4960833,24.1212666 L29.4960833,35.0674653 L45.7515771,35.0674653 C45.4239683,37.7877475 43.6542033,41.8844383 39.7213169,44.6372555 L39.6661883,45.0037254 L48.4223791,51.7870338 L49.0290201,51.8475849 C54.6004021,46.7020943 57.8123233,39.1313952 57.8123233,30.1515267" id="Path" fill="#4285F4"></path>
@@ -152,13 +68,13 @@
                                 <div class="form-check form-check-info text-left">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
                                     <label class="form-check-label" for="flexCheckDefault">
-                                        Tôi đồng ý <a href="javascript:;" class="text-dark font-weight-bolder">Điều kiện  </a>
+                                        Tôi đồng ý <a href="javascript:" class="text-dark font-weight-bolder">Điều kiện  </a>
                                     </label>
                                 </div>
                                 <div class="text-center">
                                     <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">Đăng ký</button>
                                 </div>
-                                <p class="text-sm mt-3 mb-0">Bạn đã có tài khoản? <a href="javascript:;" class="text-dark font-weight-bolder">Đăng nhập</a></p>
+                                <p class="text-sm mt-3 mb-0">Bạn đã có tài khoản? <a href="javascript:" class="text-dark font-weight-bolder">Đăng nhập</a></p>
                             </form>
                         </div>
                     </div>
@@ -171,19 +87,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center mb-4 mt-2">
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
+                    <a href="javascript:" target="_blank" class="text-secondary me-xl-4 me-4">
                         <span class="text-lg fab fa-dribbble"></span>
                     </a>
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
+                    <a href="javascript:" target="_blank" class="text-secondary me-xl-4 me-4">
                         <span class="text-lg fab fa-twitter"></span>
                     </a>
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
+                    <a href="javascript:" target="_blank" class="text-secondary me-xl-4 me-4">
                         <span class="text-lg fab fa-instagram"></span>
                     </a>
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
+                    <a href="javascript:" target="_blank" class="text-secondary me-xl-4 me-4">
                         <span class="text-lg fab fa-pinterest"></span>
                     </a>
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
+                    <a href="javascript:" target="_blank" class="text-secondary me-xl-4 me-4">
                         <span class="text-lg fab fa-github"></span>
                     </a>
                 </div>
@@ -191,12 +107,13 @@
         </div>
     </footer>
     <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-</main>
+@endsection
+@section('footer_scripts')
 <!--   Core JS Files   -->
-<script src="../assets/js/core/popper.min.js"></script>
-<script src="../assets/js/core/bootstrap.min.js"></script>
-<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-<script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -209,7 +126,5 @@
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.6"></script>
-</body>
-
-</html>
+<script src="{{ asset('assets/js/soft-ui-dashboard.min.js?v=1.0.6') }}"></script>
+@endsection

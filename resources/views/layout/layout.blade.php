@@ -33,7 +33,7 @@
     <div class="">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link  active" href="../pages/dashboard.html">
+                <a class="nav-link  active" href="{{ route('dashboard.index') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 45 40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>shop </title>
@@ -53,7 +53,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/ThietBi.html">
+                <a class="nav-link  " href="{{ route('equipment.index') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>office</title>
@@ -73,7 +73,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/qlDatTruoc.html">
+                <a class="nav-link  " href="{{ route('reservation.index') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 43 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>credit-card</title>
@@ -93,7 +93,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/qlMuonTra.html">
+                <a class="nav-link  " href="{{ route('lend_return.index') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 43 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>credit-card</title>
@@ -113,7 +113,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/qlSuaChua.html">
+                <a class="nav-link  " href="{{ route('maintenance.index') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 43 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>credit-card</title>
@@ -133,7 +133,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/qlThanhLy.html">
+                <a class="nav-link  " href="{{ route('liquidation.index') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 43 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>credit-card</title>
@@ -156,7 +156,7 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Quản lý chung</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/qlGioHoc.html">
+                <a class="nav-link  " href="{{ route('class.time.index') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>customer-support</title>
@@ -177,7 +177,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/qlSoLuong.html">
+                <a class="nav-link  " href="{{ route('equipment.number.index') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>customer-support</title>
@@ -198,7 +198,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/qlMonHoc.html">
+                <a class="nav-link  " href="{{ route('course.index') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>customer-support</title>
@@ -219,7 +219,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/qlPhongHoc.html">
+                <a class="nav-link  " href="{{ route('room.index') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>customer-support</title>
@@ -240,7 +240,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/qlKhoiLop.html">
+                <a class="nav-link  " href="{{ route('grade.index') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>customer-support</title>
@@ -264,7 +264,7 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Tài Khoản</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/profile.html">
+                <a class="nav-link  " href="{{ route('profile.index') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>customer-support</title>
@@ -285,7 +285,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/sign-in.html">
+                <a class="nav-link  " href="{{ route('signin.index') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 40 44" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>document</title>
@@ -305,7 +305,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/sign-up.html">
+                <a class="nav-link  " href="{{ route('signup.index') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="20px" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>spaceship</title>
