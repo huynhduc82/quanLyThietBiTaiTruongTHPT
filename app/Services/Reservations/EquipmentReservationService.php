@@ -35,7 +35,7 @@ class EquipmentReservationService extends BaseService
             $input['equipment_reservation_id'] = $result->id;
             app(EquipmentReservationDetailService::class)->store($input);
 
-            app(EquipmentService::class)->updateRentQuantity($input, true);
+            app(EquipmentService::class)->updateRentQuantity($input['equipment'], true);
 
 //            DB::commit();
             return 'OK';
@@ -73,7 +73,8 @@ class EquipmentReservationService extends BaseService
         $result = $this->repository->edit(Arr::only($input, EquipmentReservation::ATTRIBUTE));
 
         if(!empty($input['equipment'])) {
-            app(EquipmentReservationDetailService::class)->edit($input, $id);
+            $model = EquipmentReservation::with('details')->find($id);
+            app(EquipmentReservationDetailService::class)->edit($input, $id, $model);
         }
 
         return $result;
@@ -81,7 +82,8 @@ class EquipmentReservationService extends BaseService
 
     public function delete($id = 0)
     {
-        app(EquipmentReservationDetailService::class)->delete($id);
+        $model = EquipmentReservation::with('details')->find($id);
+        app(EquipmentReservationDetailService::class)->delete($model);
         return $this->repository->delete($id);
     }
 }

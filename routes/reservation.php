@@ -15,9 +15,9 @@ Route::group([
         'uses' => 'Reservations\EquipmentReservationController@store'
     ]);
     Route::post('/{id}', [
-        'uses' => 'Equipment\EquipmentController@edit'
+        'uses' => 'Reservations\EquipmentReservationController@edit'
     ]);
     Route::delete('/{id}', [
-        'uses' => 'Equipment\EquipmentController@delete'
+        'uses' => 'Reservations\EquipmentReservationController@delete'
     ]);
 });

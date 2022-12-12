@@ -31,7 +31,7 @@ class ReturnEquipmentService extends BaseService
 //            $input['lend_return_equipment_id'] = $result->id;
 //            app(LendEquipmentDetailsService::class)->store($input);
 
-            app(EquipmentService::class)->updateRentQuantity($input, false);
+            app(EquipmentService::class)->updateRentQuantity($input['equipment'], false);
             DB::commit();
         } catch (Exception $e)
         {
