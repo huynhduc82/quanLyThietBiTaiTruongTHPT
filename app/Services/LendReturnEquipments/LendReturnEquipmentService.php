@@ -113,12 +113,15 @@ class LendReturnEquipmentService extends BaseService
         return $this->repository->details($include, $id);
     }
 
-    public function edit($id, )
+    public function edit($id, $input)
     {
-//        dd(app(ReturnEquipmentValidators::class));
+        $this->validatorCreateUpdateLend($input);
         $model = LendReturnEquipment::query()->where('id', $id)->with('details')->first();
-        app(LendEquipmentDetailsService::class)->edit($model);
-//        $this->repository->edit
+        if (!empty($model->return_time)) {
+            $this->validatorCreateUpdateReturn($input);
+        }
+        app(LendEquipmentDetailsService::class)->edit($model, $input);
+        $this->repository->edit($id, Arr::only($input, Arr::flatten(LendReturnEquipment::ATTRIBUTE_TO_UPDATE)));
     }
 
     public function delete($id)

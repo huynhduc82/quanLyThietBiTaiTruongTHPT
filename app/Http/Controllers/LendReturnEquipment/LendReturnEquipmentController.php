@@ -68,11 +68,11 @@ class LendReturnEquipmentController extends Controller
     }
 
 
-    public function edit(Request $request)
+    public function edit(Request $request, $id)
     {
         $input = $request::all();
 
-//        $this->service->edit($id, $input);
+        $this->service->edit($id, $input);
     }
 
     public function delete($id)
