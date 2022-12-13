@@ -53,13 +53,11 @@ class EquipmentReservationDetailService extends BaseService
 
     public function delete($model = null)
     {
-        $param = [];
         $details = $model->details;
         foreach ($details as $item)
         {
             $item->equipments()->detach();
             $this->repository->delete($item->id);
-            $param[] = explode(Helpers::SEPARATOR, $item->equipment_details);
         }
 
         app(EquipmentService::class)->updateRentQuantity($details, false);

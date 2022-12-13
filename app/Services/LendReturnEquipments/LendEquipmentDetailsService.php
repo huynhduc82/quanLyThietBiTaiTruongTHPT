@@ -4,6 +4,7 @@ namespace App\Services\LendReturnEquipments;
 
 use App\Helpers;
 use App\Repositories\Contracts\LendReturnEquipment\ILendReturnEquipmentDetailsRepo;
+use App\Services\Equipment\EquipmentService;
 use App\Services\Response\BaseService;
 use phpDocumentor\Reflection\Types\Array_;
 
@@ -44,6 +45,17 @@ class LendEquipmentDetailsService extends BaseService
             $result = $this->repository->store($lendDetails);
             $result->equipments()->attach(array_values($item['equipment_details']));
         }
+    }
 
+    public function delete($model = null)
+    {
+        $details = $model->details;
+        foreach ($details as $item)
+        {
+            $item->equipments()->detach();
+            $this->repository->destroy($model->id, $item->type_of_equipment_id);
+        }
+
+        app(EquipmentService::class)->updateRentQuantity($details, false);
     }
 }
