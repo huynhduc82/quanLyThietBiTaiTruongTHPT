@@ -5,30 +5,35 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'prefix' => 'lend',
 ], function (){
-    Route::get('/',[
-        'uses' => 'LendReturnEquipment\LendEquipmentController@index'
-    ]);
     Route::post('/', [
-        'uses' => 'LendReturnEquipment\LendEquipmentController@store'
+        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@store'
     ]);
     Route::post('/approved/{id}', [
-        'uses' => 'LendReturnEquipment\LendEquipmentController@approved'
+        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@approved'
     ]);
 });
 
 Route::group([
     'prefix' => 'return',
 ], function (){
+    Route::post('/{id}', [
+        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@store'
+    ]);
+});
+
+Route::group([
+    'prefix' => 'lend-return',
+], function (){
     Route::get('/',[
-        'uses' => 'Equipment\TypeOfEquipmentController@index'
+        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@index'
     ]);
     Route::get('/{id}',[
-        'uses' => 'Equipment\TypeOfEquipmentController@detail'
+        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@details'
     ]);
-    Route::post('/', [
-        'uses' => 'LendReturnEquipment\ReturnEquipmentController@store'
+    Route::post('/{id}',[
+        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@edit'
     ]);
-    Route::post('/{id}', [
-        'uses' => 'LendReturnEquipment\ReturnEquipmentController@store'
+    Route::delete('/{id}',[
+        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@delete'
     ]);
 });

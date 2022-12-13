@@ -9,11 +9,13 @@ use App\Services\Equipment\EquipmentService;
 use App\Services\Reservations\EquipmentReservationService;
 use App\Services\Response\BaseService;
 use App\Validators\LendReturnEquipments\LendEquipmentValidators;
+use App\Validators\LendReturnEquipments\ReturnEquipmentValidators;
 use Exception;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
-class LendEquipmentService extends BaseService
+class LendReturnEquipmentService extends BaseService
 {
     public function repository(): string
     {
@@ -29,13 +31,13 @@ class LendEquipmentService extends BaseService
     /**
      * @throws Exception
      */
-    public function store($input = [])
+    public function lend($input = [])
     {
-        $this->validatorCreateUpdate($input);
+        $this->validatorCreateUpdateLend($input);
 
         try {
 //            DB::beginTransaction();
-            $result = $this->repository->store(Arr::only($input, LendReturnEquipment::ATTRIBUTE_TO_LEND));
+            $result = $this->repository->lend(Arr::only($input, LendReturnEquipment::ATTRIBUTE_TO_LEND));
 
             $input['lend_return_equipment_id'] = $result->id;
             app(LendEquipmentDetailsService::class)->store($input);
@@ -50,7 +52,7 @@ class LendEquipmentService extends BaseService
         }
     }
 
-    protected function validatorCreateUpdate(array $params = [], ?int $id = null): void
+    protected function validatorCreateUpdateLend(array $params = [], ?int $id = null): void
     {
         $validator = app(LendEquipmentValidators::class);
         $validator->with($params);
@@ -74,5 +76,55 @@ class LendEquipmentService extends BaseService
         app(EquipmentService::class)->updateRentQuantity($input['equipment'], true);
 
         app(EquipmentReservationService::class)->updateStatus($id, EquipmentReservation::STATUS_APPROVED);
+    }
+
+    public function return($input, $id)
+    {
+        $this->validatorCreateUpdateReturn($input);
+
+        try {
+            DB::beginTransaction();
+            $this->repository->return(Arr::only($input, LendReturnEquipment::ATTRIBUTE_TO_RETURN), $id);
+
+//            $input['lend_return_equipment_id'] = $result->id;
+//            app(LendEquipmentDetailsService::class)->store($input);
+
+            app(EquipmentService::class)->updateRentQuantity($input['equipment'], false);
+            DB::commit();
+        } catch (Exception $e)
+        {
+            DB::rollBack();
+            throw new Exception($e);
+        }
+    }
+
+    protected function validatorCreateUpdateReturn(array $params = [], ?int $id = null): void
+    {
+        $validator = app(ReturnEquipmentValidators::class);
+        $validator->with($params);
+        if ($id) {
+            $validator->setId($id);
+        }
+        $validator->passesOrFail($id === null ? ValidatorInterface::RULE_CREATE : ValidatorInterface::RULE_UPDATE);
+    }
+
+    public function details($include, $id)
+    {
+        return $this->repository->details($include, $id);
+    }
+
+    public function edit($id, )
+    {
+//        dd(app(ReturnEquipmentValidators::class));
+        $model = LendReturnEquipment::query()->where('id', $id)->with('details')->first();
+        app(LendEquipmentDetailsService::class)->edit($model);
+//        $this->repository->edit
+    }
+
+    public function delete($id)
+    {
+        $model = LendReturnEquipment::query()->where('id', $id)->with('details')->first();
+        app(LendEquipmentDetailsService::class)->delete($model);
+        return $this->repository->delete($id);
     }
 }

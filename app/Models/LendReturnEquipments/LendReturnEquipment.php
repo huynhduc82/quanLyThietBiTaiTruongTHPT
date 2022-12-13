@@ -28,6 +28,11 @@ class LendReturnEquipment extends BaseModel
         'returner_id',
     ];
 
+    const ATTRIBUTE_TO_UPDATE = [
+        self::ATTRIBUTE_TO_LEND,
+        self::ATTRIBUTE_TO_RETURN
+    ];
+
     use SoftDeletes;
 
     protected $table = 'lend_return_equipment';

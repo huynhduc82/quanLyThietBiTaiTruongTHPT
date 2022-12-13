@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('quantity')->unsigned();
             $table->string('equipment_status_id')->nullable();
             $table->string('recoup_id')->nullable();
-            $table->string('equipment_id')->nullable();
+            $table->string('equipment_details')->nullable();
             $table->bigInteger('created_by')->nullable()->unsigned();
             $table->bigInteger('updated_by')->nullable()->unsigned();
             $table->softDeletes();

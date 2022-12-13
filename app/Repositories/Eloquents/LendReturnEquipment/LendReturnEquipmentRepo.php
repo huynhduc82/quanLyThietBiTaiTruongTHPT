@@ -24,7 +24,7 @@ class LendReturnEquipmentRepo extends BaseEloquentRepository implements ILendRet
         return $query->with($include)->orderBy('id')->get();
     }
 
-    public function store($input = []): Model|Builder
+    public function lend($input = []): Model|Builder
     {
         $query = $this->model->newQuery();
 
@@ -36,5 +36,19 @@ class LendReturnEquipmentRepo extends BaseEloquentRepository implements ILendRet
         $query = $this->model->newQuery();
 
         $query->where('id', $id)->update($input);
+    }
+
+    public function details($include, $id)
+    {
+        $query = $this->model->newQuery();
+
+        return $query->where('id', $id)->with($include)->first();
+    }
+
+    public function delete($id)
+    {
+        $query = $this->model->newQuery();
+
+        return $query->where('id', $id)->delete();
     }
 }
