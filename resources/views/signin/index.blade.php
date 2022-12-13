@@ -5,8 +5,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/logo.jpg') }}">
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/logo.jpg') }}">
     <title>
         Soft UI Dashboard by Creative Tim
     </title>
@@ -76,7 +76,7 @@
                         <div class="card card-plain mt-8">
                             <div class="card-header pb-0 text-left bg-transparent">
                                 <h3 class="font-weight-bolder text-info text-gradient">Xin chào</h3>
-                                <p class="mb-0">Vui lòng nhập email và password để đăng nhập !!!!!!</p>
+                                <p class="mb-0">Vui lòng nhập email và password để đăng nhập !</p>
                             </div>
                             <div class="card-body">
                                 <form role="form">
@@ -89,10 +89,6 @@
                                         <input type="email" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon" required>
                                         <span class="show-btn"><i class="fas fa-eye"></i></span>
                                     </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
-                                        <label class="form-check-label" for="rememberMe">Ghi nhớ </label>
-                                    </div>
                                     <div class="text-center">
                                         <button type="button" class="btn bg-gradient-info w-100 mt-4 mb-0">Đăng nhập</button>
                                     </div>
@@ -100,7 +96,7 @@
                             </div>
                             <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                 <p class="mb-4 text-sm mx-auto">
-                                    Bạn chưa có tài khoản???
+                                    Bạn chưa có tài khoản?
                                     <a href="javascript:;" class="text-info text-gradient font-weight-bold">Đăng ký</a>
                                 </p>
                             </div>
@@ -108,7 +104,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-                            <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../assets/img/6.jpg')"></div>
+                            <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url({{asset('assets/img/122.jpg')}})"></div>
                         </div>
                     </div>
                 </div>
@@ -117,26 +113,7 @@
     </section>
 </main>
 <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-<footer class="footer py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mx-auto text-center mb-4 mt-2">
-                <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-                    <span class="text-lg fab fa-dribbble"></span>
-                </a>
-                <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-                    <span class="text-lg fab fa-twitter"></span>
-                </a>
-                <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-                    <span class="text-lg fab fa-instagram"></span>
-                </a>
-                <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-                    <span class="text-lg fab fa-pinterest"></span>
-                </a>
-                <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-                    <span class="text-lg fab fa-github"></span>
-                </a>
-            </div>
+<footer class="
         </div>
     </div>
 </footer>

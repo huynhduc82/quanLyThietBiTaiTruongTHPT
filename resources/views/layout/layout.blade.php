@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png') }}">
-    <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/logo.jpg') }}">
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/logo.jpg') }}">
     <title>
         Quản lý thiết bị
     </title>
@@ -21,12 +21,12 @@
     <link id="pagestyle" href="{{ asset('assets/css/soft-ui-dashboard.css?v=1.0.6') }}" rel="stylesheet" />
 </head>
 <body class="g-sidenav-show  bg-gray-100">
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main" style="background-image: url({{asset('assets/img/21.jpg')}});">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html " target="_blank">
-            <img src="{{ asset('assets/img/logo-ct-dark.png') }}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">Bảng điều khiển giao diện</span>
+            <img src="{{ asset('assets/img/logo.jpg') }}" class="navbar-brand-img h-100" alt="main_logo">
+            <span class="ms-1 font-weight-bold">Quản lý thiết bị</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -334,7 +334,7 @@
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl position-sticky blur shadow-blur mt-4 left-auto top-1 z-index-sticky" id="navbarBlur" navbar-scroll="true">
         <div class="container-fluid py-1 px-3">
 
-            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar" style="background-image: url({{asset('assets/img/21.jpg')}});">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     <div class="input-group">
                         <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
@@ -348,24 +348,8 @@
                             <span class="d-sm-inline d-none">Đăng nhập</span>
                         </a>
                     </li>
-                    <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                        <a href="javascript:" class="nav-link text-body p-0" id="iconNavbarSidenav">
-                            <div class="sidenav-toggler-inner">
-                                <i class="sidenav-toggler-line"></i>
-                                <i class="sidenav-toggler-line"></i>
-                                <i class="sidenav-toggler-line"></i>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item px-3 d-flex align-items-center">
-                        <a href="javascript:" class="nav-link text-body p-0">
-                            <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-                        </a>
-                    </li>
                     <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                        <a href="javascript:" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-bell cursor-pointer"></i>
-                        </a>
+
                         <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                             <li>
                                 <a class="dropdown-item border-radius-md" href="javascript:">
