@@ -51,4 +51,11 @@ class LendReturnEquipmentRepo extends BaseEloquentRepository implements ILendRet
 
         return $query->where('id', $id)->delete();
     }
+
+    public function edit($id, $input)
+    {
+        $query = $this->model->newQuery();
+
+        return $query->where('id', $id)->update($input);
+    }
 }
