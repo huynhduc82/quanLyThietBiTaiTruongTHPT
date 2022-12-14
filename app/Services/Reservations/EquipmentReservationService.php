@@ -30,12 +30,12 @@ class EquipmentReservationService extends BaseService
         try {
 //            DB::beginTransaction();
             $input['status'] = EquipmentReservation::STATUS_NEW;
-            $result = $this->repository->store(Arr::only($input, EquipmentReservation::ATTRIBUTE_STORE));
+            $result = $this->repository->store(Arr::only($input, EquipmentReservation::ATTRIBUTE));
 
             $input['equipment_reservation_id'] = $result->id;
             app(EquipmentReservationDetailService::class)->store($input);
 
-            app(EquipmentService::class)->updateRentQuantity($input, true);
+            app(EquipmentService::class)->updateRentQuantity($input['equipment'], true);
 
 //            DB::commit();
             return 'OK';
@@ -59,5 +59,31 @@ class EquipmentReservationService extends BaseService
     public function updateStatus($id, $status)
     {
         $this->repository->updateStatus($id, $status);
+    }
+
+    public function details($id = 0, $include = [])
+    {
+        return $this->repository->details($id, $include);
+    }
+
+    public function edit($input = [], $id = 0)
+    {
+        $this->validatorCreateUpdate($input);
+
+        $result = $this->repository->edit(Arr::only($input, EquipmentReservation::ATTRIBUTE));
+
+        if(!empty($input['equipment'])) {
+            $model = EquipmentReservation::with('details')->find($id);
+            app(EquipmentReservationDetailService::class)->edit($input, $id, $model);
+        }
+
+        return $result;
+    }
+
+    public function delete($id = 0)
+    {
+        $model = EquipmentReservation::with('details')->find($id);
+        app(EquipmentReservationDetailService::class)->delete($model);
+        return $this->repository->delete($id);
     }
 }

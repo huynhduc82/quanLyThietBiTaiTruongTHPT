@@ -3,6 +3,7 @@
 namespace App\Services\Equipment;
 
 use App\Models\ImageInfos\ImageInfo;
+use App\Models\TypeOfEquipments\TypeOfEquipment;
 use App\Repositories\Contracts\Equipment\ITypeOfEquipmentRepo;
 use App\Services\ImageInfos\ImageInfoService;
 use App\Services\Response\BaseService;
@@ -61,6 +62,9 @@ class TypeOfEquipmentService extends BaseService
         $this->validatorCreateUpdate($input, $id);
 
         if(!empty($input['images'])) {
+            $model = TypeOfEquipment::query()->where('id', $id)->with('imagesInfo')->first();
+            app(ImageInfoService::class)->deleteUnusedImage($model->imagesInfo->image_path);
+
             $images = $input['images'];
 
             $param = app(ImageInfoService::class)->uploadDrive($images, ImageInfo::COMPONENT_EQUIPMENT);
@@ -70,5 +74,14 @@ class TypeOfEquipmentService extends BaseService
         }
 
         return $this->repository->edit($input, $id);
+    }
+
+    public function delete($id = 0)
+    {
+        $model = TypeOfEquipment::query()->where('id', $id)->with('imagesInfo')->first();
+
+        app(ImageInfoService::class)->deleteUnusedImage($model->imagesInfo->image_path);
+
+        return $this->repository->delete($id);
     }
 }

@@ -49,9 +49,9 @@ class ImageInfoService extends BaseService
         $gDisk = Storage::disk('google');
 
         $type = $images->getClientOriginalExtension();
-        $newName = 'IMG' . Str::random(27);
+        $newName = 'IMG' . Str::random(27) . '.' . $type;
 
-        $path = $gDisk->putFileAs($component, $images, $newName. '.' . $type);
+        $path = $gDisk->putFileAs($component, $images, $newName);
 
         $param = [];
         $name = $newName;

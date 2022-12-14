@@ -19,4 +19,18 @@ class EquipmentReservationDetailRepo extends BaseEloquentRepository
 
         return $query->create($input);
     }
+
+    public function edit($id, $input = [], $eid = 0)
+    {
+        $query = $this->model->newQuery();
+
+        return $query->where('type_of_equipment_id', $id)->where('equipment_reservation_id', $eid)->update($input);
+    }
+
+    public function delete($id)
+    {
+        $query = $this->model->newQuery();
+
+        return $query->where('id', $id)->delete();
+    }
 }

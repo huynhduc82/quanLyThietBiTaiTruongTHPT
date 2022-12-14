@@ -20,4 +20,19 @@ class LendReturnEquipmentDetailsRepo extends BaseEloquentRepository implements I
 
         return $query->create($input);
     }
+
+    public function destroy($lrId, $typeId)
+    {
+        $query = $this->model->newQuery();
+
+        return $query->where('lend_return_equipment_id', $lrId)
+            ->where('type_of_equipment_id', $typeId)->delete();
+    }
+
+    public function edit($id, $input, $typeId)
+    {
+        $query = $this->model->newQuery();
+
+        return $query->where('lend_return_equipment_id', $id)->where('type_of_equipment_id', $typeId)->update($input);
+    }
 }

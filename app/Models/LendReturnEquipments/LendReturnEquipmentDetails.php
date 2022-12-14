@@ -21,7 +21,7 @@ class LendReturnEquipmentDetails extends BaseModel
 
     protected $fillable = [
         'lend_return_equipment_id',
-        'equipment_id',
+        'equipment_details',
         'quantity',
         'equipment_status_id',
         'recoup_id',

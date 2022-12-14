@@ -10,7 +10,6 @@ use App\Services\Response\BaseService;
 use App\Validators\Equipment\EquipmentValidator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use phpDocumentor\Reflection\Types\Array_;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
 class EquipmentService extends BaseService
@@ -66,9 +65,9 @@ class EquipmentService extends BaseService
     {
         $param = [];
         $ids = [];
-        foreach ($input['equipment'] as $item)
+        foreach ($input as $item)
         {
-            if (!$item['equipment_details'] instanceof Array_)
+            if (!is_array($item['equipment_details']))
             {
                 $item['equipment_details'] = explode(Helpers::SEPARATOR, $item['equipment_details']);
             }
@@ -85,5 +84,12 @@ class EquipmentService extends BaseService
     public function delete($id): int
     {
         return $this->repository->delete($id);
+    }
+
+    public function updateRentQuantityOld($id, $ids, $rent)
+    {
+        $this->repository->updateRentQuantity($ids, $rent);
+
+        app(TypeOfEquipmentService::class)->updateQuantity($id);
     }
 }
