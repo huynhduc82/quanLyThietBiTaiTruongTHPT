@@ -34,7 +34,7 @@
                             <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                 <p class="mb-4 text-sm mx-auto">
                                     Bạn chưa có tài khoản???
-                                    <a href="javascript:" class="text-info text-gradient font-weight-bold">Đăng ký</a>
+                                    <a href="{{ route('signup.index') }}" class="text-info text-gradient font-weight-bold">Đăng ký</a>
                                 </p>
                             </div>
                         </div>
@@ -76,10 +76,7 @@
 <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
 <!--   Core JS Files   -->
 @section('footer_scripts')
-<script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
-<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('core/js/signin.js')}}"></script>
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
