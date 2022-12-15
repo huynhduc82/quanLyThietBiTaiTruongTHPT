@@ -60,13 +60,25 @@
                         <div class="card-body">
                             <form role="form text-left" id="frm-signup">
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="email-addon" id="name">
+                                    <input type="text" class="form-control" placeholder="Họ tên" aria-label="Name" aria-describedby="email-addon" id="name">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Số điện thoại" aria-label="Name" aria-describedby="email-addon" id="phone_number">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Ngày sinh" aria-label="Name" aria-describedby="email-addon" id="date_of_birth" onblur="(this.value === '' ? this.type='text' : this.type='date')" onfocus="(this.type='date') ">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Địa chỉ" aria-label="Name" aria-describedby="email-addon" id="address">
                                 </div>
                                 <div class="mb-3">
                                     <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email-addon" id="email">
                                 </div>
                                 <div class="mb-3">
-                                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon" id="password">
+                                    <input type="password" class="form-control" placeholder="Mật khẩu" aria-label="Password" aria-describedby="password-addon" id="password">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" aria-label="Password" aria-describedby="password-addon" id="password_confirmation">
                                 </div>
                                 <div class="form-check form-check-info text-left">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
@@ -74,8 +86,11 @@
                                         Tôi đồng ý <a href="javascript:" class="text-dark font-weight-bolder">Điều kiện  </a>
                                     </label>
                                 </div>
+                                <div id="submit_error" class="help-block with-errors color-red">
+
+                                </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Đăng ký</button>
+                                    <button type="submit" class="btn bg-gradient-dark w-100 my-1 mb-1">Đăng ký</button>
                                 </div>
                                 <p class="text-sm mt-3 mb-0">Bạn đã có tài khoản? <a href="{{ route('signin.index') }}" class="text-dark font-weight-bolder">Đăng nhập</a></p>
                             </form>
@@ -113,6 +128,7 @@
 @endsection
 @section('footer_scripts')
 <!--   Core JS Files   -->
+<script type="text/javascript" src="{{ asset('core/common.js')}}"></script>
 <script type="text/javascript" src="{{ asset('core/js/signup.js')}}"></script>
 <script>
     var win = navigator.platform.indexOf('Win') > -1;

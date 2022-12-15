@@ -15,7 +15,7 @@
                 <div class="col-auto my-auto">
                     <div class="h-100">
                         <h5 class="mb-1">
-                            Quỳnh
+                            {{ Auth::user()->name }}
                         </h5>
                         <p class="mb-0 font-weight-bold text-sm">
                             CEO
@@ -112,10 +112,10 @@
                         </p>
                         <hr class="horizontal gray-light my-4">
                         <ul class="list-group">
-                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Họ và tên:</strong> &nbsp; Huỳnh Phát</li>
-                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">SĐT:</strong> &nbsp; 0338627345</li>
-                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; huynhphat7345@mail.com</li>
-                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Quốc gia:</strong> &nbsp; Việt Nam</li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Họ và tên:</strong> {{Auth::user()->name}} </li>
+                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">SĐT:</strong> {{Auth::user()->phone_number}}</li>
+                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> {{Auth::user()->email}}</li>
+                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Địa chỉ:</strong> {{Auth::user()->address}}</li>
                             <li class="list-group-item border-0 ps-0 pb-0">
                                 <strong class="text-dark text-sm">Liên hệ khác:</strong> &nbsp;
                                 <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="https://www.facebook.com/huynhphat9286:;">
