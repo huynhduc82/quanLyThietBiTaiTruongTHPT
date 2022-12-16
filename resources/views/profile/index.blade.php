@@ -1,5 +1,9 @@
 @extends('layout.layout')
 
+@section('title')
+    Hồ sơ người dùng
+@endsection
+
 @section('content')
     <div class="container-fluid">
         <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('{{asset('assets/img/curved-images/curved0.jpg')}}'); background-position-y: 50%;">
