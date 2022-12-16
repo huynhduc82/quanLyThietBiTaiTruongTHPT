@@ -446,7 +446,7 @@
                                 <a class="dropdown-item border-radius-md" href="javascript:;">
                                     <div class="d-flex py-1">
                                         <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-                                            <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <svg width="12px" height="12px" viewBox="0 0 43 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                                 <title>credit-card</title>
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                     <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -483,44 +483,12 @@
         @yield('content')
     </section>
 </main>
+
 @yield('footer_scripts')
-</body>
-<script>
-    const iconNavbarSidenav = document.getElementById("iconNavbarSidenav"),
-        iconSidenav = document.getElementById("iconSidenav"),
-        sidenav = document.getElementById("sidenav-main");
-    let body = document.getElementsByTagName("body")[0],
-        className = "g-sidenav-pinned";
-
-    function toggleSidenav() {
-        body.classList.contains(className) ? (body.classList.remove(className), setTimeout(function() {
-            sidenav.classList.remove("bg-white")
-        }, 100), sidenav.classList.remove("bg-transparent")) : (body.classList.add(className), sidenav.classList.add("bg-white"), sidenav.classList.remove("bg-transparent"), iconSidenav.classList.remove("d-none"))
-    }
-    iconNavbarSidenav && iconNavbarSidenav.addEventListener("click", toggleSidenav), iconSidenav && iconSidenav.addEventListener("click", toggleSidenav);
-</script>
-
-<script>
-    const container = document.getElementById('sidenav-main');
-    const btns = container.getElementsByClassName("nav-link");
-
-    // Loop through the buttons and add the active class to the current/clicked button
-    for (let i = 0; i < btns.length; i++) {
-        if (btns[i].href === window.location.href) {
-            btns[i].className += " active";
-            document.getElementById('title-first').innerText = btns[i].innerText
-            document.getElementById('title-second').innerText = btns[i].innerText
-        }
-        btns[i].addEventListener("click", function () {
-            const current = document.getElementsByClassName("active");
-            current[0].className = current[0].className.replace(" active", "");
-            this.className += " active";
-        });
-    }
-</script>
-
-<script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+</body>
+<script src="{{ asset('assets/js/soft-ui-main.js') }}"></script>
+<script src="{{ asset('assets/js/soft-ui.js') }}"></script>
 </html>
 
 
