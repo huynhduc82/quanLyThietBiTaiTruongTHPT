@@ -1,5 +1,9 @@
 @extends('layout.signlayout')
 
+@section('title')
+    Đăng nhập
+@endsection
+
 @section('content')
     <section>
         <div class="page-header min-vh-75">

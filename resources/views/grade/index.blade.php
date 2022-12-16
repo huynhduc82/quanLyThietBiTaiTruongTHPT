@@ -1,5 +1,9 @@
 @extends('layout.layout')
 
+@section('title')
+    Quản lý khối lớp
+@endsection
+
 @section('content')
     <div class="container-fluid py-4">
         <div class="row">

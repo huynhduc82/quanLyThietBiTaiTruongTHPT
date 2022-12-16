@@ -8286,6 +8286,10 @@ fieldset:disabled .btn {
   vertical-align: text-top !important;
 }
 
+.align-text-center {
+    horiz-align: center !important;
+}
+
 .float-start {
   float: left !important;
 }
@@ -20596,7 +20600,16 @@ fieldset:disabled .btn {
   background-color: #ea0606;
   border-color: #ea0606;
 }
-
+.bell {
+    font-size: 21px;
+}
+.notification-bell {
+    position: absolute;
+    font-size: 13px;
+    top: -2px;
+    right: 3px;
+    font-weight: 600;
+}
 .btn-danger .btn.bg-outline-danger,
 .btn.bg-gradient-danger .btn.bg-outline-danger {
   border: 1px solid #ea0606;
@@ -22069,6 +22082,14 @@ hr.horizontal.gray-light {
 .lock-size {
   width: 1.7rem;
   height: 1.7rem;
+}
+
+.border-radius-custom {
+    border-radius-bottomleft : 1.5rem;
+    -moz-border-radius-bottomleft: 1.5rem;
+    -moz-border-radius-bottomright: 1.5rem;
+    -moz-border-radius-topleft: 1.5rem;
+    -moz-border-radius-topright: 1.5rem;
 }
 
 .border-radius-xs {
