@@ -61,25 +61,25 @@
                             <form role="form text-left" method="POST" action="{{ route('register') }}" id="frm-signup">
                                 @csrf
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="Họ tên" aria-label="Name" aria-describedby="email-addon" name="name">
+                                    <input type="text" class="form-control" placeholder="Họ tên" aria-label="Name" aria-describedby="email-addon" name="name" id="name">
                                 </div>
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="Số điện thoại" aria-label="Name" aria-describedby="email-addon" name="phone_number">
+                                    <input type="text" class="form-control" placeholder="Số điện thoại" aria-label="Name" aria-describedby="email-addon" name="phone_number" id="phone_number">
                                 </div>
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="Ngày sinh" aria-label="Name" aria-describedby="email-addon" name="date_of_birth" onblur="(this.value === '' ? this.type='text' : this.type='date')" onfocus="(this.type='date') ">
+                                    <input type="text" class="form-control" placeholder="Ngày sinh" aria-label="Name" aria-describedby="email-addon" name="date_of_birth" id="date_of_birth" onblur="(this.value === '' ? this.type='text' : this.type='date')" onfocus="(this.type='date') ">
                                 </div>
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="Địa chỉ" aria-label="Name" aria-describedby="email-addon" name="address">
+                                    <input type="text" class="form-control" placeholder="Địa chỉ" aria-label="Name" aria-describedby="email-addon" name="address" id="address">
                                 </div>
                                 <div class="mb-3">
-                                    <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email-addon" name="email">
+                                    <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email-addon" name="email" id="email">
                                 </div>
                                 <div class="mb-3">
-                                    <input type="password" class="form-control" placeholder="Mật khẩu" aria-label="Password" aria-describedby="password-addon" name="password">
+                                    <input type="password" class="form-control" placeholder="Mật khẩu" aria-label="Password" aria-describedby="password-addon" name="password" id="password">
                                 </div>
                                 <div class="mb-3">
-                                    <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" aria-label="Password" aria-describedby="password-addon" name="password_confirmation">
+                                    <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" aria-label  ="Password" aria-describedby="password-addon" name="password_confirmation" id="password_confirmation">
                                 </div>
                                 <div class="form-check form-check-info text-left">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
@@ -131,15 +131,15 @@
 <!--   Core JS Files   -->
 <script type="text/javascript" src="{{ asset('core/common.js')}}"></script>
 <script type="text/javascript" src="{{ asset('core/js/signup.js')}}"></script>
-{{--<script>--}}
-{{--    var win = navigator.platform.indexOf('Win') > -1;--}}
-{{--    if (win && document.querySelector('#sidenav-scrollbar')) {--}}
-{{--        var options = {--}}
-{{--            damping: '0.5'--}}
-{{--        }--}}
-{{--        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);--}}
-{{--    }--}}
-{{--</script>--}}
+<script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+            damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+</script>
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 @endsection
