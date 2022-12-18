@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('type_of_equipment', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->integer('quantity')->unsigned()->default(0);
             $table->integer('quantity_can_rent')->unsigned()->default(0);
             $table->float('price');

@@ -25,9 +25,9 @@ Route::group([
 Route::group([
     'prefix' => '/equipment',
 ], function (){
-    Route::get('/index', function () {
-        return view('equipment/index');
-    })->name('equipment.index');
+    Route::get('/index',[
+        'uses' => 'Equipment\TypeOfEquipmentController@indexView'
+    ])->name('equipment.index');
 });
 
 Route::group([

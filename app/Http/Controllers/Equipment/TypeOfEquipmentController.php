@@ -16,6 +16,18 @@ class TypeOfEquipmentController extends Controller
     {
     }
 
+    public function indexView()
+    {
+        $include=[
+            'equipments',
+            'imagesInfo'
+        ];
+
+        $data = $this->typeOfEquipmentService->index($include);
+//        dd($data);
+        return view('equipment/index')->with(compact('data'));
+    }
+
     public function index(): JsonResponse
     {
         $include=[
