@@ -17,6 +17,18 @@ class EquipmentController extends Controller
     {
     }
 
+    public function indexView()
+    {
+        $include=[
+            'status',
+            'room'
+        ];
+
+        $data = $this->equipmentService->index($include);
+
+        return view('equipment/index')->with(compact('data'));
+    }
+
     public function index(): JsonResponse
     {
         $include=[
