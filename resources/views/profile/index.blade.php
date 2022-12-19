@@ -6,8 +6,8 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('{{asset('assets/img/curved-images/curved0.jpg')}}'); background-position-y: 50%;">
-            <span class="mask bg-gradient-primary opacity-6"></span>
+        <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('https://drive.google.com/uc?id=1biP0e_yAYCn_x9lKwcNCZv5k4MVH63AQ&export=media://drive.google.com/file/d/1biP0e_yAYCn_x9lKwcNCZv5k4MVH63AQ/view?usp=sharing'); background-position-y: 50%;">
+{{--            <span class="mask bg-gradient-primary opacity-6"></span>--}}
         </div>
         <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
             <div class="row gx-4">
@@ -22,7 +22,7 @@
                             {{ Auth::user()->name }}
                         </h5>
                         <p class="mb-0 font-weight-bold text-sm">
-                            CEO
+                            {{ implode(',',Auth::user()->getRoleNames()->toArray()) }}
                         </p>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                     </div>
                     <div class="card-body p-3">
                         <p class="text-sm">
-                            HELLO I'M PHÁT
+                            {{ Auth::user()->information }}
                         </p>
                         <hr class="horizontal gray-light my-4">
                         <ul class="list-group">
@@ -122,15 +122,21 @@
                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Địa chỉ:</strong> {{Auth::user()->address}}</li>
                             <li class="list-group-item border-0 ps-0 pb-0">
                                 <strong class="text-dark text-sm">Liên hệ khác:</strong> &nbsp;
-                                <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="https://www.facebook.com/huynhphat9286:;">
+                                @if(Auth::user()->facebook)
+                                <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href=" {{Auth::user()->facebook}} " target="_blank">
                                     <i class="fab fa-facebook fa-lg"></i>
                                 </a>
-                                <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="https://www.facebook.com/huynhphat9286:;">
+                                @endif
+                                @if(Auth::user()->twitter)
+                                <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="{{Auth::user()->twitter}}" target="_blank">
                                     <i class="fab fa-twitter fa-lg"></i>
                                 </a>
-                                <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="https://www.facebook.com/huynhphat9286:;">
+                                @endif
+                                @if(Auth::user()->instagram)
+                                <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="{{Auth::user()->instagram}}" target="_blank">
                                     <i class="fab fa-instagram fa-lg"></i>
                                 </a>
+                                @endif
                             </li>
                         </ul>
                     </div>
