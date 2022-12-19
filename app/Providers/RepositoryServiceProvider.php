@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Repositories\Eloquents\Courses;
 use App\Repositories\Eloquents\EquipmentStatus;
 use App\Repositories\Eloquents\Equipment;
 use App\Repositories\Eloquents\ImageInfos;
@@ -9,6 +10,7 @@ use App\Repositories\Eloquents\Rooms;
 use App\Repositories\Eloquents\LendReturnEquipment;
 use App\Repositories\Eloquents\Reservations;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Contracts\Courses as ICourse;
 use App\Repositories\Contracts\Equipment As IEquipment;
 use App\Repositories\Contracts\ImageInfos As IImageInfo;
 use App\Repositories\Contracts\EquipmentStatus As IEquipmentStatus;
@@ -64,6 +66,12 @@ class RepositoryServiceProvider extends ServiceProvider
          * ------------------------------------------------------------
          */
         IReservations\IEquipmentReservationRepo::class => Reservations\EquipmentReservationRepo::class,
-        IReservations\IEquipmentReservationDetailRepo::class => Reservations\EquipmentReservationDetailRepo::class
+        IReservations\IEquipmentReservationDetailRepo::class => Reservations\EquipmentReservationDetailRepo::class,
+        /*
+         * ------------------------------------------------------------
+         * Course
+         * ------------------------------------------------------------
+         */
+        ICourse\ICourseRepo::class => Courses\CourseRepo::class
     ];
 }
