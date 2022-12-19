@@ -107,7 +107,7 @@ Route::group([
 ], function (){
     Route::get('/index', function () {
         return view('profile/index');
-    })->name('profile.index');
+    });
 });
 
 Route::group([
@@ -126,8 +126,13 @@ Route::group([
     })->name('signup.index');
 });
 
-
-
+Route::group([
+    'prefix' => 'user',
+], function (){
+    Route::get('/index',[
+        'uses' => 'User\UserProfileController@indexView'
+    ])->name('profile.index');
+});
 
 
 
