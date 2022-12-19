@@ -9,7 +9,9 @@ use App\Repositories\Eloquents\ImageInfos;
 use App\Repositories\Eloquents\Rooms;
 use App\Repositories\Eloquents\LendReturnEquipment;
 use App\Repositories\Eloquents\Reservations;
+use App\Repositories\Eloquents\User;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Contracts\User as IUser;
 use App\Repositories\Contracts\Courses as ICourse;
 use App\Repositories\Contracts\Equipment As IEquipment;
 use App\Repositories\Contracts\ImageInfos As IImageInfo;
@@ -72,6 +74,12 @@ class RepositoryServiceProvider extends ServiceProvider
          * Course
          * ------------------------------------------------------------
          */
-        ICourse\ICourseRepo::class => Courses\CourseRepo::class
+        ICourse\ICourseRepo::class => Courses\CourseRepo::class,
+        /*
+         * ------------------------------------------------------------
+         * User
+         * ------------------------------------------------------------
+         */
+        IUser\IUserProfileRepo::class => User\UserProfileRepo::class,
     ];
 }

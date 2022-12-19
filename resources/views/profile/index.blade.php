@@ -19,7 +19,7 @@
                 <div class="col-auto my-auto">
                     <div class="h-100">
                         <h5 class="mb-1">
-                            {{ Auth::user()->name }}
+                            {{ $data->name  }}
                         </h5>
                         <p class="mb-0 font-weight-bold text-sm">
                             {{ implode(',',Auth::user()->getRoleNames()->toArray()) }}
@@ -112,28 +112,28 @@
                     </div>
                     <div class="card-body p-3">
                         <p class="text-sm">
-                            {{ Auth::user()->information }}
+                            {{ $data->information }}
                         </p>
                         <hr class="horizontal gray-light my-4">
                         <ul class="list-group">
-                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Họ và tên:</strong> {{Auth::user()->name}} </li>
-                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">SĐT:</strong> {{Auth::user()->phone_number}}</li>
-                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> {{Auth::user()->email}}</li>
-                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Địa chỉ:</strong> {{Auth::user()->address}}</li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Họ và tên:</strong> {{$data->name}} </li>
+                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">SĐT:</strong> {{$data->phone_number}}</li>
+                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> {{$data->email}}</li>
+                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Địa chỉ:</strong> {{$data->address}}</li>
                             <li class="list-group-item border-0 ps-0 pb-0">
                                 <strong class="text-dark text-sm">Liên hệ khác:</strong> &nbsp;
-                                @if(Auth::user()->facebook)
-                                <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href=" {{Auth::user()->facebook}} " target="_blank">
+                                @if($data->facebook)
+                                <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href=" {{$data->facebook}} " target="_blank">
                                     <i class="fab fa-facebook fa-lg"></i>
                                 </a>
                                 @endif
-                                @if(Auth::user()->twitter)
-                                <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="{{Auth::user()->twitter}}" target="_blank">
+                                @if($data->twitter)
+                                <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="{{$data->twitter}}" target="_blank">
                                     <i class="fab fa-twitter fa-lg"></i>
                                 </a>
                                 @endif
-                                @if(Auth::user()->instagram)
-                                <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="{{Auth::user()->instagram}}" target="_blank">
+                                @if($data->instagram)
+                                <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="{{$data->instagram}}" target="_blank">
                                     <i class="fab fa-instagram fa-lg"></i>
                                 </a>
                                 @endif
@@ -172,7 +172,8 @@
                     </div>
                     <div class="card-body p-3">
                         <div class="row">
-                            <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                            @foreach($data->courses as $course)
+                            <div class="col-xl-3 col-md-6 mb-xl-0 mb-4 mt-2">
                                 <div class="card card-blog card-plain">
                                     <div class="position-relative">
                                         <a class="d-block shadow-xl border-radius-xl">
@@ -180,10 +181,10 @@
                                         </a>
                                     </div>
                                     <div class="card-body px-1 pb-0">
-                                        <p class="text-gradient text-dark mb-2 text-sm">Lịch sử</p>
+                                        <p class="text-gradient text-dark mb-2 text-sm">{{ $course->name  }}</p>
                                         <a href="javascript:;">
                                             <h5>
-                                                Khối 10
+                                                Lớp {{ $course->grade->name }}
                                             </h5>
                                         </a>
                                         <p class="mb-4 text-sm">
@@ -209,6 +210,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
                             <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                                 <div class="card h-100 card-plain border">
                                     <div class="card-body d-flex flex-column justify-content-center text-center">

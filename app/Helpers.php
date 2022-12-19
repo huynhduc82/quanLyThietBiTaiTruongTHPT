@@ -7,6 +7,7 @@ use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Pagination\CursorPaginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -86,4 +87,12 @@ class Helpers
         return true;
     }
 
+    public static function getUserLoginId()
+    {
+        if(!empty(Auth::user()))
+        {
+            return Auth::user()->id;
+        }
+        return null;
+    }
 }

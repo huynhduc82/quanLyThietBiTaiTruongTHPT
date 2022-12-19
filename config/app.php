@@ -190,6 +190,7 @@ return [
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         RepositoryServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
 
         /*
          * Package Service Providers...

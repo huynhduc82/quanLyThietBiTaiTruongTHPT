@@ -25,3 +25,4 @@ require 'grade.php';
 require 'lend_return_equipment.php';
 require 'reservation.php';
 require 'course.php';
+require 'user.php';

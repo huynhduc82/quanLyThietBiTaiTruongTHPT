@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Courses\Courses;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -51,5 +52,14 @@ class User extends Authenticatable
     public function course() : HasMany
     {
         return $this->hasMany(Courses::class,'id', 'course');
+    }
+
+    public function courses() : BelongsToMany
+    {
+        return $this->belongsToMany(
+            Courses::class,
+            'user_course_pivot',
+            'user_id',
+            'course_id');
     }
 }
