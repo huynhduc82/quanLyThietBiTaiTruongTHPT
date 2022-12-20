@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Course;
 
 use App\Http\Controllers\Controller;
+use App\Imports\CoursesDetailsImport;
 use App\Services\Courses\CourseService;
 use App\Transformers\Course\CourseTransformer;
 use App\Transformers\Equipment\EquipmentTransformers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class CourseController extends Controller
@@ -76,5 +78,14 @@ class CourseController extends Controller
         $result = $this->courseService->delete($id);
 
         return $this->response($result);
+    }
+
+    public function importCourseDetail(Request $request): JsonResponse
+    {
+        $file = $request::all()['file'];
+
+        Excel::import(new CoursesDetailsImport, $file);
+
+        return $this->response(123);
     }
 }
