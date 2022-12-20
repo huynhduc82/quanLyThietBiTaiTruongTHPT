@@ -39,9 +39,7 @@ class UserProfileService extends BaseService
     {
         $this->validatorCreateUpdate($input, $id);
 
-
-
-
+        $this->repository->getModel()::find($id)->courses()->sync(explode(',', $input['course']));
 
         return $this->repository->edit($input, $id);
     }

@@ -9,7 +9,7 @@ class CoursesDetails extends BaseModel
 {
     use SoftDeletes;
 
-    protected $table = 'courses_details';
+    protected $table = 'course_details';
 
     protected $fillable = [
         'course_id',
