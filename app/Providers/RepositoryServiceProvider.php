@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Repositories\Eloquents\SpecifyTheNumberOfEquipments;
 use App\Repositories\Eloquents\Courses;
 use App\Repositories\Eloquents\EquipmentStatus;
 use App\Repositories\Eloquents\Equipment;
@@ -11,6 +12,7 @@ use App\Repositories\Eloquents\LendReturnEquipment;
 use App\Repositories\Eloquents\Reservations;
 use App\Repositories\Eloquents\User;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Contracts\SpecifyTheNumberOfEquipments as ISpecifyTheNumberOfEquipments;
 use App\Repositories\Contracts\User as IUser;
 use App\Repositories\Contracts\Courses as ICourse;
 use App\Repositories\Contracts\Equipment As IEquipment;
@@ -81,5 +83,11 @@ class RepositoryServiceProvider extends ServiceProvider
          * ------------------------------------------------------------
          */
         IUser\IUserProfileRepo::class => User\UserProfileRepo::class,
+        /*
+         * ------------------------------------------------------------
+         * Specify The Number Of Equipments
+         * ------------------------------------------------------------
+         */
+        ISpecifyTheNumberOfEquipments\ISpecifyTheNumberOfEquipmentsRepo::class => SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsRepo::class
     ];
 }
