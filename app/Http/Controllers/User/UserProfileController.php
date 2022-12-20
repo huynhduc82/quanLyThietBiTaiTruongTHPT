@@ -4,10 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Helpers;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Services\Equipment\EquipmentService;
 use App\Services\User\UserProfileService;
-use App\Transformers\Equipment\EquipmentTransformers;
+use App\Transformers\User\UserProfileTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;
 
@@ -30,7 +28,8 @@ class UserProfileController extends Controller
     public function indexView()
     {
         $include=[
-            'courses'
+            'courses',
+            'avatarInfo',
         ];
 
         $data = $this->userProfileService->details(Helpers::getUserLoginId(),$include);
@@ -41,22 +40,13 @@ class UserProfileController extends Controller
     public function details($id): JsonResponse
     {
         $include=[
-            'status',
-            'room'
+            'courses',
+            'avatarInfo',
         ];
 
         $result = $this->userProfileService->details($id, $include);
 
-        return $this->response($this->transform($result, EquipmentTransformers::class, $include));
-    }
-
-    public function store(Request $request)
-    {
-        $input = $request::all();
-
-        $result = $this->userProfileService->store($input);
-
-        return $result;
+        return $this->response($this->transform($result, UserProfileTransformer::class, $include));
     }
 
     public function edit(Request $request, $id): JsonResponse

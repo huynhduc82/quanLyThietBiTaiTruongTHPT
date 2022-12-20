@@ -2,7 +2,9 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Exception;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Pagination\CursorPaginator;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -94,5 +96,29 @@ class Helpers
             return Auth::user()->id;
         }
         return null;
+    }
+
+    public static function fromFile($file): UploadedFile
+    {
+        $newFile = new UploadedFile(
+            $file->getPathname(),
+            $file->getFilename(),
+            $file->getMimeType(),
+            0,
+            true
+        );
+
+        return $newFile;
+    }
+
+    public static function getTimeNow()
+    {
+        $day = Carbon::now()->day; //ngày
+        $month = Carbon::now()->month; //tháng
+        $year = Carbon::now()->year; //năm
+        $hour = Carbon::now()->hour; //giờ
+        $minute = Carbon::now()->minute; //phút
+        $second = Carbon::now()->second; //giây
+        return $year . '_' . $month . '_' . $day . '_' . $hour . $minute . $second;
     }
 }

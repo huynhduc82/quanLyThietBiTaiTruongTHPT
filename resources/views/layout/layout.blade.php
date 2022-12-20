@@ -373,8 +373,12 @@
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <i class="fa fa-user me-sm-1"></i>
-                                <span class="d-sm-inline d-none">{{ Auth::user()->name }}</span>
+                                @if(Auth::user()->load('avatarInfo')->avatarInfo)
+                                    <img src="{{Auth::user()->load('avatarInfo')->avatarInfo->url}}" alt="avatar" width="35" height="35">
+                                @else
+                                    <i class="fa fa-user me-sm-1"></i>
+                                @endif
+                                    <span class="d-sm-inline d-none">{{ Auth::user()->name }}</span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

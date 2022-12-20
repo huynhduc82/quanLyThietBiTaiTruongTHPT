@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers;
 use App\Http\Controllers\Controller;
+use App\Models\ImageInfos\ImageInfo;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Services\ImageInfos\ImageInfoService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\File;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Laravolt\Avatar\Avatar;
 
 class RegisterController extends Controller
 {
@@ -34,9 +40,20 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+        $name = Helpers::getTimeNow();
         $this->validator($request->all())->validate();
+        app(Avatar::class)->create($request->name)->save(storage_path('app/public/images/' . $name . '.png'),100);
+        $image = new File(storage_path('app/public/images/' . $name . '.png'));
+        $image = Helpers::fromFile($image);
 
-        event(new Registered($user = $this->create($request->all())));
+        $avatar = app(ImageInfoService::class)->uploadDrive($image, ImageInfo::COMPONENT_AVATAR);
+
+        Storage::delete('public/images/' . $name . '.png');
+
+        $param = $request->all();
+        $param['avatar'] = $avatar['image_references'];
+
+        event(new Registered($user = $this->create($param)));
 
         $this->guard()->login($user);
 
@@ -100,6 +117,7 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'avatar' => $data['avatar'],
         ]);
     }
 }

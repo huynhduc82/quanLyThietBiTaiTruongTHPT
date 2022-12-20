@@ -16,6 +16,7 @@ class ImageInfo extends BaseModel
         ];
     const IMAGE_MAX_SIZE = 5120;
     const COMPONENT_EQUIPMENT = 'equipment';
+    const COMPONENT_AVATAR = 'avatar';
 
     use SoftDeletes;
 
