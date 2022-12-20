@@ -12,6 +12,7 @@
         "laravel/passport": "^11.3",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "laravolt/avatar": "^4.1",
         "league/fractal": "^0.20.1",
         "masbug/flysystem-google-drive-ext": "^2.2",
         "prettus/l5-repository": "^2.8",

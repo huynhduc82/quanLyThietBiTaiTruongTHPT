@@ -3,12 +3,9 @@
 namespace App\Services\User;
 
 use App\Helpers;
-use App\Models\EquipmentStatus\EquipmentStatus;
 use App\Repositories\Contracts\User\IUserProfileRepo;
-use App\Services\EquipmentStatus\EquipmentStatusServices;
 use App\Services\Response\BaseService;
-use App\Validators\Equipment\EquipmentValidator;
-use Illuminate\Support\Facades\DB;
+use App\Validators\User\UserProfileValidator;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
 class UserProfileService extends BaseService
@@ -38,31 +35,20 @@ class UserProfileService extends BaseService
         return $this->repository->details($id, $include);
     }
 
-    public function store($input)
-    {
-        $this->validatorCreateUpdate($input);
-
-        DB::beginTransaction();
-        $param = ['condition_details' => EquipmentStatus::STATUS_ALL_GOOD,
-            'can_continue_to_use' => EquipmentStatus::CAN_CONTINUE_USE];
-        $input['equipment_status_id'] = app(EquipmentStatusServices::class)->store($param);
-        $result = $this->repository->store($input);
-        app(TypeOfEquipmentService::class)->updateQuantity($input['type_of_equipment_id']);
-        DB::commit();
-
-        return $result;
-    }
-
     public function edit($input, $id)
     {
         $this->validatorCreateUpdate($input, $id);
+
+
+
+
 
         return $this->repository->edit($input, $id);
     }
 
     protected function validatorCreateUpdate(array $params = [], ?int $id = null): void
     {
-        $validator = app(EquipmentValidator::class);
+        $validator = app(UserProfileValidator::class);
         $validator->with($params);
         if ($id) {
             $validator->setId($id);

@@ -191,6 +191,7 @@ return [
         RepositoryServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+        Laravolt\Avatar\ServiceProvider::class,
 
         /*
          * Package Service Providers...
