@@ -28,6 +28,9 @@ Route::group([
     Route::get('/index',[
         'uses' => 'Equipment\TypeOfEquipmentController@indexView'
     ])->name('equipment.index');
+    Route::get('/store',[
+        'uses' => 'Equipment\TypeOfEquipmentController@storeView'
+    ])->name('equipment.store');
 });
 
 Route::group([
@@ -135,12 +138,45 @@ Route::group([
 });
 
 
+Route::group([
+    'prefix' => 'register',
+], function (){
+    Route::get('/index',[
+        'uses' => 'Auth\RegisterController@showRegistrationForm'
+    ])->name('register');
+    Route::post('',[
+        'uses' => 'Auth\RegisterController@register'
+    ]);
+});
+
+Route::group([
+    'prefix' => 'login',
+], function (){
+    Route::get('/index',[
+        'uses' => 'Auth\LoginController@showLoginForm'
+    ])->name('login');
+    Route::post('',[
+        'uses' => 'Auth\LoginController@login'
+    ])->name('login');
+});
+
+Route::post('logout',[
+    'uses' => 'Auth\LoginController@logout'
+])->name('logout');
 
 
 
+//$this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+//$this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+//$this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+//$this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+//$this->get('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
+//$this->post('password/confirm', 'Auth\ConfirmPasswordController@confirm');
+//$this->get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+//$this->get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
+//$this->post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 
-
-Auth::routes();
+//Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
