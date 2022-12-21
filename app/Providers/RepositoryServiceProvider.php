@@ -11,9 +11,11 @@ use App\Repositories\Eloquents\Rooms;
 use App\Repositories\Eloquents\LendReturnEquipment;
 use App\Repositories\Eloquents\Reservations;
 use App\Repositories\Eloquents\User;
+use App\Repositories\Eloquents\Classes;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Contracts\SpecifyTheNumberOfEquipments as ISpecifyTheNumberOfEquipments;
 use App\Repositories\Contracts\User as IUser;
+use App\Repositories\Contracts\Classes as IClasses;
 use App\Repositories\Contracts\Courses as ICourse;
 use App\Repositories\Contracts\Equipment As IEquipment;
 use App\Repositories\Contracts\ImageInfos As IImageInfo;
@@ -88,6 +90,12 @@ class RepositoryServiceProvider extends ServiceProvider
          * Specify The Number Of Equipments
          * ------------------------------------------------------------
          */
-        ISpecifyTheNumberOfEquipments\ISpecifyTheNumberOfEquipmentsRepo::class => SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsRepo::class
+        ISpecifyTheNumberOfEquipments\ISpecifyTheNumberOfEquipmentsRepo::class => SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsRepo::class,
+        /*
+         * ------------------------------------------------------------
+         * Specify The Number Of Equipments
+         * ------------------------------------------------------------
+         */
+        IClasses\IClassRepo::class => Classes\ClassRepo::class,
     ];
 }
