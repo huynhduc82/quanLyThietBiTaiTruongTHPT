@@ -23,6 +23,7 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Đơn vị tính</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Giá</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mô tả</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
                                 </tr>
                                 </thead>
                                 @foreach($data as $item)
@@ -78,8 +79,23 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td class="align-middle">
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex justify-content-center">
+                                                    <button type="button" class="btn bg-gradient-info my-1 mb-1 ms-1">Sửa</button>
+                                                    <button type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1">Xóa</button>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
+                                <td class="align-middle">
+                                    <div class="d-flex px-2 py-1">
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{ route('equipment.store') }}" type="button" class="btn bg-gradient-info my-1 mb-1">Thêm mới</a>
+                                        </div>
+                                    </div>
+                                </td>
                             </table>
                         </div>
                     </div>

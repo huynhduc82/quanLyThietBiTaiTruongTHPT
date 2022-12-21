@@ -73,12 +73,18 @@ window.addEventListener('resize', function() {
     }
 });
 
+function getUrl(link) {
+    link = link.split('/')
+    let temp = link.pop()
+    return link.join('/')
+}
+
 const container = document.getElementById('sidenav-main');
 const btns = container.getElementsByClassName("nav-link");
 
 // Loop through the buttons and add the active class to the current/clicked button
 for (let i = 0; i < btns.length; i++) {
-    if (btns[i].href === window.location.href) {
+    if (getUrl(btns[i].href) === getUrl(window.location.href)) {
         btns[i].className += " active";
         document.getElementById('title-first').innerText = btns[i].innerText
         document.getElementById('title-second').innerText = btns[i].innerText
