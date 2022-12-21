@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Course;
+namespace App\Http\Controllers\Class;
 
 use App\Http\Controllers\Controller;
+use App\Imports\ClassesImport;
 use App\Imports\CoursesDetailsImport;
 use App\Services\Courses\CourseService;
 use App\Transformers\Course\CourseTransformer;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 
-class CourseController extends Controller
+class ClassController extends Controller
 {
     public function __construct(
         protected CourseService $courseService
@@ -80,11 +81,11 @@ class CourseController extends Controller
         return $this->response($result);
     }
 
-    public function importCourseDetail(Request $request): JsonResponse
+    public function importClass(Request $request): JsonResponse
     {
         $file = $request::all()['file'];
 
-        Excel::import(new CoursesDetailsImport, $file);
+        Excel::import(new ClassesImport(), $file);
 
         return $this->response(123);
     }

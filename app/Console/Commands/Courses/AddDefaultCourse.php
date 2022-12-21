@@ -30,13 +30,13 @@ class AddDefaultCourse extends Command
                 'Ngữ Văn',
                 'Lịch Sử',
                 'Địa Lí',
-                'Sinh học',
+                'Sinh Học',
                 'Tiếng Anh',
-                'Giáo dục công dân',
-                'Công nghệ',
-                'Giáo dục quốc phòng',
-                'Giáo dục thể chất',
-                'Tin học',
+                'Giáo Dục Công Dân',
+                'Công Nghệ',
+                'Giáo Dục Quốc Phòng',
+                'Giáo Dục Thể Chất',
+                'Tin Học',
             ];
             $result = [];
             foreach ($courseDefault as $cour)
@@ -46,7 +46,7 @@ class AddDefaultCourse extends Command
                     $result[] = ['name' => $cour, 'grade_id' => $grade];
                 }
             }
-            $this->output->title('Starting import Class Time Regulations');
+            $this->output->title('Starting import Default Course');
             DB::beginTransaction();
             Courses::insert($result);
             DB::commit();

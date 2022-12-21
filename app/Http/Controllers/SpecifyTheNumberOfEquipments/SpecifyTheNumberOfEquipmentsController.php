@@ -1,56 +1,53 @@
 <?php
 
-namespace App\Http\Controllers\Course;
+namespace App\Http\Controllers\SpecifyTheNumberOfEquipments;
 
 use App\Http\Controllers\Controller;
-use App\Imports\CoursesDetailsImport;
-use App\Services\Courses\CourseService;
-use App\Transformers\Course\CourseTransformer;
+use App\Services\SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsService;
 use App\Transformers\Equipment\EquipmentTransformers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;
-use Maatwebsite\Excel\Facades\Excel;
 
 
-class CourseController extends Controller
+class SpecifyTheNumberOfEquipmentsController extends Controller
 {
     public function __construct(
-        protected CourseService $courseService
+        protected SpecifyTheNumberOfEquipmentsService $specifyTheNumberOfEquipmentsService
     )
     {
     }
 
     public function indexView()
     {
-        $include = [
+        $include=[
             'status',
             'room'
         ];
 
-        $data = $this->courseService->index($include);
+        $data = $this->specifyTheNumberOfEquipmentsService->index($include);
 
         return view('equipment/index')->with(compact('data'));
     }
 
     public function index(): JsonResponse
     {
-        $include = [
-            'grade',
+        $include=[
+
         ];
 
-        $result = $this->courseService->index($include);
+        $result = $this->specifyTheNumberOfEquipmentsService->index($include);
 
-        return $this->response($this->transform($result, CourseTransformer::class, $include));
+        return $this->response($this->transform($result, EquipmentTransformers::class, $include));
     }
 
     public function details($id): JsonResponse
     {
-        $include = [
+        $include=[
             'status',
             'room'
         ];
 
-        $result = $this->courseService->details($id, $include);
+        $result = $this->specifyTheNumberOfEquipmentsService->details($id, $include);
 
         return $this->response($this->transform($result, EquipmentTransformers::class, $include));
     }
@@ -59,7 +56,7 @@ class CourseController extends Controller
     {
         $input = $request::all();
 
-        $result = $this->courseService->store($input);
+        $result = $this->specifyTheNumberOfEquipmentsService->store($input);
 
         return $result;
     }
@@ -68,24 +65,15 @@ class CourseController extends Controller
     {
         $input = $request::all();
 
-        $result = $this->courseService->edit($input, $id);
+        $result = $this->specifyTheNumberOfEquipmentsService->edit($input, $id);
 
         return $this->response($result);
     }
 
     public function delete($id): JsonResponse
     {
-        $result = $this->courseService->delete($id);
+        $result = $this->specifyTheNumberOfEquipmentsService->delete($id);
 
         return $this->response($result);
-    }
-
-    public function importCourseDetail(Request $request): JsonResponse
-    {
-        $file = $request::all()['file'];
-
-        Excel::import(new CoursesDetailsImport, $file);
-
-        return $this->response(123);
     }
 }
