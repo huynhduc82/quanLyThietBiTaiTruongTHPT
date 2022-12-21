@@ -87,7 +87,9 @@ for (let i = 0; i < btns.length; i++) {
     if (getUrl(btns[i].href) === getUrl(window.location.href)) {
         btns[i].className += " active";
         document.getElementById('title-first').innerText = btns[i].innerText
-        document.getElementById('title-second').innerText = btns[i].innerText
+        if (btns[i].href === window.location.href) {
+         document.getElementById('title-second').innerText = btns[i].innerText
+        }
     }
     btns[i].addEventListener("click", function () {
         const current = document.getElementsByClassName("active");
