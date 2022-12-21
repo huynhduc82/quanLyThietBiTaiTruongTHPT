@@ -26,3 +26,4 @@ require 'lend_return_equipment.php';
 require 'reservation.php';
 require 'course.php';
 require 'user.php';
+require 'specify_the_number_of_equipments.php';

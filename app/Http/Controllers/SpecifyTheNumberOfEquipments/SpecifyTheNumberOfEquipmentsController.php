@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SpecifyTheNumberOfEquipments;
 use App\Http\Controllers\Controller;
 use App\Services\SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsService;
 use App\Transformers\Equipment\EquipmentTransformers;
+use App\Transformers\SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;
 
@@ -37,7 +38,7 @@ class SpecifyTheNumberOfEquipmentsController extends Controller
 
         $result = $this->specifyTheNumberOfEquipmentsService->index($include);
 
-        return $this->response($this->transform($result, EquipmentTransformers::class, $include));
+        return $this->response($this->transform($result, SpecifyTheNumberOfEquipmentsTransformer::class, $include));
     }
 
     public function details($id): JsonResponse
@@ -73,6 +74,15 @@ class SpecifyTheNumberOfEquipmentsController extends Controller
     public function delete($id): JsonResponse
     {
         $result = $this->specifyTheNumberOfEquipmentsService->delete($id);
+
+        return $this->response($result);
+    }
+
+    public function calEquipmentQuantity(Request $request)
+    {
+        $input = $request::all();
+
+        $result = $this->specifyTheNumberOfEquipmentsService->calEquipmentQuantity($input);
 
         return $this->response($result);
     }

@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Services\SpecifyTheNumberOfEquipments;
+namespace App\Services\Class;
 
 use App\Helpers;
 use App\Models\EquipmentStatus\EquipmentStatus;
+use App\Repositories\Contracts\Classes\IClassRepo;
 use App\Repositories\Contracts\Equipment\IEquipmentRepo;
-use App\Repositories\Contracts\SpecifyTheNumberOfEquipments\ISpecifyTheNumberOfEquipmentsRepo;
-use App\Services\Class\ClassService;
 use App\Services\EquipmentStatus\EquipmentStatusServices;
 use App\Services\Response\BaseService;
 use App\Validators\Equipment\EquipmentValidator;
@@ -14,11 +13,11 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
-class SpecifyTheNumberOfEquipmentsService extends BaseService
+class ClassService extends BaseService
 {
     public function repository(): string
     {
-        return ISpecifyTheNumberOfEquipmentsRepo::class;
+        return IClassRepo::class;
     }
 
     public function index(array $include = [])
@@ -63,17 +62,35 @@ class SpecifyTheNumberOfEquipmentsService extends BaseService
         $validator->passesOrFail($id === null ? ValidatorInterface::RULE_CREATE : ValidatorInterface::RULE_UPDATE);
     }
 
+    public function updateRentQuantity($input = [], $rent = true)
+    {
+        $param = [];
+        $ids = [];
+        foreach ($input as $item)
+        {
+            if (!is_array($item['equipment_details']))
+            {
+                $item['equipment_details'] = explode(Helpers::SEPARATOR, $item['equipment_details']);
+            }
+            $param[] = $item['equipment_details'];
+            $ids[] = $item['type_of_equipment_id'];
+        }
+        $this->repository->updateRentQuantity(Arr::flatten($param), $rent);
+        foreach ($ids as $id)
+        {
+            app(TypeOfEquipmentService::class)->updateQuantity($id);
+        }
+    }
+
     public function delete($id): int
     {
         return $this->repository->delete($id);
     }
 
-    public function calEquipmentQuantity($input = [])
+    public function updateRentQuantityOld($id, $ids, $rent)
     {
-        $numberOfPupils = app(ClassService::class)->details($input['class'])->number_of_pupils;
+        $this->repository->updateRentQuantity($ids, $rent);
 
-        $numberEquipment = $this->repository->details($input['equipment'])->quantity;
-
-        return ceil($numberOfPupils/$numberEquipment);
+        app(TypeOfEquipmentService::class)->updateQuantity($id);
     }
 }
