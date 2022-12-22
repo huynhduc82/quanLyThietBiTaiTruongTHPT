@@ -33,6 +33,18 @@ class TypeOfEquipmentController extends Controller
         return view('equipment/store');
     }
 
+    public function editView($id)
+    {
+        $include=[
+            'equipments',
+            'imagesInfo',
+        ];
+
+        $data = $this->typeOfEquipmentService->details($id, $include);
+
+        return view('equipment/edit')->with(compact('data'));
+    }
+
     public function index(): JsonResponse
     {
         $include=[
