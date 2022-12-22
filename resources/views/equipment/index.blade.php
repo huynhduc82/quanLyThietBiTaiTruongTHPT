@@ -11,7 +11,27 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0">
                         <h6>Thiết bị</h6>
+
                     </div>
+                    <tr>
+                    <td>
+                        <div>
+                            <div class="input-group max-height-150 max-width-400 ">
+                                <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
+                                &emsp;&emsp;&emsp;
+                                <div >
+                                    <a href="{{ route('equipment.store') }}" type="button" class="btn bg-gradient-info my-1 mb-1">Thêm mới</a>
+                                </div>
+                            </div>
+
+                            </div>
+                        </td>
+
+                        <td>
+
+                        </td>
+                    </tr>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
@@ -20,9 +40,9 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên và hình ảnh</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số lượng</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số lượng có thể mượn</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Đơn vị tính</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Đơn vị tính</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Giá</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mô tả</th>
+                                    <th class=" text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Mô tả</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
                                 </tr>
                                 </thead>
@@ -31,7 +51,7 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="{{$item->imagesInfo->url}}" class="avatar avatar-sm me-3" alt="user1">
+                                                    <img src="{{$item->imagesInfo ? $item->imagesInfo->url : null}}" class="avatar avatar-sm me-3" alt="user1">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{$item->name}}</h6>
@@ -89,13 +109,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                                <td class="align-middle">
-                                    <div class="d-flex px-2 py-1">
-                                        <div class="d-flex justify-content-center">
-                                            <a href="{{ route('equipment.store') }}" type="button" class="btn bg-gradient-info my-1 mb-1">Thêm mới</a>
-                                        </div>
-                                    </div>
-                                </td>
+
                             </table>
                         </div>
                     </div>
