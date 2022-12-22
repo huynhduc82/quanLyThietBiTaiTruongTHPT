@@ -1,41 +1,81 @@
-<form role="form text-left" class="w-70" >
-    <p>QUẢN LÝ THIẾT BỊ</p>
-    <div class="mb-3">
-        <p>Mã Thiết bị</p>
-        <input type="text" class="form-control" placeholder="Mã Thiết bị" aria-label="Mã Thiết bị" >
-    </div>
+@extends('layout.layout')
 
-    <div class="mb-3">
-        <p>Tên thiết bị</p>
-        <input type="text" class="form-control" placeholder="Tên thiết bị" aria-label="Tên thiết bị" >
+@section('title')
+    Chỉnh sửa thiết bị
+@endsection
+
+@section('content')
+    <div class="container-fluid py-4">
+        <div class="card w-70">
+            <div class="card-header pb-2">
+                <h3>Chỉnh sửa thiết bị</h3>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+                <form id="frm-equipment">
+                    <div class="form-group px-4">
+                        <div class="col-9">
+                            <label class="col-form-label">ID</label>
+                            <input type="text" class="form-control not-allowed" disabled="disabled" placeholder="ID thiết bị" id="id" value="{{ $data->id }}">
+                        </div>
+                    </div>
+                    <div class="form-group px-4">
+                        <div class="col-9">
+                            <label class="col-form-label">Tên thiết bị</label>
+                            <input type="text" class="form-control" placeholder="Tên thiết bị" id="name" value="{{ $data->name }}">
+                        </div>
+                    </div>
+                    <div class="form-group px-4">
+                        <div class="col-9">
+                            <label class="col-form-label">Mô tả</label>
+                            <input type="text" class="form-control" placeholder="Mô tả" id="describe" value="{{ $data->describe }}">
+                        </div>
+                    </div>
+                    <div class="form-group px-4">
+                        <div class="col-9">
+                            <label class="col-form-label">Đơn vị tính</label>
+                            <input type="text" class="form-control" placeholder="Đơn vị tính" id ="unit" value="{{ $data->unit }}">
+                        </div>
+                    </div>
+                    <div class="form-group px-4">
+                        <div class="col-9">
+                            <label class="col-form-label">Giá tiền</label>
+                            <input type="text" class="form-control" placeholder="Giá tiền" id="price" value="{{ $data->price }}">
+                        </div>
+                    </div>
+                    <div class="form-group px-4">
+                        <div class="col-9">
+                            <label class="col-form-label">Hình</label>
+                            <input type="file" class="form-control" placeholder="Hình ảnh thiết bị" id="image">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center py-1 col-9">
+                        <button type="submit" class="btn bg-gradient-info my-4 mb-2">Xác nhận</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="mb-3">
-        <p>Nhà sản xuất</p>
-        <input type="text" class="form-control" placeholder="Nhà sản xuất" aria-label="Nhà sản xuất" >
-    </div>
-    <div class="mb-3">
-        <p>Ngày nhập</p>
-        <input type="date" class="form-control" placeholder="Ngày nhập" aria-label="Ngày nhập" >
-    </div>
-    <div class="mb-3">
-        <p>Hạn sử dụng</p>
-        <input type="date" class="form-control" placeholder="Hạn sử dụng" aria-label="Hạn sử dụng" >
-    </div>
-    <div class="mb-3">
-        <p>Mã loại</p>
-        <input type="text" class="form-control" placeholder="Mã loại" aria-label="Mã loại" >
-    </div>
-    <div class="mb-3">
-        <p>Số lượng thiết bị</p>
-        <input type="number" class="form-control" placeholder="Số lượng thiết bị" aria-label="Số lượng thiết bị" >
-    </div>
-    <div class="mb-3">
-        <p>Hình</p>
-        <input type="image" class="form-control" placeholder="Số lượng thiết bị" aria-label="Số lượng thiết bị" >
-    </div>
-    <div class="text-center">
-        <button type="button" class="btn bg-gradient-info w-10 my-4 mb-2">Thêm</button>
-        <button type="button" class="btn bg-gradient-info w-10 my-4 mb-2">Sửa</button>
-        <button type="button" class="btn bg-gradient-info w-10 my-4 mb-2">Xóa</button>
-    </div>
-</form>
+@endsection
+
+@section('footer_scripts')
+
+    <!--   Core JS Files   -->
+    <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('core/js/type_equipment/type_equipment_edit.js')}}"></script>
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <script>
+        document.getElementById('title-first').innerText = 'Thiết bị'
+        document.getElementById('title-second').innerText = 'Chỉnh sửa thiết bị'
+    </script>
+@endsection

@@ -34,5 +34,8 @@
     "bugs": {
         "url": "https://github.com/huynhduc82/quanLyThietBiTaiTruongTHPT/issues"
     },
-    "homepage": "https://github.com/huynhduc82/quanLyThietBiTaiTruongTHPT#readme"
+    "homepage": "https://github.com/huynhduc82/quanLyThietBiTaiTruongTHPT#readme",
+    "dependencies": {
+        "sweetalert2": "^11.6.16"
+    }
 }

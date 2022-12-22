@@ -10,8 +10,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Thiết bị</h6>
-
+                        <h2>Thiết bị</h2>
                     </div>
                     <tr>
                     <td>
@@ -102,14 +101,15 @@
                                         <td class="align-middle">
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex justify-content-center">
-                                                    <button type="button" class="btn bg-gradient-info my-1 mb-1 ms-1">Sửa</button>
-                                                    <button type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1">Xóa</button>
+                                                    <a type="button" href="{{ route('equipment.edit', ['id' => $item->id]) }}" class="btn bg-gradient-info my-1 mb-1 ms-1">Sửa</a>
+                                                    <button type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1" onclick="SubmitConfrim()">
+                                                        Xoá
+                                                    </button>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                 @endforeach
-
                             </table>
                         </div>
                     </div>
@@ -117,60 +117,6 @@
             </div>
         </div>
     </div>
-    {{--    <div class="row">--}}
-    {{--        <div class="col-12">--}}
-    {{--            <div class="card mb-4">--}}
-    {{--                <div class="card-header pb-0">--}}
-    {{--                    <h6> Mức độ sử dụng</h6>--}}
-    {{--                </div>--}}
-    {{--                <div class="card-body px-0 pt-0 pb-2">--}}
-    {{--                    <div class="table-responsive p-0">--}}
-    {{--                        <table class="table align-items-center justify-content-center mb-0">--}}
-    {{--                            <thead>--}}
-    {{--                            <tr>--}}
-    {{--                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thiết bị</th>--}}
-    {{--                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số lần mượn</th>--}}
-    {{--                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Số phần trăm</th>--}}
-    {{--                                <th></th>--}}
-    {{--                            </tr>--}}
-    {{--                            </thead>--}}
-    {{--                            <tr>--}}
-    {{--                                <td>--}}
-    {{--                                    <div class="d-flex px-2 py-1">--}}
-    {{--                                        <div>--}}
-    {{--                                            <img src="{{asset('assets/img/5.jpg')}}" class="avatar avatar-sm me-3" alt="user1">--}}
-    {{--                                        </div>--}}
-    {{--                                        <div class="d-flex flex-column justify-content-center">--}}
-    {{--                                            <h6 class="mb-0 text-sm">Ống nghiệm</h6>--}}
-    {{--                                            <p class="text-xs text-secondary mb-0"></p>--}}
-    {{--                                        </div>--}}
-    {{--                                    </div>--}}
-    {{--                                </td>--}}
-    {{--                                <td>--}}
-    {{--                                    <p class="text-sm font-weight-bold mb-0">20</p>--}}
-    {{--                                </td>--}}
-    {{--                                <td class="align-middle text-center">--}}
-    {{--                                    <div class="d-flex align-items-center justify-content-center">--}}
-    {{--                                        <span class="me-2 text-xs font-weight-bold">10%</span>--}}
-    {{--                                        <div>--}}
-    {{--                                            <div class="progress">--}}
-    {{--                                                <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%;"></div>--}}
-    {{--                                            </div>--}}
-    {{--                                        </div>--}}
-    {{--                                    </div>--}}
-    {{--                                </td>--}}
-    {{--                                <td class="align-middle">--}}
-    {{--                                    <button class="btn btn-link text-secondary mb-0">--}}
-    {{--                                        <i class="fa fa-ellipsis-v text-xs"></i>--}}
-    {{--                                    </button>--}}
-    {{--                                </td>--}}
-    {{--                            </tr>--}}
-    {{--                        </table>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
     <footer class="footer pt-3  ">
         <div class="container-fluid">
             <div class="row align-items-center justify-content-lg-between">
@@ -198,6 +144,7 @@
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -206,6 +153,45 @@
             }
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
+    </script>
+    <script type="text/javascript">
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        var SubmitConfrim = () => {
+            swalWithBootstrapButtons.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true,
+                backdrop: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    swalWithBootstrapButtons.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success',
+                    $('#frmBookAction').submit())
+                }else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Your imaginary file is safe :)',
+                        'error'
+                    )
+                }
+            })
+        };
     </script>
     <!-- Github buttons -->
     <script async defer src="{{asset('https://buttons.github.io/buttons.js')}}"></script>

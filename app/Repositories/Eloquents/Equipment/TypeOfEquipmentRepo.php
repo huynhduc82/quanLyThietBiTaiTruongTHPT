@@ -25,11 +25,11 @@ class TypeOfEquipmentRepo extends BaseEloquentRepository implements ITypeOfEquip
         return $query->with($withs)->orderBy('id')->get();
     }
 
-    public function details($id = null, array $withs = []): Collection|array
+    public function details($id = null, array $withs = []): Builder|Model
     {
         $query = $this->model->newQuery();
 
-        return $query->where('id', $id)->with($withs)->get();
+        return $query->where('id', $id)->with($withs)->first();
     }
 
     public function store(array $input=[]): Model|Builder

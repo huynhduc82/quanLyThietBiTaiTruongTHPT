@@ -31,6 +31,9 @@ Route::group([
     Route::get('/store',[
         'uses' => 'Equipment\TypeOfEquipmentController@storeView'
     ])->name('equipment.store');
+    Route::get('/edit/{id}',[
+        'uses' => 'Equipment\TypeOfEquipmentController@editView'
+    ])->name('equipment.edit');
 });
 
 Route::group([

@@ -26627,3 +26627,6 @@ pre[class*="language-"] {
 }
 
 /*# sourceMappingURL=dashboard-free.css.map */
+.not-allowed {
+    cursor: not-allowed !important;
+}
