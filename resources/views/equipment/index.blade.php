@@ -12,42 +12,34 @@
                     <div class="card-header pb-0">
                         <h2>Thiết bị</h2>
                     </div>
-                    <tr>
-                    <td>
-                        <div>
-                            <div class="input-group max-height-150 max-width-400 ">
+                    <div class="row px-4 py-2">
+                        <div class="col-5">
+                            <div class="input-group">
                                 <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                                 <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
-                                &emsp;&emsp;&emsp;
-                                <div >
-                                    <a href="{{ route('equipment.store') }}" type="button" class="btn bg-gradient-info my-1 mb-1">Thêm mới</a>
-                                </div>
                             </div>
-
-                            </div>
-                        </td>
-
-                        <td>
-
-                        </td>
-                    </tr>
+                        </div>
+                        <div class="col-3">
+                            <a href="{{ route('equipment.store') }}" type="button" class="btn bg-gradient-info">Thêm mới</a>
+                        </div>
+                    </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
                                 <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên và hình ảnh</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số lượng</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số lượng có thể mượn</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Đơn vị tính</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Giá</th>
-                                    <th class=" text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Mô tả</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+                                <tr class="d-flex">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-30">Tên và hình ảnh</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-6">Số lượng</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-9 text-wrap">Số lượng có thể mượn</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-6">Đơn vị tính</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-10">Giá</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-25">Mô tả</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-10 text-wrap"></th>
                                 </tr>
                                 </thead>
                                 @foreach($data as $item)
-                                    <tr>
-                                        <td>
+                                    <tr class="d-flex">
+                                        <td class="text-wrap w-30">
                                             <div class="d-flex px-2 py-1">
                                                 <div>
                                                     <img src="{{$item->imagesInfo ? $item->imagesInfo->url : null}}" class="avatar avatar-sm me-3" alt="user1">
@@ -58,7 +50,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle">
+                                        <td class="w-6">
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{$item->quantity}}</h6>
@@ -66,7 +58,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle">
+                                        <td class="w-9">
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{$item->quantity_can_rent}}</h6>
@@ -74,7 +66,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle">
+                                        <td class="w-6">
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{$item->unit}}</h6>
@@ -82,7 +74,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle">
+                                        <td class="w-10">
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{$item->price}}</h6>
@@ -90,7 +82,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle">
+                                        <td class="w-25 text-wrap">
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{$item->describe}}</h6>
@@ -98,11 +90,11 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle">
+                                        <td class="w-10">
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex justify-content-center">
                                                     <a type="button" href="{{ route('equipment.edit', ['id' => $item->id]) }}" class="btn bg-gradient-info my-1 mb-1 ms-1">Sửa</a>
-                                                    <button type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1" onclick="SubmitConfrim()">
+                                                    <button type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1" onclick="SubmitConfrim({{$item->id}})">
                                                         Xoá
                                                     </button>
                                                 </div>
@@ -163,32 +155,55 @@
             buttonsStyling: false
         })
 
-        var SubmitConfrim = () => {
+        var SubmitConfrim = (id) => {
             swalWithBootstrapButtons.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                title: 'Bạn có chắc không?',
+                text: "Bạn không thể khôi phục lại thiết bị đã xoá!",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
+                confirmButtonText: 'Có, Hãy xoá đi!',
+                cancelButtonText: 'Không, Huỷ bỏ!',
                 reverseButtons: true,
                 backdrop: false,
             }).then((result) => {
                 if (result.isConfirmed) {
-                    swalWithBootstrapButtons.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success',
-                    $('#frmBookAction').submit())
+                    $.ajax({
+                        url: '/api/type/equip/delete/' + id,
+                        // dataType: 'json',
+                        enctype: "multipart/form-data",
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function () {
+                            swalWithBootstrapButtons.fire({
+                                title: 'Đã xoá!',
+                                text: "Thiết bị của bạn đã xoá.",
+                                icon: 'success',
+                                backdrop: false,
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            })
+                        },
+                        error: function (error) {
+                        },
+                        type: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    })
+
                 }else if (
                     /* Read more about handling dismissals below */
                     result.dismiss === Swal.DismissReason.cancel
                 ) {
-                    swalWithBootstrapButtons.fire(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    )
+                    swalWithBootstrapButtons.fire({
+                            title: 'Đã huỷ',
+                            text: 'Thiết bị của bạn đã an toàn :)',
+                            icon: 'error',
+                            backdrop: false,
+                    })
                 }
             })
         };
