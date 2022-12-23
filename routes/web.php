@@ -38,7 +38,7 @@ Route::group([
 Route::group([
     'prefix' => '/equipment',
 ], function (){
-    Route::get('/store-details',[
+    Route::get('/store-details/{id}',[
         'uses' => 'Equipment\EquipmentController@storeView'
     ])->name('equipment_details.store');
     Route::get('/edit-details/{id}',[
