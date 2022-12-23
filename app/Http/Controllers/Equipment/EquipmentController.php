@@ -19,11 +19,11 @@ class EquipmentController extends Controller
     }
 
 
-    public function storeView()
+    public function storeView($id)
     {
         $roomData = app(RoomServices::class)->index();
 
-        return view('equipment_details/store')->with(compact('roomData'));
+        return view('equipment_details/store')->with(compact('roomData', 'id'));
     }
 
     public function editView($id)
@@ -74,7 +74,7 @@ class EquipmentController extends Controller
     public function edit(Request $request, $id): JsonResponse
     {
         $input = $request::all();
-
+        
         $result = $this->equipmentService->edit($input, $id);
 
         return $this->response($result);

@@ -131,7 +131,7 @@
                                             <div class="accordion-body collapse" id="demo{{ $item->id }}"
                                                  style="height: 0" aria-expanded="false">
                                                 <table class="table align-items-center mb-0">
-                                                    @if(!$item->equipments)
+                                                    @if(!empty($item->equipments[0]))
                                                     <thead>
                                                     <tr class="d-flex px-3">
                                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
@@ -166,7 +166,7 @@
                                                                 <div class="d-flex px-4 py-1">
                                                                     <div
                                                                         class="d-flex flex-column justify-content-center">
-                                                                        <h6 class="mb-0 text-sm">{{$equipment->room ?? 'Chưa phân bổ'}}</h6>
+                                                                        <h6 class="mb-0 text-sm">{{$equipment->room->name ?? 'Chưa phân bổ'}}</h6>
                                                                         <p class="text-xs text-secondary mb-0"></p>
                                                                     </div>
                                                                 </div>
@@ -206,7 +206,7 @@
                                                         </tr>
                                                     @endforeach
                                                     <div class="pt-3 px-5">
-                                                        <a href="{{ route('equipment_details.store') }}" type="button"
+                                                        <a href="{{ route('equipment_details.store', ['id' => $item->id]) }}" type="button"
                                                            class="btn bg-gradient-info">Thêm mới</a>
                                                     </div>
                                                     </tbody>

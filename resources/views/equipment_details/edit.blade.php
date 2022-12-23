@@ -26,8 +26,8 @@
                     </div>
                     <div class="form-group px-4">
                         <div class="col-9">
-                            <label class="col-form-label" for="describe">Tên phòng</label>
-                            <select type="text" class="form-select"  id="describe">
+                            <label class="col-form-label" for="room">Tên phòng</label>
+                            <select type="text" class="form-select"  id="room">
                             @foreach($roomData as $data)
                                 <option value="{{ $data->id }}">{{ $data->name }}</option>
                             @endforeach
@@ -50,7 +50,7 @@
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('core/js/type_equipment/type_equipment_edit.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('core/js/equipment/equipment_edit.js')}}"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
