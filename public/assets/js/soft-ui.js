@@ -75,7 +75,7 @@ window.addEventListener('resize', function() {
 
 function getUrl(link) {
     link = link.split('/')
-    let temp = link.pop()
+    link.length = 4
     return link.join('/')
 }
 

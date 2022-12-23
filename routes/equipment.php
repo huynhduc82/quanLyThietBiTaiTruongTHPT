@@ -19,7 +19,7 @@ Route::group([
     ]);
     Route::delete('/{id}', [
         'uses' => 'Equipment\EquipmentController@delete'
-    ]);
+    ])->name('equipment_details.delete');
 });
 
 Route::group([
@@ -39,5 +39,5 @@ Route::group([
     ]);
     Route::delete('/delete/{id}', [
         'uses' => 'Equipment\TypeOfEquipmentController@delete'
-    ]);
+    ])->name('equipment.delete');
 });

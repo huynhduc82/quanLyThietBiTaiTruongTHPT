@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Equipment;
 
 use App\Http\Controllers\Controller;
 use App\Services\Equipment\EquipmentService;
+use App\Services\Rooms\RoomServices;
 use App\Transformers\Equipment\EquipmentTransformers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;
@@ -17,19 +18,27 @@ class EquipmentController extends Controller
     {
     }
 
-    public function indexView()
+
+    public function storeView()
     {
-        $include=[
-            'status',
-            'room'
-        ];
+        $roomData = app(RoomServices::class)->index();
 
-        $data = $this->equipmentService->index($include);
-
-        return view('equipment/index')->with(compact('data'));
+        return view('equipment_details/store')->with(compact('roomData'));
     }
 
-    public function index(): JsonResponse
+    public function editView($id)
+    {
+        $include=[
+        ];
+
+        $roomData = app(RoomServices::class)->index();
+
+        $data = $this->equipmentService->details($id, $include);
+
+        return view('equipment_details/edit')->with(compact('data', 'roomData'));
+    }
+
+        public function index(): JsonResponse
     {
         $include=[
             'status',
