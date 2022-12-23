@@ -131,6 +131,7 @@
                                             <div class="accordion-body collapse" id="demo{{ $item->id }}"
                                                  style="height: 0" aria-expanded="false">
                                                 <table class="table align-items-center mb-0">
+                                                    @if(!$item->equipments)
                                                     <thead>
                                                     <tr class="d-flex px-3">
                                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
@@ -148,6 +149,7 @@
                                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20"></th>
                                                     </tr>
                                                     </thead>
+                                                    @endif
                                                     <tbody>
                                                     @foreach($item->equipments as $equipment)
                                                         <tr class="d-flex">
