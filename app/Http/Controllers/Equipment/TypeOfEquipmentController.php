@@ -20,7 +20,8 @@ class TypeOfEquipmentController extends Controller
     {
         $include=[
             'equipments',
-            'imagesInfo'
+            'imagesInfo',
+            'equipments.status'
         ];
 
         $data = $this->typeOfEquipmentService->index($include);

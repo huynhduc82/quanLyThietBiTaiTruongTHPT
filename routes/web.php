@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +33,17 @@ Route::group([
     Route::get('/edit/{id}',[
         'uses' => 'Equipment\TypeOfEquipmentController@editView'
     ])->name('equipment.edit');
+});
+
+Route::group([
+    'prefix' => '/equipment',
+], function (){
+    Route::get('/store-details',[
+        'uses' => 'Equipment\EquipmentController@storeView'
+    ])->name('equipment_details.store');
+    Route::get('/edit-details/{id}',[
+        'uses' => 'Equipment\EquipmentController@editView'
+    ])->name('equipment_details.edit');
 });
 
 Route::group([
@@ -77,9 +87,9 @@ Route::group([
 });
 
 Route::group([
-    'prefix' => '/equipment',
+    'prefix' => '/number',
 ], function (){
-    Route::get('/number/index', function () {
+    Route::get('/index', function () {
         return view('specifythenumberofequipment/index');
     })->name('equipment.number.index');
 });
@@ -158,9 +168,9 @@ Route::group([
     Route::get('/index',[
         'uses' => 'Auth\LoginController@showLoginForm'
     ])->name('login');
-    Route::post('',[
+    Route::post('/index',[
         'uses' => 'Auth\LoginController@login'
-    ])->name('login');
+    ]);
 });
 
 Route::post('logout',[
