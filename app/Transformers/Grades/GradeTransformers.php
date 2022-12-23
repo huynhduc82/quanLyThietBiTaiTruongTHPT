@@ -19,7 +19,7 @@ class GradeTransformers extends TransformerAbstract
     {
         return [
             'id' => $model->id,
-            'name' => 'Lớp ' . $model->name,
+            'name' => 'Khối ' . $model->name,
         ];
     }
 }

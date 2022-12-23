@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Class;
 
 use App\Http\Controllers\Controller;
 use App\Imports\ClassesImport;
-use App\Imports\CoursesDetailsImport;
+use App\Models\Class\Classes;
+use App\Services\Class\ClassService;
 use App\Services\Courses\CourseService;
+use App\Transformers\Class\ClassTransformer;
 use App\Transformers\Course\CourseTransformer;
 use App\Transformers\Equipment\EquipmentTransformers;
 use Illuminate\Http\JsonResponse;
@@ -16,7 +18,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class ClassController extends Controller
 {
     public function __construct(
-        protected CourseService $courseService
+        protected ClassService $classService
     )
     {
     }
@@ -28,7 +30,7 @@ class ClassController extends Controller
             'room'
         ];
 
-        $data = $this->courseService->index($include);
+        $data = $this->classService->index($include);
 
         return view('equipment/index')->with(compact('data'));
     }
@@ -39,28 +41,27 @@ class ClassController extends Controller
             'grade',
         ];
 
-        $result = $this->courseService->index($include);
+        $result = $this->classService->index($include);
 
-        return $this->response($this->transform($result, CourseTransformer::class, $include));
+        return $this->response($this->transform($result, ClassTransformer::class, $include));
     }
 
     public function details($id): JsonResponse
     {
         $include = [
-            'status',
-            'room'
+            'grade',
         ];
 
-        $result = $this->courseService->details($id, $include);
+        $result = $this->classService->details($id, $include);
 
-        return $this->response($this->transform($result, EquipmentTransformers::class, $include));
+        return $this->response($this->transform($result, ClassTransformer::class, $include));
     }
 
     public function store(Request $request)
     {
         $input = $request::all();
 
-        $result = $this->courseService->store($input);
+        $result = $this->classService->store($input);
 
         return $result;
     }
@@ -69,14 +70,14 @@ class ClassController extends Controller
     {
         $input = $request::all();
 
-        $result = $this->courseService->edit($input, $id);
+        $result = $this->classService->edit($input, $id);
 
         return $this->response($result);
     }
 
     public function delete($id): JsonResponse
     {
-        $result = $this->courseService->delete($id);
+        $result = $this->classService->delete($id);
 
         return $this->response($result);
     }

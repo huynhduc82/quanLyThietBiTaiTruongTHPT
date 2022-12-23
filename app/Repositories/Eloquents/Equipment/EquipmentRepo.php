@@ -57,6 +57,7 @@ class EquipmentRepo extends BaseEloquentRepository implements IEquipmentRepo
 
     public function delete($id): int
     {
+        $this->model->newQuery()->where('id', $id)->first()->status()->delete();
         return $this->model->newQuery()->where('id', $id)->delete();
     }
 }

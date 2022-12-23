@@ -8,18 +8,21 @@ Route::group([
     'prefix' => 'class',
 ], function (){
     Route::get('/',[
-        'uses' => 'Equipment\EquipmentController@index'
+        'uses' => 'Class\ClassController@index'
     ]);
     Route::get('/{id}',[
-        'uses' => 'Equipment\EquipmentController@details'
+        'uses' => 'Class\ClassController@details'
     ]);
     Route::post('/', [
-        'uses' => 'Equipment\EquipmentController@store'
+        'uses' => 'Class\ClassController@store'
+    ]);
+    Route::post('/{id}', [
+        'uses' => 'Class\ClassController@edit'
     ]);
     Route::post('/import-class', [
         'uses' => 'Class\ClassController@importClass'
     ]);
     Route::delete('/{id}', [
-        'uses' => 'Equipment\EquipmentController@delete'
+        'uses' => 'Class\ClassController@delete'
     ]);
 });
