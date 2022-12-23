@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
+                        <div class="table-responsive p-0 w-100">
                             <table class="table align-items-center mb-0">
                                 <thead>
                                 <tr class="d-flex">
@@ -42,7 +42,7 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-6">
                                         Đơn vị tính
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-10">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3 w-10">
                                         Giá
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-25">
@@ -105,7 +105,7 @@
                                         </td>
                                         <td class="w-25 text-wrap accordion-toggle" data-bs-toggle="collapse"
                                             data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
-                                            <div class="d-flex px-2 py-1">
+                                            <div class="d-flex px-2 py-1 align-text-center">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{$item->describe}}</h6>
                                                     <p class="text-xs text-secondary mb-0"></p>
