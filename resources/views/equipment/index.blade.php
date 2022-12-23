@@ -33,7 +33,8 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-30">
                                         Tên và hình ảnh
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-6">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2
+                                     w-6">
                                         Số lượng
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-9 text-wrap">
@@ -69,7 +70,7 @@
                                         </td>
                                         <td class="w-6 accordion-toggle" data-bs-toggle="collapse"
                                             data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
-                                            <div class="d-flex px-2 py-1">
+                                            <div class="d-block px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{$item->quantity}}</h6>
                                                     <p class="text-xs text-secondary mb-0"></p>
@@ -78,7 +79,7 @@
                                         </td>
                                         <td class="w-9 accordion-toggle" data-bs-toggle="collapse"
                                             data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
-                                            <div class="d-flex px-2 py-1">
+                                            <div class="d-block px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{$item->quantity_can_rent}}</h6>
                                                     <p class="text-xs text-secondary mb-0"></p>
@@ -87,7 +88,7 @@
                                         </td>
                                         <td class="w-6 accordion-toggle" data-bs-toggle="collapse"
                                             data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
-                                            <div class="d-flex px-2 py-1">
+                                            <div class="d-block px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{$item->unit}}</h6>
                                                     <p class="text-xs text-secondary mb-0"></p>
@@ -96,7 +97,7 @@
                                         </td>
                                         <td class="w-7 accordion-toggle" data-bs-toggle="collapse"
                                             data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
-                                            <div class="d-flex px-2 py-1">
+                                            <div class="d-block px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{$item->price}}</h6>
                                                     <p class="text-xs text-secondary mb-0"></p>
@@ -105,7 +106,7 @@
                                         </td>
                                         <td class="w-25 text-wrap accordion-toggle" data-bs-toggle="collapse"
                                             data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
-                                            <div class="d-flex px-2 py-1 align-text-center">
+                                            <div class="d-block px-2 py-1 align-text-center">
                                                 <div class="d-flex flex-column justify-content-center text-center">
                                                     <h6 class="mb-0 text-sm">{{$item->describe}}</h6>
                                                     <p class="text-xs text-secondary mb-0"></p>
@@ -113,11 +114,11 @@
                                             </div>
                                         </td>
                                         <td class="w-7">
-                                            <div class="d-flex px-2 py-1">
+                                            <div class="d-block px-2 py-1">
                                                 <div class="d-flex justify-content-center">
                                                     <a type="button"
                                                        href="{{ route('equipment.edit', ['id' => $item->id]) }}"
-                                                       class="btn bg-gradient-info my-1 mb-1 ms-1">Sửa</a>
+                                                       class="btn bg-gradient-info my-1 mb-1 ms-6">Sửa</a>
                                                     <button type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1"
                                                             onclick="DeleteConfirm('{{route('equipment.delete', ['id' => $item->id])}}')">
                                                         Xoá
