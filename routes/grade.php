@@ -2,4 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('grade',['uses' => 'Grades\GradeController@index']);
+Route::group([
+    'prefix' => 'grade',
+], function () {
+    Route::get('/', [
+        'uses' => 'Grades\GradeController@index'
+    ]);
+    Route::get('/{id}', [
+        'uses' => 'Grades\GradeController@details'
+    ]);
+    Route::post('/', [
+        'uses' => 'Grades\GradeController@store'
+    ]);
+    Route::post('/{id}', [
+        'uses' => 'Grades\GradeController@edit'
+    ]);
+    Route::delete('/{id}', [
+        'uses' => 'Grades\GradeController@delete'
+    ]);
+});
