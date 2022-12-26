@@ -20,22 +20,23 @@ class CourseController extends Controller
     {
     }
 
-    public function indexView()
-    {
-        $include = [
-            'status',
-            'room'
-        ];
-
-        $data = $this->courseService->index($include);
-
-        return view('equipment/index')->with(compact('data'));
-    }
+//    public function indexView()
+//    {
+//        $include = [
+//            'status',
+//            'room'
+//        ];
+//
+//        $data = $this->courseService->index($include);
+//
+//        return view('equipment/index')->with(compact('data'));
+//    }
 
     public function index(): JsonResponse
     {
         $include = [
             'grade',
+            'courseDetails',
         ];
 
         $result = $this->courseService->index($include);
@@ -46,13 +47,13 @@ class CourseController extends Controller
     public function details($id): JsonResponse
     {
         $include = [
-            'status',
-            'room'
+            'grade',
+            'courseDetails',
         ];
 
         $result = $this->courseService->details($id, $include);
 
-        return $this->response($this->transform($result, EquipmentTransformers::class, $include));
+        return $this->response($this->transform($result, CourseTransformer::class, $include));
     }
 
     public function store(Request $request)
@@ -78,14 +79,5 @@ class CourseController extends Controller
         $result = $this->courseService->delete($id);
 
         return $this->response($result);
-    }
-
-    public function importCourseDetail(Request $request): JsonResponse
-    {
-        $file = $request::all()['file'];
-
-        Excel::import(new CoursesDetailsImport, $file);
-
-        return $this->response(123);
     }
 }
