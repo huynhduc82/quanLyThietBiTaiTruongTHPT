@@ -35,7 +35,7 @@ class ClassController extends Controller
         return view('equipment/index')->with(compact('data'));
     }
 
-    public function index(): JsonResponse
+    public function index()
     {
         $include = [
             'grade',
@@ -43,7 +43,7 @@ class ClassController extends Controller
 
         $result = $this->classService->index($include);
 
-        return $this->response($this->transform($result, ClassTransformer::class, $include));
+        return $this->transform($result, ClassTransformer::class, $include);
     }
 
     public function details($id): JsonResponse

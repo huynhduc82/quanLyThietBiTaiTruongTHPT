@@ -25,7 +25,7 @@ class ClassTransformer extends TransformerAbstract
         return [
             'id' => $model->id,
             'grade_id' => $model->grade_id,
-            'name' => $model->name,
+            'name' => 'Lớp ' . $model->name,
             'number_of_pupils' => $model->number_of_pupils,
         ];
     }

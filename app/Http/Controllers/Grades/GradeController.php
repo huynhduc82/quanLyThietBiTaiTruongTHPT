@@ -26,14 +26,14 @@ class GradeController extends Controller
         return view('equipment/index')->with(compact('data'));
     }
 
-    public function index(): JsonResponse
+    public function index()
     {
         $include = [
         ];
 
         $result = $this->gradeService->index($include);
 
-        return $this->response($this->transform($result, GradeTransformers::class, $include));
+        return $this->transform($result, GradeTransformers::class, $include);
     }
 
     public function details($id): JsonResponse

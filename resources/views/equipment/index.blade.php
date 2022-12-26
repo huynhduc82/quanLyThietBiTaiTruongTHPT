@@ -29,6 +29,7 @@
                         <div class="table-responsive p-0 ">
                             <table class="table mb-0 w-100">
                                 <thead>
+                                @if(!empty($data))
                                 <tr class="d-flex">
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-30">
                                         Tên và hình ảnh
@@ -51,6 +52,7 @@
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-7 text-wrap"></th>
                                 </tr>
+                                @endif
                                 </thead>
                                 <tbody>
                                 @foreach($data as $item)

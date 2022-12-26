@@ -30,6 +30,16 @@ class CourseDetailController extends Controller
         return $this->response($this->transform($result, CourseDetailsTransformer::class, $include));
     }
 
+    public function indexData()
+    {
+        $include = [
+        ];
+
+        $result = $this->courseDetailsService->index($include);
+
+        return $this->transform($result, CourseDetailsTransformer::class, $include);
+    }
+
     public function details($id): JsonResponse
     {
         $include = [
