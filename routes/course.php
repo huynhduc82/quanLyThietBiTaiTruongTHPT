@@ -9,15 +9,38 @@ Route::group([
         'uses' => 'Course\CourseController@index'
     ]);
     Route::get('/{id}',[
-        'uses' => 'Equipment\EquipmentController@details'
+        'uses' => 'Course\CourseController@details'
     ]);
     Route::post('/', [
-        'uses' => 'Equipment\EquipmentController@store'
+        'uses' => 'Course\CourseController@store'
     ]);
-    Route::post('/import-course-details', [
-        'uses' => 'Course\CourseController@importCourseDetail'
+    Route::post('/{id}', [
+        'uses' => 'Course\CourseController@edit'
     ]);
     Route::delete('/{id}', [
-        'uses' => 'Equipment\EquipmentController@delete'
+        'uses' => 'Course\CourseController@delete'
+    ]);
+});
+
+Route::group([
+    'prefix' => 'course-details',
+], function (){
+    Route::get('/',[
+        'uses' => 'Course\CourseDetailController@index'
+    ]);
+    Route::get('/{id}',[
+        'uses' => 'Course\CourseDetailController@details'
+    ]);
+    Route::post('/', [
+        'uses' => 'Course\CourseDetailController@store'
+    ]);
+    Route::post('/{id}', [
+        'uses' => 'Course\CourseDetailController@edit'
+    ]);
+    Route::post('/import', [
+        'uses' => 'Course\CourseDetailController@importCourseDetail'
+    ]);
+    Route::delete('/{id}', [
+        'uses' => 'Course\CourseDetailController@delete'
     ]);
 });

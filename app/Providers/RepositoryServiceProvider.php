@@ -79,6 +79,7 @@ class RepositoryServiceProvider extends ServiceProvider
          * ------------------------------------------------------------
          */
         ICourse\ICourseRepo::class => Courses\CourseRepo::class,
+        ICourse\ICourseDetailRepo::class => Courses\CourseDetailsRepo::class,
         /*
          * ------------------------------------------------------------
          * User

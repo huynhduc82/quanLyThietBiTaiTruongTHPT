@@ -3,17 +3,18 @@
 namespace App\Repositories\Eloquents\Courses;
 
 use App\Models\Courses\Courses;
+use App\Models\Courses\CoursesDetails;
 use App\Repositories\BaseEloquentRepository;
 use App\Repositories\Contracts\Equipment\IEquipmentRepo;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class CourseRepo extends BaseEloquentRepository implements IEquipmentRepo
+class CourseDetailsRepo extends BaseEloquentRepository implements IEquipmentRepo
 {
     public function model(): string
     {
-        return Courses::class;
+        return CoursesDetails::class;
     }
 
     public function index(array $include = []): Collection
@@ -47,7 +48,6 @@ class CourseRepo extends BaseEloquentRepository implements IEquipmentRepo
 
     public function delete($id): int
     {
-        $this->model->newQuery()->where('id', $id)->first()->courseDetails()->delete();
         return $this->model->newQuery()->where('id', $id)->delete();
     }
 }

@@ -2,20 +2,17 @@
 
 namespace App\Services\Courses;
 
-use App\Models\EquipmentStatus\EquipmentStatus;
-use App\Repositories\Contracts\Courses\ICourseRepo;
-use App\Services\EquipmentStatus\EquipmentStatusServices;
+use App\Repositories\Contracts\Courses\ICourseDetailRepo;
 use App\Services\Response\BaseService;
+use App\Validators\Course\CourseDetailValidator;
 use App\Validators\Course\CourseValidator;
-use App\Validators\Equipment\EquipmentValidator;
-use Illuminate\Support\Facades\DB;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
-class CourseService extends BaseService
+class CourseDetailsService extends BaseService
 {
     public function repository(): string
     {
-        return ICourseRepo::class;
+        return ICourseDetailRepo::class;
     }
 
     public function index(array $include = [])
@@ -46,7 +43,7 @@ class CourseService extends BaseService
 
     protected function validatorCreateUpdate(array $params = [], ?int $id = null): void
     {
-        $validator = app(CourseValidator::class);
+        $validator = app(CourseDetailValidator::class);
         $validator->with($params);
         if ($id) {
             $validator->setId($id);
