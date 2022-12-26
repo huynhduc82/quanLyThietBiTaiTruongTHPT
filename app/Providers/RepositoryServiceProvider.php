@@ -12,7 +12,9 @@ use App\Repositories\Eloquents\LendReturnEquipment;
 use App\Repositories\Eloquents\Reservations;
 use App\Repositories\Eloquents\User;
 use App\Repositories\Eloquents\Classes;
+use App\Repositories\Eloquents\Grades;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Contracts\Grades as IGrade;
 use App\Repositories\Contracts\SpecifyTheNumberOfEquipments as ISpecifyTheNumberOfEquipments;
 use App\Repositories\Contracts\User as IUser;
 use App\Repositories\Contracts\Classes as IClasses;
@@ -98,5 +100,11 @@ class RepositoryServiceProvider extends ServiceProvider
          * ------------------------------------------------------------
          */
         IClasses\IClassRepo::class => Classes\ClassRepo::class,
+        /*
+         * ------------------------------------------------------------
+         * Grades
+         * ------------------------------------------------------------
+         */
+        IGrade\IGradeRepo::class => Grades\GradeRepo::class,
     ];
 }

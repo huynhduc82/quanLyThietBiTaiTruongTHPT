@@ -9,6 +9,9 @@ class Grade extends BaseModel
 {
     use SoftDeletes;
 
+    const NAME_MIN_LENGTH = '1';
+    const NAME_MAX_LENGTH = '255';
+
     protected $table = 'grades';
 
     protected $fillable = [
