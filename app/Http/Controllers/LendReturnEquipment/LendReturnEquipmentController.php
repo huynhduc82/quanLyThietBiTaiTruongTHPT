@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers\LendReturnEquipment;
 
+use App\Http\Controllers\Class\ClassController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Course\CourseController;
+use App\Http\Controllers\Course\CourseDetailController;
+use App\Http\Controllers\Grades\GradeController;
+use App\Services\Grades\GradeService;
 use App\Services\LendReturnEquipments\LendReturnEquipmentService;
+use App\Services\Rooms\RoomServices;
 use App\Transformers\LendReturnEquipment\LendReturnEquipmentTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;
@@ -14,6 +20,17 @@ class LendReturnEquipmentController extends Controller
         protected LendReturnEquipmentService $service
     )
     {
+    }
+
+    public function indexView()
+    {
+        $gradeData = app(GradeController::class)->index();
+        $classData = app(ClassController::class)->index();
+        $roomData = app(RoomServices::class)->index();
+        $courseData = app(CourseController::class)->indexData();
+        $courseDetailData = app(CourseDetailController::class)->indexData();
+        return view('lendreturn/index')->with(compact('roomData','gradeData', 'classData', 'courseData'
+        , 'courseDetailData'));
     }
 
     public function index()

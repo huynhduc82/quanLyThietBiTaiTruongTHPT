@@ -57,9 +57,9 @@ Route::group([
 Route::group([
     'prefix' => '/lend_return',
 ], function (){
-    Route::get('/index', function () {
-        return view('lendreturn/index');
-    })->name('lend_return.index');
+    Route::get('/index',[
+        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@indexView'
+    ])->name('lend_return.index');
 });
 
 Route::group([

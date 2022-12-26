@@ -1,270 +1,329 @@
 @extends('layout.layout')
 
 @section('title')
-    Sửa chữa thiết bị
+    Sữa chửa thiết bị
 @endsection
 
 @section('content')
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
-                <form role="form text-left" class="w-70" >
-                    <p>QUẢN LÝ THIẾT BỊ</p>
-                    <div class="mb-3">
-                        <p>Mã Thiết bị</p>
-                        <input type="text" class="form-control" placeholder="Mã Thiết bị" aria-label="Mã Thiết bị" >
-                    </div>
-
-                    <div class="mb-3">
-                        <p>Tên thiết bị</p>
-                        <input type="text" class="form-control" placeholder="Tên thiết bị" aria-label="Tên thiết bị" >
-                    </div>
-                    <div class="mb-3">
-                        <p>Tình trạng</p>
-                        <input type="text" class="form-control" placeholder="Tình trạng" aria-label="Tình trạng" >
-                    </div>
-
-                    <div class="mb-3">
-                        <p>Số lượng thiết bị</p>
-                        <input type="number" class="form-control" placeholder="Số lượng thiết bị" aria-label="Số lượng thiết bị" >
-                    </div>
-
-                    <div class="text-center">
-                        <button type="button" class="btn bg-gradient-info w-10 my-4 mb-2">Thêm</button>
-                        <button type="button" class="btn bg-gradient-info w-10 my-4 mb-2">Sửa</button>
-                        <button type="button" class="btn bg-gradient-info w-10 my-4 mb-2">Xóa</button>
-                    </div>
-                </form>
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Danh sách sửa chữa</h6>
+                        <h2>Quản lý bảo hành sữa chửa thiết bị</h2>
+                    </div>
+                    <div class="row px-4 py-2">
+                        <div class="col-5">
+                            <div class="input-group">
+                                <span class="input-group-text text-body"><i class="fas fa-search"
+                                                                            aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <a href="{{ route('equipment.store') }}" type="button" class="btn bg-gradient-info">Báo hỏng thiết bị</a>
+                        </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
+                        <div class="table-responsive p-0 ">
+                            <table class="table mb-0 w-100">
                                 <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-20">Tên và hình ảnh</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-20">Tình trạng</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-20">Số lượng</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-20">Ngày sửa chữa</th>
+                                @if(!empty($data))
+                                <tr class="d-flex">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-30">
+                                        Tên và hình ảnh
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2
+                                     w-6">
+                                        Số lượng
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-9 text-wrap">
+                                        Số lượng có thể mượn
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-6">
+                                        Đơn vị tính
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3 w-7">
+                                        Giá
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-25">
+                                        Mô tả
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-7 text-wrap"></th>
                                 </tr>
+                                @endif
                                 </thead>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div>
-                                                <img src="../assets/img/5.jpg" class="avatar avatar-sm me-3" alt="user1">
+                                <tbody>
+                                @foreach($data = [] as $item)
+                                    <tr class="d-flex">
+                                        <td class="text-wrap w-30 accordion-toggle" data-bs-toggle="collapse"
+                                            data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
+                                            <div class="d-flex px-2 py-1">
+                                                <div>
+                                                    <img src="{{$item->imagesInfo ? $item->imagesInfo->url : null}}"
+                                                         class="avatar avatar-sm me-3" alt="user1">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{$item->name}}</h6>
+                                                    <p class="text-xs text-secondary mb-0"></p>
+                                                </div>
                                             </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Ống nghiệm</h6>
-                                                <p class="text-xs text-secondary mb-0"></p>
+                                        </td>
+                                        <td class="w-6 accordion-toggle" data-bs-toggle="collapse"
+                                            data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
+                                            <div class="d-block px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{$item->quantity}}</h6>
+                                                    <p class="text-xs text-secondary mb-0"></p>
+                                                </div>
                                             </div>
-
-                                        </div>
-                                    </td>
-                                    <td class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-20 ps-2" style="text-align: end;">
-                                        <button class="btn btn-link text-secondary mb-0">
-                                            <i class="fa fa-ellipsis-v text-xs"> Xem chi tiết</i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td class="w-9 accordion-toggle" data-bs-toggle="collapse"
+                                            data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
+                                            <div class="d-block px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{$item->quantity_can_rent}}</h6>
+                                                    <p class="text-xs text-secondary mb-0"></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="w-6 accordion-toggle" data-bs-toggle="collapse"
+                                            data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
+                                            <div class="d-block px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{$item->unit}}</h6>
+                                                    <p class="text-xs text-secondary mb-0"></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="w-7 accordion-toggle" data-bs-toggle="collapse"
+                                            data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
+                                            <div class="d-block px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{$item->price}}</h6>
+                                                    <p class="text-xs text-secondary mb-0"></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="w-25 text-wrap accordion-toggle" data-bs-toggle="collapse"
+                                            data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
+                                            <div class="d-block px-2 py-1 align-text-center">
+                                                <div class="d-flex flex-column justify-content-center text-center">
+                                                    <h6 class="mb-0 text-sm">{{$item->describe}}</h6>
+                                                    <p class="text-xs text-secondary mb-0"></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="w-7">
+                                            <div class="d-block px-2 py-1">
+                                                <div class="d-flex justify-content-center">
+                                                    <a type="button"
+                                                       href="{{ route('equipment.edit', ['id' => $item->id]) }}"
+                                                       class="btn bg-gradient-info my-1 mb-1 ms-6">Sửa</a>
+                                                    <button type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1"
+                                                            onclick="DeleteConfirm('{{route('equipment.delete', ['id' => $item->id])}}')">
+                                                        Xoá
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="12" class="hiddenRow">
+                                            <div class="accordion-body collapse" id="demo{{ $item->id }}"
+                                                 style="height: 0" aria-expanded="false">
+                                                <table class="table mb-0">
+                                                    @if(!empty($item->equipments[0]))
+                                                        <thead>
+                                                        <tr class="d-flex px-3">
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
+                                                                Tên thiết bị
+                                                            </th>
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
+                                                                Phòng
+                                                            </th>
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
+                                                                Tình trạng
+                                                            </th>
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
+                                                                Trạng thái
+                                                            </th>
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20"></th>
+                                                        </tr>
+                                                        </thead>
+                                                    @endif
+                                                    <tbody>
+                                                    @foreach($item->equipments as $equipment)
+                                                        <tr class="d-flex">
+                                                            <td class="w-20 text-wrap">
+                                                                <div class="d-flex px-4 py-1">
+                                                                    <div
+                                                                        class="d-flex flex-column justify-content-center">
+                                                                        <h6 class="mb-0 text-sm">{{$equipment->name}}</h6>
+                                                                        <p class="text-xs text-secondary mb-0"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="w-20 text-wrap">
+                                                                <div class="d-flex px-4 py-1">
+                                                                    <div
+                                                                        class="d-flex flex-column justify-content-center">
+                                                                        <h6 class="mb-0 text-sm">{{$equipment->room->name ?? 'Chưa phân bổ'}}</h6>
+                                                                        <p class="text-xs text-secondary mb-0"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="w-20 text-wrap">
+                                                                <div class="d-flex px-4 py-1">
+                                                                    <div
+                                                                        class="d-flex flex-column justify-content-center">
+                                                                        <h6 class="mb-0 text-sm">{{$equipment->status->condition_details}}</h6>
+                                                                        <p class="text-xs text-secondary mb-0"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="w-20 text-wrap">
+                                                                <div class="d-flex px-4 py-1">
+                                                                    <div
+                                                                        class="d-flex flex-column justify-content-center">
+                                                                        <h6 class="mb-0 text-sm">{{$equipment->can_rent != 1 ? 'Đang cho mượn' : 'Có thể mượn' }}</h6>
+                                                                        <p class="text-xs text-secondary mb-0"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="w-20">
+                                                                <div class="d-flex px-2 py-1">
+                                                                    <div class="d-flex justify-content-center">
+                                                                        <a type="button"
+                                                                           href="{{ route('equipment_details.edit', ['id' => $equipment->id]) }}"
+                                                                           class="btn bg-gradient-info my-1 mb-1 ms-1">Sửa</a>
+                                                                        <button type="button"
+                                                                                class="btn bg-gradient-danger my-1 mb-1 ms-1"
+                                                                                onclick="DeleteConfirm('{{route('equipment_details.delete', ['id' => $equipment->id])}}')">
+                                                                            Xoá
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    <div class="pt-3 px-5">
+                                                        <a href="{{ route('equipment_details.store', ['id' => $item->id]) }}" type="button"
+                                                           class="btn bg-gradient-info">Thêm mới</a>
+                                                    </div>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+        <footer class="footer pt-3  ">
+            <div class="container-fluid">
+                <div class="row align-items-center justify-content-lg-between">
+                    <div class="col-lg-6 mb-lg-0 mb-4">
+                    </div>
+                    <div class="col-lg-6">
+                        <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                            <li class="nav-item">
+                                <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Giới
+                                    thiệu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://www.facebook.com/huynhphat9286" class="nav-link pe-0 text-muted"
+                                   target="_blank">Liên hệ</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    @endsection
 
-@section('footer_scripts')
-
-    <!--   Core JS Files   -->
-    <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
-    <script>
-        var ctx = document.getElementById("chart-bars").getContext("2d");
-
-        new Chart(ctx, {
-            type: "bar",
-            data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [{
-                    label: "Sales",
-                    tension: 0.4,
-                    borderWidth: 0,
-                    borderRadius: 4,
-                    borderSkipped: false,
-                    backgroundColor: "#fff",
-                    data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-                    maxBarThickness: 6
-                }, ],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false,
+    @section('footer_scripts')
+        <!--   Core JS Files   -->
+            <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+            <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+            <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                var win = navigator.platform.indexOf('Win') > -1;
+                if (win && document.querySelector('#sidenav-scrollbar')) {
+                    var options = {
+                        damping: '0.5'
                     }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index',
-                },
-                scales: {
-                    y: {
-                        grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false,
-                        },
-                        ticks: {
-                            suggestedMin: 0,
-                            suggestedMax: 500,
-                            beginAtZero: true,
-                            padding: 15,
-                            font: {
-                                size: 14,
-                                family: "Open Sans",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                            color: "#fff"
-                        },
+                    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+                }
+            </script>
+            <script>
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
                     },
-                    x: {
-                        grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false
-                        },
-                        ticks: {
-                            display: false
-                        },
-                    },
-                },
-            },
-        });
+                    buttonsStyling: false
+                })
 
+                var DeleteConfirm = (url) => {
+                    swalWithBootstrapButtons.fire({
+                        title: 'Bạn có chắc không?',
+                        text: "Bạn không thể khôi phục lại thiết bị đã xoá!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Có, Hãy xoá đi!',
+                        cancelButtonText: 'Không, Huỷ bỏ!',
+                        reverseButtons: true,
+                        backdrop: false,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: url,
+                                // dataType: 'json',
+                                enctype: "multipart/form-data",
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                success: function () {
+                                    swalWithBootstrapButtons.fire({
+                                        title: 'Đã xoá!',
+                                        text: "Thiết bị của bạn đã xoá.",
+                                        icon: 'success',
+                                        backdrop: false,
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload();
+                                        }
+                                    })
+                                },
+                                error: function (error) {
+                                },
+                                type: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            })
 
-        var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-        var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-        gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-        gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-        gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-
-        var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-        gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-        gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-        gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
-
-        new Chart(ctx2, {
-            type: "line",
-            data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [{
-                    label: "Mobile apps",
-                    tension: 0.4,
-                    borderWidth: 0,
-                    pointRadius: 0,
-                    borderColor: "#cb0c9f",
-                    borderWidth: 3,
-                    backgroundColor: gradientStroke1,
-                    fill: true,
-                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-                    maxBarThickness: 6
-
-                },
-                    {
-                        label: "Websites",
-                        tension: 0.4,
-                        borderWidth: 0,
-                        pointRadius: 0,
-                        borderColor: "#3A416F",
-                        borderWidth: 3,
-                        backgroundColor: gradientStroke2,
-                        fill: true,
-                        data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-                        maxBarThickness: 6
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false,
-                    }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index',
-                },
-                scales: {
-                    y: {
-                        grid: {
-                            drawBorder: false,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: false,
-                            borderDash: [5, 5]
-                        },
-                        ticks: {
-                            display: true,
-                            padding: 10,
-                            color: '#b2b9bf',
-                            font: {
-                                size: 11,
-                                family: "Open Sans",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
+                        } else if (
+                            /* Read more about handling dismissals below */
+                            result.dismiss === Swal.DismissReason.cancel
+                        ) {
+                            swalWithBootstrapButtons.fire({
+                                title: 'Đã huỷ',
+                                text: 'Thiết bị của bạn đã an toàn :)',
+                                icon: 'error',
+                                backdrop: false,
+                            })
                         }
-                    },
-                    x: {
-                        grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false,
-                            borderDash: [5, 5]
-                        },
-                        ticks: {
-                            display: true,
-                            color: '#b2b9bf',
-                            padding: 20,
-                            font: {
-                                size: 11,
-                                family: "Open Sans",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
-                    },
-                },
-            },
-        });
-    </script>
-    <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-                damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
-    </script>
-    <!-- Github buttons -->
-    <script async defer src="{{asset('https://buttons.github.io/buttons.js')}}"></script>
+                    })
+                };
+            </script>
+            <!-- Github buttons -->
+            <script async defer src="{{asset('https://buttons.github.io/buttons.js')}}"></script>
 @endsection
