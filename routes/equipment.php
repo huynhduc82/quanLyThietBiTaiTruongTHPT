@@ -40,4 +40,7 @@ Route::group([
     Route::delete('/delete/{id}', [
         'uses' => 'Equipment\TypeOfEquipmentController@delete'
     ])->name('equipment.delete');
+    Route::post('/import/equipment', [
+        'uses' => 'Equipment\TypeOfEquipmentController@importEquipment'
+    ]);
 });

@@ -29,57 +29,60 @@ class CoursesDetailsImport implements ToCollection,WithHeadingRow
                 "describe" => $row['describe'],
                 "need_equipment" => (bool)$row['need_equipment'],
             ]);
-
+            dump($model);
             if($row['need_equipment'] = 1)
             {
-                if($row['equipment1'])
+                for ($i = 1 ; $i <= $row['total_equipment']; $i++)
                 {
-                    $id = $equipment->where('name', '=', $row['equipment1'])->first()->id;
-                    SpecifyTheNumberOfEquipment::create([
-                        "equipment_id" => $id,
-                        "course_details_id" => $model->id,
-                        "quantity" => $row['quantity1']
-                    ]);
-                }
+                    if($row['equipment' . $i])
+                    {
+                        $id = $equipment->where('name', '=', $row['equipment' . $i])->first()->id;
+                        SpecifyTheNumberOfEquipment::create([
+                            "equipment_id" => $id,
+                            "course_details_id" => $model->id,
+                            "quantity" => $row['quantity' . $i]
+                        ]);
+                    }
 
-                if($row['equipment2'])
-                {
-                    $id = $equipment->where('name', '=', $row['equipment2'])->first()->id;
-                    SpecifyTheNumberOfEquipment::create([
-                        "equipment_id" => $id,
-                        "course_details_id" => $model->id,
-                        "quantity" => $row['quantity2']
-                    ]);
-                }
-
-                if($row['equipment3'])
-                {
-                    $id = $equipment->where('name', '=', $row['equipment3'])->first()->id;
-                    SpecifyTheNumberOfEquipment::create([
-                        "equipment_id" => $id,
-                        "course_details_id" => $model->id,
-                        "quantity" => $row['quantity3']
-                    ]);
-                }
-
-                if($row['equipment4'])
-                {
-                    $id = $equipment->where('name', '=', $row['equipment4'])->first()->id;
-                    SpecifyTheNumberOfEquipment::create([
-                        "equipment_id" => $id,
-                        "course_details_id" => $model->id,
-                        "quantity" => $row['quantity4']
-                    ]);
-                }
-
-                if($row['equipment5'])
-                {
-                    $id = $equipment->where('name', '=', $row['equipment5'])->first()->id;
-                    SpecifyTheNumberOfEquipment::create([
-                        "equipment_id" => $id,
-                        "course_details_id" => $model->id,
-                        "quantity" => $row['quantity5']
-                    ]);
+//                    if($row['equipment2'])
+//                    {
+//                        $id = $equipment->where('name', '=', $row['equipment2'])->first()->id;
+//                        SpecifyTheNumberOfEquipment::create([
+//                            "equipment_id" => $id,
+//                            "course_details_id" => $model->id,
+//                            "quantity" => $row['quantity2']
+//                        ]);
+//                    }
+//
+//                    if($row['equipment3'])
+//                    {
+//                        $id = $equipment->where('name', '=', $row['equipment3'])->first()->id;
+//                        SpecifyTheNumberOfEquipment::create([
+//                            "equipment_id" => $id,
+//                            "course_details_id" => $model->id,
+//                            "quantity" => $row['quantity3']
+//                        ]);
+//                    }
+//
+//                    if($row['equipment4'])
+//                    {
+//                        $id = $equipment->where('name', '=', $row['equipment4'])->first()->id;
+//                        SpecifyTheNumberOfEquipment::create([
+//                            "equipment_id" => $id,
+//                            "course_details_id" => $model->id,
+//                            "quantity" => $row['quantity4']
+//                        ]);
+//                    }
+//
+//                    if($row['equipment5'])
+//                    {
+//                        $id = $equipment->where('name', '=', $row['equipment5'])->first()->id;
+//                        SpecifyTheNumberOfEquipment::create([
+//                            "equipment_id" => $id,
+//                            "course_details_id" => $model->id,
+//                            "quantity" => $row['quantity5']
+//                        ]);
+//                    }
                 }
             }
         }
