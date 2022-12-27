@@ -84,6 +84,12 @@ Route::group([
     Route::get('/time/index', function () {
         return view('classtime/index');
     })->name('class.time.index');
+    Route::get('/time/store', function () {
+        return view('classtime/store');
+    })->name('class.time.store');
+    Route::get('/time/edit', function () {
+        return view('classtime/edit');
+    })->name('class.time.edit');
 });
 
 Route::group([
@@ -92,6 +98,12 @@ Route::group([
     Route::get('/index', function () {
         return view('specifythenumberofequipment/index');
     })->name('equipment.number.index');
+    Route::get('/store', function () {
+        return view('specifythenumberofequipment/store');
+    })->name('equipment.number.store');
+    Route::get('/edit', function () {
+        return view('specifythenumberofequipment/edit');
+    })->name('equipment.number.edit');
 });
 
 Route::group([
@@ -100,6 +112,12 @@ Route::group([
     Route::get('/index', function () {
         return view('course/index');
     })->name('course.index');
+    Route::get('/store', function () {
+        return view('course/store');
+    })->name('course.store');
+    Route::get('/edit', function () {
+        return view('course/edit');
+    })->name('course.edit');
 });
 
 Route::group([
@@ -108,6 +126,12 @@ Route::group([
     Route::get('/index', function () {
         return view('room/index');
     })->name('room.index');
+    Route::get('/store', function () {
+        return view('room/store');
+    })->name('room.store');
+    Route::get('/edit', function () {
+        return view('room/edit');
+    })->name('room.edit');
 });
 
 Route::group([
@@ -116,6 +140,12 @@ Route::group([
     Route::get('/index', function () {
         return view('grade/index');
     })->name('grade.index');
+    Route::get('/store', function () {
+        return view('grade/store');
+    })->name('grade.store');
+    Route::get('/edit', function () {
+        return view('grade/edit');
+    })->name('grade.edit');
 });
 
 Route::group([

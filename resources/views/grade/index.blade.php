@@ -8,73 +8,65 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
-                <form role="form text-left" class="w-70" >
-                    <p>QUẢN LÝ THIẾT BỊ</p>
-                    <div class="mb-3">
-                        <p>Mã Thiết bị</p>
-                        <input type="text" class="form-control" placeholder="Mã Thiết bị" aria-label="Mã Thiết bị" >
-                    </div>
-
-                    <div class="mb-3">
-                        <p>Tên thiết bị</p>
-                        <input type="text" class="form-control" placeholder="Tên thiết bị" aria-label="Tên thiết bị" >
-                    </div>
-                    <div class="mb-3">
-                        <p>Tình trạng</p>
-                        <input type="text" class="form-control" placeholder="Tình trạng" aria-label="Tình trạng" >
-                    </div>
-
-                    <div class="mb-3">
-                        <p>Số lượng thiết bị</p>
-                        <input type="number" class="form-control" placeholder="Số lượng thiết bị" aria-label="Số lượng thiết bị" >
-                    </div>
-
-                    <div class="text-center">
-                        <button type="button" class="btn bg-gradient-info w-10 my-4 mb-2">Thêm</button>
-                        <button type="button" class="btn bg-gradient-info w-10 my-4 mb-2">Sửa</button>
-                        <button type="button" class="btn bg-gradient-info w-10 my-4 mb-2">Xóa</button>
-                    </div>
-                </form>
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Danh sách sửa chữa</h6>
+                        <h2>Quản lý khối lớp</h2>
+                    </div>
+                    <div class="row px-4 py-2">
+                        <div class="col-5">
+                            <div class="input-group">
+                                <span class="input-group-text text-body"><i class="fas fa-search"
+                                                                            aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <a href="{{ route('grade.store') }}" type="button" class="btn bg-gradient-info">Thêm
+                                mới</a>
+                        </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
+                        <div class="table-responsive p-0 ">
+                            <table class="table mb-0 w-100">
                                 <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-20">Tên và hình ảnh</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-20">Tình trạng</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-20">Số lượng</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-20">Ngày sửa chữa</th>
-                                </tr>
-                                </thead>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div>
-                                                <img src="../assets/img/5.jpg" class="avatar avatar-sm me-3" alt="user1">
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Ống nghiệm</h6>
-                                                <p class="text-xs text-secondary mb-0"></p>
-                                            </div>
 
-                                        </div>
-                                    </td>
-                                    <td class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-20 ps-2" style="text-align: end;">
-                                        <button class="btn btn-link text-secondary mb-0">
-                                            <i class="fa fa-ellipsis-v text-xs"> Xem chi tiết</i>
-                                        </button>
-                                    </td>
+                                <tr class="d-flex">
+
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-25">
+                                        Tên lớp
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-7 text-wrap"></th>
                                 </tr>
+
+                                <tbody>
+
+
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <footer class="footer pt-3  ">
+            <div class="container-fluid">
+                <div class="row align-items-center justify-content-lg-between">
+                    <div class="col-lg-6 mb-lg-0 mb-4">
+                    </div>
+                    <div class="col-lg-6">
+                        <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                            <li class="nav-item">
+                                <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Giới
+                                    thiệu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://www.facebook.com/huynhphat9286" class="nav-link pe-0 text-muted"
+                                   target="_blank">Liên hệ</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
         @endsection
 
         @section('footer_scripts')

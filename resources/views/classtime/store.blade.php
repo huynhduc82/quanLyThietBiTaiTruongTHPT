@@ -1,45 +1,33 @@
 @extends('layout.layout')
 
 @section('title')
-    Thêm thiết bị mới
+    Thêm mới giờ học
 @endsection
 
 @section('content')
     <div class="container-fluid py-4">
         <div class="card w-70">
             <div class="card-header pb-2">
-                <h3>Thêm mới thiết bị</h3>
+                <h3>Thêm mới giờ học</h3>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <form id="frm-equipment">
                     <div class="form-group px-4">
                         <div class="col-9">
-                            <label class="col-form-label">Tên thiết bị</label>
-                            <input type="text" class="form-control" placeholder="Tên thiết bị" id="name">
+                            <label class="col-form-label">Bài học</label>
+                            <input type="text" class="form-control" placeholder="Bài học" id="name">
                         </div>
                     </div>
                     <div class="form-group px-4">
                         <div class="col-9">
-                            <label class="col-form-label">Mô tả</label>
-                            <input type="text" class="form-control" placeholder="Mô tả" id="describe">
+                            <label class="col-form-label">Thời gian bắt đầu</label>
+                            <input type="time" class="form-control" placeholder="Thời gian bắt đầu" id="describe">
                         </div>
                     </div>
                     <div class="form-group px-4">
                         <div class="col-9">
-                            <label class="col-form-label">Đơn vị tính</label>
-                            <input type="text" class="form-control" placeholder="Đơn vị tính" id ="unit">
-                        </div>
-                    </div>
-                    <div class="form-group px-4">
-                        <div class="col-9">
-                            <label class="col-form-label">Giá tiền</label>
-                            <input type="text" class="form-control" placeholder="Giá tiền" id="price">
-                        </div>
-                    </div>
-                    <div class="form-group px-4">
-                        <div class="col-9">
-                            <label class="col-form-label">Hình</label>
-                            <input type="file" class="form-control" placeholder="Hình ảnh thiết bị" id="image">
+                            <label class="col-form-label">Thời gian kết thúc</label>
+                            <input type="time" class="form-control" placeholder="Thời gian kết thúc" id="describe">
                         </div>
                     </div>
                     <div class="d-flex justify-content-center py-1 col-9">
@@ -69,8 +57,7 @@
         }
     </script>
     <script>
-        document.getElementById('title-first').innerText = 'Thiết bị'
-        document.getElementById('title-second').innerText = 'Thêm mới thiết bị'
+        document.getElementById('title-first').innerText = 'Quản lý giờ học'
+        document.getElementById('title-second').innerText = 'Thêm mới giờ học'
     </script>
-
 @endsection
