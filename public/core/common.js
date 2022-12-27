@@ -39,3 +39,23 @@ let ajax_requests = function (url, data, done_fun) {
         }
     });
 };
+
+let ajax_get_data = function (url, data, done_fun) {
+    $.ajax({
+        url: url,
+        data: JSON.stringify(data),
+        dataType: 'json',
+        enctype: "multipart/form-data",
+        contentType: 'application/json',
+        cache: false,
+        processData: false,
+        success: function () {
+        },
+        error: function () {
+        },
+        type: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+};

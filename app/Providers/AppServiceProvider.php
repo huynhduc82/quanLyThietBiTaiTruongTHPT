@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -31,5 +32,6 @@ class AppServiceProvider extends ServiceProvider
         if (App::environment('production')) {
             URL::forceScheme('https');
         }
+        Paginator::useBootstrap();
     }
 }

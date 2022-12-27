@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Course\CourseController;
 use App\Http\Controllers\Course\CourseDetailController;
 use App\Http\Controllers\Grades\GradeController;
-use App\Services\Grades\GradeService;
 use App\Services\LendReturnEquipments\LendReturnEquipmentService;
 use App\Services\Rooms\RoomServices;
 use App\Transformers\LendReturnEquipment\LendReturnEquipmentTransformer;
@@ -28,7 +27,7 @@ class LendReturnEquipmentController extends Controller
         $classData = app(ClassController::class)->index();
         $roomData = app(RoomServices::class)->index();
         $courseData = app(CourseController::class)->indexData();
-        $courseDetailData = app(CourseDetailController::class)->indexData();
+        $courseDetailData = app(CourseDetailController::class)->getNeedEquipment();
         return view('lendreturn/index')->with(compact('roomData','gradeData', 'classData', 'courseData'
         , 'courseDetailData'));
     }

@@ -11,6 +11,9 @@ Route::group([
     Route::get('/{id}',[
         'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@details'
     ]);
+    Route::get('/by-course-details-id/{id}',[
+        'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@getByCourseDetailId'
+    ])->name('number.get.by.course.detail.id');
     Route::post('/', [
         'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@store'
     ]);

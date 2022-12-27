@@ -5,7 +5,6 @@ namespace App\Services\Courses;
 use App\Repositories\Contracts\Courses\ICourseDetailRepo;
 use App\Services\Response\BaseService;
 use App\Validators\Course\CourseDetailValidator;
-use App\Validators\Course\CourseValidator;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
 class CourseDetailsService extends BaseService
@@ -18,6 +17,11 @@ class CourseDetailsService extends BaseService
     public function index(array $include = [])
     {
         return $this->repository->index($include);
+    }
+
+    public function getNeedEquipment()
+    {
+        return $this->repository->getNeedEquipment();
     }
 
     public function details($id = 0, $include = [])

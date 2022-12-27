@@ -45,7 +45,7 @@
                             </div>
                             <div class="form-group px-4 col-6">
                                 <label class="col-form-label">Thời Gian Mượn </label>
-                                <input type="text" class="form-control" placeholder="Nhập Thời Gian Mượn" id="price">
+                                <input type="date" class="form-control" placeholder="Nhập Thời Gian Mượn" id="price">
                             </div>
                             <div class="form-group px-4 col-6">
                                 <label class="col-form-label">Tên Giáo Viên </label>
@@ -54,15 +54,12 @@
                             </div>
                             <div class="form-group px-4 col-6">
                                 <label class="col-form-label">Môn học</label>
-                                <select type="text" class="form-select" id="describe">
-                                    @foreach($courseData as $data)
-                                        <option value="{{ $data['id'] }}">{{ $data['name'] }}</option>
-                                    @endforeach
+                                <select type="text" class="form-select" id="course" onclick="filterCourseDetail()">
                                 </select>
                             </div>
                             <div class="form-group px-4 col-6">
                                 <label class="col-form-label">Bài Học</label>
-                                <select type="text" class="form-select" id="describe">
+                                <select type="text" class="form-select" id="courseDetails">
                                     @foreach($courseDetailData as $data)
                                         <option value="{{ $data['id'] }}">{{ $data['describe'] }}</option>
                                     @endforeach
@@ -81,86 +78,52 @@
             </div>
         </div>
         <div class="col-12">
-            <div class="row px-2 py-2">
-                <div class="card w-100 col-4">
-                    <div class="card-header pb-2">
-                        <h3> Danh sách thiết bị</h3>
-                    </div>
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <form id="frm-equipment">
-                            <div class="form-group px-4">
-                                <div class="col-9">
-                                    <label class="col-form-label">Tên Thiết Bị</label>
-                                    <input type="text" class="form-control" placeholder="Nhập Tên Thiết Bị" id="price">
-                                </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <h2>Danh sách thiết bị</h2>
+                        </div>
+                        <div class="px-4 py-2">
+                                <button type="button" class="btn bg-gradient-info">Thêm</button>
+                                <button type="button" class="btn bg-gradient-info" id="autoAdd" onclick="autoAddEquipment()">Thêm nhanh</button>
+                                <button type="button" class="btn bg-gradient-info">Chọn từ danh sách</button>
+{{--                                <button type="button" class="btn bg-gradient-info">Thêm mới</button>--}}
+                        </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+                            <div class="table-responsive p-0 ">
+                                <table class="table mb-0 w-100" id="listEquipment">
+                                    <thead>
+                                    @if(!empty($data))
+                                        <tr class="d-flex">
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-30">
+                                                Tên thiết bị
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2
+                                     w-6">
+                                                Số lượng
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-9 text-wrap">
+                                                Số lượng có thể mượn
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-6">
+                                                Đơn vị tính
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3 w-7">
+                                                Giá
+                                            </th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-25">
+                                                Mô tả
+                                            </th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-7 text-wrap"></th>
+                                        </tr>
+                                    @endif
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="form-group px-4">
-                                <div class="col-9">
-                                    <label class="col-form-label">Số Lượng Học Sinh</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Số lượng học sinh"
-                                               aria-label="Recipient's username" aria-describedby="button-addon2">
-                                        <button class="btn bg-gradient-info m-0" type="button" id="button-addon2">Tính
-                                            số lượng thiết bị
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group px-4">
-                                <div class="col-9">
-                                    <label class="col-form-label">Số Lượng Thiết Bị Mượn</label>
-                                    <input type="text" class="form-control" placeholder="Nhập Số Lượng Thiết Bị"
-                                           id="price">
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-center py-1 col-9">
-                                <button type="submit" class="btn bg-gradient-info my-4 mb-2">Thêm</button>
-                                <button type="submit" class="btn bg-gradient-info my-4 mb-2 mx-4">Thêm nhanh</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-4">
-                <div class="card-header pb-0">
-                    <h6>Danh sách Thiết Bị Mượn </h6>
-                </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                            <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-20">Tên
-                                    Thiết Bị
-                                </th>
-
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-20">
-                                    Số lượng
-                                </th>
-
-                            </tr>
-                            </thead>
-                            <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-1">
-                                        <div>
-                                            <img src="../assets/img/5.jpg" class="avatar avatar-sm me-3" alt="user1">
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">Ống nghiệm</h6>
-                                            <p class="text-xs text-secondary mb-0"></p>
-                                        </div>
-
-                                    </div>
-                                </td>
-                                <td class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-20 ps-2"
-                                    style="text-align: end;">
-                                    <button class="btn btn-link text-secondary mb-0">
-                                        <i class="fa fa-ellipsis-v text-xs"> Xem chi tiết</i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -190,11 +153,108 @@
             let id = Number($('#grade').val());
             let classData = {!! json_encode($classData) !!};
             let classFilter = classData.filter(item => item.grade_id === id)
-            $.each( classFilter, function (index, value) {
+            $.each(classFilter, function (index, value) {
                 classes.append(
-                `<option value="${value.id}">${value.name}</option>`
-            )
+                    `<option value="${value.id}">${value.name}</option>`
+                )
             });
+            filterCourse();
+        }
+
+        function filterCourse() {
+            let id = Number($('#grade').val());
+            let courseData = {!! json_encode($courseData) !!};
+            let courseFilter = courseData.filter(item => item.grade_id === id)
+            let course = $('#course');
+            course.empty();
+            $.each(courseFilter, function (index, value) {
+                course.append(
+                    `<option value="${value.id}">${value.name}</option>`
+                )
+            });
+        }
+
+        function filterCourseDetail() {
+            let courseDetails = $('#courseDetails');
+            courseDetails.empty();
+            let id = Number($('#course').val());
+            let courseDetailsData = {!! json_encode($courseDetailData) !!};
+            let courseDetailsFilter = courseDetailsData.filter(item => item.course_id === id)
+            $.each(courseDetailsFilter, function (index, value) {
+                courseDetails.append(
+                    `<option value="${value.id}">${value.describe}</option>`
+                )
+            });
+        }
+
+        $(document).ready(function () {
+            filterCourse()
+            filterCourseDetail()
+        })
+
+        function autoAddEquipment()
+        {
+            let id = Number($('#courseDetails').val());
+            let numberData = []
+            let listEquipment = document.querySelector("#listEquipment > tbody");
+            $.ajax({
+                url: '/' +
+                    'api/number-equipment/by-course-details-id/' + id ,
+                dataType: 'json',
+                enctype: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    numberData = data['data']
+
+                    while (listEquipment.firstChild)
+                    {
+                        listEquipment.removeChild(listEquipment.firstChild);
+                    }
+
+                    for (let item of numberData)
+                    {
+                        let rowElement = document.createElement("tr");
+                        rowElement.className = "d-flex";
+                        let nameCell = createTableCell(item.equipment.name, 'w-30')
+                        let quantityCell = createTableCell(item.quantity, 'w-6')
+                        let canRentQuantity = createTableCell(item.equipment.quantity_can_rent, 'w-9')
+                        rowElement.appendChild(nameCell);
+                        rowElement.appendChild(quantityCell);
+                        rowElement.appendChild(canRentQuantity);
+
+                        listEquipment.appendChild(rowElement);
+                    }
+                },
+                error: function (error) {
+                    $('#submit_error').text(error.responseJSON.message);
+                },
+                type: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+        }
+
+        function createTableCell(input, className)
+        {
+            let cellElement = document.createElement("td");
+            cellElement.className = className;
+            let div = document.createElement("div");
+            div.className = "d-flex px-4 py-1";
+            let div1 = document.createElement("div");
+            div1.className = "d-flex flex-column justify-content-center";
+            let text = document.createElement("h6");
+            text.className = "mb-0 text-sm";
+            text.textContent = input;
+
+            div1.appendChild(text);
+            div.appendChild(div1);
+            cellElement.appendChild(div);
+
+            return cellElement;
         }
     </script>
     <!-- Github buttons -->

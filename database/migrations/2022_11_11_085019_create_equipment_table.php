@@ -18,7 +18,7 @@ return new class extends Migration
             $table->bigInteger('room_id')->nullable();
             $table->bigInteger('equipment_status_id')->nullable();
             $table->bigInteger('type_of_equipment_id')->nullable();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->boolean('can_rent')->default(true);
             $table->bigInteger('created_by')->nullable()->unsigned();
             $table->bigInteger('updated_by')->nullable()->unsigned();

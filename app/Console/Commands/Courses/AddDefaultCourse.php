@@ -26,7 +26,7 @@ class AddDefaultCourse extends Command
             $courseDefault = [
                 'Toán',
                 'Vật Lý',
-                'Hóa',
+                'Hóa Học',
                 'Ngữ Văn',
                 'Lịch Sử',
                 'Địa Lí',
