@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Equipment;
 
 use App\Http\Controllers\Controller;
+use App\Imports\CoursesDetailMultiSheetImport;
+use App\Imports\EquipmentImport;
 use App\Services\Equipment\TypeOfEquipmentService;
 use App\Transformers\Equipment\TypeOfEquipmentTransformers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TypeOfEquipmentController extends Controller
 {
@@ -94,5 +97,14 @@ class TypeOfEquipmentController extends Controller
         $result = $this->typeOfEquipmentService->delete($id);
 
         return $this->response($result);
+    }
+
+    public function importEquipment(Request $request): JsonResponse
+    {
+        $file = $request->all()['file'];
+
+        Excel::import(new EquipmentImport(), $file);
+
+        return $this->response(123);
     }
 }

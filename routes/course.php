@@ -34,7 +34,7 @@ Route::group([
     Route::post('/', [
         'uses' => 'Course\CourseDetailController@store'
     ]);
-    Route::post('/{id}', [
+    Route::put('/{id}', [
         'uses' => 'Course\CourseDetailController@edit'
     ]);
     Route::post('/import', [

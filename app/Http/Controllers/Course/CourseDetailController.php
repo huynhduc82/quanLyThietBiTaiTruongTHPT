@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Course;
 
 use App\Http\Controllers\Controller;
+use App\Imports\CoursesDetailMultiSheetImport;
 use App\Imports\CoursesDetailsImport;
 use App\Services\Courses\CourseDetailsService;
 use App\Transformers\Course\CourseDetailsTransformer;
@@ -88,7 +89,7 @@ class CourseDetailController extends Controller
     {
         $file = $request::all()['file'];
 
-        Excel::import(new CoursesDetailsImport, $file);
+        Excel::import(new CoursesDetailsImport(), $file);
 
         return $this->response(123);
     }
