@@ -73,4 +73,4 @@
         document.getElementById('title-second').innerText = 'Thêm mới thiết bị'
     </script>
 
-@endsectio
+@endsection
