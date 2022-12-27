@@ -20,9 +20,10 @@
                                 <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-5">
                             <a href="{{ route('equipment.store') }}" type="button" class="btn bg-gradient-info">Thêm
                                 mới</a>
+                            <a href="{{ route('equipment.store') }}" type="button" class="btn bg-gradient-info mx-2">Nhập bằng file Excel</a>
                         </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -221,6 +222,7 @@
                             </table>
                         </div>
                     </div>
+                    {!! $data->links('layout.paginate') !!}
                 </div>
             </div>
         </div>
