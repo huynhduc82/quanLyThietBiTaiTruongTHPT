@@ -31,11 +31,18 @@ class SpecifyTheNumberOfEquipmentsRepo extends BaseEloquentRepository implements
         return $query->where('id', $id)->with($include)->first();
     }
 
+    public function getByCourseDetailId($id, array $include = []): Collection|array
+    {
+        $query = $this->model->newQuery();
+
+        return $query->where('course_details_id', $id)->with($include)->get();
+    }
+
     public function detailsWithEquipment($equipmentId, $courseDetailId): Model|Builder|null
     {
         $query = $this->model->newQuery();
 
-        return $query->where('equipment_id', $equipmentId)->where('course_details_id')->first();
+        return $query->where('equipment_id', $equipmentId)->where('course_details_id', $courseDetailId)->first();
     }
 
     public function store($input): Model|Builder

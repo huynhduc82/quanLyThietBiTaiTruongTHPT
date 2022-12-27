@@ -3,7 +3,14 @@
 namespace App\Models\SpecifyTheNumberOfEquipments;
 
 use App\Models\BaseModel;
+use App\Models\TypeOfEquipments\TypeOfEquipment;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
+/**
+ *
+ * @property ?TypeOfEquipment equipment
+ */
 
 class SpecifyTheNumberOfEquipment extends BaseModel
 {
@@ -16,4 +23,9 @@ class SpecifyTheNumberOfEquipment extends BaseModel
         'course_details_id',
         'quantity',
     ];
+
+    public function equipment(): HasOne
+    {
+        return $this->hasOne(TypeOfEquipment::class, 'id', 'equipment_id');
+    }
 }

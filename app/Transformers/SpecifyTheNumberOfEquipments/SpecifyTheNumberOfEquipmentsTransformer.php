@@ -2,9 +2,8 @@
 
 namespace App\Transformers\SpecifyTheNumberOfEquipments;
 
-use App\Models\Equipments\Equipment;
 use App\Models\SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipment;
-use App\Transformers\EquipmentStatus\EquipmentStatusTransformers;
+use App\Transformers\Equipment\TypeOfEquipmentTransformers;
 use App\Transformers\Room\RoomTransformers;
 use League\Fractal\Resource\Item;
 use League\Fractal\Resource\NullResource;
@@ -17,7 +16,7 @@ class SpecifyTheNumberOfEquipmentsTransformer extends TransformerAbstract
     ];
 
     protected array $availableIncludes = [
-
+        'equipment'
     ];
 
     public function transform(SpecifyTheNumberOfEquipment $model): array
@@ -30,14 +29,14 @@ class SpecifyTheNumberOfEquipmentsTransformer extends TransformerAbstract
         ];
     }
 
-    public function includeStatus(Equipment $model): Item|NullResource
+    public function includeEquipment(SpecifyTheNumberOfEquipment $model): Item|NullResource
     {
-        $data = $model->relationLoaded('status') ? $model->status : null;
+        $data = $model->relationLoaded('equipment') ? $model->equipment : null;
 
-        return $data ? $this->item($data, new EquipmentStatusTransformers()) : $this->null();
+        return $data ? $this->item($data, new TypeOfEquipmentTransformers()) : $this->null();
     }
 
-    public function includeRoom(Equipment $model): Item|NullResource
+    public function includeRoom(SpecifyTheNumberOfEquipment $model): Item|NullResource
     {
         $data = $model->relationLoaded('room') ? $model->room : null;
 

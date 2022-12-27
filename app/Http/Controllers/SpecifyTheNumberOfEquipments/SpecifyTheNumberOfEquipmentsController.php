@@ -4,7 +4,6 @@ namespace App\Http\Controllers\SpecifyTheNumberOfEquipments;
 
 use App\Http\Controllers\Controller;
 use App\Services\SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsService;
-use App\Transformers\Equipment\EquipmentTransformers;
 use App\Transformers\SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;
@@ -50,7 +49,18 @@ class SpecifyTheNumberOfEquipmentsController extends Controller
 
         $result = $this->specifyTheNumberOfEquipmentsService->details($id, $include);
 
-        return $this->response($this->transform($result, EquipmentTransformers::class, $include));
+        return $this->response($this->transform($result, SpecifyTheNumberOfEquipmentsTransformer::class, $include));
+    }
+
+    public function getByCourseDetailId($id): JsonResponse
+    {
+        $include = [
+            'equipment',
+        ];
+
+        $result = $this->specifyTheNumberOfEquipmentsService->getByCourseDetailId($id, $include);
+
+        return $this->response($this->transform($result, SpecifyTheNumberOfEquipmentsTransformer::class, $include));
     }
 
     public function store(Request $request)

@@ -2,15 +2,10 @@
 
 namespace App\Services\SpecifyTheNumberOfEquipments;
 
-use App\Helpers;
-use App\Models\EquipmentStatus\EquipmentStatus;
-use App\Repositories\Contracts\Equipment\IEquipmentRepo;
 use App\Repositories\Contracts\SpecifyTheNumberOfEquipments\ISpecifyTheNumberOfEquipmentsRepo;
 use App\Services\Class\ClassService;
-use App\Services\EquipmentStatus\EquipmentStatusServices;
 use App\Services\Response\BaseService;
 use App\Validators\Equipment\EquipmentValidator;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
@@ -31,16 +26,17 @@ class SpecifyTheNumberOfEquipmentsService extends BaseService
         return $this->repository->details($id, $include);
     }
 
+    public function getByCourseDetailId($id = 0, $include = [])
+    {
+        return $this->repository->getByCourseDetailId($id, $include);
+    }
+
     public function store($input)
     {
         $this->validatorCreateUpdate($input);
 
-        DB::beginTransaction();
-        $param = ['condition_details' => EquipmentStatus::STATUS_ALL_GOOD,
-            'can_continue_to_use' => EquipmentStatus::CAN_CONTINUE_USE];
-        $input['equipment_status_id'] = app(EquipmentStatusServices::class)->store($param);
         $result = $this->repository->store($input);
-        app(TypeOfEquipmentService::class)->updateQuantity($input['type_of_equipment_id']);
+
         DB::commit();
 
         return $result;
