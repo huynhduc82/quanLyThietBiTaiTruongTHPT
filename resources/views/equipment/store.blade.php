@@ -68,8 +68,9 @@
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
     </script>
-    <scripnt>
+    <script>
         document.getElementById('title-first').innerText = 'Thiết bị'
         document.getElementById('title-second').innerText = 'Thêm mới thiết bị'
-    </scripnt>
+    </script>
+
 @endsectio
