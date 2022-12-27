@@ -2,25 +2,35 @@
 
 namespace App\Imports;
 
-use App\Models\Grades\Grade;
+use App\Models\Equipments\Equipment;
+use App\Models\EquipmentStatus\EquipmentStatus;
 use App\Models\TypeOfEquipments\TypeOfEquipment;
-use Illuminate\Database\Eloquent\Model;
-use Maatwebsite\Excel\Concerns\ToModel;
+use App\Services\EquipmentStatus\EquipmentStatusServices;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class EquipmentImport implements ToModel,WithHeadingRow
+class EquipmentImport implements ToCollection,WithHeadingRow
 {
-    /**
-     * @param array $row
-     *
-     * @return Model|null
-     */
-    public function model(array $row)
+    public function collection(Collection $collection)
     {
-        return new TypeOfEquipment([
-            "name" => $row['name'],
-            "price" => $row['price'],
-            "unit" => $row['unit'],
-        ]);
+        foreach ($collection as $row)
+        {
+            $model = TypeOfEquipment::query()->updateOrCreate([
+                "name" => $row['name'],
+                "price" => $row['price'],
+                "unit" => $row['unit'],
+            ]);
+
+            $param = ['condition_details' => EquipmentStatus::STATUS_ALL_GOOD,
+                'can_continue_to_use' => EquipmentStatus::CAN_CONTINUE_USE];
+            $equipmentStatusId = app(EquipmentStatusServices::class)->store($param);
+
+            Equipment::query()->updateOrCreate([
+                "equipment_status_id" => $equipmentStatusId,
+                "type_of_equipment_id" => $model->id,
+                "name" => $model->name . ' 1',
+            ]);
+        }
     }
 }
