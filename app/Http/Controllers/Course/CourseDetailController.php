@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Imports\CoursesDetailsImport;
 use App\Services\Courses\CourseDetailsService;
 use App\Transformers\Course\CourseDetailsTransformer;
-use App\Transformers\Course\CourseTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -36,6 +35,16 @@ class CourseDetailController extends Controller
         ];
 
         $result = $this->courseDetailsService->index($include);
+
+        return $this->transform($result, CourseDetailsTransformer::class, $include);
+    }
+
+    public function getNeedEquipment()
+    {
+        $include = [
+        ];
+
+        $result = $this->courseDetailsService->getNeedEquipment();
 
         return $this->transform($result, CourseDetailsTransformer::class, $include);
     }

@@ -2,7 +2,6 @@
 
 namespace App\Repositories\Eloquents\Courses;
 
-use App\Models\Courses\Courses;
 use App\Models\Courses\CoursesDetails;
 use App\Repositories\BaseEloquentRepository;
 use App\Repositories\Contracts\Equipment\IEquipmentRepo;
@@ -22,6 +21,13 @@ class CourseDetailsRepo extends BaseEloquentRepository implements IEquipmentRepo
         $query = $this->model->newQuery();
 
         return $query->with($include)->orderBy('id')->get();
+    }
+
+    public function getNeedEquipment(): Collection
+    {
+        $query = $this->model->newQuery();
+
+        return $query->where('need_equipment', '=', 'true')->orderBy('id')->get();
     }
 
     public function details($id, array $include = []): Model|Builder|null
