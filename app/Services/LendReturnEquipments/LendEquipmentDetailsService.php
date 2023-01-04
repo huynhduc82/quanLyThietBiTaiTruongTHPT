@@ -20,7 +20,7 @@ class LendEquipmentDetailsService extends BaseService
     {
         foreach ($input['equipment'] as $item)
         {
-            if (!$item['equipment_details'] instanceof Array_)
+            if (!is_array($item['equipment_details']))
             {
                 $item['equipment_details'] = explode(Helpers::SEPARATOR, $item['equipment_details']);
             }

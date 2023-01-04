@@ -46,15 +46,6 @@
 @endif
 
 <style>
-    @import url(http://weloveiconfonts.com/api/?family=entypo);
-    @import url(https://fonts.googleapis.com/css?family=Roboto:300);
-
-    html, body {
-        font-family: 'Roboto', sans-serif;
-        font-size: 16px;
-        line-height: 24px;
-    }
-
     .pagination-container {
         text-align: center;
     }
@@ -71,6 +62,7 @@
     .pagination-item.is-active {
         background-color: #fa4248;
         border-right: 1px solid #fff;
+        color: #fff !important;
     }
 
     .pagination-item.last
@@ -82,7 +74,6 @@
         padding: 1.1em 1.6em;
         display: inline-block;
         text-decoration: none;
-        color: #8b969c;
         transform: scale(1) rotate(0deg) translateX(0px) translateY(0px) skewX(20deg) skewY(0deg);
     }
     .pagination-link:hover {

@@ -16,15 +16,6 @@ class LendEquipmentValidators extends AbstractValidator implements IValidatorMes
     {
         // TODO: Implement ruleCreate() method.
         return [
-            'user_id' => [
-                'required',
-                'int',
-                Rule::exists(User::class, 'id')->whereNull('deleted_at'),
-            ],
-            'pick_up_time' => [
-                'required',
-                'date',
-            ],
             'lender_id' => [
                 'required',
                 'int',
@@ -48,14 +39,10 @@ class LendEquipmentValidators extends AbstractValidator implements IValidatorMes
                 'int',
 //                Rule::exists(TypeOfEquipment::class, 'id')->whereNull('deleted_at'),
             ],
-            'equipment.*.equipment_details' => [
+            'equipment.*.quantity' => [
                 'required',
-                'array',
-            ],
-            'equipment.*.equipment_details.*' => [
-                'required',
-                'int',
-//                Rule::exists(Equipment::class, 'id')->whereNull('deleted_at')->where('can_rent', true),
+                'integer',
+
             ],
         ];
     }

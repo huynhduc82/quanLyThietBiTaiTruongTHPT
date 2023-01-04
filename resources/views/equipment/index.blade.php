@@ -28,7 +28,7 @@
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0 ">
-                            <table class="table mb-0 w-100">
+                            <table class="table mb-0 w-100" id="equipment-table">
                                 <thead>
                                 @if(!empty($data))
                                 <tr class="d-flex">
@@ -254,6 +254,7 @@
             <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
             <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
             <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script>
                 var win = navigator.platform.indexOf('Win') > -1;
