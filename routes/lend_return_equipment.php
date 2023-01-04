@@ -6,7 +6,7 @@ Route::group([
     'prefix' => 'lend',
 ], function (){
     Route::post('/', [
-        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@store'
+        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@lend'
     ]);
     Route::post('/approved/{id}', [
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@approved'

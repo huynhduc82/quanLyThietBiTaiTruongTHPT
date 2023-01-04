@@ -2,7 +2,9 @@
 
 namespace App\Services\LendReturnEquipments;
 
+use App\Helpers;
 use App\Models\EquipmentReservations\EquipmentReservation;
+use App\Models\Equipments\Equipment;
 use App\Models\LendReturnEquipments\LendReturnEquipment;
 use App\Repositories\Contracts\LendReturnEquipment\ILendReturnEquipmentRepo;
 use App\Services\Equipment\EquipmentService;
@@ -10,6 +12,7 @@ use App\Services\Reservations\EquipmentReservationService;
 use App\Services\Response\BaseService;
 use App\Validators\LendReturnEquipments\LendEquipmentValidators;
 use App\Validators\LendReturnEquipments\ReturnEquipmentValidators;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -36,18 +39,34 @@ class LendReturnEquipmentService extends BaseService
         $this->validatorCreateUpdateLend($input);
 
         try {
-//            DB::beginTransaction();
+            $input['user_id'] = Helpers::getUserLoginId();
+            $list = [];
+            foreach ($input['equipment'] as $equip) {
+                $ids = [];
+                $temp = [];
+                $query = Equipment::query()->where('type_of_equipment_id', $equip['type_of_equipment_id'])
+                    ->where('can_rent', '=', true)->limit($equip['quantity'])->get();
+                $temp["type_of_equipment_id"] = $equip['type_of_equipment_id'];
+                foreach ($query as $equi) {
+                    $ids[] = $equi->id;
+                }
+                $temp["equipment_details"] = $ids;
+                $list[] = $temp;
+            }
+
+            $input['pick_up_time'] = Carbon::now();
+
+            $input['equipment'] = $list;
+
             $result = $this->repository->lend(Arr::only($input, LendReturnEquipment::ATTRIBUTE_TO_LEND));
 
             $input['lend_return_equipment_id'] = $result->id;
+
             app(LendEquipmentDetailsService::class)->store($input);
 
             app(EquipmentService::class)->updateRentQuantity($input['equipment'], true);
-//
-//            DB::commit();
         } catch (Exception $e)
         {
-//            DB::rollBack();
             throw new Exception($e);
         }
     }

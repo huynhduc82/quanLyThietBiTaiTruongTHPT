@@ -51,7 +51,7 @@ Route::group([
 ], function (){
     Route::get('/index', function () {
         return view('reservation/index');
-    })->name('reservation.index');
+    })->name('reservation.index')->middleware('auth');
 });
 
 Route::group([
@@ -60,6 +60,12 @@ Route::group([
     Route::get('/index',[
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@indexView'
     ])->name('lend_return.index');
+    Route::get('/store',[
+        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@storeView'
+    ])->name('lend_return.store');
+    Route::post('/', [
+        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@lend'
+    ]);
 });
 
 Route::group([

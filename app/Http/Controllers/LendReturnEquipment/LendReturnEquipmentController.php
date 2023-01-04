@@ -32,6 +32,17 @@ class LendReturnEquipmentController extends Controller
         , 'courseDetailData'));
     }
 
+    public function storeView()
+    {
+        $gradeData = app(GradeController::class)->index();
+        $classData = app(ClassController::class)->index();
+        $roomData = app(RoomServices::class)->index();
+        $courseData = app(CourseController::class)->indexData();
+        $courseDetailData = app(CourseDetailController::class)->getNeedEquipment();
+        return view('lendreturn/store')->with(compact('roomData','gradeData', 'classData', 'courseData'
+            , 'courseDetailData'));
+    }
+
     public function index()
     {
         $include = [
