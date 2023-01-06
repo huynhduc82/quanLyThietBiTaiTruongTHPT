@@ -23,13 +23,16 @@ class LendReturnEquipmentController extends Controller
 
     public function indexView()
     {
-        $gradeData = app(GradeController::class)->index();
-        $classData = app(ClassController::class)->index();
-        $roomData = app(RoomServices::class)->index();
-        $courseData = app(CourseController::class)->indexData();
-        $courseDetailData = app(CourseDetailController::class)->getNeedEquipment();
-        return view('lendreturn/index')->with(compact('roomData','gradeData', 'classData', 'courseData'
-        , 'courseDetailData'));
+        $include = [
+            'details',
+            'details.equipments',
+            'user',
+            'lender',
+            'returner'
+        ];
+
+        $data = $this->service->index($include);
+        return view('lendreturn/index')->with(compact('data'));
     }
 
     public function storeView()
@@ -52,6 +55,25 @@ class LendReturnEquipmentController extends Controller
 
         return $this->response($this->transform($this->service->index($include),
             LendReturnEquipmentTransformer::class, $include));
+    }
+
+    public function getLendReturnByDay(Request $request)
+    {
+        $include = [
+            'details',
+            'details.equipments',
+            'user',
+            'lender',
+            'returner'
+        ];
+
+        $input = $request::all();
+
+        $data = $this->service->getLendReturnByDay($input, $include);
+
+        $table_view = view('lendreturn/table_view', compact('data'))->render();
+
+        return response()->json(['succes' => true, 'table_view' => $table_view]);
     }
 
     /**

@@ -24,6 +24,15 @@ class LendReturnEquipmentRepo extends BaseEloquentRepository implements ILendRet
         return $query->with($include)->orderBy('id')->get();
     }
 
+    public function getLendReturnByDay($input = [], $include = []): Collection|array
+    {
+        $query = $this->model->newQuery();
+
+        return $query->where('created_at', '>=', $input['day_from'])
+            ->where('created_at', '<=', $input['day_to'])
+            ->orderBy('id')->with($include)->get();
+    }
+
     public function lend($input = []): Model|Builder
     {
         $query = $this->model->newQuery();
