@@ -30,6 +30,9 @@ Route::group([
     Route::get('/{id}',[
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@details'
     ]);
+    Route::get('/by/day',[
+        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@getLendReturnByDay'
+    ]);
     Route::post('/{id}',[
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@edit'
     ]);

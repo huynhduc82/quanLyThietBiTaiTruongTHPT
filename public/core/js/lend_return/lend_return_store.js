@@ -39,11 +39,13 @@ $(document).ready(function(){
         CourseDetails = InputCourseDetails.val();
         ReturnAppointmentTime = InputReturnAppointmentTime.val();
         Grade = InputGrade.val();
-        ListEquipment = $("#listEquipment").DataTable({
-            destroy: true,
-            paging: false,
-            searching: false,
-            info: false,}).rows().data().toArray();
+        // ListEquipment = $("#listEquipment").DataTable({
+        //     destroy: true,
+        //     paging: false,
+        //     searching: false,
+        //     info: false,}).rows().data().toArray();
+        ListEquipment = $("#listEquipment").DataTable().rows().data().toArray();
+        console.log(ListEquipment)
         let ListEquipmentId = getListEquipmentId(ListEquipment)
 
         if (!LenderId) {

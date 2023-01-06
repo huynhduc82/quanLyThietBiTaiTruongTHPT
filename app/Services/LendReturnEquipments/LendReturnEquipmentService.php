@@ -31,6 +31,14 @@ class LendReturnEquipmentService extends BaseService
         return $this->repository->index($include);
     }
 
+    public function getLendReturnByDay($input = [], $include = [])
+    {
+        $input['day_from'] = Carbon::createFromDate($input['day_from'])->toDateTimeString();
+        $input['day_to'] = Carbon::createFromDate($input['day_to'])->endOfDay()->toDateTimeString();
+
+        return $this->repository->getLendReturnByDay($input, $include);
+    }
+
     /**
      * @throws Exception
      */

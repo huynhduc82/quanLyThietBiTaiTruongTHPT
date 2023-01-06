@@ -3,6 +3,9 @@
 namespace App\Models\LendReturnEquipments;
 
 use App\Models\BaseModel;
+use App\Models\Rooms\Room;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -50,5 +53,25 @@ class LendReturnEquipment extends BaseModel
     public function details() : HasMany
     {
         return $this->hasMany(LendReturnEquipmentDetails::class, 'lend_return_equipment_id', 'id');
+    }
+
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function lender() : BelongsTo
+    {
+        return $this->belongsTo(User::class, 'lender_id', 'id');
+    }
+
+    public function returner() : BelongsTo
+    {
+        return $this->belongsTo(User::class, 'returner_id', 'id');
+    }
+
+    public function room() : BelongsTo
+    {
+        return $this->belongsTo(Room::class, 'room_id', 'id');
     }
 }

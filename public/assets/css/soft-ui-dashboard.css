@@ -8838,6 +8838,14 @@ fieldset:disabled .btn {
   width: 15% !important;
 }
 
+.w-11 {
+    width: 11% !important;
+}
+
+.w-12 {
+    width: 12% !important;
+}
+
 .w-20 {
   width: 20% !important;
 }
