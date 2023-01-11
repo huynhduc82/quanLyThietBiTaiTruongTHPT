@@ -66,6 +66,12 @@ Route::group([
     Route::get('/by/day',[
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@getLendReturnByDay'
     ]);
+    Route::get('/return/view/{id}',[
+        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@returnView'
+    ])->name('lend_return.returnView');
+    Route::post('/return/{id}',[
+        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@return'
+    ])->name('lend_return.return');
     Route::post('/', [
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@lend'
     ]);

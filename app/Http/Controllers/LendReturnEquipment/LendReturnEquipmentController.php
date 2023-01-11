@@ -10,6 +10,9 @@ use App\Http\Controllers\Grades\GradeController;
 use App\Services\LendReturnEquipments\LendReturnEquipmentService;
 use App\Services\Rooms\RoomServices;
 use App\Transformers\LendReturnEquipment\LendReturnEquipmentTransformer;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;
 
@@ -28,14 +31,15 @@ class LendReturnEquipmentController extends Controller
             'details.equipments',
             'user',
             'lender',
-            'returner'
+            'returner',
+            'details.typeOfEquipment',
         ];
 
         $data = $this->service->index($include);
         return view('lendreturn/index')->with(compact('data'));
     }
 
-    public function storeView()
+    public function storeView(): Factory|View|Application
     {
         $gradeData = app(GradeController::class)->index();
         $classData = app(ClassController::class)->index();
@@ -44,6 +48,21 @@ class LendReturnEquipmentController extends Controller
         $courseDetailData = app(CourseDetailController::class)->getNeedEquipment();
         return view('lendreturn/store')->with(compact('roomData','gradeData', 'classData', 'courseData'
             , 'courseDetailData'));
+    }
+
+    public function returnView(int $id): Factory|View|Application
+    {
+        $include = [
+            'details',
+            'details.equipments',
+            'details.typeOfEquipment',
+            'user',
+            'lender',
+            'returner'
+        ];
+        $lendReturn = $this->service->details($include, $id);
+//        dd($lendReturn);
+        return view('lendreturn/return')->with(compact('lendReturn'));
     }
 
     public function index()

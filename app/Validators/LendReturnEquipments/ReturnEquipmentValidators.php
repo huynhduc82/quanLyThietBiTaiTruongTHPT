@@ -15,20 +15,6 @@ class ReturnEquipmentValidators extends AbstractValidator implements IValidatorM
     {
         // TODO: Implement ruleCreate() method.
         return [
-            'user_id' => [
-                'required',
-                'int',
-                Rule::exists(User::class, 'id')->whereNull('deleted_at'),
-            ],
-            'returner_id' => [
-                'nullable',
-                'int',
-                Rule::exists(User::class, 'id')->whereNull('deleted_at'),
-            ],
-            'return_time' => [
-                'required',
-                'date',
-            ],
             'equipment' => [
                 'required',
                 'array'
@@ -38,14 +24,9 @@ class ReturnEquipmentValidators extends AbstractValidator implements IValidatorM
                 'int',
 //                Rule::exists(TypeOfEquipment::class, 'id')->whereNull('deleted_at'),
             ],
-            'equipment.*.equipment_details' => [
-                'required',
-                'array',
-            ],
-            'equipment.*.equipment_details.*' => [
+            'equipment.*.quantity' => [
                 'required',
                 'int',
-//                Rule::exists(Equipment::class, 'id')->whereNull('deleted_at'),
             ],
         ];
     }

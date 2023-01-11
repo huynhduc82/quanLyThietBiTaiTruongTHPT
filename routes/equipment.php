@@ -43,4 +43,7 @@ Route::group([
     Route::post('/import/equipment', [
         'uses' => 'Equipment\TypeOfEquipmentController@importEquipment'
     ]);
+    Route::get('/update/all/quantity', [
+        'uses' => 'Equipment\TypeOfEquipmentController@updateAllQuantity'
+    ]);
 });

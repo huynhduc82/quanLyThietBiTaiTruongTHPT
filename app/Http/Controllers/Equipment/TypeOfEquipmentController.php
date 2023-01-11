@@ -29,7 +29,6 @@ class TypeOfEquipmentController extends Controller
         ];
 
         $data = $this->typeOfEquipmentService->index($include);
-
         return view('equipment/index')->with(compact('data'));
     }
 
@@ -106,5 +105,10 @@ class TypeOfEquipmentController extends Controller
         Excel::import(new EquipmentImport(), $file);
 
         return $this->response(123);
+    }
+
+    public function updateAllQuantity()
+    {
+        return $this->typeOfEquipmentService->updateAllQuantity();
     }
 }
