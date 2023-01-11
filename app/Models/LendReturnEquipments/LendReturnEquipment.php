@@ -17,18 +17,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class LendReturnEquipment extends BaseModel
 {
+    const STATUS_LENDING = 1;
+    const STATUS_RETURNED = 2;
+    const STATUS_OUT_OF_DATE = 3;
+
     const ATTRIBUTE_TO_LEND = [
         'user_id',
         'pick_up_time',
         'lender_id',
         'return_appointment_time',
         'room_id',
+        'status',
     ];
 
     const ATTRIBUTE_TO_RETURN = [
-        'user_id',
         'return_time',
         'returner_id',
+        'status',
     ];
 
     const ATTRIBUTE_TO_UPDATE = [

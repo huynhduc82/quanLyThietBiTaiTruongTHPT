@@ -52,6 +52,18 @@ class TypeOfEquipmentRepo extends BaseEloquentRepository implements ITypeOfEquip
         $query->update(['quantity' => $quantity, 'quantity_can_rent' => $quantityCanRent]);
     }
 
+    public function updateAllQuantity()
+    {
+        $query = $this->model->newQuery();
+        $equipmentQuery = Equipment::query();
+        $quantity = $equipmentQuery->where('type_of_equipment_id' , '=' , $id)
+            ->count();
+        $quantityCanRent = $equipmentQuery->where('type_of_equipment_id' , '=' , $id)
+            ->where('can_rent', '=', true)
+            ->count();
+        $query->update(['quantity' => $quantity, 'quantity_can_rent' => $quantityCanRent]);
+    }
+
     public function edit($input, $id): int
     {
         $query = $this->model->newQuery();

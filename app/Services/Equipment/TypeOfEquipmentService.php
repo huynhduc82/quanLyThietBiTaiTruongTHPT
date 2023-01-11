@@ -57,6 +57,18 @@ class TypeOfEquipmentService extends BaseService
         return $this->repository->updateQuantity($id);
     }
 
+    public function updateAllQuantity()
+    {
+        $typeOfEquipment = TypeOfEquipment::all();
+
+        foreach ($typeOfEquipment as $item)
+        {
+            $this->repository->updateQuantity($item->id);
+        }
+        return 'OK';
+    }
+
+
     public function edit($input = [], $id = 0)
     {
         $this->validatorCreateUpdate($input, $id);

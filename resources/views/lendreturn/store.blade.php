@@ -205,6 +205,10 @@
         {
             let id = Number($('#courseDetails').val());
             let tableEquipment = []
+            let classId = Number($('#class').val());
+            let classData = {!! json_encode($classData) !!};
+            let classDataFilter = classData.find(item => item.id === classId)
+            let number_of_pupils = classDataFilter.number_of_pupils;
             $.ajax({
                 url: '/' +
                     'api/number-equipment/by-course-details-id/' + id ,
@@ -216,7 +220,7 @@
                 success: function (data) {
                     for (let item of data['data'])
                     {
-                        item.equipment.quantity = 1;
+                        item.equipment.quantity = number_of_pupils/item.quantity;
                         tableEquipment.push(item.equipment);
                     }
 

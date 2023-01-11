@@ -31,10 +31,15 @@ class LendReturnEquipmentService extends BaseService
         return $this->repository->index($include);
     }
 
+    /**
+     * @throws Exception
+     */
     public function getLendReturnByDay($input = [], $include = [])
     {
-        $input['day_from'] = Carbon::createFromDate($input['day_from'])->toDateTimeString();
-        $input['day_to'] = Carbon::createFromDate($input['day_to'])->endOfDay()->toDateTimeString();
+        if(!empty($input['day_from']) && !empty($input['day_to'])) {
+            $input['day_from'] = Carbon::createFromDate($input['day_from'])->toDateTimeString();
+            $input['day_to'] = Carbon::createFromDate($input['day_to'])->endOfDay()->toDateTimeString();
+        }
 
         return $this->repository->getLendReturnByDay($input, $include);
     }
@@ -47,7 +52,7 @@ class LendReturnEquipmentService extends BaseService
         $this->validatorCreateUpdateLend($input);
 
         try {
-            $input['user_id'] = Helpers::getUserLoginId();
+            $input['lender_id'] = Helpers::getUserLoginId();
             $list = [];
             foreach ($input['equipment'] as $equip) {
                 $ids = [];
@@ -65,6 +70,8 @@ class LendReturnEquipmentService extends BaseService
             $input['pick_up_time'] = Carbon::now();
 
             $input['equipment'] = $list;
+
+            $input['status'] = LendReturnEquipment::STATUS_LENDING;
 
             $result = $this->repository->lend(Arr::only($input, LendReturnEquipment::ATTRIBUTE_TO_LEND));
 
@@ -109,12 +116,29 @@ class LendReturnEquipmentService extends BaseService
     {
         $this->validatorCreateUpdateReturn($input);
 
+        $list = [];
+        foreach ($input['equipment'] as $equip) {
+            $ids = [];
+            $temp = [];
+            $query = Equipment::query()->where('type_of_equipment_id', $equip['type_of_equipment_id'])
+                ->limit($equip['quantity'])->get();
+            $temp["type_of_equipment_id"] = $equip['type_of_equipment_id'];
+            foreach ($query as $equi) {
+                $ids[] = $equi->id;
+            }
+            $temp["equipment_details"] = $ids;
+            $list[] = $temp;
+        }
+
         try {
             DB::beginTransaction();
+            $input['returner_id'] = Helpers::getUserLoginId();
+            $input['return_time'] = Carbon::now();
+            $input['status'] = LendReturnEquipment::STATUS_RETURNED;
             $this->repository->return(Arr::only($input, LendReturnEquipment::ATTRIBUTE_TO_RETURN), $id);
-
-//            $input['lend_return_equipment_id'] = $result->id;
-//            app(LendEquipmentDetailsService::class)->store($input);
+            $input['equipment'] = $list;
+            $model = LendReturnEquipment::query()->where('id', $id)->with('details')->first();
+            app(LendEquipmentDetailsService::class)->edit($model, $input);
 
             app(EquipmentService::class)->updateRentQuantity($input['equipment'], false);
             DB::commit();

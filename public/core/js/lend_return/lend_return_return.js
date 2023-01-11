@@ -1,6 +1,6 @@
-let Class;
+let ID;
 let Room;
-let UserId;
+let LenderId;
 let TeacherName;
 let TimeLend;
 let Course;
@@ -9,9 +9,9 @@ let ReturnAppointmentTime;
 let Grade;
 let ListEquipment;
 
-let InputClass = $("#class");
+let InputID = $("#ID");
 let InputRoom = $("#room");
-let InputUserId = $("#teacherId");
+let InputLenderId = $("#teacherId");
 let InputTeacherName = $("#teacherName");
 let InputTimeLend = $("#timeLend");
 let InputCourse = $("#course");
@@ -23,29 +23,19 @@ let InputGrade = $("#grade");
 let data = {}
 
 $(document).ready(function(){
-    let myVar = setInterval(myTimer ,1000);
-    function myTimer() {
-        const d = new Date();
-        document.getElementById("timeLend").value = d.toLocaleTimeString();
-    }
     $('#frm-lend-return').on('submit', function (e) {
         e.preventDefault();
-        Class = InputClass.val();
+        ID = InputID.val();
         Room = InputRoom.val();
-        UserId = InputUserId.val();
+        LenderId = InputLenderId.val();
         TeacherName = InputTeacherName.val();
         TimeLend = InputTimeLend.val();
         Course = InputCourse.val();
         CourseDetails = InputCourseDetails.val();
         ReturnAppointmentTime = InputReturnAppointmentTime.val();
         Grade = InputGrade.val();
-        // ListEquipment = $("#listEquipment").DataTable({
-        //     destroy: true,
-        //     paging: false,
-        //     searching: false,
-        //     info: false,}).rows().data().toArray();
+        // ListEquipment = $("#listEquipment").DataTable().rows({ selected: true }).data().toArray();
         ListEquipment = $("#listEquipment").DataTable().rows().data().toArray();
-        console.log(ListEquipment)
         let ListEquipmentId = getListEquipmentId(ListEquipment)
 
         if (!LenderId) {
@@ -61,7 +51,7 @@ $(document).ready(function(){
             return false;
         }
         if (ListEquipmentId.length <= 0) {
-            $('#label-error').text('Bạn chưa chọn thiết bị mượn');
+            $('#label-error').text('Bạn chưa xác nhận tình trạng thiết bị');
             return false;
         }
         // if (!Email) {
@@ -79,16 +69,12 @@ $(document).ready(function(){
         $('#label-error').text('');
 
 
-        data.class = Class;
-        data.room = Room;
-        data.user_id = LenderId;
-        data.return_appointment_time = ReturnAppointmentTime;
         data.equipment = ListEquipmentId;
 
-        let back_page = '/equipment/index';
+        let back_page = '/lend_return/index';
 
         $.ajax({
-            url: '/lend_return',
+            url: '/lend_return/return/' + ID,
             data: JSON.stringify(data),
             dataType: 'json',
             enctype: "multipart/form-data",
@@ -115,7 +101,7 @@ function getListEquipmentId(ListEquipment)
     ListEquipment.forEach(myFunction);
     function myFunction(item) {
         let EquipmentId = {}
-        EquipmentId.type_of_equipment_id = item.id
+        EquipmentId.type_of_equipment_id = item.type_of_equipment_id
         EquipmentId.quantity = item.quantity
         listEquipmentId.push(EquipmentId);
     }

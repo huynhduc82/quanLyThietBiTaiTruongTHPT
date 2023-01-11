@@ -15,7 +15,7 @@
                     <div class="row px-4 py-2">
                         <div class="col-5">
                             <div class="input-group">
-                                <span class="input-group-text text-body"><i class="fas fa-search"
+                                <span class="input-group-text text-body"><i class="fas fa-search z-index-0"
                                                                             aria-hidden="true"></i></span>
                                 <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
                             </div>
@@ -25,19 +25,36 @@
                                 thiết bị</a>
                         </div>
                     </div>
-                    <div class="px-4 py-0 w-70">
+                    <div class="px-4 py-0 w-100">
                         <form id="frm-filter">
                             <div class="border border-info rounded p-2 pb-3 row">
-                                <div class="col-5">
+                                <div class="col-3">
                                     <label class="col-form-label" for="day_from">Từ ngày</label>
                                     <label for="day_from"></label><input type="date" class="form-control" id="day_from">
                                 </div>
-                                <div class="col-5">
+                                <div class="col-3">
                                     <label class="col-form-label" for="day_to">Tới ngày</label>
                                     <input type="date" class="form-control" id="day_to">
                                 </div>
-                                <div class="col-2" style="text-align: center; margin: auto 0">
+                                <div class="col-2" style="margin: auto 0">
+                                    <div class="form-switch">
+                                        <input class="form-check-input" type="checkbox" id="chkLending">
+                                        <label class="col-form-label p-0" for="flexSwitchCheckDefault">Đang mượn</label>
+                                    </div>
+                                    <div class="form-switch">
+                                        <input class="form-check-input" type="checkbox" id="chkReturned">
+                                        <label class="col-form-label p-0" for="flexSwitchCheckDefault">Đã trả</label>
+                                    </div>
+                                    <div class="form-switch">
+                                        <input class="form-check-input" type="checkbox" id="chkOutOfDate">
+                                        <label class="col-form-label p-0" for="flexSwitchCheckDefault">Quá hạn</label>
+                                    </div>
+                                </div>
+                                <div class="col-1" style="margin: auto 0">
                                     <button type="submit" class="btn bg-gradient-info mb-0">Lọc</button>
+                                </div>
+                                <div class="col-3" style="margin: auto 0">
+                                    <label style=" color: red" class="col-form-label" id="label-error"></label>
                                 </div>
                             </div>
                         </form>
@@ -141,13 +158,13 @@
                                         <td class="w-12">
                                             <div class="d-block">
                                                 <div class="d-flex justify-content-center">
-                                                    <a type="button"
-                                                       href="{{ route('equipment.edit', ['id' => $item->id]) }}"
-                                                       class="btn bg-gradient-info my-1 mb-1">Sửa</a>
-                                                    <button type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1"
-                                                            onclick="DeleteConfirm('{{route('equipment.delete', ['id' => $item->id])}}')">
+{{--                                                    <a type="button"--}}
+{{--                                                       href="{{ route('equipment.edit', ['id' => $item->id]) }}"--}}
+{{--                                                       class="btn bg-gradient-info my-1 mb-1">Sửa</a>--}}
+                                                    <a type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1"
+                                                       href="{{ route('lend_return.returnView', ['id' => $item->id]) }}">
                                                         Trả
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </td>
@@ -164,7 +181,7 @@
                                                                 Tên thiết bị
                                                             </th>
                                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
-                                                                Phòng
+                                                                Số lượng
                                                             </th>
                                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
                                                                 Tình trạng
@@ -177,13 +194,13 @@
                                                         </thead>
                                                     @endif
                                                     <tbody>
-                                                    @foreach($item as $equipment)
+                                                    @foreach($item->details as $details)
                                                         <tr class="d-flex">
                                                             <td class="w-20 text-wrap">
                                                                 <div class="d-flex px-4 py-1">
                                                                     <div
                                                                         class="d-flex flex-column justify-content-center">
-{{--                                                                        <h6 class="mb-0 text-sm">{{$equipment->name}}</h6>--}}
+                                                                        <h6 class="mb-0 text-sm">{{$details->typeOfEquipment->name}}</h6>
                                                                         <p class="text-xs text-secondary mb-0"></p>
                                                                     </div>
                                                                 </div>
@@ -192,7 +209,7 @@
                                                                 <div class="d-flex px-4 py-1">
                                                                     <div
                                                                         class="d-flex flex-column justify-content-center">
-{{--                                                                        <h6 class="mb-0 text-sm">{{$equipment->room->name ?? 'Chưa phân bổ'}}</h6>--}}
+                                                                        <h6 class="mb-0 text-sm">{{$details->quantity}}</h6>
                                                                         <p class="text-xs text-secondary mb-0"></p>
                                                                     </div>
                                                                 </div>
@@ -215,20 +232,20 @@
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            <td class="w-20">
-                                                                <div class="d-flex px-2 py-1">
-                                                                    <div class="d-flex justify-content-center">
-                                                                        <a type="button"
+{{--                                                            <td class="w-20">--}}
+{{--                                                                <div class="d-flex px-2 py-1">--}}
+{{--                                                                    <div class="d-flex justify-content-center">--}}
+{{--                                                                        <a type="button"--}}
 {{--                                                                           href="{{ route('equipment_details.edit', ['id' => $equipment->id]) }}"--}}
-                                                                           class="btn bg-gradient-info my-1 mb-1 ms-1">Sửa</a>
-                                                                        <button type="button"
-                                                                                class="btn bg-gradient-danger my-1 mb-1 ms-1">
+{{--                                                                           class="btn bg-gradient-info my-1 mb-1 ms-1">Sửa</a>--}}
+{{--                                                                        <button type="button"--}}
+{{--                                                                                class="btn bg-gradient-danger my-1 mb-1 ms-1">--}}
 {{--                                                                                onclick="DeleteConfirm('{{route('equipment_details.delete', ['id' => $equipment->id])}}')">--}}
 {{--                                                                            Xoá--}}
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
+{{--                                                                        </button>--}}
+{{--                                                                    </div>--}}
+{{--                                                                </div>--}}
+{{--                                                            </td>--}}
                                                         </tr>
                                                     @endforeach
                                                     </tbody>
@@ -349,15 +366,35 @@
         <script>
             $('#frm-filter').on('submit', function (e) {
                 e.preventDefault();
+                let data = {};
                 let dayFrom = $('#day_from').val();
                 let dayTo = $('#day_to').val();
+                let returned = $('#chkReturned');
+                let outOfDate = $('#chkOutOfDate');
+                let lending = $('#chkLending');
 
+                if (dayFrom) {
+                    data.day_from = dayFrom
+                }
+                if (dayTo) {
+                    data.day_to = dayTo
+                }
+                if (lending.is(':checked')) {
+                    data.lending = true
+                }
+                if (returned.is(':checked')) {
+                    data.returned = true
+                }
+                if (outOfDate.is(':checked')) {
+                    data.out_of_date = true
+                }
+                $('#label-error').text('');
                 $.ajax({
                     url: '/lend_return/by/day',
-                    data: {
-                        day_from : dayFrom,
-                        day_to : dayTo,
-                    },
+                    dataType: 'json',
+                    enctype: "multipart/form-data",
+                    contentType: 'application/json',
+                    data: data,
                     success: function (data) {
                         $('#equipment-table').html(data.table_view)
                     },
