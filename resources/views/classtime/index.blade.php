@@ -21,10 +21,10 @@
                             </div>
                         </div>
                         <div class="col-5">
-                            <a href="{{ route('equipment.store') }}" type="button" class="btn bg-gradient-info">Thêm
+                            <a href="{{ route('classtime.store') }}" type="button" class="btn bg-gradient-info">Thêm
                                 mới</a>
                             <button class="btn bg-gradient-info mx-2"
-                                    onclick="importExcel('{{route('equipment.import.excel')}}')"
+                                    onclick="importExcel('{{route('class.import.excel')}}')"
                             >
                                 Nhập bằng file Excel
                             </button>
