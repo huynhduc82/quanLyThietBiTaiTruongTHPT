@@ -27,7 +27,7 @@ Mượn trả thiết bị
                         <div class="form-group px-4 col-6">
                             <label class="col-form-label">Tên Người Cho Mượn</label>
                             <input type="text" class="form-control"
-                                   value="{{ $lendReturn->lender->name}}" id="teacherId">
+                                   value="{{ $lendReturn->lender->name ?? '.......'}}" id="teacherId">
                         </div>
                         <div class="form-group px-4 col-6">
                             <label class="col-form-label">Phòng </label>

@@ -31,14 +31,19 @@ class LendReturnEquipmentRepo extends BaseEloquentRepository implements ILendRet
             $query->where('created_at', '>=', $input['day_from'] )
                 ->where('created_at', '<=', $input['day_to']);
         }
+        $statusForFilter = [];
         if (!empty($input['lending']) && $input['lending']) {
-            $query->where('status', '=', LendReturnEquipment::STATUS_LENDING);
+            $statusForFilter[] = LendReturnEquipment::STATUS_LENDING;
         }
         if (!empty($input['returned']) && $input['returned']) {
-            $query->where('status', '=', LendReturnEquipment::STATUS_RETURNED);
+            $statusForFilter[] = LendReturnEquipment::STATUS_RETURNED;
+
         }
         if (!empty($input['out_of_date']) && $input['out_of_date']) {
-            $query->where('status', '=', LendReturnEquipment::STATUS_OUT_OF_DATE);
+            $statusForFilter[] = LendReturnEquipment::STATUS_OUT_OF_DATE;
+        }
+        if  (!empty($statusForFilter)){
+            $query->whereIn('status', $statusForFilter);
         }
 
         return $query->orderBy('id')->with($include)->get();

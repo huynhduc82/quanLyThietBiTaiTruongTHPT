@@ -48,7 +48,7 @@ $(document).ready(function(){
         console.log(ListEquipment)
         let ListEquipmentId = getListEquipmentId(ListEquipment)
 
-        if (!LenderId) {
+        if (!UserId) {
             $('#label-error').text('Bạn chưa nhập Mã Giáo Viên');
             return false;
         }
@@ -81,11 +81,11 @@ $(document).ready(function(){
 
         data.class = Class;
         data.room = Room;
-        data.user_id = LenderId;
+        data.user_id = UserId;
         data.return_appointment_time = ReturnAppointmentTime;
         data.equipment = ListEquipmentId;
 
-        let back_page = '/equipment/index';
+        let back_page = '/lend_return/index';
 
         $.ajax({
             url: '/lend_return',

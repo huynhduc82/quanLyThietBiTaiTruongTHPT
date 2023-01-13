@@ -16,7 +16,7 @@ class LendEquipmentValidators extends AbstractValidator implements IValidatorMes
     {
         // TODO: Implement ruleCreate() method.
         return [
-            'lender_id' => [
+            'user_id' => [
                 'required',
                 'int',
                 Rule::exists(User::class, 'id')->whereNull('deleted_at'),

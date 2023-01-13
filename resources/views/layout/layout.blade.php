@@ -55,7 +55,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Trang chủ</span>
+                    <span class="nav-link-text ms-1">Trang Chủ</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -95,7 +95,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Đặt trước</span>
+                    <span class="nav-link-text ms-1">Đặt Trước</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -135,7 +135,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Sửa chữa</span>
+                    <span class="nav-link-text ms-1">Sửa Chữa</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -155,7 +155,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Thanh lý</span>
+                    <span class="nav-link-text ms-1">Thanh Lý</span>
                 </a>
             </li>
             <li class="nav-item mt-3">
@@ -179,7 +179,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Quản lý giờ học</span>
+                    <span class="nav-link-text ms-1">Giờ Học</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -200,7 +200,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Quản lý số lượng thiết bị</span>
+                    <span class="nav-link-text ms-1">Số Lượng Thiết Bị</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -221,7 +221,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Quản lý môn học</span>
+                    <span class="nav-link-text ms-1">Môn Học</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -242,7 +242,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Quản lý Phòng học</span>
+                    <span class="nav-link-text ms-1">Phòng Học</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -263,7 +263,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Quản lý khối lớp</span>
+                    <span class="nav-link-text ms-1">Khối Lớp</span>
                 </a>
             </li>
             <li class="nav-item mt-3">
@@ -287,7 +287,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Đăng nhập</span>
+                    <span class="nav-link-text ms-1">Đăng Nhập</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -309,7 +309,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Đăng ký</span>
+                    <span class="nav-link-text ms-1">Đăng Ký</span>
                 </a>
             </li>
             @else
@@ -331,7 +331,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Hồ sơ</span>
+                    <span class="nav-link-text ms-1">Hồ Sơ</span>
                 </a>
             </li>
             @endguest

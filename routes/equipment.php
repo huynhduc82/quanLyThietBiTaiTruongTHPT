@@ -42,7 +42,7 @@ Route::group([
     ])->name('equipment.delete');
     Route::post('/import/equipment', [
         'uses' => 'Equipment\TypeOfEquipmentController@importEquipment'
-    ]);
+    ])->name('equipment.import.excel');
     Route::get('/update/all/quantity', [
         'uses' => 'Equipment\TypeOfEquipmentController@updateAllQuantity'
     ]);
