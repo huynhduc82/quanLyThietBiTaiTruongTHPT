@@ -110,9 +110,9 @@ Route::group([
 Route::group([
     'prefix' => '/number',
 ], function (){
-    Route::get('/index', function () {
-        return view('specifythenumberofequipment/index');
-    })->name('equipment.number.index');
+    Route::get('/index',[
+        'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@indexView'
+    ])->name('equipment.number.index');
     Route::get('/store', function () {
         return view('specifythenumberofequipment/store');
     })->name('equipment.number.store');
