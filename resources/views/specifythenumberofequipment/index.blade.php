@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <div class="col-5">
-                            <a href="{{ route('number.store') }}" type="button" class="btn bg-gradient-info">Thêm
+                            <a href="{{ route('equipment.number.store') }}" type="button" class="btn bg-gradient-info">Thêm
                                 mới</a>
                             <button class="btn bg-gradient-info mx-2"
                                     onclick="importExcel('{{route('number.import.excel')}}')"
