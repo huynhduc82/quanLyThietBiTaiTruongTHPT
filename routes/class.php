@@ -21,7 +21,7 @@ Route::group([
     ]);
     Route::post('/import-class', [
         'uses' => 'Class\ClassController@importClass'
-    ]);
+    ])->name('class.import.excel');
     Route::delete('/{id}', [
         'uses' => 'Class\ClassController@delete'
     ]);
