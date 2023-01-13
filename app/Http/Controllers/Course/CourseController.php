@@ -20,17 +20,38 @@ class CourseController extends Controller
     {
     }
 
-//    public function indexView()
-//    {
-//        $include = [
-//            'status',
-//            'room'
-//        ];
-//
-//        $data = $this->courseService->index($include);
-//
-//        return view('equipment/index')->with(compact('data'));
-//    }
+    public function storeView()
+    {
+        $include = [
+
+        ];
+
+        $data = $this->courseService->index($include);
+
+        return view('course/index')->with(compact('data'));
+    }
+
+    public function editView($id)
+    {
+        $include = [
+
+        ];
+
+        $data = $this->courseService->index($include);
+
+        return view('course/index')->with(compact('data'));
+    }
+
+    public function indexView()
+    {
+        $include = [
+
+        ];
+
+        $data = $this->courseService->index($include);
+
+        return view('course/index')->with(compact('data'));
+    }
 
     public function index(): JsonResponse
     {
