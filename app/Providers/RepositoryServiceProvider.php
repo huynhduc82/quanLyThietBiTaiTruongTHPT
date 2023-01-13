@@ -100,6 +100,7 @@ class RepositoryServiceProvider extends ServiceProvider
          * ------------------------------------------------------------
          */
         IClasses\IClassRepo::class => Classes\ClassRepo::class,
+        IClasses\IClassTimeRegulationRepo::class => Classes\ClassTimeRegulationRepo::class,
         /*
          * ------------------------------------------------------------
          * Grades

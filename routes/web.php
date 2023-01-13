@@ -96,15 +96,15 @@ Route::group([
 Route::group([
     'prefix' => '/class',
 ], function (){
-    Route::get('/time/index', function () {
-        return view('classtime/index');
-    })->name('class.time.index');
-    Route::get('/time/store', function () {
-        return view('classtime/store');
-    })->name('class.time.store');
-    Route::get('/time/edit', function () {
-        return view('classtime/edit');
-    })->name('class.time.edit');
+    Route::get('/time/index', [
+        'uses' => 'Class\ClassTimeRegulationController@indexView'
+    ])->name('class.time.index');
+    Route::get('/time/store', [
+        'uses' => 'Class\ClassTimeRegulationController@storeView'
+    ])->name('class.time.store');
+    Route::get('/time/edit', [
+        'uses' => 'Class\ClassTimeRegulationController@editView'
+    ])->name('class.time.edit');
 });
 
 Route::group([
