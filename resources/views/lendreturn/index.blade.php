@@ -25,7 +25,7 @@
                                 thiết bị</a>
                         </div>
                     </div>
-                    <div class="px-4 py-0 w-100">
+                    <div class="px-4 py-0 w-60">
                         <form id="frm-filter">
                             <div class="border border-info rounded p-2 pb-3 row">
                                 <div class="col-3">
@@ -36,7 +36,7 @@
                                     <label class="col-form-label" for="day_to">Tới ngày</label>
                                     <input type="date" class="form-control" id="day_to">
                                 </div>
-                                <div class="col-2" style="margin: auto 0">
+                                <div class="col-3" style="margin: auto 0">
                                     <div class="form-switch">
                                         <input class="form-check-input" type="checkbox" id="chkLending">
                                         <label class="col-form-label p-0" for="flexSwitchCheckDefault">Đang mượn</label>
@@ -53,9 +53,9 @@
                                 <div class="col-1" style="margin: auto 0">
                                     <button type="submit" class="btn bg-gradient-info mb-0">Lọc</button>
                                 </div>
-                                <div class="col-3" style="margin: auto 0">
-                                    <label style=" color: red" class="col-form-label" id="label-error"></label>
-                                </div>
+{{--                                <div class="col-3" style="margin: auto 0">--}}
+{{--                                    <label style=" color: red" class="col-form-label" id="label-error"></label>--}}
+{{--                                </div>--}}
                             </div>
                         </form>
                     </div>
@@ -116,7 +116,7 @@
                                             data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
                                             <div class="d-block">
                                                 <div class="d-block flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{$item->lender->name}}</h6>
+                                                    <h6 class="mb-0 text-sm">{{$item->lender->name ?? '......'}}</h6>
                                                     <p class="text-xs text-secondary mb-0"></p>
                                                 </div>
                                             </div>
@@ -161,10 +161,17 @@
 {{--                                                    <a type="button"--}}
 {{--                                                       href="{{ route('equipment.edit', ['id' => $item->id]) }}"--}}
 {{--                                                       class="btn bg-gradient-info my-1 mb-1">Sửa</a>--}}
-                                                    <a type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1"
-                                                       href="{{ route('lend_return.returnView', ['id' => $item->id]) }}">
-                                                        Trả
-                                                    </a>
+                                                    @if($item->status != 2)
+                                                        <a type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1"
+                                                           href="{{ route('lend_return.returnView', ['id' => $item->id]) }}">
+                                                            Trả
+                                                        </a>
+                                                    @else
+                                                        <a type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1 disabled"
+                                                           href="{{ route('lend_return.returnView', ['id' => $item->id]) }}">
+                                                            Trả
+                                                        </a>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </td>

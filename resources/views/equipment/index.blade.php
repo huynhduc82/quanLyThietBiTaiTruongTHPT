@@ -23,7 +23,11 @@
                         <div class="col-5">
                             <a href="{{ route('equipment.store') }}" type="button" class="btn bg-gradient-info">Thêm
                                 mới</a>
-                            <a href="{{ route('equipment.store') }}" type="button" class="btn bg-gradient-info mx-2">Nhập bằng file Excel</a>
+                            <button class="btn bg-gradient-info mx-2"
+                                    onclick="importExcel('{{route('equipment.import.excel')}}')"
+                            >
+                                Nhập bằng file Excel
+                            </button>
                         </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -312,7 +316,6 @@
                                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                 }
                             })
-
                         } else if (
                             /* Read more about handling dismissals below */
                             result.dismiss === Swal.DismissReason.cancel
@@ -321,6 +324,49 @@
                                 title: 'Đã huỷ',
                                 text: 'Thiết bị của bạn đã an toàn :)',
                                 icon: 'error',
+                                backdrop: false,
+                            })
+                        }
+                    })
+                };
+
+                let importExcel = (url) => {
+                    Swal.fire({
+                        title: 'Chọn file excel',
+                        input: 'file',
+                        inputAttributes: {
+                            autocapitalize: 'off'
+                        },
+                        showCancelButton: true,
+                        cancelButtonText: 'Huỷ',
+                        confirmButtonText: 'Đồng ý',
+                        showLoaderOnConfirm: true,
+                        backdrop: false,
+                        preConfirm: () => {
+                            let formData = new FormData();
+                            formData.append('file', Swal.getInput().files[0])
+                            return $.ajax({
+                                url: url,
+                                data: formData,
+                                enctype: "multipart/form-data",
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                success: function () {
+                                },
+                                error: function (error) {
+                                },
+                                type: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            })
+                        },
+                        allowOutsideClick: () => !Swal.isLoading()
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                title: `Đã nhập thiết bị bằng file excel thành công`,
                                 backdrop: false,
                             })
                         }

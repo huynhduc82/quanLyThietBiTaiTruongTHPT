@@ -46,6 +46,7 @@ class LendReturnEquipmentController extends Controller
         $roomData = app(RoomServices::class)->index();
         $courseData = app(CourseController::class)->indexData();
         $courseDetailData = app(CourseDetailController::class)->getNeedEquipment();
+
         return view('lendreturn/store')->with(compact('roomData','gradeData', 'classData', 'courseData'
             , 'courseDetailData'));
     }
