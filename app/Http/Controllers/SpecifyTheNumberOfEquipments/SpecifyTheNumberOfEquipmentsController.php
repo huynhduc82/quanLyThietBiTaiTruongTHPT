@@ -20,13 +20,12 @@ class SpecifyTheNumberOfEquipmentsController extends Controller
     public function indexView()
     {
         $include=[
-            'status',
-            'room'
+            'equipment'
         ];
 
         $data = $this->specifyTheNumberOfEquipmentsService->index($include);
-
-        return view('equipment/index')->with(compact('data'));
+//        dd($data->toArray());
+        return view('specifythenumberofequipment/index')->with(compact('data'));
     }
 
     public function index(): JsonResponse

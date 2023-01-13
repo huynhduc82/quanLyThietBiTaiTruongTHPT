@@ -29,7 +29,6 @@
                         <div class="table-responsive p-0 ">
                             <table class="table mb-0 w-100">
                                 <thead>
-
                                 <tr class="d-flex">
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-30">
                                         Tên thiết bị
@@ -38,14 +37,64 @@
                                      w-6">
                                         Số lượng
                                     </th>
-
-
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-7 text-wrap"></th>
                                 </tr>
-
                                 <tbody>
-
-
+                                @foreach($data as $item)
+                                    <tr class="d-flex">
+                                        <td class="w-20 text-wrap">
+                                            <div class="d-flex px-4 py-1">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{$item->equipment->name ?? ' '}}</h6>
+                                                    <p class="text-xs text-secondary mb-0"></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="w-20 text-wrap">
+                                            <div class="d-flex px-4 py-1">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{$item->quantity ?? 0}}</h6>
+                                                    <p class="text-xs text-secondary mb-0"></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="w-20 text-wrap">
+                                            <div class="d-flex px-4 py-1">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center">
+{{--                                                    <h6 class="mb-0 text-sm">{{$equipment->status->condition_details}}</h6>--}}
+                                                    <p class="text-xs text-secondary mb-0"></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="w-20 text-wrap">
+                                            <div class="d-flex px-4 py-1">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center">
+{{--                                                    <h6 class="mb-0 text-sm">{{$equipment->can_rent != 1 ? 'Đang cho mượn' : 'Có thể mượn' }}</h6>--}}
+                                                    <p class="text-xs text-secondary mb-0"></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="w-20">
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex justify-content-center">
+                                                    <a type="button"
+{{--                                                       href="{{ route('equipment_details.edit', ['id' => $equipment->id]) }}"--}}
+                                                       class="btn bg-gradient-info my-1 mb-1 ms-1">Sửa</a>
+{{--                                                    <button type="button"--}}
+{{--                                                            class="btn bg-gradient-danger my-1 mb-1 ms-1"--}}
+{{--                                                            onclick="DeleteConfirm('{{route('equipment_details.delete', ['id' => $equipment->id])}}')">--}}
+{{--                                                        Xoá--}}
+{{--                                                    </button>--}}
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>
