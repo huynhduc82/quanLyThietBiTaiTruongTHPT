@@ -124,43 +124,43 @@ Route::group([
 Route::group([
     'prefix' => '/course',
 ], function (){
-    Route::get('/index', function () {
-        return view('course/index');
-    })->name('course.index');
-    Route::get('/store', function () {
-        return view('course/store');
-    })->name('course.store');
-    Route::get('/edit', function () {
-        return view('course/edit');
-    })->name('course.edit');
+    Route::get('/index', [
+     'uses' => 'Course\CourseController@indexView'
+    ])->name('course.index');
+    Route::get('/store', [
+        'uses' => 'Course\CourseController@storeView'
+    ])->name('course.store');
+    Route::get('/edit', [
+        'uses' => 'Course\CourseController@editView'
+    ])->name('course.edit');
 });
 
 Route::group([
     'prefix' => '/room',
 ], function (){
-    Route::get('/index', function () {
-        return view('room/index');
-    })->name('room.index');
-    Route::get('/store', function () {
-        return view('room/store');
-    })->name('room.store');
-    Route::get('/edit', function () {
-        return view('room/edit');
-    })->name('room.edit');
+    Route::get('/index', [
+        'uses' => 'Rooms\RoomController@indexView'
+    ])->name('room.index');
+    Route::get('/store', [
+        'uses' => 'Rooms\RoomController@storeView'
+    ])->name('room.store');
+    Route::get('/edit', [
+        'uses' => 'Rooms\RoomController@editView'
+    ])->name('room.edit');
 });
 
 Route::group([
     'prefix' => '/grade',
 ], function (){
-    Route::get('/index', function () {
-        return view('grade/index');
-    })->name('grade.index');
-    Route::get('/store', function () {
-        return view('grade/store');
-    })->name('grade.store');
-    Route::get('/edit', function () {
-        return view('grade/edit');
-    })->name('grade.edit');
+    Route::get('/index', [
+        'uses' => 'Grades\GradeController@indexView'
+    ])->name('grade.index');
+    Route::get('/store', [
+        'uses' => 'Grades\GradeController@storeView'
+    ])->name('grade.store');
+    Route::get('/edit', [
+        'uses' => 'Grades\GradeController@editView'
+    ])->name('grade.edit');
 });
 
 Route::group([

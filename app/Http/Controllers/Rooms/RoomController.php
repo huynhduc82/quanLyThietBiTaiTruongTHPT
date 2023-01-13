@@ -14,6 +14,39 @@ class RoomController extends Controller
     {
     }
 
+    public function storeView()
+    {
+        $include = [
+
+        ];
+
+        $data = $this->roomServices->index($include);
+
+        return view('room/index')->with(compact('data'));
+    }
+
+    public function editView($id)
+    {
+        $include = [
+
+        ];
+
+        $data = $this->roomServices->index($include);
+
+        return view('room/index')->with(compact('data'));
+    }
+
+    public function indexView()
+    {
+        $include = [
+
+        ];
+
+        $data = $this->roomServices->index($include);
+
+        return view('room/index')->with(compact('data'));
+    }
+
     public function index()
     {
         $include = [

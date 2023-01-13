@@ -16,6 +16,28 @@ class GradeController extends Controller
     {
     }
 
+    public function storeView()
+    {
+        $include = [
+
+        ];
+
+        $data = $this->gradeService->index($include);
+
+        return view('grade/store')->with(compact('data'));
+    }
+
+    public function editView($id)
+    {
+        $include = [
+
+        ];
+
+        $data = $this->gradeService->index($include);
+
+        return view('grade/edit')->with(compact('data'));
+    }
+
     public function indexView()
     {
         $include = [
@@ -23,7 +45,7 @@ class GradeController extends Controller
 
         $data = $this->gradeService->index($include);
 
-        return view('equipment/index')->with(compact('data'));
+        return view('grade/index')->with(compact('data'));
     }
 
     public function index()
