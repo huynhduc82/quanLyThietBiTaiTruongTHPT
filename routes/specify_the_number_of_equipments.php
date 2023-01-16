@@ -14,6 +14,12 @@ Route::group([
     Route::get('/by-course-details-id/{id}',[
         'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@getByCourseDetailId'
     ])->name('number.get.by.course.detail.id');
+    Route::get('/by-course-id/{id}',[
+        'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@getByCourseId'
+    ])->name('number.get.by.course.id');
+    Route::get('/by-name/{name}',[
+        'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@getByName'
+    ])->name('number.get.by.name');
     Route::post('/', [
         'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@store'
     ]);

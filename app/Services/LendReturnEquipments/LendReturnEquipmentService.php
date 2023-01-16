@@ -66,7 +66,6 @@ class LendReturnEquipmentService extends BaseService
                 $temp["equipment_details"] = $ids;
                 $list[] = $temp;
             }
-
             $input['pick_up_time'] = Carbon::now();
 
             $input['equipment'] = $list;

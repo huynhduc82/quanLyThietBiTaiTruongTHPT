@@ -53,6 +53,7 @@ class LendReturnEquipment extends BaseModel
         'return_time',
         'room_id',
         'return_appointment_time',
+        'status',
     ];
 
     public function details() : HasMany

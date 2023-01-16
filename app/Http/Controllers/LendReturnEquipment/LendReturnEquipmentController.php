@@ -91,9 +91,7 @@ class LendReturnEquipmentController extends Controller
 
         $data = $this->service->getLendReturnByDay($input, $include);
 
-        $table_view = view('lendreturn/table_view', compact('data'))->render();
-
-        return response()->json(['succes' => true, 'table_view' => $table_view]);
+        return view('lendreturn/index', compact('data'));
     }
 
     /**
