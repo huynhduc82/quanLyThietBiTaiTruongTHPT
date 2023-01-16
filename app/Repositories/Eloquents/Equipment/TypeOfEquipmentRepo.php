@@ -8,7 +8,6 @@ use App\Repositories\BaseEloquentRepository;
 use App\Repositories\Contracts\Equipment\ITypeOfEquipmentRepo;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class TypeOfEquipmentRepo extends BaseEloquentRepository implements ITypeOfEquipmentRepo
@@ -52,7 +51,7 @@ class TypeOfEquipmentRepo extends BaseEloquentRepository implements ITypeOfEquip
         $query->update(['quantity' => $quantity, 'quantity_can_rent' => $quantityCanRent]);
     }
 
-    public function updateAllQuantity()
+    public function updateAllQuantity($id)
     {
         $query = $this->model->newQuery();
         $equipmentQuery = Equipment::query();

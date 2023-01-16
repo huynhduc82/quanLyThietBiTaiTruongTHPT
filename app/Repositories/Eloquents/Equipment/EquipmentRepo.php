@@ -49,8 +49,15 @@ class EquipmentRepo extends BaseEloquentRepository implements IEquipmentRepo
     public function updateRentQuantity($input = [], $rent = true)
     {
         $query = $this->model->newQuery();
-
-        $query->whereIn('id', $input);
+        foreach ($input as $key => $item)
+        {
+            if (is_string($item)) {
+                unset($input[$key]);
+            }
+        }
+        if (!empty($input) && !is_string($input)) {
+            $query->whereIn('id', $input);
+        }
 
         $query->update(['can_rent' => !$rent]);
     }

@@ -53,7 +53,7 @@
                 data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
                 <div class="d-block">
                     <div class="d-block flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">{{$item->lender->name}}</h6>
+                        <h6 class="mb-0 text-sm">{{$item->lender->name ?? '......'}}</h6>
                         <p class="text-xs text-secondary mb-0"></p>
                     </div>
                 </div>
@@ -98,10 +98,17 @@
                         {{--                                                    <a type="button"--}}
                         {{--                                                       href="{{ route('equipment.edit', ['id' => $item->id]) }}"--}}
                         {{--                                                       class="btn bg-gradient-info my-1 mb-1">Sửa</a>--}}
-                        <a type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1"
-                           href="{{ route('lend_return.returnView', ['id' => $item->id]) }}">
-                            Trả
-                        </a>
+                        @if($item->status != 2)
+                            <a type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1"
+                               href="{{ route('lend_return.returnView', ['id' => $item->id]) }}">
+                                Trả
+                            </a>
+                        @else
+                            <a type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1 disabled"
+                               href="{{ route('lend_return.returnView', ['id' => $item->id]) }}">
+                                Trả
+                            </a>
+                        @endif
                     </div>
                 </div>
             </td>
@@ -193,3 +200,4 @@
     @endforeach
     </tbody>
 </table>
+

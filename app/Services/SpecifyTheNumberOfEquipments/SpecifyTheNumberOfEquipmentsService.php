@@ -31,6 +31,16 @@ class SpecifyTheNumberOfEquipmentsService extends BaseService
         return $this->repository->getByCourseDetailId($id, $include);
     }
 
+    public function getByCourseId($id = 0, $include = [])
+    {
+        return $this->repository->getByCourseId($id, $include);
+    }
+
+    public function getByName($name = null, $include = [])
+    {
+        return $this->repository->getByName($name, $include);
+    }
+
     public function store($input)
     {
         $this->validatorCreateUpdate($input);

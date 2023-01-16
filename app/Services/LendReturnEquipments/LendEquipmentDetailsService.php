@@ -6,7 +6,6 @@ use App\Helpers;
 use App\Repositories\Contracts\LendReturnEquipment\ILendReturnEquipmentDetailsRepo;
 use App\Services\Equipment\EquipmentService;
 use App\Services\Response\BaseService;
-use phpDocumentor\Reflection\Types\Array_;
 
 class LendEquipmentDetailsService extends BaseService
 {
