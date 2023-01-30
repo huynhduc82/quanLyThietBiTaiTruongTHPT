@@ -5,6 +5,8 @@ namespace App\Models\EquipmentReservations;
 use App\Helpers;
 use App\Models\BaseModel;
 use App\Models\Equipments\Equipment;
+use App\Models\TypeOfEquipments\TypeOfEquipment;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -41,5 +43,10 @@ class EquipmentReservationDetails extends BaseModel
             return explode(Helpers::SEPARATOR, $value);
         }
         return null;
+    }
+
+    public function typeOfEquipment() : BelongsTo
+    {
+        return $this->BelongsTo(TypeOfEquipment::class, 'type_of_equipment_id', 'id');
     }
 }

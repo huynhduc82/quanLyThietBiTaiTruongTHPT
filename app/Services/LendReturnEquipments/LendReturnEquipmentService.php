@@ -98,8 +98,9 @@ class LendReturnEquipmentService extends BaseService
     public function approved($id = 0)
     {
         $reservation = EquipmentReservation::with('details')->find($id)->toArray();
-
-        $result = $this->repository->store(Arr::only($reservation, LendReturnEquipment::ATTRIBUTE_TO_LEND));
+        $reservation['status'] = LendReturnEquipment::STATUS_LENDING;
+        $reservation['lender_id'] = Helpers::getUserLoginId();
+        $result = $this->repository->lend(Arr::only($reservation, LendReturnEquipment::ATTRIBUTE_TO_LEND));
 
         $input['lend_return_equipment_id'] = $result->id;
         $input['equipment'] = $reservation['details'];
