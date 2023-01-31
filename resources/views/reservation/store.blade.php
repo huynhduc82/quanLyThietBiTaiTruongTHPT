@@ -436,8 +436,8 @@
     <!-- Github buttons -->
     <script async defer src="{{asset('https://buttons.github.io/buttons.js')}}"></script>
     <script>
-        document.getElementById('title-first').innerText = 'Đặt trước'
-        document.getElementById('title-second').innerText = 'Đặt trước thiết bị'
+        document.getElementById('title-first').innerText = 'Đặt trước.'
+        document.getElementById('title-second').innerText = 'Đặt trước thiết bị.'
     </script>
 @endsection
 
