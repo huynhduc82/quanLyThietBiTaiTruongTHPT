@@ -147,4 +147,21 @@ class LendReturnEquipmentController extends Controller
     {
         $this->service->delete($id);
     }
+
+    public function printView($id)
+    {
+        $include = [
+            'details',
+            'details.equipments',
+            'details.typeOfEquipment',
+            'user',
+            'lender',
+            'returner',
+            'class',
+            'course',
+            'details.courseDetails'
+        ];
+        $lendReturn = $this->service->details($include, $id);
+        return view('lendreturn/print')->with(compact('lendReturn'));
+    }
 }

@@ -67,7 +67,7 @@
                             </div>
                             <div class="form-group px-4 col-6">
                                 <label class="col-form-label">Thời Gian Trả Dự Kiến </label>
-                                <input type="date" class="form-control" placeholder="Nhập Thời Gian Dự Kiến" id="returnAppointmentTime">
+                                <input type="datetime-local" class="form-control" placeholder="Nhập Thời Gian Dự Kiến" id="returnAppointmentTime">
                             </div>
                             <div class="form-group px-4 col-6" style="margin: auto 0px">
                                 <label style=" color: red" class="col-form-label" id="label-error"></label>
