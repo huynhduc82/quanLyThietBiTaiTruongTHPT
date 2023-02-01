@@ -158,9 +158,9 @@
                                         <td class="w-12">
                                             <div class="d-block">
                                                 <div class="d-flex justify-content-center">
-{{--                                                    <a type="button"--}}
-{{--                                                       href="{{ route('equipment.edit', ['id' => $item->id]) }}"--}}
-{{--                                                       class="btn bg-gradient-info my-1 mb-1">Sửa</a>--}}
+                                                    <a type="button"
+                                                       href="{{ route('lend_return.print', ['id' => $item->id]) }}"
+                                                       class="btn bg-gradient-info my-1 mb-1">In</a>
                                                     @if($item->status != 2)
                                                         <a type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1"
                                                            href="{{ route('lend_return.returnView', ['id' => $item->id]) }}">

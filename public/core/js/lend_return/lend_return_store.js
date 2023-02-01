@@ -79,11 +79,13 @@ $(document).ready(function(){
         $('#label-error').text('');
 
 
-        data.class = Class;
+        data.class_id = Class;
         data.room = Room;
         data.user_id = UserId;
         data.return_appointment_time = ReturnAppointmentTime;
         data.equipment = ListEquipmentId;
+        data.course_id = Course;
+        data.course_details_id = CourseDetails;
 
         let back_page = '/lend_return/index';
 
