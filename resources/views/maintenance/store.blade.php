@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('title')
-    Đặt trước thiết bị
+    Báo hỏng thiết bị
 @endsection
 
 @section('content')
@@ -9,48 +9,11 @@
         <div class="row">
             <div class="card mb-4 col-12">
                 <div class="card-header pb-2">
-                    <h3>Quản lý thông tin phiếu đặt trước</h3>
+                    <h3>Quản lý thông tin phiếu báo hỏng thiết bị</h3>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <form id="frm-lend-return">
                         <div class="row">
-                            <div class="form-group px-4 col-6">
-                                <label class="col-form-label">Tên Khối Lớp</label>
-                                <select type="text" class="form-select" id="grade" onclick="filterClass()">
-                                    @foreach($gradeData as $data)
-                                        <option value="{{ $data['id'] }}">{{ $data['name'] }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group px-4 col-6">
-                                <label class="col-form-label">Tên Lớp Học</label>
-                                <select type="text" class="form-select" id="class">
-                                    @foreach($classData as $data)
-                                        <option value="{{ $data['id'] }}">{{ $data['name'] }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group px-4 col-6">
-                                <label class="col-form-label">Môn học</label>
-                                <select type="text" class="form-select" id="course" onclick="filterCourseDetail()">
-                                </select>
-                            </div>
-                            <div class="form-group px-4 col-6">
-                                <label class="col-form-label">Thời Gian Lấy Dự Kiến </label>
-                                <input type="datetime-local" class="form-control" placeholder="Nhập Thời Gian Mượn" id="pickUpTime">
-                            </div>
-                            <div class="form-group px-4 col-6">
-                                <label class="col-form-label">Bài Học</label>
-                                <select type="text" class="form-select" id="courseDetails">
-                                    @foreach($courseDetailData as $data)
-                                        <option value="{{ $data['id'] }}">{{ $data['describe'] }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group px-4 col-6">
-                                <label class="col-form-label">Thời Gian Trả Dự Kiến </label>
-                                <input type="datetime-local" class="form-control" placeholder="Nhập Thời Gian Dự Kiến" id="returnAppointmentTime">
-                            </div>
                             <div class="form-group px-4 col-6">
                                 <label class="col-form-label">Tên Phòng Học</label>
                                 <select type="text" class="form-select" id="room">
@@ -63,7 +26,7 @@
                                 <label style=" color: red" class="col-form-label" id="label-error"></label>
                             </div>
                             <div class="d-flex justify-content-center py-1 col-12">
-                                <button type="submit" class="btn bg-gradient-info my-4 mb-2">Xác nhận đặt trước thiết bị</button>
+                                <button type="submit" class="btn bg-gradient-info my-4 mb-2">Xác nhận báo hỏng thiết bị</button>
                             </div>
                         </div>
                     </form>
@@ -80,7 +43,6 @@
                         <div class="px-4 py-2">
                             <button type="button" class="btn bg-gradient-info" id="add" onclick="AddEquipment()">Thêm</button>
                             <button type="button" class="btn bg-gradient-info" id="autoAdd" onclick="autoAddEquipment()">Thêm nhanh</button>
-                            <button type="button" class="btn bg-gradient-info" id="changeQuantity" disabled="disabled" onclick="changeQuantity()">Thay đổi số lượng</button>
                             <button type="button" class="btn bg-gradient-danger" id="deleteEquipment" disabled="disabled" onclick="deleteEquipment()">Xoá</button>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
@@ -136,7 +98,7 @@
     <script src="https://cdn.datatables.net/select/1.5.0/js/dataTables.select.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/table-to-json@1.0.0/lib/jquery.tabletojson.min.js" integrity="sha256-H8xrCe0tZFi/C2CgxkmiGksqVaxhW0PFcUKZJZo1yNU=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{{ asset('core/js/reservation/reservation_store.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('core/js/maintenance/maintenance_store.js')}}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
@@ -149,58 +111,13 @@
         }
     </script>
     <script>
-        function filterClass() {
-            let classes = $('#class');
-            classes.empty();
-            let id = Number($('#grade').val());
-            let classData = {!! json_encode($classData) !!};
-            let classFilter = classData.filter(item => item.grade_id === id)
-            $.each(classFilter, function (index, value) {
-                classes.append(
-                    `<option value="${value.id}">${value.name}</option>`
-                )
-            });
-            filterCourse();
-        }
-
-        function filterCourse() {
-            let id = Number($('#grade').val());
-            let courseData = {!! json_encode($courseData) !!};
-            let courseFilter = courseData.filter(item => item.grade_id === id)
-            let course = $('#course');
-            course.empty();
-            $.each(courseFilter, function (index, value) {
-                course.append(
-                    `<option value="${value.id}">${value.name}</option>`
-                )
-            });
-        }
-
-        function filterCourseDetail() {
-            let courseDetails = $('#courseDetails');
-            courseDetails.empty();
-            let id = Number($('#course').val());
-            let courseDetailsData = {!! json_encode($courseDetailData) !!};
-            let courseDetailsFilter = courseDetailsData.filter(item => item.course_id === id)
-            $.each(courseDetailsFilter, function (index, value) {
-                courseDetails.append(
-                    `<option value="${value.id}">${value.describe}</option>`
-                )
-            });
-        }
-
-        $(document).ready(function () {
-            filterCourse()
-            filterCourseDetail()
-        })
-
-        async function getEquipmentByCourseID()
+        async function getEquipmentByRoomID()
         {
-            let id = Number($('#course').val());
+            let id = Number($('#room').val());
             let dataReturn = {}
             await $.ajax({
                 url: '/' +
-                    'api/number-equipment/by-course-id/' + id ,
+                    'api/equip/by-room-id/' + id ,
                 dataType: 'json',
                 enctype: "multipart/form-data",
                 contentType: false,
@@ -209,7 +126,7 @@
                 success: function (data) {
                     for (let item of data['data'])
                     {
-                        dataReturn[item.equipment.name] = item.equipment.name
+                        dataReturn[item.name] = item.name
                     }
                 },
                 error: function (error) {
@@ -223,12 +140,12 @@
             return dataReturn;
         }
 
-        async function getNumberEquipmentByName(name)
+        async function getNumberEquipmentByName(name, room)
         {
             let dataReturn = {}
             await $.ajax({
                 url: '/' +
-                    'api/number-equipment/by-name/' + name ,
+                    'api/equip/by-name/' + name + '/' + room ,
                 dataType: 'json',
                 enctype: "multipart/form-data",
                 contentType: false,
@@ -250,14 +167,11 @@
 
         async function AddEquipment()
         {
-            let classId = Number($('#class').val());
-            let classData = {!! json_encode($classData) !!};
-            let classDataFilter = classData.find(item => item.id === classId)
-            let number_of_pupils = classDataFilter.number_of_pupils;
+            let Id = Number($('#room').val());
             const { value : name } = await Swal.fire({
                 title: 'Chọn thiết bị',
                 input: 'select',
-                inputOptions: await getEquipmentByCourseID(),
+                inputOptions: await getEquipmentByRoomID(Id),
                 inputPlaceholder: 'Chọn thiết bị',
                 showCancelButton: true,
                 backdrop: false,
@@ -269,15 +183,15 @@
             })
 
             if (name) {
+                let Id = Number($('#room').val());
                 await Swal.fire({
                     backdrop: false,
                     title: `Bạn đã chọn thiết bị: ${name}`
                 })
-                let newEquipment = await getNumberEquipmentByName(name)
-                newEquipment.equipment.quantity = number_of_pupils/newEquipment.equipment.quantity;
+                let newEquipment = await getNumberEquipmentByName(name, Id)
                 let ListEquipment = $("#listEquipment").DataTable().rows().data().toArray();
                 let data =  []
-                data.push(newEquipment.equipment)
+                data.push(newEquipment)
                 for (let equipment of ListEquipment)
                 {
                     data.push(equipment)
@@ -289,15 +203,11 @@
 
         function autoAddEquipment()
         {
-            let id = Number($('#courseDetails').val());
+            let id = Number($('#room').val());
             let tableEquipment = []
-            let classId = Number($('#class').val());
-            let classData = {!! json_encode($classData) !!};
-            let classDataFilter = classData.find(item => item.id === classId)
-            let number_of_pupils = classDataFilter.number_of_pupils;
             $.ajax({
                 url: '/' +
-                    'api/number-equipment/by-course-details-id/' + id ,
+                    'api/equip/by-room-id/' + id ,
                 dataType: 'json',
                 enctype: "multipart/form-data",
                 contentType: false,
@@ -306,8 +216,7 @@
                 success: function (data) {
                     for (let item of data['data'])
                     {
-                        item.equipment.quantity = number_of_pupils/item.quantity;
-                        tableEquipment.push(item.equipment);
+                        tableEquipment.push(item);
                     }
 
                     createDataTable(tableEquipment)
@@ -323,39 +232,9 @@
 
         }
 
-        async function changeQuantity()
-        {
-            const { value: quantity } = await Swal.fire({
-                title: 'Nhập số lượng thiết bị',
-                input: 'text',
-                inputLabel: 'Số lượng',
-                showCancelButton: true,
-                backdrop: false,
-                inputValidator: (value) => {
-                    if (!value) {
-                        return 'You need to write something!'
-                    }
-                }
-            })
-
-            if (quantity) {
-                let listEquipment = $("#listEquipment");
-                let Equipment = listEquipment.DataTable().rows({ selected: true }).data().toArray();
-                let ListEquipment = listEquipment.DataTable().rows().data().toArray();
-                let name = Equipment[0].name;
-                let oldQuantity = Equipment[0].quantity;
-                await Swal.fire({
-                    backdrop: false,
-                    title: `Bạn đã thay đổi số lượng của thiết bị ${name}: ${oldQuantity} ==> ${quantity}`
-                })
-                Equipment[0].quantity = Number(quantity);
-
-                createDataTable(ListEquipment)
-            }
-        }
-
         function createDataTable (data)
         {
+            console.log(data)
             $('#listEquipment').DataTable({
                 columnDefs: [
                     { targets: 0, className:  "ps-5 select-checkbox"},
@@ -378,11 +257,11 @@
                         orderable: false,
                     },
                     { data: 'name' },
-                    { data: 'quantity' },
-                    { data: 'quantity_can_rent' },
-                    { data: 'unit' },
-                    { data: 'price' },
-                    { data: 'describe' },
+                    // { data: 'quantity' },
+                    // { data: 'quantity_can_rent' },
+                    // { data: 'unit' },
+                    // { data: 'price' },
+                    // { data: 'describe' },
                 ],
             });
             $("#listEquipment tr").click(function() {
@@ -436,8 +315,8 @@
     <!-- Github buttons -->
     <script async defer src="{{asset('https://buttons.github.io/buttons.js')}}"></script>
     <script>
-        document.getElementById('title-first').innerText = 'Đặt trước.'
-        document.getElementById('title-second').innerText = 'Đặt trước thiết bị.'
+        document.getElementById('title-first').innerText = 'Đặt trước'
+        document.getElementById('title-second').innerText = 'Báo hỏng thiết bị'
     </script>
 @endsection
 

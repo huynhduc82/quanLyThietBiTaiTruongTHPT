@@ -67,4 +67,22 @@ class EquipmentRepo extends BaseEloquentRepository implements IEquipmentRepo
         $this->model->newQuery()->where('id', $id)->first()->status()->delete();
         return $this->model->newQuery()->where('id', $id)->delete();
     }
+
+    public function getByRoomId($id, array $include = []): Collection|array
+    {
+        $query = $this->model->newQuery()
+            ->where('room_id', '=', $id);
+
+        return $query->with($include)->get();
+    }
+
+    public function getByName($name, $id): Model
+    {
+        $query = $this->model->newQuery()
+            ->where('name', 'like', '%' . $name . '%')
+            ->where('room_id', '=', $id)
+        ;
+
+        return $query->first();
+    }
 }

@@ -92,4 +92,14 @@ class EquipmentService extends BaseService
 
         app(TypeOfEquipmentService::class)->updateQuantity($id);
     }
+
+    public function getByRoomId($id = 0, $include = [])
+    {
+        return $this->repository->getByRoomId($id, $include);
+    }
+
+    public function getByName($name = 0, $id = 0)
+    {
+        return $this->repository->getByName($name, $id);
+    }
 }
