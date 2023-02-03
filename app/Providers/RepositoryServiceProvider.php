@@ -13,8 +13,10 @@ use App\Repositories\Eloquents\Reservations;
 use App\Repositories\Eloquents\User;
 use App\Repositories\Eloquents\Classes;
 use App\Repositories\Eloquents\Grades;
+use App\Repositories\Eloquents\Maintenance;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Contracts\Grades as IGrade;
+use App\Repositories\Contracts\Maintenance as IMaintenance;
 use App\Repositories\Contracts\SpecifyTheNumberOfEquipments as ISpecifyTheNumberOfEquipments;
 use App\Repositories\Contracts\User as IUser;
 use App\Repositories\Contracts\Classes as IClasses;
@@ -107,5 +109,12 @@ class RepositoryServiceProvider extends ServiceProvider
          * ------------------------------------------------------------
          */
         IGrade\IGradeRepo::class => Grades\GradeRepo::class,
+        /*
+         * ------------------------------------------------------------
+         * Maintenance
+         * ------------------------------------------------------------
+         */
+        IMaintenance\IMaintenanceRepo::class => Maintenance\MaintenanceRepo::class,
+        IMaintenance\IMaintenanceDetailsRepo::class => Maintenance\MaintenanceDetailsRepo::class,
     ];
 }

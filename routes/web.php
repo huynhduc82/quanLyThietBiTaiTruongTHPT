@@ -104,9 +104,15 @@ Route::group([
 Route::group([
     'prefix' => '/maintenance',
 ], function (){
-    Route::get('/index', function () {
-        return view('maintenance/index');
-    })->name('maintenance.index');
+    Route::get('/index', [
+        'uses' => 'Maintenance\MaintenanceController@indexView'
+    ])->name('maintenance.index');
+    Route::get('/store',[
+        'uses' => 'Maintenance\MaintenanceController@storeView'
+    ])->name('maintenance.store');
+    Route::post('/',[
+        'uses' => 'Maintenance\MaintenanceController@store'
+    ])->name('maintenance.store');
 });
 
 Route::group([
