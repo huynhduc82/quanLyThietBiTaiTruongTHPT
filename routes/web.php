@@ -49,9 +49,30 @@ Route::group([
 Route::group([
     'prefix' => '/reservation',
 ], function (){
-    Route::get('/index', function () {
-        return view('reservation/index');
-    })->name('reservation.index')->middleware('auth');
+    Route::get('/index',[
+        'uses' => 'Reservations\EquipmentReservationController@indexView'
+    ])->name('reservation.index')->middleware('auth');
+    Route::get('/store',[
+        'uses' => 'Reservations\EquipmentReservationController@storeView'
+    ])->name('reservation.store')->middleware('auth');
+    Route::get('/filter',[
+        'uses' => 'Reservations\EquipmentReservationController@filter'
+    ])->name('reservation.filter')->middleware('auth');
+    Route::post('/',[
+        'uses' => 'Reservations\EquipmentReservationController@store'
+    ])->middleware('auth');
+    Route::post('/approved/{id}',[
+        'uses' => 'Reservations\EquipmentReservationController@approved'
+    ])->name('reservation.approved')->middleware('auth');
+    Route::post('/cancel/{id}',[
+        'uses' => 'Reservations\EquipmentReservationController@cancel'
+    ])->name('reservation.cancel')->middleware('auth');
+    Route::delete('/delete/{id}',[
+        'uses' => 'Reservations\EquipmentReservationController@delete'
+    ])->name('reservation.delete')->middleware('auth');
+    Route::post('/lend/{id}',[
+        'uses' => 'Reservations\EquipmentReservationController@lend'
+    ])->name('reservation.lend')->middleware('auth');
 });
 
 Route::group([
@@ -75,14 +96,23 @@ Route::group([
     Route::post('/', [
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@lend'
     ]);
+    Route::get('/print/{id}', [
+        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@printView'
+    ])->name('lend_return.print');
 });
 
 Route::group([
     'prefix' => '/maintenance',
 ], function (){
-    Route::get('/index', function () {
-        return view('maintenance/index');
-    })->name('maintenance.index');
+    Route::get('/index', [
+        'uses' => 'Maintenance\MaintenanceController@indexView'
+    ])->name('maintenance.index');
+    Route::get('/store',[
+        'uses' => 'Maintenance\MaintenanceController@storeView'
+    ])->name('maintenance.store');
+    Route::post('/',[
+        'uses' => 'Maintenance\MaintenanceController@store'
+    ])->name('maintenance.store');
 });
 
 Route::group([

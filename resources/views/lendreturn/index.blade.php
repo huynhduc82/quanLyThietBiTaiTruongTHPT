@@ -26,27 +26,27 @@
                         </div>
                     </div>
                     <div class="px-4 py-0 w-60">
-                        <form id="frm-filter">
+                        <form id="frm-filter" action="{{ route('lend_return.get-by-day') }}" method="GET">
                             <div class="border border-info rounded p-2 pb-3 row">
                                 <div class="col-3">
                                     <label class="col-form-label" for="day_from">Từ ngày</label>
-                                    <label for="day_from"></label><input type="date" class="form-control" id="day_from">
+                                    <label for="day_from"></label><input type="date" class="form-control" name="day_from" id="day_from">
                                 </div>
                                 <div class="col-3">
                                     <label class="col-form-label" for="day_to">Tới ngày</label>
-                                    <input type="date" class="form-control" id="day_to">
+                                    <input type="date" class="form-control" name="day_to" id="day_to">
                                 </div>
                                 <div class="col-3" style="margin: auto 0">
                                     <div class="form-switch">
-                                        <input class="form-check-input" type="checkbox" id="chkLending">
+                                        <input class="form-check-input" type="checkbox" id="chkLending" name="lending">
                                         <label class="col-form-label p-0" for="flexSwitchCheckDefault">Đang mượn</label>
                                     </div>
                                     <div class="form-switch">
-                                        <input class="form-check-input" type="checkbox" id="chkReturned">
+                                        <input class="form-check-input" type="checkbox" id="chkReturned" name="returned">
                                         <label class="col-form-label p-0" for="flexSwitchCheckDefault">Đã trả</label>
                                     </div>
                                     <div class="form-switch">
-                                        <input class="form-check-input" type="checkbox" id="chkOutOfDate">
+                                        <input class="form-check-input" type="checkbox" id="chkOutOfDate" name="out_of_date">
                                         <label class="col-form-label p-0" for="flexSwitchCheckDefault">Quá hạn</label>
                                     </div>
                                 </div>
@@ -158,9 +158,9 @@
                                         <td class="w-12">
                                             <div class="d-block">
                                                 <div class="d-flex justify-content-center">
-{{--                                                    <a type="button"--}}
-{{--                                                       href="{{ route('equipment.edit', ['id' => $item->id]) }}"--}}
-{{--                                                       class="btn bg-gradient-info my-1 mb-1">Sửa</a>--}}
+                                                    <a type="button"
+                                                       href="{{ route('lend_return.print', ['id' => $item->id]) }}"
+                                                       class="btn bg-gradient-info my-1 mb-1">In</a>
                                                     @if($item->status != 2)
                                                         <a type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1"
                                                            href="{{ route('lend_return.returnView', ['id' => $item->id]) }}">
@@ -265,7 +265,7 @@
                             </table>
                         </div>
                     </div>
-{{--                    {!! $data->links('layout.paginate') !!}--}}
+                    {!! $data->links('layout.paginate') !!}
                 </div>
             </div>
         </div>
@@ -370,48 +370,65 @@
                 })
             };
         </script>
-        <script>
-            $('#frm-filter').on('submit', function (e) {
-                e.preventDefault();
-                let data = {};
-                let dayFrom = $('#day_from').val();
-                let dayTo = $('#day_to').val();
-                let returned = $('#chkReturned');
-                let outOfDate = $('#chkOutOfDate');
-                let lending = $('#chkLending');
+{{--        <script>--}}
+{{--            $('#frm-filter').on('submit', function (e) {--}}
+{{--                e.preventDefault();--}}
+{{--                let data = {};--}}
+{{--                let dayFrom = $('#day_from').val();--}}
+{{--                let dayTo = $('#day_to').val();--}}
+{{--                let returned = $('#chkReturned');--}}
+{{--                let outOfDate = $('#chkOutOfDate');--}}
+{{--                let lending = $('#chkLending');--}}
 
-                if (dayFrom) {
-                    data.day_from = dayFrom
-                }
-                if (dayTo) {
-                    data.day_to = dayTo
-                }
-                if (lending.is(':checked')) {
-                    data.lending = true
-                }
-                if (returned.is(':checked')) {
-                    data.returned = true
-                }
-                if (outOfDate.is(':checked')) {
-                    data.out_of_date = true
-                }
-                $('#label-error').text('');
-                $.ajax({
-                    url: '/lend_return/by/day',
-                    dataType: 'json',
-                    enctype: "multipart/form-data",
-                    contentType: 'application/json',
-                    data: data,
-                    success: function (data) {
-                        $('#equipment-table').html(data.table_view)
-                    },
-                    error: function (error) {
-                        $('#label-error').text(error.responseJSON.message);
-                    },
-                    type: 'GET',
-                });
-            })
-        </script>
+{{--                if (dayFrom) {--}}
+{{--                    data.day_from = dayFrom--}}
+{{--                }--}}
+{{--                if (dayTo) {--}}
+{{--                    data.day_to = dayTo--}}
+{{--                }--}}
+{{--                if (lending.is(':checked')) {--}}
+{{--                    data.lending = true--}}
+{{--                }--}}
+{{--                if (returned.is(':checked')) {--}}
+{{--                    data.returned = true--}}
+{{--                }--}}
+{{--                if (outOfDate.is(':checked')) {--}}
+{{--                    data.out_of_date = true--}}
+{{--                }--}}
+{{--                $('#label-error').text('');--}}
+{{--                $.ajax({--}}
+{{--                    url: '/lend_return/by/day',--}}
+{{--                    dataType: 'json',--}}
+{{--                    enctype: "multipart/form-data",--}}
+{{--                    contentType: 'application/json',--}}
+{{--                    data: data,--}}
+{{--                    success: function (data) {--}}
+{{--                        $('#equipment-table').html(data.table_view)--}}
+{{--                    },--}}
+{{--                    error: function (error) {--}}
+{{--                        $('#label-error').text(error.responseJSON.message);--}}
+{{--                    },--}}
+{{--                    type: 'GET',--}}
+{{--                });--}}
+{{--            })--}}
+{{--        </script>--}}
+    <script>
+        $(document).ready(function () {
+            let urlToCheck = document.URL.toString();
+            let returned = urlToCheck.includes("returned");
+            let lending = urlToCheck.includes("lending");
+            let out_of_date = urlToCheck.includes("out_of_date");
+            if (returned){
+                $('#chkReturned').prop('checked', true);
+            }
+            if (lending){
+                $('#chkLending').prop('checked', true);
+            }
+            if (out_of_date){
+                $('#chkOutOfDate').prop('checked', true);
+            }
+        })
+    </script>
         <script>
             document.getElementById('title-first').innerText = 'Mượn trả'
             document.getElementById('title-second').innerText = 'Danh sách mượn trả'

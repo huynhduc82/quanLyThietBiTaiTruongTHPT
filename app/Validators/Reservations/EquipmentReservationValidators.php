@@ -15,11 +15,6 @@ class EquipmentReservationValidators extends AbstractValidator implements IValid
     {
         // TODO: Implement ruleCreate() method.
         return [
-            'user_id' => [
-                'required',
-                'int',
-                Rule::exists(User::class, 'id')->whereNull('deleted_at'),
-            ],
             'pick_up_time' => [
                 'required',
                 'date',
@@ -37,14 +32,9 @@ class EquipmentReservationValidators extends AbstractValidator implements IValid
                 'int',
 //                Rule::exists(TypeOfEquipment::class, 'id')->whereNull('deleted_at'),
             ],
-            'equipment.*.equipment_details' => [
-                'required',
-                'array',
-            ],
-            'equipment.*.equipment_details.*' => [
+            'equipment.*.quantity' => [
                 'required',
                 'int',
-//                Rule::exists(Equipment::class, 'id')->whereNull('deleted_at')->where('can_rent', true),
             ],
         ];
     }

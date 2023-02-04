@@ -3,6 +3,8 @@
 namespace App\Models\LendReturnEquipments;
 
 use App\Models\BaseModel;
+use App\Models\Class\Classes;
+use App\Models\Courses\Courses;
 use App\Models\Rooms\Room;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -28,6 +30,8 @@ class LendReturnEquipment extends BaseModel
         'return_appointment_time',
         'room_id',
         'status',
+        'course_id',
+        'class_id'
     ];
 
     const ATTRIBUTE_TO_RETURN = [
@@ -53,6 +57,9 @@ class LendReturnEquipment extends BaseModel
         'return_time',
         'room_id',
         'return_appointment_time',
+        'status',
+        'course_id',
+        'class_id'
     ];
 
     public function details() : HasMany
@@ -78,5 +85,15 @@ class LendReturnEquipment extends BaseModel
     public function room() : BelongsTo
     {
         return $this->belongsTo(Room::class, 'room_id', 'id');
+    }
+
+    public function course() : BelongsTo
+    {
+        return $this->belongsTo(Courses::class, 'course_id', 'id');
+    }
+
+    public function class() : BelongsTo
+    {
+        return $this->belongsTo(Classes::class, 'class_id', 'id');
     }
 }

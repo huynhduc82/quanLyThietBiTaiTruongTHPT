@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('maintenance', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->nullable();
+            $table->timestamp('maintenance_day')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }

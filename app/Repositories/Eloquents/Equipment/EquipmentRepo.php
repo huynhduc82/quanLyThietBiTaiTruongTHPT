@@ -49,8 +49,15 @@ class EquipmentRepo extends BaseEloquentRepository implements IEquipmentRepo
     public function updateRentQuantity($input = [], $rent = true)
     {
         $query = $this->model->newQuery();
-
-        $query->whereIn('id', $input);
+        foreach ($input as $key => $item)
+        {
+            if (is_string($item)) {
+                unset($input[$key]);
+            }
+        }
+        if (!empty($input) && !is_string($input)) {
+            $query->whereIn('id', $input);
+        }
 
         $query->update(['can_rent' => !$rent]);
     }
@@ -59,5 +66,23 @@ class EquipmentRepo extends BaseEloquentRepository implements IEquipmentRepo
     {
         $this->model->newQuery()->where('id', $id)->first()->status()->delete();
         return $this->model->newQuery()->where('id', $id)->delete();
+    }
+
+    public function getByRoomId($id, array $include = []): Collection|array
+    {
+        $query = $this->model->newQuery()
+            ->where('room_id', '=', $id);
+
+        return $query->with($include)->get();
+    }
+
+    public function getByName($name, $id): Model
+    {
+        $query = $this->model->newQuery()
+            ->where('name', 'like', '%' . $name . '%')
+            ->where('room_id', '=', $id)
+        ;
+
+        return $query->first();
     }
 }

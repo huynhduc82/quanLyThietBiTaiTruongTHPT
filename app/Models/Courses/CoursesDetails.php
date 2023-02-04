@@ -3,6 +3,7 @@
 namespace App\Models\Courses;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CoursesDetails extends BaseModel
@@ -23,4 +24,9 @@ class CoursesDetails extends BaseModel
         'describe',
         'need_equipment',
     ];
+
+    public function course() : BelongsTo
+    {
+        return $this->belongsTo(Courses::class, 'course_id', 'id');
+    }
 }

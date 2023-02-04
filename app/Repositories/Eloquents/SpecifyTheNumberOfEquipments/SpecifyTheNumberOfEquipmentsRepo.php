@@ -38,6 +38,25 @@ class SpecifyTheNumberOfEquipmentsRepo extends BaseEloquentRepository implements
         return $query->where('course_details_id', $id)->with($include)->get();
     }
 
+    public function getByName($name, array $include = []): Builder|Model
+    {
+        $query = $this->model->newQuery();
+
+        return $query->whereHas('equipment', function ($query) use ($name){
+            return $query->where('name', '=', $name);
+        })->with($include)->first();
+    }
+
+    public function getByCourseId($id, array $include = []): Collection|array
+    {
+        $query = $this->model->newQuery()
+            ->whereHas('courseDetails.course', function ($query) use ($id){
+                return $query->where('id', '=', $id);
+            });
+
+        return $query->with($include)->get();
+    }
+
     public function detailsWithEquipment($equipmentId, $courseDetailId): Model|Builder|null
     {
         $query = $this->model->newQuery();

@@ -82,6 +82,7 @@ class LendReturnEquipmentController extends Controller
         $include = [
             'details',
             'details.equipments',
+            'details.typeOfEquipment',
             'user',
             'lender',
             'returner'
@@ -91,9 +92,7 @@ class LendReturnEquipmentController extends Controller
 
         $data = $this->service->getLendReturnByDay($input, $include);
 
-        $table_view = view('lendreturn/table_view', compact('data'))->render();
-
-        return response()->json(['succes' => true, 'table_view' => $table_view]);
+        return view('lendreturn/index', compact('data'));
     }
 
     /**
@@ -147,5 +146,22 @@ class LendReturnEquipmentController extends Controller
     public function delete($id)
     {
         $this->service->delete($id);
+    }
+
+    public function printView($id)
+    {
+        $include = [
+            'details',
+            'details.equipments',
+            'details.typeOfEquipment',
+            'user',
+            'lender',
+            'returner',
+            'class',
+            'course',
+            'details.courseDetails'
+        ];
+        $lendReturn = $this->service->details($include, $id);
+        return view('lendreturn/print')->with(compact('lendReturn'));
     }
 }

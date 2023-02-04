@@ -4,6 +4,7 @@ namespace App\Models\LendReturnEquipments;
 
 use App\Helpers;
 use App\Models\BaseModel;
+use App\Models\Courses\CoursesDetails;
 use App\Models\Equipments\Equipment;
 use App\Models\TypeOfEquipments\TypeOfEquipment;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -28,6 +29,7 @@ class LendReturnEquipmentDetails extends BaseModel
         'equipment_status_id',
         'recoup_id',
         'type_of_equipment_id',
+        'course_details_id',
     ];
 
     public function equipments() : BelongsToMany
@@ -50,5 +52,10 @@ class LendReturnEquipmentDetails extends BaseModel
     public function typeOfEquipment() : BelongsTo
     {
         return $this->BelongsTo(TypeOfEquipment::class, 'type_of_equipment_id', 'id');
+    }
+
+    public function courseDetails() : BelongsTo
+    {
+        return $this->BelongsTo(CoursesDetails::class, 'course_details_id', 'id');
     }
 }

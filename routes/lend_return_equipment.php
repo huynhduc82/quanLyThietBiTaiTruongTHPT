@@ -32,7 +32,7 @@ Route::group([
     ]);
     Route::get('/by/day',[
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@getLendReturnByDay'
-    ]);
+    ])->name('lend_return.get-by-day');
     Route::post('/{id}',[
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@edit'
     ]);

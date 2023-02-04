@@ -67,7 +67,7 @@
                             </div>
                             <div class="form-group px-4 col-6">
                                 <label class="col-form-label">Thời Gian Trả Dự Kiến </label>
-                                <input type="date" class="form-control" placeholder="Nhập Thời Gian Dự Kiến" id="returnAppointmentTime">
+                                <input type="datetime-local" class="form-control" placeholder="Nhập Thời Gian Dự Kiến" id="returnAppointmentTime">
                             </div>
                             <div class="form-group px-4 col-6" style="margin: auto 0px">
                                 <label style=" color: red" class="col-form-label" id="label-error"></label>
@@ -88,10 +88,10 @@
                             <h2>Danh sách thiết bị</h2>
                         </div>
                         <div class="px-4 py-2">
-                            <button type="button" class="btn bg-gradient-info">Thêm</button>
+                            <button type="button" class="btn bg-gradient-info" id="add" onclick="AddEquipment()">Thêm</button>
                             <button type="button" class="btn bg-gradient-info" id="autoAdd" onclick="autoAddEquipment()">Thêm nhanh</button>
-                            <button type="button" class="btn bg-gradient-info">Chọn từ danh sách</button>
-                            {{--                                <button type="button" class="btn bg-gradient-info">Thêm mới</button>--}}
+                            <button type="button" class="btn bg-gradient-info" id="changeQuantity" disabled="disabled" onclick="changeQuantity()">Thay đổi số lượng</button>
+                            <button type="button" class="btn bg-gradient-danger" id="deleteEquipment" disabled="disabled" onclick="deleteEquipment()">Xoá</button>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0 ">
@@ -99,11 +99,11 @@
                                     <thead>
                                     @if(!empty($data))
                                         <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-30">
+                                            <th class="w-5 p-0"></th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-30 ps-2">
                                                 Tên thiết bị
                                             </th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2
-                                     w-6">
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-6">
                                                 Số lượng
                                             </th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-9 text-wrap">
@@ -118,7 +118,6 @@
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-25">
                                                 Mô tả
                                             </th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-7 text-wrap"></th>
                                         </tr>
                                     @endif
                                     </thead>
@@ -143,8 +142,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+    <link href="https://cdn.datatables.net/select/1.5.0/css/select.dataTables.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/select/1.5.0/js/dataTables.select.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/table-to-json@1.0.0/lib/jquery.tabletojson.min.js" integrity="sha256-H8xrCe0tZFi/C2CgxkmiGksqVaxhW0PFcUKZJZo1yNU=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ asset('core/js/lend_return/lend_return_store.js')}}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         let win = navigator.platform.indexOf('Win') > -1;
@@ -201,6 +204,99 @@
             filterCourseDetail()
         })
 
+        async function getEquipmentByCourseID()
+        {
+            let id = Number($('#course').val());
+            let dataReturn = {}
+            await $.ajax({
+                url: '/' +
+                    'api/number-equipment/by-course-id/' + id ,
+                dataType: 'json',
+                enctype: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    for (let item of data['data'])
+                    {
+                        dataReturn[item.equipment.name] = item.equipment.name
+                    }
+                },
+                error: function (error) {
+                    $('#submit_error').text(error.responseJSON.message);
+                },
+                type: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            return dataReturn;
+        }
+
+        async function getNumberEquipmentByName(name)
+        {
+            let dataReturn = {}
+            await $.ajax({
+                url: '/' +
+                    'api/number-equipment/by-name/' + name ,
+                dataType: 'json',
+                enctype: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    dataReturn = data['data'];
+                },
+                error: function (error) {
+                    $('#submit_error').text(error.responseJSON.message);
+                },
+                type: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            return dataReturn
+        }
+
+        async function AddEquipment()
+        {
+            let classId = Number($('#class').val());
+            let classData = {!! json_encode($classData) !!};
+            let classDataFilter = classData.find(item => item.id === classId)
+            let number_of_pupils = classDataFilter.number_of_pupils;
+            const { value : name } = await Swal.fire({
+                title: 'Chọn thiết bị',
+                input: 'select',
+                inputOptions: await getEquipmentByCourseID(),
+                inputPlaceholder: 'Chọn thiết bị',
+                showCancelButton: true,
+                backdrop: false,
+                inputValidator: (value) => {
+                    return new Promise((resolve) => {
+                        resolve()
+                    })
+                }
+            })
+
+            if (name) {
+                await Swal.fire({
+                    backdrop: false,
+                    title: `Bạn đã chọn thiết bị: ${name}`
+                })
+                let newEquipment = await getNumberEquipmentByName(name)
+                newEquipment.equipment.quantity = number_of_pupils/newEquipment.equipment.quantity;
+                let ListEquipment = $("#listEquipment").DataTable().rows().data().toArray();
+                let data =  []
+                data.push(newEquipment.equipment)
+                for (let equipment of ListEquipment)
+                {
+                    data.push(equipment)
+                }
+
+                createDataTable(data)
+            }
+        }
+
         function autoAddEquipment()
         {
             let id = Number($('#courseDetails').val());
@@ -224,24 +320,7 @@
                         tableEquipment.push(item.equipment);
                     }
 
-                    $('#listEquipment').DataTable({
-                        columnDefs: [
-                            { targets: 0, className:  "ps-4"}
-                        ],
-                        destroy: true,
-                        paging: false,
-                        searching: false,
-                        info: false,
-                        data: tableEquipment,
-                        columns: [
-                            { data: 'name' },
-                            { data: 'quantity' },
-                            { data: 'quantity_can_rent' },
-                            { data: 'unit' },
-                            { data: 'price' },
-                            { data: 'describe' },
-                        ],
-                    });
+                    createDataTable(tableEquipment)
                 },
                 error: function (error) {
                     $('#submit_error').text(error.responseJSON.message);
@@ -253,6 +332,116 @@
             });
 
         }
+
+        async function changeQuantity()
+        {
+            const { value: quantity } = await Swal.fire({
+                title: 'Nhập số lượng thiết bị',
+                input: 'text',
+                inputLabel: 'Số lượng',
+                showCancelButton: true,
+                backdrop: false,
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to write something!'
+                    }
+                }
+            })
+
+            if (quantity) {
+                let listEquipment = $("#listEquipment");
+                let Equipment = listEquipment.DataTable().rows({ selected: true }).data().toArray();
+                let ListEquipment = listEquipment.DataTable().rows().data().toArray();
+                let name = Equipment[0].name;
+                let oldQuantity = Equipment[0].quantity;
+                await Swal.fire({
+                    backdrop: false,
+                    title: `Bạn đã thay đổi số lượng của thiết bị ${name}: ${oldQuantity} ==> ${quantity}`
+                })
+                Equipment[0].quantity = Number(quantity);
+
+                createDataTable(ListEquipment)
+            }
+        }
+
+        function createDataTable (data)
+        {
+            $('#listEquipment').DataTable({
+                columnDefs: [
+                    { targets: 0, className:  "ps-5 select-checkbox"},
+                ],
+                select: {
+                    style:    'os',
+                    selector: 'td:first-child'
+                },
+                order: [[ 1, 'asc' ]],
+                destroy: true,
+                paging: false,
+                searching: false,
+                info: false,
+                data: data,
+                columns: [
+                    {
+                        data: null,
+                        defaultContent: '',
+                        className: 'select-checkbox',
+                        orderable: false,
+                    },
+                    { data: 'name' },
+                    { data: 'quantity' },
+                    { data: 'quantity_can_rent' },
+                    { data: 'unit' },
+                    { data: 'price' },
+                    { data: 'describe' },
+                ],
+            });
+            $("#listEquipment tr").click(function() {
+                $('#changeQuantity').removeAttr("disabled")
+                $('#deleteEquipment').removeAttr("disabled")
+            });
+        }
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        let deleteEquipment = () => {
+            swalWithBootstrapButtons.fire({
+                title: 'Bạn có chắc không?',
+                text: "Bạn có thể thêm thiết bị này lại vào lúc sau!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Có, Hãy xoá đi!',
+                cancelButtonText: 'Không, Huỷ bỏ!',
+                reverseButtons: true,
+                backdrop: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let listEquipment = $("#listEquipment");
+                    let Equipment = listEquipment.DataTable().rows({ selected: true }).data().toArray();
+                    let ListEquipment = listEquipment.DataTable().rows().data().toArray();
+                    const result = ListEquipment.filter(removeDuplicate);
+                    function removeDuplicate(equipment) {
+                        return equipment.id !== Equipment[0].id;
+                    }
+                    createDataTable(result)
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire({
+                        title: 'Đã huỷ',
+                        text: 'Thiết bị của bạn đã an toàn :)',
+                        icon: 'error',
+                        backdrop: false,
+                    })
+                }
+            })
+        };
     </script>
     <!-- Github buttons -->
     <script async defer src="{{asset('https://buttons.github.io/buttons.js')}}"></script>

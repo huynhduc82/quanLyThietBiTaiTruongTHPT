@@ -3,6 +3,7 @@
 namespace App\Repositories\Eloquents\Classes;
 
 use App\Models\Class\Classes;
+use App\Models\Class\ClassTimeRegulations;
 use App\Repositories\BaseEloquentRepository;
 use App\Repositories\Contracts\Equipment\IEquipmentRepo;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,7 +15,7 @@ class ClassTimeRegulationRepo extends BaseEloquentRepository implements IEquipme
     public function model(): string
     {
         // TODO: Implement model() method.
-        return Classes::class;
+        return ClassTimeRegulations::class;
     }
 
     public function index(array $include = []): Collection

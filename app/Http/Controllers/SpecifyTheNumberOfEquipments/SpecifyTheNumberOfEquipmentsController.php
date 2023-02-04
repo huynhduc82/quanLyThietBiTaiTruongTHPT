@@ -62,6 +62,28 @@ class SpecifyTheNumberOfEquipmentsController extends Controller
         return $this->response($this->transform($result, SpecifyTheNumberOfEquipmentsTransformer::class, $include));
     }
 
+    public function getByName($name): JsonResponse
+    {
+        $include = [
+            'equipment',
+        ];
+
+        $result = $this->specifyTheNumberOfEquipmentsService->getByName($name, $include);
+
+        return $this->response($this->transform($result, SpecifyTheNumberOfEquipmentsTransformer::class, $include));
+    }
+
+    public function getByCourseId($id): JsonResponse
+    {
+        $include = [
+            'equipment',
+        ];
+
+        $result = $this->specifyTheNumberOfEquipmentsService->getByCourseId($id, $include);
+
+        return $this->response($this->transform($result, SpecifyTheNumberOfEquipmentsTransformer::class, $include));
+    }
+
     public function store(Request $request)
     {
         $input = $request::all();

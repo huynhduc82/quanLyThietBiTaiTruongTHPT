@@ -5,8 +5,8 @@ namespace App\Repositories\Eloquents\LendReturnEquipment;
 use App\Models\LendReturnEquipments\LendReturnEquipment;
 use App\Repositories\BaseEloquentRepository;
 use App\Repositories\Contracts\LendReturnEquipment\ILendReturnEquipmentRepo;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class LendReturnEquipmentRepo extends BaseEloquentRepository implements ILendReturnEquipmentRepo
@@ -17,14 +17,14 @@ class LendReturnEquipmentRepo extends BaseEloquentRepository implements ILendRet
         return LendReturnEquipment::class;
     }
 
-    public function index($include = []): Collection|array
+    public function index($include = []): LengthAwarePaginator
     {
         $query = $this->model->newQuery();
 
-        return $query->with($include)->orderBy('id')->get();
+        return $query->with($include)->orderBy('id')->paginate(10);
     }
 
-    public function getLendReturnByDay($input = [], $include = []): Collection|array
+    public function getLendReturnByDay($input = [], $include = []): LengthAwarePaginator
     {
         $query = $this->model->newQuery();
         if (!empty($input['day_from']) && !empty($input['day_to'])) {
@@ -46,7 +46,7 @@ class LendReturnEquipmentRepo extends BaseEloquentRepository implements ILendRet
             $query->whereIn('status', $statusForFilter);
         }
 
-        return $query->orderBy('id')->with($include)->get();
+        return $query->orderBy('id')->with($include)->paginate(10);
     }
 
     public function lend($input = []): Model|Builder

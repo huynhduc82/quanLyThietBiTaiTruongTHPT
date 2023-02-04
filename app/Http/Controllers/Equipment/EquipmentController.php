@@ -74,7 +74,7 @@ class EquipmentController extends Controller
     public function edit(Request $request, $id): JsonResponse
     {
         $input = $request::all();
-        
+
         $result = $this->equipmentService->edit($input, $id);
 
         return $this->response($result);
@@ -83,6 +83,20 @@ class EquipmentController extends Controller
     public function delete($id): JsonResponse
     {
         $result = $this->equipmentService->delete($id);
+
+        return $this->response($result);
+    }
+
+    public function getByRoomId($id): JsonResponse
+    {
+        $result = $this->equipmentService->getByRoomId($id);
+
+        return $this->response($this->transform($result, EquipmentTransformers::class, ));
+    }
+
+    public function getByName($name, $id)
+    {
+        $result = $this->equipmentService->getByName($name, $id);
 
         return $this->response($result);
     }

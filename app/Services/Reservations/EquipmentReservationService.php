@@ -2,11 +2,14 @@
 
 namespace App\Services\Reservations;
 
+use App\Helpers;
 use App\Models\EquipmentReservations\EquipmentReservation;
+use App\Models\Equipments\Equipment;
 use App\Repositories\Contracts\Reservations\IEquipmentReservationRepo;
 use App\Services\Equipment\EquipmentService;
 use App\Services\Response\BaseService;
 use App\Validators\Reservations\EquipmentReservationValidators;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Exception;
 use Prettus\Validator\Contracts\ValidatorInterface;
@@ -19,6 +22,16 @@ class EquipmentReservationService extends BaseService
         return IEquipmentReservationRepo::class;
     }
 
+    public function filter($input = [], $include = [])
+    {
+        if(!empty($input['day_from']) && !empty($input['day_to'])) {
+            $input['day_from'] = Carbon::createFromDate($input['day_from'])->toDateTimeString();
+            $input['day_to'] = Carbon::createFromDate($input['day_to'])->endOfDay()->toDateTimeString();
+        }
+
+        return $this->repository->filter($input, $include);
+    }
+
     public function index($include = [])
     {
         return $this->repository->index($include);
@@ -29,6 +42,21 @@ class EquipmentReservationService extends BaseService
         $this->validatorCreateUpdate($input);
         try {
 //            DB::beginTransaction();
+            $input['user_id'] = Helpers::getUserLoginId() ?? 14;
+            $list = [];
+            foreach ($input['equipment'] as $equip) {
+                $ids = [];
+                $temp = [];
+                $query = Equipment::query()->where('type_of_equipment_id', $equip['type_of_equipment_id'])
+                    ->where('can_rent', '=', true)->limit($equip['quantity'])->orderBy('id')->get();
+                $temp["type_of_equipment_id"] = $equip['type_of_equipment_id'];
+                foreach ($query as $equi) {
+                    $ids[] = $equi->id;
+                }
+                $temp["equipment_details"] = $ids;
+                $list[] = $temp;
+            }
+            $input['equipment'] = $list;
             $input['status'] = EquipmentReservation::STATUS_NEW;
             $result = $this->repository->store(Arr::only($input, EquipmentReservation::ATTRIBUTE));
 
@@ -78,6 +106,21 @@ class EquipmentReservationService extends BaseService
         }
 
         return $result;
+    }
+
+    public function cancel($id = 0)
+    {
+        return $this->repository->updateStatus(EquipmentReservation::STATUS_CANCEL, $id);
+    }
+
+    public function approved($id = 0)
+    {
+        return $this->repository->updateStatus(EquipmentReservation::STATUS_APPROVED, $id);
+    }
+
+    public function lend($id = 0)
+    {
+        return $this->repository->updateStatus(EquipmentReservation::STATUS_LEND, $id);
     }
 
     public function delete($id = 0)
