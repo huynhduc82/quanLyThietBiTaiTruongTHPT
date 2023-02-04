@@ -24,21 +24,20 @@ class MaintenanceDetails extends BaseModel
 
     protected $fillable = [
         'maintenance_id',
-        'type_of_equipment_id',
         'equipment_id',
     ];
 
-    public function equipments() : BelongsToMany
-    {
-        return $this->belongsToMany(
-            Equipment::class,
-            'equipment_maintenance_pivot',
-            'maintenance_id',
-            'equipment_id');
-    }
+//    public function equipments() : BelongsToMany
+//    {
+//        return $this->belongsToMany(
+//            Equipment::class,
+//            'equipment_maintenance_pivot',
+//            'maintenance_id',
+//            'equipment_id');
+//    }
 
-    public function typeOfEquipment() : BelongsTo
+    public function equipments() : BelongsTo
     {
-        return $this->BelongsTo(TypeOfEquipment::class, 'type_of_equipment_id', 'id');
+        return $this->BelongsTo(Equipment::class, 'equipment_id', 'id');
     }
 }

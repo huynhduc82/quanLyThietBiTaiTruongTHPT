@@ -33,7 +33,8 @@ class ClassTimeRegulationController extends Controller
 
     public function indexView(): Factory|View|Application
     {
-        return view('classtime/index');
+        $data = $this->classTimeRegulationService->index();
+        return view('classtime/index')->with(compact('data'));
     }
 
     public function index(): JsonResponse
