@@ -39,7 +39,7 @@ class Maintenance extends BaseModel
 
     public function details() : HasMany
     {
-        return $this->hasMany(MaintenanceDetails::class, 'equipment_reservation_id', 'id');
+        return $this->hasMany(MaintenanceDetails::class, 'maintenance_id', 'id');
     }
 
     public function user() : BelongsTo

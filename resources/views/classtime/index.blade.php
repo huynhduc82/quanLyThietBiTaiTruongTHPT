@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <div class="col-5">
-                            <a href="{{ route('class.store') }}" type="button" class="btn bg-gradient-info">Thêm
+                            <a href="{{ route('class.time.store') }}" type="button" class="btn bg-gradient-info">Thêm
                                 mới</a>
                             <button class="btn bg-gradient-info mx-2"
                                     onclick="importExcel('{{route('class.import.excel')}}')"
@@ -34,24 +34,66 @@
                         <div class="table-responsive p-0 ">
                             <table class="table mb-0 w-100">
                                 <thead>
-
                                     <tr class="d-flex">
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-4  w-30">
                                             Bài học
                                         </th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-30 text-wrap">
-
                                             Thời gian bắt đầu
                                         </th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-30">
                                             Thời gian kết thúc
                                         </th>
-
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-30">
+                                        </th>
                                     </tr>
-
                                 <tbody>
-
-
+                                <tbody>
+                                @foreach($data as $details)
+                                    <tr class="d-flex">
+                                        <td class="w-20 text-wrap">
+                                            <div class="d-flex px-4 py-1">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{$details->lesson}}</h6>
+                                                    <p class="text-xs text-secondary mb-0"></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="w-20 text-wrap">
+                                            <div class="d-flex px-4 py-1">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{$details->start}}</h6>
+                                                    <p class="text-xs text-secondary mb-0"></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="w-20 text-wrap">
+                                            <div class="d-flex px-4 py-1">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{$details->end}}</h6>
+                                                    <p class="text-xs text-secondary mb-0"></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="w-7">
+                                            <div class="d-block px-2 py-1">
+                                                <div class="d-flex justify-content-center">
+                                                    <a type="button"
+                                                       href="{{ route('equipment.edit', ['id' => $details->id]) }}"
+                                                       class="btn bg-gradient-info my-1 mb-1 ms-6">Sửa</a>
+                                                    <button type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1"
+                                                            onclick="DeleteConfirm('{{route('equipment.delete', ['id' => $details->id])}}')">
+                                                        Xoá
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>

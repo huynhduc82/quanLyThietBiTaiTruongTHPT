@@ -30,10 +30,10 @@ class MaintenanceController extends Controller
             'details',
             'details.equipments',
             'user',
-            'details.typeOfEquipment',
         ];
 
         $data = $this->maintenanceServices->index($include);
+        dd($data);
         return view('maintenance/index')->with(compact('data'));
     }
 
