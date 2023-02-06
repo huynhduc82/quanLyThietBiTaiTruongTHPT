@@ -35,21 +35,16 @@ Route::group([
     ])->name('equipment.index');
     Route::get('/store',[
         'uses' => 'Equipment\TypeOfEquipmentController@storeView'
-    ])->name('equipment.store');
+    ])->name('equipment.store')->middleware('auth');
     Route::get('/edit/{id}',[
         'uses' => 'Equipment\TypeOfEquipmentController@editView'
-    ])->name('equipment.edit');
-});
-
-Route::group([
-    'prefix' => '/equipment',
-], function (){
+    ])->name('equipment.edit')->middleware('auth');
     Route::get('/store-details/{id}',[
         'uses' => 'Equipment\EquipmentController@storeView'
-    ])->name('equipment_details.store');
+    ])->name('equipment_details.store')->middleware('auth');
     Route::get('/edit-details/{id}',[
         'uses' => 'Equipment\EquipmentController@editView'
-    ])->name('equipment_details.edit');
+    ])->name('equipment_details.edit')->middleware('auth');
 });
 
 Route::group([
@@ -57,7 +52,7 @@ Route::group([
 ], function (){
     Route::get('/index',[
         'uses' => 'Reservations\EquipmentReservationController@indexView'
-    ])->name('reservation.index')->middleware('auth');
+    ])->name('reservation.index');
     Route::get('/store',[
         'uses' => 'Reservations\EquipmentReservationController@storeView'
     ])->name('reservation.store')->middleware('auth');
@@ -89,19 +84,19 @@ Route::group([
     ])->name('lend_return.index');
     Route::get('/store',[
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@storeView'
-    ])->name('lend_return.store');
+    ])->name('lend_return.store')->middleware('auth');
     Route::get('/by/day',[
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@getLendReturnByDay'
     ]);
     Route::get('/return/view/{id}',[
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@returnView'
-    ])->name('lend_return.returnView');
+    ])->name('lend_return.returnView')->middleware('auth');
     Route::post('/return/{id}',[
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@return'
-    ])->name('lend_return.return');
+    ])->name('lend_return.return')->middleware('auth');
     Route::post('/', [
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@lend'
-    ]);
+    ])->middleware('auth');
     Route::get('/print/{id}', [
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@printView'
     ])->name('lend_return.print');
@@ -115,10 +110,10 @@ Route::group([
     ])->name('maintenance.index');
     Route::get('/store',[
         'uses' => 'Maintenance\MaintenanceController@storeView'
-    ])->name('maintenance.store');
+    ])->name('maintenance.store')->middleware('auth');
     Route::post('/',[
         'uses' => 'Maintenance\MaintenanceController@store'
-    ]);
+    ])->middleware('auth');
     Route::post('/start/{id}',[
         'uses' => 'Maintenance\MaintenanceController@startMaintenance'
     ])->name('maintenance.approved')->middleware('auth');
@@ -140,6 +135,64 @@ Route::group([
         return view('liquidation/index');
     })->name('liquidation.index');
 });
+
+Route::group([
+    'prefix' => '/liquidation',
+], function (){
+    Route::get('/index',[
+        'uses' => 'Reservations\EquipmentReservationController@indexView'
+    ])->name('reservation.index');
+    Route::get('/store',[
+        'uses' => 'Reservations\EquipmentReservationController@storeView'
+    ])->name('reservation.store')->middleware('auth');
+    Route::get('/filter',[
+        'uses' => 'Reservations\EquipmentReservationController@filter'
+    ])->name('reservation.filter')->middleware('auth');
+    Route::post('/',[
+        'uses' => 'Reservations\EquipmentReservationController@store'
+    ])->middleware('auth');
+    Route::post('/approved/{id}',[
+        'uses' => 'Reservations\EquipmentReservationController@approved'
+    ])->name('reservation.approved')->middleware('auth');
+    Route::post('/cancel/{id}',[
+        'uses' => 'Reservations\EquipmentReservationController@cancel'
+    ])->name('reservation.cancel')->middleware('auth');
+    Route::delete('/delete/{id}',[
+        'uses' => 'Reservations\EquipmentReservationController@delete'
+    ])->name('reservation.delete')->middleware('auth');
+    Route::post('/lend/{id}',[
+        'uses' => 'Reservations\EquipmentReservationController@lend'
+    ])->name('reservation.lend')->middleware('auth');
+});
+
+//Route::group([
+//    'prefix' => '/import',
+//], function (){
+//    Route::get('/index',[
+//        'uses' => 'Reservations\EquipmentReservationController@indexView'
+//    ])->name('reservation.index');
+//    Route::get('/store',[
+//        'uses' => 'Reservations\EquipmentReservationController@storeView'
+//    ])->name('reservation.store')->middleware('auth');
+//    Route::get('/filter',[
+//        'uses' => 'Reservations\EquipmentReservationController@filter'
+//    ])->name('reservation.filter')->middleware('auth');
+//    Route::post('/',[
+//        'uses' => 'Reservations\EquipmentReservationController@store'
+//    ])->middleware('auth');
+//    Route::post('/approved/{id}',[
+//        'uses' => 'Reservations\EquipmentReservationController@approved'
+//    ])->name('reservation.approved')->middleware('auth');
+//    Route::post('/cancel/{id}',[
+//        'uses' => 'Reservations\EquipmentReservationController@cancel'
+//    ])->name('reservation.cancel')->middleware('auth');
+//    Route::delete('/delete/{id}',[
+//        'uses' => 'Reservations\EquipmentReservationController@delete'
+//    ])->name('reservation.delete')->middleware('auth');
+//    Route::post('/lend/{id}',[
+//        'uses' => 'Reservations\EquipmentReservationController@lend'
+//    ])->name('reservation.lend')->middleware('auth');
+//});
 
 Route::group([
     'prefix' => '/class',
@@ -240,7 +293,7 @@ Route::group([
 ], function (){
     Route::get('/index',[
         'uses' => 'User\UserProfileController@indexView'
-    ])->name('profile.index');
+    ])->name('profile.index')->middleware('auth');
 });
 
 

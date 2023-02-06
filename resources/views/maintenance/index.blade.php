@@ -167,15 +167,14 @@
                                                                     Tên thiết bị
                                                                 </th>
                                                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
-                                                                    Tình trạng
-                                                                </th>
-                                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
                                                                     Chi tiết trình trạng
                                                                 </th>
                                                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
                                                                     Phòng
                                                                 </th>
-                                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20"></th>
+                                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
+                                                                    Số lần sửa chữa
+                                                                </th>
                                                             </tr>
                                                             </thead>
                                                         @endif
@@ -195,25 +194,25 @@
                                                                     <div class="d-flex px-4 py-1">
                                                                         <div
                                                                             class="d-flex flex-column justify-content-center">
-                                                                            {{--                                                                        <h6 class="mb-0 text-sm">{{$equipment->status->condition_details}}</h6>--}}
+                                                                            <h6 class="mb-0 text-sm">{{$details->equipments->status->condition_details}}</h6>
                                                                             <p class="text-xs text-secondary mb-0"></p>
                                                                         </div>
                                                                     </div>
                                                                 </td>
                                                                 <td class="w-20 text-wrap">
-                                                                    <div class="d-flex px-4 py-1">
-                                                                        <div
-                                                                            class="d-flex flex-column justify-content-center">
-                                                                            {{--                                                                        <h6 class="mb-0 text-sm">{{$equipment->can_rent != 1 ? 'Đang cho mượn' : 'Có thể mượn' }}</h6>--}}
-                                                                            <p class="text-xs text-secondary mb-0"></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td class="w-20 text-wrap">
-                                                                    <div class="d-flex px-4 py-1">
+                                                                    <div class="d-flex px-3 py-1">
                                                                         <div
                                                                             class="d-flex flex-column justify-content-center">
                                                                             <h6 class="mb-0 text-sm">{{$details->equipments->room->name}}</h6>
+                                                                            <p class="text-xs text-secondary mb-0"></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="w-20 text-wrap">
+                                                                    <div class="d-flex px-4 py-1">
+                                                                        <div
+                                                                            class="d-flex flex-column justify-content-center">
+                                                                            <h6 class="mb-0 text-sm">{{$details->equipments->status->number_of_repairs}}</h6>
                                                                             <p class="text-xs text-secondary mb-0"></p>
                                                                         </div>
                                                                     </div>

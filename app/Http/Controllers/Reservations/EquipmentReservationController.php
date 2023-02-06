@@ -84,7 +84,8 @@ class EquipmentReservationController extends Controller
     {
         $include = [
             'details',
-            'details.equipments'
+            'details.equipments',
+            'details.equipments.status'
         ];
 
         return $this->response($this->transform($this->equipmentReservationService->index($include),
