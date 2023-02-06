@@ -490,6 +490,16 @@
                                     })
                                 },
                                 error: function (error) {
+                                    swalWithBootstrapButtons.fire({
+                                        title: 'Lỗi!',
+                                        text: jQuery.parseJSON(error.responseText).message,
+                                        icon: 'error',
+                                        backdrop: false,
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload();
+                                        }
+                                    })
                                 },
                                 type: 'POST',
                                 headers: {

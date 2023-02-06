@@ -16,8 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Maintenance extends BaseModel
 {
     const STATUS_NEW = 1;
-    const STATUS_MAINTAINING = 2;
-    const STATUS_MAINTAINED = 3;
+    const STATUS_CANCEL = 2;
+    const STATUS_MAINTAINING = 3;
+    const STATUS_MAINTAINED = 4;
 
     const ATTRIBUTE = [
         'user_id',

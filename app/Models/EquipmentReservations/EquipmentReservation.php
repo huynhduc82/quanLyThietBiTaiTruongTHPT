@@ -25,6 +25,7 @@ class EquipmentReservation extends BaseModel
         'pick_up_time',
         'return_appointment_time',
         'status',
+        'course_details_id',
     ];
 
     use SoftDeletes;
@@ -36,6 +37,7 @@ class EquipmentReservation extends BaseModel
         'pick_up_time',
         'return_appointment_time',
         'status',
+        'course_details_id',
     ];
 
     public function details() : HasMany

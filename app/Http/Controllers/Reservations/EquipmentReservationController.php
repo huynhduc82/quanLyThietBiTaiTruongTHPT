@@ -144,9 +144,12 @@ class EquipmentReservationController extends Controller
     public function lend($id)
     {
         $result = app(LendReturnEquipmentService::class)->approved($id);
-
+        if($result == false)
+        {
+            return $this->response('Phiếu đặt trước này không có thiết bị','400');
+        }
         $this->equipmentReservationService->lend($id);
 
-        return $this->response($result);
+        return $result;
     }
 }

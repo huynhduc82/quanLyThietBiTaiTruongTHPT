@@ -29,11 +29,12 @@ class MaintenanceController extends Controller
         $include = [
             'details',
             'details.equipments',
+            'details.equipments.room',
             'user',
         ];
 
         $data = $this->maintenanceServices->index($include);
-        dd($data);
+
         return view('maintenance/index')->with(compact('data'));
     }
 
@@ -134,18 +135,16 @@ class MaintenanceController extends Controller
         return $this->response($result);
     }
 
-    public function approved($id)
+    public function startMaintenance($id)
     {
-        $result = $this->maintenanceServices->approved($id);
+        $result = $this->maintenanceServices->startMaintenance($id);
 
         return $this->response($result);
     }
 
-    public function lend($id)
+    public function endMaintenance($id)
     {
-        $result = app(LendReturnEquipmentService::class)->approved($id);
-
-        $this->maintenanceServices->lend($id);
+        $result = $this->maintenanceServices->endMaintenance($id);
 
         return $this->response($result);
     }
