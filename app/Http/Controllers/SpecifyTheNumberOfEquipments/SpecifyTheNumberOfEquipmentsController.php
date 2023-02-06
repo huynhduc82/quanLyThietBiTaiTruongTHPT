@@ -24,7 +24,7 @@ class SpecifyTheNumberOfEquipmentsController extends Controller
         ];
 
         $data = $this->specifyTheNumberOfEquipmentsService->index($include);
-//        dd($data->toArray());
+//      dd($data->toArray());
         return view('specifythenumberofequipment/index')->with(compact('data'));
     }
 

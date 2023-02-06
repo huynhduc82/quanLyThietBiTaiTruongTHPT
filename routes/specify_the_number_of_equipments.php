@@ -26,6 +26,9 @@ Route::group([
     Route::post('/cal-equipment', [
         'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@calEquipmentQuantity'
     ]);
+    Route::post('/import', [
+        'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@importCourseDetail'
+    ]);
     Route::delete('/{id}', [
         'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@delete'
     ]);

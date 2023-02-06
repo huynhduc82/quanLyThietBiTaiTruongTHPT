@@ -149,6 +149,9 @@ Route::group([
     Route::get('/edit', function () {
         return view('specifythenumberofequipment/edit');
     })->name('equipment.number.edit');
+    Route::post('/import', [
+        'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@importCourseDetail'
+    ])->name('number.import.excel');
 });
 
 Route::group([
@@ -163,6 +166,9 @@ Route::group([
     Route::get('/edit', [
         'uses' => 'Course\CourseController@editView'
     ])->name('course.edit');
+    Route::post('/import', [
+        'uses' => 'Course\CourseDetailController@importCourseDetail'
+    ])->name('course.import.excel');
 });
 
 Route::group([
@@ -177,6 +183,9 @@ Route::group([
     Route::get('/edit', [
         'uses' => 'Rooms\RoomController@editView'
     ])->name('room.edit');
+    Route::post('/import', [
+        'uses' => 'Rooms\RoomController@importCourseDetail'
+    ])->name('room.import.excel');
 });
 
 Route::group([
@@ -191,6 +200,9 @@ Route::group([
     Route::get('/edit', [
         'uses' => 'Grades\GradeController@editView'
     ])->name('grade.edit');
+    Route::post('/import', [
+        'uses' => 'Grades\GradeController@importCourseDetail'
+    ])->name('grade.import.excel');
 });
 
 Route::group([
