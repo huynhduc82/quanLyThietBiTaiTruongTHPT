@@ -96,23 +96,21 @@ class MaintenanceServices extends BaseService
 
     public function cancel($id = 0)
     {
-        return $this->repository->updateStatus(EquipmentReservation::STATUS_CANCEL, $id);
+        return $this->repository->updateStatus(Maintenance::STATUS_CANCEL, $id);
     }
 
-    public function approved($id = 0)
+    public function startMaintenance($id = 0)
     {
-        return $this->repository->updateStatus(EquipmentReservation::STATUS_APPROVED, $id);
+        return $this->repository->updateStatus(Maintenance::STATUS_MAINTAINING, $id);
     }
 
-    public function lend($id = 0)
+    public function endMaintenance($id = 0)
     {
-        return $this->repository->updateStatus(EquipmentReservation::STATUS_LEND, $id);
+        return $this->repository->updateStatus(Maintenance::STATUS_MAINTAINED, $id);
     }
 
     public function delete($id = 0)
     {
-        $model = EquipmentReservation::with('details')->find($id);
-        app(EquipmentReservationDetailService::class)->delete($model);
         return $this->repository->delete($id);
     }
 }

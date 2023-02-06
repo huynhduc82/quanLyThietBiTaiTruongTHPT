@@ -1,9 +1,11 @@
 let Room;
 let PickUpTime
 let ReturnAppointmentTime;
+let CourseDetail;
 let ListEquipment;
 
 let InputRoom = $("#room");
+let InputCourseDetail = $("#courseDetails");
 let InputReturnAppointmentTime = $("#returnAppointmentTime");
 let InputPickUpTime = $("#pickUpTime")
 
@@ -16,6 +18,7 @@ $(document).ready(function(){
         Room = InputRoom.val();
         ReturnAppointmentTime = InputReturnAppointmentTime.val();
         PickUpTime = InputPickUpTime.val();
+        CourseDetail = InputCourseDetail.val();
         // ListEquipment = $("#listEquipment").DataTable({
         //     destroy: true,
         //     paging: false,
@@ -35,6 +38,7 @@ $(document).ready(function(){
         $('#label-error').text('');
 
         data.pick_up_time = PickUpTime;
+        data.course_details_id = CourseDetail;
         data.room = Room;
         data.return_appointment_time = ReturnAppointmentTime;
         data.equipment = ListEquipmentId;

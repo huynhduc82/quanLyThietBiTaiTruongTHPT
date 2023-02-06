@@ -21,7 +21,7 @@ class LendReturnEquipmentRepo extends BaseEloquentRepository implements ILendRet
     {
         $query = $this->model->newQuery();
 
-        return $query->with($include)->orderBy('id')->paginate(10);
+        return $query->with($include)->orderBy('id','desc')->paginate(10);
     }
 
     public function getLendReturnByDay($input = [], $include = []): LengthAwarePaginator
@@ -46,7 +46,7 @@ class LendReturnEquipmentRepo extends BaseEloquentRepository implements ILendRet
             $query->whereIn('status', $statusForFilter);
         }
 
-        return $query->orderBy('id')->with($include)->paginate(10);
+        return $query->orderBy('id' ,'desc')->with($include)->paginate(10);
     }
 
     public function lend($input = []): Model|Builder

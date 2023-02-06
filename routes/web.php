@@ -19,6 +19,12 @@ Route::group([
     Route::get('/', function () {
         return view('dashboard/index');
     })->name('dashboard.index');
+    Route::get('/403', function () {
+        return view('layout/403');
+    })->name('403');
+    Route::get('/404', function () {
+        return view('layout/404');
+    });
 });
 
 Route::group([
@@ -112,7 +118,19 @@ Route::group([
     ])->name('maintenance.store');
     Route::post('/',[
         'uses' => 'Maintenance\MaintenanceController@store'
-    ])->name('maintenance.store');
+    ]);
+    Route::post('/start/{id}',[
+        'uses' => 'Maintenance\MaintenanceController@startMaintenance'
+    ])->name('maintenance.approved')->middleware('auth');
+    Route::post('/cancel/{id}',[
+        'uses' => 'Maintenance\MaintenanceController@cancel'
+    ])->name('maintenance.cancel')->middleware('auth');
+    Route::delete('/delete/{id}',[
+        'uses' => 'Maintenance\MaintenanceController@delete'
+    ])->name('maintenance.delete')->middleware('auth');
+    Route::post('/end/{id}',[
+        'uses' => 'Maintenance\MaintenanceController@endMaintenance'
+    ])->name('maintenance.lend')->middleware('auth');
 });
 
 Route::group([
