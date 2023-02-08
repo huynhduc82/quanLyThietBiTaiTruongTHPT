@@ -4,6 +4,7 @@ namespace App\Services\Equipment;
 
 use App\Helpers;
 use App\Models\EquipmentStatus\EquipmentStatus;
+use App\Models\TypeOfEquipments\TypeOfEquipment;
 use App\Repositories\Contracts\Equipment\IEquipmentRepo;
 use App\Services\EquipmentStatus\EquipmentStatusServices;
 use App\Services\Response\BaseService;
@@ -81,6 +82,28 @@ class EquipmentService extends BaseService
         }
     }
 
+    public function updateEquipmentRentQuantity($input = [], $rent = true)
+    {
+        $param = [];
+        $ids = [];
+        foreach ($input as $item)
+        {
+            dd($item);
+            $ids[] = $item['id'];
+        }
+        $this->repository->updateRentQuantity(Arr::flatten($param), $rent);
+        app(TypeOfEquipmentService::class)->updateAllQuantity();
+    }
+
+    public function updateEquipmentStatus($input = [], $rent = true)
+    {
+        foreach ($input as $item)
+        {
+            $equipment = $this->repository->updateRentStatus($item, $rent);
+            app(TypeOfEquipmentService::class)->updateQuantity($equipment->type->id);
+        }
+    }
+
     public function delete($id): int
     {
         return $this->repository->delete($id);
@@ -98,8 +121,13 @@ class EquipmentService extends BaseService
         return $this->repository->getByRoomId($id, $include);
     }
 
-    public function getByName($name = 0, $id = 0)
+    public function getById($id = 0, $include = [])
     {
-        return $this->repository->getByName($name, $id);
+        return $this->repository->details($id, $include);
+    }
+
+    public function getByName($name = 0, $id = 0, $include)
+    {
+        return $this->repository->getByName($name, $id, $include);
     }
 }

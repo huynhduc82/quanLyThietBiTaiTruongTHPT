@@ -6,6 +6,9 @@ use App\Models\BaseModel;
 use App\Models\EquipmentReservations\EquipmentReservationDetails;
 use App\Models\EquipmentStatus\EquipmentStatus;
 use App\Models\Rooms\Room;
+use App\Models\TypeOfEquipments\TypeOfEquipment;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -48,5 +51,10 @@ class Equipment extends BaseModel
         return $this->belongsToMany(
             EquipmentReservationDetails::class
         );
+    }
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(TypeOfEquipment::class, 'type_of_equipment_id', 'id');
     }
 }

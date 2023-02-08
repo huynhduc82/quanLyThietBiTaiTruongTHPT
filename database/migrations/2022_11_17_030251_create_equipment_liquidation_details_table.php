@@ -16,8 +16,7 @@ return new class extends Migration
         Schema::create('equipment_liquidation_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('equipment_liquidation_id');
-            $table->bigInteger('type_of_equipment_id');
-            $table->bigInteger('quantity')->unsigned();
+            $table->bigInteger('equipment_id');
             $table->string('liquidation_reason');
             $table->string('liquidation_method');
             $table->bigInteger('created_by')->nullable()->unsigned();

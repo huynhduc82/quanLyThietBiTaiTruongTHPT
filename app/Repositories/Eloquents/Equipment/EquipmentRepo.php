@@ -62,6 +62,14 @@ class EquipmentRepo extends BaseEloquentRepository implements IEquipmentRepo
         $query->update(['can_rent' => !$rent]);
     }
 
+    public function updateRentStatus($id, $rent)
+    {
+        $model = $this->model->newQuery()->where('id', '=', $id)->first();
+        $model->can_rent = $rent;
+        $model->save();
+        return $model;
+    }
+
     public function delete($id): int
     {
         $this->model->newQuery()->where('id', $id)->first()->status()->delete();
@@ -76,13 +84,13 @@ class EquipmentRepo extends BaseEloquentRepository implements IEquipmentRepo
         return $query->with($include)->get();
     }
 
-    public function getByName($name, $id): Model
+    public function getByName($name, $id, $include = []): Model
     {
         $query = $this->model->newQuery()
             ->where('name', 'like', '%' . $name . '%')
             ->where('room_id', '=', $id)
         ;
 
-        return $query->first();
+        return $query->with($include)->first();
     }
 }

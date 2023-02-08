@@ -17,6 +17,9 @@ Route::group([
     Route::get('/by-room-id/{id}',[
         'uses' => 'Equipment\EquipmentController@getByRoomId'
     ]);
+    Route::get('/by-id/{id}',[
+        'uses' => 'Equipment\EquipmentController@getById'
+    ]);
     Route::post('/', [
         'uses' => 'Equipment\EquipmentController@store'
     ]);

@@ -7,265 +7,263 @@
 @section('content')
     <div class="container-fluid py-4">
         <div class="row">
-            <form role="form text-left" class="w-70" >
-                <p>QUẢN LÝ THANH LÝ</p>
-                <div class="mb-3">
-                    <p>Mã Thiết bị</p>
-                    <input type="text" class="form-control" placeholder="Mã Thiết bị" aria-label="Mã Thiết bị" >
-                </div>
-
-                <div class="mb-3">
-                    <p>Tên thiết bị</p>
-                    <input type="" class="form-control" placeholder="Tên thiết bị" aria-label="Tên thiết bị" >
-                </div>
-                <div class="mb-3">
-                    <p>Nhà sản xuất</p>
-                    <input type="text" class="form-control" placeholder="Nhà sản xuất" aria-label="Nhà sản xuất" >
-                </div>
-                <div class="mb-3">
-                    <p>Ngày nhập</p>
-                    <input type="date" class="form-control" placeholder="Ngày nhập" aria-label="Ngày nhập" >
-                </div>
-                <div class="mb-3">
-                    <p>Hạn sử dụng</p>
-                    <input type="date" class="form-control" placeholder="Hạn sử dụng" aria-label="Hạn sử dụng" >
-                </div>
-                <div class="mb-3">
-                    <p>Mã loại</p>
-                    <input type="text" class="form-control" placeholder="Mã loại" aria-label="Mã loại" >
-                </div>
-                <div class="mb-3">
-                    <p>Số lượng thiết bị</p>
-                    <input type="number" class="form-control" placeholder="Số lượng thiết bị" aria-label="Số lượng thiết bị" >
-                </div>
-                <div class="mb-3">
-                    <p>Hình</p>
-                    <input type="image" class="form-control" placeholder="Số lượng thiết bị" aria-label="Số lượng thiết bị" >
-                </div>
-                <div class="text-center">
-                    <button type="button" class="btn bg-gradient-info w-10 my-4 mb-2">Thêm</button>
-                    <button type="button" class="btn bg-gradient-info w-10 my-4 mb-2">Sửa</button>
-                    <button type="button" class="btn bg-gradient-info w-10 my-4 mb-2">Xóa</button>
-                </div>
-            </form>
-
-        </div>
-        <div class="col-12">
-
-            <div class="card mb-4">
-                <div class="card-header pb-0">
-                    <h6>Danh sách thanh lý</h6>
-                </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                            <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-20">Tên và hình ảnh</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-20 ps-2">Khối</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-20 ps-2">Môn học</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-20 ps-2">NXS</th>
-
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tình trạng</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hạn sử dụng</th>
-                                <th class="text-secondary opacity-7"></th>
-                            </tr>
-                            </thead>
-                            <tr>
-                                <td>
-
-                                </td>
-                                <td class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-20 ps-2" style="text-align: end;">
-                                    <button class="btn btn-link text-secondary mb-0">
-                                        <i class="fa fa-ellipsis-v text-xs"> Xem chi tiết</i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </table>
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header pb-0">
+                        <h2>Thanh lý thiết bị</h2>
                     </div>
+                    <div class="row px-4 py-2">
+                        <div class="col-5">
+                            <div class="input-group">
+                                <span class="input-group-text text-body"><i class="fas fa-search z-index-0"
+                                                                            aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <a href="{{ route('liquidation.store') }}" type="button" class="btn bg-gradient-info">Thanh lý thiết bị</a>
+                        </div>
+                    </div>
+                    <div class="px-4 py-0 w-60">
+                        <form id="frm-filter" action="{{ route('reservation.filter') }}" method="GET">
+                            <div class="border border-info rounded p-2 pb-3 row">
+                                <div class="col-3">
+                                    <label class="col-form-label" for="day_from">Từ ngày</label>
+                                    <label for="day_from"></label><input type="date" class="form-control" name="day_from" id="day_from">
+                                </div>
+                                <div class="col-3">
+                                    <label class="col-form-label" for="day_to">Tới ngày</label>
+                                    <input type="date" class="form-control" name="day_to" id="day_to">
+                                </div>
+                                <div class="col-3" style="margin: auto 0">
+                                    <div class="form-switch">
+                                        <input class="form-check-input" type="checkbox" id="chkNew" name="new">
+                                        <label class="col-form-label p-0" for="flexSwitchCheckDefault">Mới</label>
+                                    </div>
+                                    <div class="form-switch">
+                                        <input class="form-check-input" type="checkbox" id="chkCancel" name="cancel">
+                                        <label class="col-form-label p-0" for="flexSwitchCheckDefault">Đã Huỷ</label>
+                                    </div>
+                                    <div class="form-switch">
+                                        <input class="form-check-input" type="checkbox" id="chkApproved" name="approved">
+                                        <label class="col-form-label p-0" for="flexSwitchCheckDefault">Đã duyệt</label>
+                                    </div>
+                                </div>
+                                <div class="col-1" style="margin: auto 0">
+                                    <button type="submit" class="btn bg-gradient-info mb-0">Lọc</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive p-0 ">
+                            <table class="table mb-0 w-100" id="equipment-table">
+                                <thead>
+                                @if(!empty($data))
+                                    <tr class="d-block">
+                                        <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-15 px-3 py-2 pt-3">
+                                            Người yêu cầu thanh lý
+                                        </th>
+                                        <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-10 p-2 pt-3">
+                                            Thời gian yêu cầu thanh lý
+                                        </th>
+                                        <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-15 p-2 pt-3">
+                                            Người duyệt thanh lý
+                                        </th>
+                                        <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-10 p-2 pt-3">
+                                            Thời gian duyệt thanh lý
+                                        </th>
+                                        <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-10 p-2 pt-3">
+                                            Trạng thái
+                                        </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-15 pt-3">
+                                        </th>
+                                    </tr>
+                                @endif
+                                </thead>
+                                <tbody>
+                                @if(!empty($data))
+                                    @foreach($data as $item)
+                                        <tr class="d-block">
+                                            <td class="text-wrap accordion-toggle w-15" data-bs-toggle="collapse"
+                                                data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
+                                                <div class="d-block">
+                                                    <div class="d-block flex-column justify-content-center text-center">
+                                                        <h6 class="mb-0 text-sm">{{$item->user ? $item->user->name : ''}}</h6>
+                                                        <p class="text-xs text-secondary mb-0"></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="accordion-toggle w-10" data-bs-toggle="collapse"
+                                                data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
+                                                <div class="d-block">
+                                                    <div class="d-flex flex-column justify-content-center text-center">
+                                                        <h6 class="mb-0 text-sm">{{$item->created_at}}</h6>
+                                                        <p class="text-xs text-secondary mb-0"></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="accordion-toggle w-15" data-bs-toggle="collapse"
+                                                data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
+                                                <div class="d-block">
+                                                    <div class="d-block flex-column justify-content-center text-center">
+                                                        <h6 class="mb-0 text-sm">{{$item->approved ? $item->approved->name : 'Chưa duyệt'}}</h6>
+                                                        <p class="text-xs text-secondary mb-0"></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="accordion-toggle w-10" data-bs-toggle="collapse"
+                                                data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
+                                                <div class="d-block">
+                                                    <div class="d-flex justify-content-center text-center">
+                                                        <h6 class="mb-0 text-sm">{{$item->approved_time ?? 'Chưa duyệt'}}</h6>
+                                                        <p class="text-xs text-secondary mb-0"></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="accordion-toggle w-10" data-bs-toggle="collapse"
+                                                data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
+                                                <div class="d-block">
+                                                    <div class="d-flex justify-content-center">
+                                                        <h6 class="mb-0 text-sm"> @if($item->status == 1) Mới @else @if($item->status == 2) Đã Huỷ @else @if($item->status == 4) Đã thanh lý xong @else Đã duyệt @endif @endif @endif </h6>
+                                                        <p class="text-xs text-secondary mb-0"></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="w-15">
+                                                <div class="d-block">
+                                                    <div class="d-flex justify-content-center">
+                                                        @if($item->status == 1)
+                                                            <button  class="btn bg-gradient-danger my-1 mb-1 ms-1" onclick="ApprovedConfirm({{$item->id}})">
+                                                                Duyệt
+                                                            </button>
+                                                            <button class="btn bg-gradient-danger my-1 mb-1 ms-1" onclick="CancelConfirm({{$item->id}})">
+                                                                Huỷ
+                                                            </button>
+                                                        @else
+                                                            @if($item->status == 3)
+                                                                <button type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1" onclick="SuccessConfirm({{$item->id}})">
+                                                                    Hoàn thành
+                                                                </button>
+                                                            @else
+                                                                <button type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1" onclick="DeleteConfirm({{$item->id}})">
+                                                                    Xoá
+                                                                </button>
+                                                            @endif
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="12" class="hiddenRow">
+                                                <div class="accordion-body collapse" id="demo{{ $item->id }}"
+                                                     style="height: 0" aria-expanded="false">
+                                                    <table class="table mb-0">
+                                                        @if(!empty($item->details[0]))
+                                                            <thead>
+                                                            <tr class="d-flex px-4">
+                                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
+                                                                    Tên thiết bị
+                                                                </th>
+                                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
+                                                                    Lý do thanh lý
+                                                                </th>
+                                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
+                                                                    Phương cách thanh lý
+                                                                </th>
+                                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
+                                                                    Phòng
+                                                                </th>
+                                                            </tr>
+                                                            </thead>
+                                                        @endif
+                                                        <tbody>
+                                                        @foreach($item->details as $details)
+                                                            <tr class="d-flex px-3">
+                                                                <td class="w-20 text-wrap">
+                                                                    <div class="d-flex px-4 py-1">
+                                                                        <div
+                                                                            class="d-flex flex-column justify-content-center">
+                                                                            <h6 class="mb-0 text-sm">{{$details->equipments ? $details->equipments->name : ''}}</h6>
+                                                                            <p class="text-xs text-secondary mb-0"></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="w-20 text-wrap">
+                                                                    <div class="d-flex px-4 py-1">
+                                                                        <div
+                                                                            class="d-flex flex-column justify-content-center">
+                                                                            <h6 class="mb-0 text-sm">{{$details->liquidation_reason}}</h6>
+                                                                            <p class="text-xs text-secondary mb-0"></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="w-20 text-wrap">
+                                                                    <div class="d-flex px-3 py-1">
+                                                                        <div
+                                                                            class="d-flex flex-column justify-content-center">
+                                                                            <h6 class="mb-0 text-sm">{{$details->liquidation_method}}</h6>
+                                                                            <p class="text-xs text-secondary mb-0"></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="w-20 text-wrap">
+                                                                    <div class="d-flex px-2 py-1">
+                                                                        <div
+                                                                            class="d-flex flex-column justify-content-center">
+                                                                            <h6 class="mb-0 text-sm">{{$details->equipments->room ? $details->equipments->room->name : ''}}</h6>
+                                                                            <p class="text-xs text-secondary mb-0"></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {{--                    {!! $data->links('layout.paginate') !!}--}}
                 </div>
             </div>
         </div>
-        @endsection
+        <footer class="footer pt-3  ">
+            <div class="container-fluid">
+                <div class="row align-items-center justify-content-lg-between">
+                    <div class="col-lg-6 mb-lg-0 mb-4">
+                    </div>
+                    <div class="col-lg-6">
+                        <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                            <li class="nav-item">
+                                <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Giới
+                                    thiệu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://www.facebook.com/huynhphat9286" class="nav-link pe-0 text-muted"
+                                   target="_blank">Liên hệ</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    @endsection
 
-        @section('footer_scripts')
-
-            <!--   Core JS Files   -->
-            <script src="{{ asset('assets/js/core/popper.min.js')}}"></script>
+    @section('footer_scripts')
+        <!--   Core JS Files   -->
+            <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
             <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
-            <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
-            <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
-            <script src="{{ asset('assets/js/plugins/chartjs.min.js')}}"></script>
-            <script>
-                var ctx = document.getElementById("chart-bars").getContext("2d");
-
-                new Chart(ctx, {
-                    type: "bar",
-                    data: {
-                        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                        datasets: [{
-                            label: "Sales",
-                            tension: 0.4,
-                            borderWidth: 0,
-                            borderRadius: 4,
-                            borderSkipped: false,
-                            backgroundColor: "#fff",
-                            data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-                            maxBarThickness: 6
-                        }, ],
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false,
-                            }
-                        },
-                        interaction: {
-                            intersect: false,
-                            mode: 'index',
-                        },
-                        scales: {
-                            y: {
-                                grid: {
-                                    drawBorder: false,
-                                    display: false,
-                                    drawOnChartArea: false,
-                                    drawTicks: false,
-                                },
-                                ticks: {
-                                    suggestedMin: 0,
-                                    suggestedMax: 500,
-                                    beginAtZero: true,
-                                    padding: 15,
-                                    font: {
-                                        size: 14,
-                                        family: "Open Sans",
-                                        style: 'normal',
-                                        lineHeight: 2
-                                    },
-                                    color: "#fff"
-                                },
-                            },
-                            x: {
-                                grid: {
-                                    drawBorder: false,
-                                    display: false,
-                                    drawOnChartArea: false,
-                                    drawTicks: false
-                                },
-                                ticks: {
-                                    display: false
-                                },
-                            },
-                        },
-                    },
-                });
-
-
-                var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-                var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-                gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-                gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-                gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-
-                var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-                gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-                gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-                gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
-
-                new Chart(ctx2, {
-                    type: "line",
-                    data: {
-                        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                        datasets: [{
-                            label: "Mobile apps",
-                            tension: 0.4,
-                            borderWidth: 0,
-                            pointRadius: 0,
-                            borderColor: "#cb0c9f",
-                            borderWidth: 3,
-                            backgroundColor: gradientStroke1,
-                            fill: true,
-                            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-                            maxBarThickness: 6
-
-                        },
-                            {
-                                label: "Websites",
-                                tension: 0.4,
-                                borderWidth: 0,
-                                pointRadius: 0,
-                                borderColor: "#3A416F",
-                                borderWidth: 3,
-                                backgroundColor: gradientStroke2,
-                                fill: true,
-                                data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-                                maxBarThickness: 6
-                            },
-                        ],
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false,
-                            }
-                        },
-                        interaction: {
-                            intersect: false,
-                            mode: 'index',
-                        },
-                        scales: {
-                            y: {
-                                grid: {
-                                    drawBorder: false,
-                                    display: true,
-                                    drawOnChartArea: true,
-                                    drawTicks: false,
-                                    borderDash: [5, 5]
-                                },
-                                ticks: {
-                                    display: true,
-                                    padding: 10,
-                                    color: '#b2b9bf',
-                                    font: {
-                                        size: 11,
-                                        family: "Open Sans",
-                                        style: 'normal',
-                                        lineHeight: 2
-                                    },
-                                }
-                            },
-                            x: {
-                                grid: {
-                                    drawBorder: false,
-                                    display: false,
-                                    drawOnChartArea: false,
-                                    drawTicks: false,
-                                    borderDash: [5, 5]
-                                },
-                                ticks: {
-                                    display: true,
-                                    color: '#b2b9bf',
-                                    padding: 20,
-                                    font: {
-                                        size: 11,
-                                        family: "Open Sans",
-                                        style: 'normal',
-                                        lineHeight: 2
-                                    },
-                                }
-                            },
-                        },
-                    },
-                });
-            </script>
+            <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+            <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script>
                 var win = navigator.platform.indexOf('Win') > -1;
                 if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -275,6 +273,251 @@
                     Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
                 }
             </script>
-            <!-- Github buttons -->
-            <script async defer src="{{asset('https://buttons.github.io/buttons.js')}}"></script>
+            <script>
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                })
+
+                let DeleteConfirm = (id) => {
+                    let url = '/liquidation/delete/' + id
+                    swalWithBootstrapButtons.fire({
+                        title: 'Bạn có chắc không?',
+                        text: "Bạn không thể khôi phục lại phiếu thanh lý đã xoá!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Có, Hãy xoá đi!',
+                        cancelButtonText: 'Không, Huỷ bỏ!',
+                        reverseButtons: true,
+                        backdrop: false,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: url,
+                                // dataType: 'json',
+                                enctype: "multipart/form-data",
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                success: function () {
+                                    swalWithBootstrapButtons.fire({
+                                        title: 'Đã xoá!',
+                                        text: "Bạn đã xoá thành công phiếu thanh lý",
+                                        icon: 'success',
+                                        backdrop: false,
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload();
+                                        }
+                                    })
+                                },
+                                error: function (error) {
+                                },
+                                type: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            })
+
+                        } else if (
+                            /* Read more about handling dismissals below */
+                            result.dismiss === Swal.DismissReason.cancel
+                        ) {
+                            swalWithBootstrapButtons.fire({
+                                title: 'Đã huỷ',
+                                text: 'Phiếu thanh lý của bạn đã an toàn :)',
+                                icon: 'error',
+                                backdrop: false,
+                            })
+                        }
+                    })
+                };
+
+                let CancelConfirm = (id) => {
+                    let url = '/liquidation/cancel/' + id
+                    swalWithBootstrapButtons.fire({
+                        title: 'Bạn có chắc không?',
+                        text: "Bạn chắc chắn muốn huỷ phiếu thanh lý này?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Có, Hãy huỷ đi!',
+                        cancelButtonText: 'Không, Huỷ bỏ!',
+                        reverseButtons: true,
+                        backdrop: false,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: url,
+                                // dataType: 'json',
+                                enctype: "multipart/form-data",
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                success: function () {
+                                    swalWithBootstrapButtons.fire({
+                                        title: 'Đã huỷ!',
+                                        text: "Bạn đã huỷ thành công phiếu thanh lý",
+                                        icon: 'success',
+                                        backdrop: false,
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload();
+                                        }
+                                    })
+                                },
+                                error: function (error) {
+                                },
+                                type: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            })
+
+                        } else if (
+                            /* Read more about handling dismissals below */
+                            result.dismiss === Swal.DismissReason.cancel
+                        ) {
+                            swalWithBootstrapButtons.fire({
+                                title: 'Đã huỷ',
+                                text: 'Phiếu thanh lý của bạn đã an toàn :)',
+                                icon: 'error',
+                                backdrop: false,
+                            })
+                        }
+                    })
+                };
+
+                let ApprovedConfirm = (id) => {
+                    let url = '/liquidation/approved/' + id
+                    swalWithBootstrapButtons.fire({
+                        title: 'Bạn có chắc không?',
+                        text: "Bạn có chắc là muốn duyệt phiếu thanh lý thiết bị này không?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Có, Tôi muốn duyệt!',
+                        cancelButtonText: 'Không, Huỷ bỏ!',
+                        reverseButtons: true,
+                        backdrop: false,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: url,
+                                // dataType: 'json',
+                                enctype: "multipart/form-data",
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                success: function () {
+                                    swalWithBootstrapButtons.fire({
+                                        title: 'Đã đồng ý!',
+                                        text: "Bạn đã duyệt phiếu thanh lý này này",
+                                        icon: 'success',
+                                        backdrop: false,
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload();
+                                        }
+                                    })
+                                },
+                                error: function (error) {
+                                },
+                                type: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            })
+
+                        } else if (
+                            /* Read more about handling dismissals below */
+                            result.dismiss === Swal.DismissReason.cancel
+                        ) {
+                            swalWithBootstrapButtons.fire({
+                                title: 'Đã huỷ',
+                                text: 'Bạn chưa duyệt phiếu thanh lý này!',
+                                icon: 'error',
+                                backdrop: false,
+                            })
+                        }
+                    })
+                };
+
+                let SuccessConfirm = (id) => {
+                    let url = '/liquidation/success/' + id
+                    swalWithBootstrapButtons.fire({
+                        title: 'Bạn có chắc không?',
+                        text: "Bạn có chắc là muốn hoàn thành phiếu thanh lý thiết bị này không?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Có, Tôi muốn duyệt!',
+                        cancelButtonText: 'Không, Huỷ bỏ!',
+                        reverseButtons: true,
+                        backdrop: false,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: url,
+                                // dataType: 'json',
+                                enctype: "multipart/form-data",
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                success: function () {
+                                    swalWithBootstrapButtons.fire({
+                                        title: 'Đã đồng ý!',
+                                        text: "Bạn đã hoàn thành phiếu thanh lý này này",
+                                        icon: 'success',
+                                        backdrop: false,
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload();
+                                        }
+                                    })
+                                },
+                                error: function (error) {
+                                },
+                                type: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            })
+
+                        } else if (
+                            /* Read more about handling dismissals below */
+                            result.dismiss === Swal.DismissReason.cancel
+                        ) {
+                            swalWithBootstrapButtons.fire({
+                                title: 'Đã huỷ',
+                                text: 'Bạn chưa hoàn thành phiếu thanh lý này!',
+                                icon: 'error',
+                                backdrop: false,
+                            })
+                        }
+                    })
+                };
+            </script>
+            </script>
+            <script>
+                $(document).ready(function () {
+                    let urlToCheck = document.URL.toString();
+                    let urlNew = urlToCheck.includes("new");
+                    let cancel = urlToCheck.includes("cancel");
+                    let approved = urlToCheck.includes("approved");
+                    if (urlNew){
+                        $('#chkNew').prop('checked', true);
+                    }
+                    if (cancel){
+                        $('#chkCancel').prop('checked', true);
+                    }
+                    if (approved){
+                        $('#chkApproved').prop('checked', true);
+                    }
+                })
+            </script>
+            <script>
+                document.getElementById('title-first').innerText = 'Mượn trả'
+                document.getElementById('title-second').innerText = 'Danh sách mượn trả'
+            </script>
 @endsection
