@@ -30,8 +30,13 @@
                                         <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
                                         <label class="form-check-label" for="rememberMe">Ghi nhớ </label>
                                     </div>
+                                    @if(\Session::has('loginError'))
+                                        <div>
+                                            <label id="label-eror" class="text-danger">{{ Session::get('loginError') }}</label>
+                                        </div>
+                                    @endif
                                     <div class="text-center">
-                                        <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Đăng nhập</button>
+                                        <button type="submit" class="btn bg-gradient-info w-100 mb-0">Đăng nhập</button>
                                     </div>
                                 </form>
                             </div>
@@ -52,7 +57,7 @@
             </div>
         </div>
     </section>
-<!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
+
 <footer class="footer py-5">
     <div class="container">
         <div class="row">
@@ -77,8 +82,7 @@
     </div>
 </footer>
 @endsection
-<!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-<!--   Core JS Files   -->
+
 @section('footer_scripts')
 <script type="text/javascript" src="{{ asset('core/common.js')}}"></script>
 <script type="text/javascript" src="{{ asset('core/js/signin.js')}}"></script>

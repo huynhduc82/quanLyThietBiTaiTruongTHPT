@@ -283,6 +283,9 @@ Route::group([
     Route::get('/index',[
         'uses' => 'User\UserProfileController@indexView'
     ])->name('profile.index')->middleware('auth');
+    Route::get('/edit/{id}',[
+        'uses' => 'User\UserProfileController@editView'
+    ])->name('profile.edit')->middleware('auth');
 });
 
 

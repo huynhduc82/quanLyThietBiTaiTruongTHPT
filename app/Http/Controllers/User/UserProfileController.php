@@ -6,6 +6,7 @@ use App\Helpers;
 use App\Http\Controllers\Controller;
 use App\Services\User\UserProfileService;
 use App\Transformers\User\UserProfileTransformer;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;
 
@@ -30,12 +31,26 @@ class UserProfileController extends Controller
         $include=[
             'courses',
             'avatarInfo',
+            'backgroundInfo',
         ];
 
         $data = $this->userProfileService->details(Helpers::getUserLoginId(),$include);
 
         return view('profile/index')->with(compact('data'));
     }
+
+    public function editView($id)
+    {
+        $include=[
+            'courses',
+            'avatarInfo',
+        ];
+
+        $data = $this->userProfileService->details($id, $include);
+        $data->date_of_birth = Carbon::create($data->date_of_birth)->format('Y-m-d');
+        return view('profile/edit')->with(compact('data'));
+    }
+
 
     public function details($id): JsonResponse
     {
