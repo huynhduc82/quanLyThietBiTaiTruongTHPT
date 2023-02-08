@@ -17,7 +17,7 @@ Route::group([
     Route::post('/{id}', [
         'uses' => 'Equipment\EquipmentController@edit'
     ]);
-    Route::put('/edit-profile/{id}', [
+    Route::post('/edit-profile/{id}', [
         'uses' => 'User\UserProfileController@edit'
     ]);
     Route::delete('/{id}', [

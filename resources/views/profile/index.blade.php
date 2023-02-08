@@ -6,14 +6,14 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('https://drive.google.com/uc?id=1biP0e_yAYCn_x9lKwcNCZv5k4MVH63AQ&export=media://drive.google.com/file/d/1biP0e_yAYCn_x9lKwcNCZv5k4MVH63AQ/view?usp=sharing'); background-position-y: 50%;">
-{{--            <span class="mask bg-gradient-primary opacity-6"></span>--}}
+        <div class="page-header max-height-500 border-radius-xl mt-4" style="background-position-y: 50%;">
+            <img src="{{$data->avatarInfo ? $data->backgroundInfo->url : null}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
         </div>
         <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
             <div class="row gx-4">
                 <div class="col-auto">
                     <div class="avatar avatar-xl position-relative">
-                        <img src="{{$data->avatarInfo ? $data->avatarInfo->url : null}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                        <img src="{{$data->avatarInfo ? $data->avatarInfo->url : null}}" alt="profile_image" class="border-radius-lg shadow-sm" style="object-fit: cover; width: 74px !important; height: 74px !important;">
                     </div>
                 </div>
                 <div class="col-auto my-auto">
@@ -104,7 +104,7 @@
                                 <h6 class="mb-0">Thông tin</h6>
                             </div>
                             <div class="col-md-4 text-end">
-                                <a href="javascript:;">
+                                <a href="{{ route('profile.edit', ['id' => $data->id]) }}">
                                     <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile"></i>
                                 </a>
                             </div>
@@ -118,22 +118,23 @@
                         <ul class="list-group">
                             <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Họ và tên:</strong> {{$data->name}} </li>
                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">SĐT:</strong> {{$data->phone_number}}</li>
+                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">CMND/CCCD:</strong> {{$data->identification}}</li>
                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> {{$data->email}}</li>
                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Địa chỉ:</strong> {{$data->address}}</li>
                             <li class="list-group-item border-0 ps-0 pb-0">
                                 <strong class="text-dark text-sm">Liên hệ khác:</strong> &nbsp;
                                 @if($data->facebook)
-                                <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href=" {{$data->facebook}} " target="_blank">
+                                <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href=" {{ url('https://'.$data->facebook) }} " target="_blank">
                                     <i class="fab fa-facebook fa-lg"></i>
                                 </a>
                                 @endif
                                 @if($data->twitter)
-                                <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="{{$data->twitter}}" target="_blank">
+                                <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="{{ url('https://'.$data->twitter) }}" target="_blank">
                                     <i class="fab fa-twitter fa-lg"></i>
                                 </a>
                                 @endif
                                 @if($data->instagram)
-                                <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="{{$data->instagram}}" target="_blank">
+                                <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="{{ url('https://'.$data->instagram) }}" target="_blank">
                                     <i class="fab fa-instagram fa-lg"></i>
                                 </a>
                                 @endif

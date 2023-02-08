@@ -83,6 +83,11 @@ class User extends Authenticatable
         return $this->belongsTo(ImageInfo::class, 'avatar', 'image_references');
     }
 
+    public function backgroundInfo() : BelongsTo
+    {
+        return $this->belongsTo(ImageInfo::class, 'background', 'image_references');
+    }
+
     public function courses() : BelongsToMany
     {
         return $this->belongsToMany(

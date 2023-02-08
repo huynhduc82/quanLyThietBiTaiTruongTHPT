@@ -2,6 +2,7 @@
 
 namespace App\Validators\User;
 
+use App\Models\ImageInfos\ImageInfo;
 use App\Models\User;
 use App\Validators\AbstractValidator;
 use App\Validators\Contracts\IValidatorMessage;
@@ -46,18 +47,18 @@ class UserProfileValidator extends AbstractValidator implements IValidatorMessag
                 'required',
                 'email',
             ],
-//            'avatar' => [
-//                'nullable',
-//                'image',
-//                'mimes:' . implode(',', ImageInfo::IMAGE_MIMES),
-//                'max:' . ImageInfo::IMAGE_MAX_SIZE,
-//            ],
-//            'background' => [
-//                'nullable',
-//                'image',
-//                'mimes:' . implode(',', ImageInfo::IMAGE_MIMES),
-//                'max:' . ImageInfo::IMAGE_MAX_SIZE,
-//            ],
+            'avatar' => [
+                'nullable',
+                'image',
+                'mimes:' . implode(',', ImageInfo::IMAGE_MIMES),
+                'max:' . ImageInfo::IMAGE_MAX_SIZE,
+            ],
+            'background' => [
+                'nullable',
+                'image',
+                'mimes:' . implode(',', ImageInfo::IMAGE_MIMES),
+                'max:' . ImageInfo::IMAGE_MAX_SIZE,
+            ],
             'facebook' => [
                 'nullable',
                 'string',

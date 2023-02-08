@@ -69,6 +69,15 @@
   }
 }
 
+.avatar-90 {
+    width: 90px !important;
+    height: 90px !important;
+
+    &.avatar-raised {
+        margin-top: -($avatar-xl-height * 0.5);
+    }
+}
+
 .avatar-lg {
 	width: $avatar-lg-width !important;
 	height: $avatar-lg-height !important;
