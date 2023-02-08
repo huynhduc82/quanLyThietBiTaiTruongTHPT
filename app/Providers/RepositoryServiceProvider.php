@@ -14,7 +14,9 @@ use App\Repositories\Eloquents\User;
 use App\Repositories\Eloquents\Classes;
 use App\Repositories\Eloquents\Grades;
 use App\Repositories\Eloquents\Maintenance;
+use App\Repositories\Eloquents\Liquidation;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Contracts\Liquidation as ILiquidation;
 use App\Repositories\Contracts\Grades as IGrade;
 use App\Repositories\Contracts\Maintenance as IMaintenance;
 use App\Repositories\Contracts\SpecifyTheNumberOfEquipments as ISpecifyTheNumberOfEquipments;
@@ -116,5 +118,12 @@ class RepositoryServiceProvider extends ServiceProvider
          */
         IMaintenance\IMaintenanceRepo::class => Maintenance\MaintenanceRepo::class,
         IMaintenance\IMaintenanceDetailsRepo::class => Maintenance\MaintenanceDetailsRepo::class,
+        /*
+         * ------------------------------------------------------------
+         * Liquidation
+         * ------------------------------------------------------------
+         */
+        ILiquidation\ILiquidationRepo::class => Liquidation\LiquidationRepo::class,
+        ILiquidation\ILiquidationDetailsRepo::class => Liquidation\LiquidationDetailsRepo::class,
     ];
 }

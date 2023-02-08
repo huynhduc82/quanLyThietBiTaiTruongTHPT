@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('equipment_liquidation', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
-            $table->bigInteger('approved_by');
+            $table->bigInteger('approved_by')->nullable();
             $table->bigInteger('created_by')->nullable()->unsigned();
             $table->bigInteger('updated_by')->nullable()->unsigned();
             $table->softDeletes();

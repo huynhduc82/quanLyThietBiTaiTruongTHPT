@@ -89,14 +89,24 @@ class EquipmentController extends Controller
 
     public function getByRoomId($id): JsonResponse
     {
-        $result = $this->equipmentService->getByRoomId($id);
+        $include = ['type'];
+        $result = $this->equipmentService->getByRoomId($id, $include);
 
-        return $this->response($this->transform($result, EquipmentTransformers::class, ));
+        return $this->response($result);
+    }
+
+    public function getById($id): JsonResponse
+    {
+        $include = ['type'];
+        $result = $this->equipmentService->getById($id, $include);
+        dd($result);
+        return $this->response($result);
     }
 
     public function getByName($name, $id)
     {
-        $result = $this->equipmentService->getByName($name, $id);
+        $include = ['type'];
+        $result = $this->equipmentService->getByName($name, $id, $include);
 
         return $this->response($result);
     }

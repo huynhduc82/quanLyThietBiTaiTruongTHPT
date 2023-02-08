@@ -131,38 +131,27 @@ Route::group([
 Route::group([
     'prefix' => '/liquidation',
 ], function (){
-    Route::get('/index', function () {
-        return view('liquidation/index');
-    })->name('liquidation.index');
-});
-
-Route::group([
-    'prefix' => '/liquidation',
-], function (){
     Route::get('/index',[
-        'uses' => 'Reservations\EquipmentReservationController@indexView'
-    ])->name('reservation.index');
+        'uses' => 'Liquidation\LiquidationController@indexView'
+    ])->name('liquidation.index');
     Route::get('/store',[
-        'uses' => 'Reservations\EquipmentReservationController@storeView'
-    ])->name('reservation.store')->middleware('auth');
-    Route::get('/filter',[
-        'uses' => 'Reservations\EquipmentReservationController@filter'
-    ])->name('reservation.filter')->middleware('auth');
+        'uses' => 'Liquidation\LiquidationController@storeView'
+    ])->name('liquidation.store')->middleware('auth');
     Route::post('/',[
-        'uses' => 'Reservations\EquipmentReservationController@store'
+        'uses' => 'Liquidation\LiquidationController@store'
     ])->middleware('auth');
     Route::post('/approved/{id}',[
-        'uses' => 'Reservations\EquipmentReservationController@approved'
-    ])->name('reservation.approved')->middleware('auth');
+        'uses' => 'Liquidation\LiquidationController@approved'
+    ])->name('liquidation.approved')->middleware('auth');
     Route::post('/cancel/{id}',[
-        'uses' => 'Reservations\EquipmentReservationController@cancel'
-    ])->name('reservation.cancel')->middleware('auth');
+        'uses' => 'Liquidation\LiquidationController@cancel'
+    ])->name('liquidation.cancel')->middleware('auth');
     Route::delete('/delete/{id}',[
-        'uses' => 'Reservations\EquipmentReservationController@delete'
-    ])->name('reservation.delete')->middleware('auth');
-    Route::post('/lend/{id}',[
-        'uses' => 'Reservations\EquipmentReservationController@lend'
-    ])->name('reservation.lend')->middleware('auth');
+        'uses' => 'Liquidation\LiquidationController@delete'
+    ])->name('liquidation.delete')->middleware('auth');
+    Route::post('/success/{id}',[
+        'uses' => 'Liquidation\LiquidationController@success'
+    ])->name('liquidation.success')->middleware('auth');
 });
 
 //Route::group([
