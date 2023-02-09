@@ -23,11 +23,11 @@
                         <div class="col-5">
                             <a href="{{ route('room.store') }}" type="button" class="btn bg-gradient-info">Thêm
                                 mới</a>
-                            <button class="btn bg-gradient-info mx-2"
-                                    onclick="importExcel('{{route('room.import.excel')}}')"
-                            >
-                                Nhập bằng file Excel
-                            </button>
+{{--                            <button class="btn bg-gradient-info mx-2"--}}
+{{--                                    onclick="importExcel('{{route('room.import.excel')}}')"--}}
+{{--                            >--}}
+{{--                                Nhập bằng file Excel--}}
+{{--                            </button>--}}
                         </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -37,30 +37,30 @@
 
                                 <tr class="d-flex">
 
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-25">
-                                        Tên phòng học
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-20">
+                                        Tên phòng
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-25">
-                                        Tình Trạng
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-20">
+                                        Có thể mượn
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-7 text-wrap"></th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-20 text-wrap"></th>
                                 </tr>
                                 <tbody>
                                 @foreach($data as $details)
                                     <tr class="d-flex">
                                         <td class="w-20 text-wrap">
-                                            <div class="d-flex px-4 py-1">
+                                            <div class="d-block px-4 py-1">
                                                 <div
-                                                    class="d-flex flex-column justify-content-center">
+                                                    class="d-flex flex-column justify-content-center text-center">
                                                     <h6 class="mb-0 text-sm">{{$details->name}}</h6>
                                                     <p class="text-xs text-secondary mb-0"></p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="w-20 text-wrap">
-                                            <div class="d-flex px-4 py-1">
+                                            <div class="d-block px-4 py-1">
                                                 <div
-                                                    class="d-flex flex-column justify-content-center">
+                                                    class="d-flex flex-column justify-content-center text-center">
                                                     <h6 class="mb-0 text-sm">{{$details->can_rent ? 'Có thể' : 'Không thể' }}</h6>
                                                     <p class="text-xs text-secondary mb-0"></p>
                                                 </div>

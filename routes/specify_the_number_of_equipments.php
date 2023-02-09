@@ -23,6 +23,9 @@ Route::group([
     Route::post('/', [
         'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@store'
     ]);
+    Route::put('/{id}', [
+        'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@edit'
+    ]);
     Route::post('/cal-equipment', [
         'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@calEquipmentQuantity'
     ]);

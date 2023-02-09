@@ -245,20 +245,20 @@ Route::group([
     Route::get('/index',[
         'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@indexView'
     ])->name('equipment.number.index');
-    Route::get('/store', function () {
-        return view('specifythenumberofequipment/storeView');
-    })->name('equipment.number.store');
-    Route::get('/edit', function () {
-        return view('specifythenumberofequipment/editView');
-    })->name('equipment.number.edit');
-    Route::post('/import', [
-        'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@importCourseDetail'
-    ])->name('number.import.excel');
+    Route::get('/store', [
+        'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@storeView'
+    ])->name('equipment.number.store');
+    Route::get('/edit/{id}', [
+        'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@editView'
+    ])->name('equipment.number.edit');
+//    Route::post('/import', [
+//        'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@importCourseDetail'
+//    ])->name('number.import.excel');
     Route::delete('/number/delete/{id}', [
-        'uses' => 'Number\SpecifyTheNumberOfEquipments@delete'
+        'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@delete'
     ])->name('number.delete');
     Route::post('', function () {
-        return view('specifythenumberofequipment/store');
+        return view('SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@store');
     });
 });
 
@@ -286,7 +286,19 @@ Route::group([
     Route::post('/course/edit/{id}', [
         'uses' => 'Course\CourseController@edit'
     ]);
-
+    Route::group([
+        'prefix' => '/details',
+    ], function () {
+        Route::get('/store/{id}', [
+            'uses' => 'Course\CourseDetailController@storeView'
+        ])->name('course.details.store');
+        Route::get('/edit/{id}', [
+            'uses' => 'Course\CourseDetailController@editView'
+        ])->name('course.details.edit');
+        Route::delete('/delete/{id}', [
+            'uses' => 'Course\CourseDetailController@delete'
+        ])->name('course.details.delete');
+    });
 });
 
 Route::group([

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Course;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Grades\GradeController;
 use App\Imports\CoursesDetailMultiSheetImport;
 use App\Imports\CoursesDetailsImport;
 use App\Services\Courses\CourseDetailsService;
@@ -18,6 +19,25 @@ class CourseDetailController extends Controller
         protected CourseDetailsService $courseDetailsService
     )
     {
+    }
+
+    public function storeView($id)
+    {
+        $include = [
+
+        ];
+
+        $gradeData = app(GradeController::class)->index();
+
+        return view('coursedetails/store')->with(compact(['gradeData', 'id']));
+    }
+
+    public function editView($id)
+    {
+
+        $data = $this->courseDetailsService->details($id);
+
+        return view('coursedetails/edit')->with(compact('data'));
     }
 
     public function index(): JsonResponse

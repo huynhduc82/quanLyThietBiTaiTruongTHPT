@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group px-4">
                         <div class="col-9">
-                            <label class="col-form-label">khối</label>
+                            <label class="col-form-label">Khối</label>
                             <select type="text" class="form-select" id="grade" onclick="filterClass()">
                                     @foreach($gradeData as $data)
                                         <option value="{{ $data['id'] }}">{{ $data['name'] }}</option>
@@ -56,7 +56,6 @@
         }
     </script>
     <script>
-        document.getElementById('title-first').innerText = 'Thiết bị'
-        document.getElementById('title-second').innerText = 'Chỉnh sửa thiết bị'
+        document.getElementById('title-second').innerText = 'Thêm mới môn học'
     </script>
 @endsection

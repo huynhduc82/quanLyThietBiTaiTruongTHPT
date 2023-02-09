@@ -1,27 +1,40 @@
-
-let Quantity;
+let Name;
+let Lesson;
 let ID;
 
-let inputID = $("#id");
-let InputQuantity = $("#quantity");
-
+let InputName = $("#name");
+let InputLesson = $("#lesson");
+let InputID = $("#id");
 
 let data = {}
 
 $(document).ready(function(){
-    $('#frm-number').on('submit', function (e) {
+    $('#frm-course-details').on('submit', function (e) {
         e.preventDefault();
-        ID = inputID.val();
-        Quantity = InputQuantity.val();
-
+        Name = InputName.val();
+        Lesson = InputLesson.val();
+        ID = InputID.val();
+        if (!Name) {
+            $('#label-error').text('Bạn chưa nhập thông tin ');
+            return false;
+        }
         $('#label-error').text('');
 
-        data.quantity = Quantity;
+        data.lesson = Lesson;
+        data.describe = Name;
 
-        let back_page = '/number/index';
+        if (document.getElementById('need_equipment').checked) {
+            data.need_equipment = true
+        }
+        else {
+            data.need_equipment = false
+        }
+
+
+        let back_page = '/course/index';
 
         $.ajax({
-            url: '/api/number-equipment/' + ID,
+            url: '/api/course-details/' + ID,
             data: JSON.stringify(data),
             dataType: 'json',
             enctype: "multipart/form-data",

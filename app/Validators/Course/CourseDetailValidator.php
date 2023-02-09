@@ -17,11 +17,6 @@ class CourseDetailValidator extends AbstractValidator implements IValidatorMessa
     {
         // TODO: Implement ruleCreate() method.
         return [
-            'course_id' => [
-                'required',
-                'int',
-                Rule::exists(Courses::class, 'id')->whereNull('deleted_at'),
-            ],
             'lesson' => [
                 'required',
                 'string',

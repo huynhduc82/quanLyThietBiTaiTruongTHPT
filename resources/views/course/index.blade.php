@@ -26,7 +26,7 @@
                             <button class="btn bg-gradient-info mx-2"
                                     onclick="importExcel('{{route('course.import.excel')}}')"
                             >
-                                Nhập bằng file Excel
+                                Nhập chi tiết môn học bằng file Excel
                             </button>
                         </div>
                     </div>
@@ -34,33 +34,31 @@
                         <div class="table-responsive p-0 ">
                             <table class="table mb-0 w-100">
                                 <thead>
-
                                 <tr class="d-flex">
-
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-25">
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-20">
                                         Tên môn học
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-25">
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-20">
                                         Khối
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-7 text-wrap"></th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-20 text-wrap"></th>
                                 </tr>
                                 <tbody>
                                 @foreach($data as $details)
                                     <tr class="d-flex">
-                                        <td class="w-20 text-wrap">
-                                            <div class="d-flex px-4 py-1">
-                                                <div
-                                                    class="d-flex flex-column justify-content-center">
+                                        <td class="text-wrap w-20 accordion-toggle" data-bs-toggle="collapse"
+                                            data-bs-target="#demo{{ $details->id }}" aria-expanded="false">
+                                            <div class="d-block px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center text-center">
                                                     <h6 class="mb-0 text-sm">{{$details->name}}</h6>
                                                     <p class="text-xs text-secondary mb-0"></p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="w-20 text-wrap">
-                                            <div class="d-flex px-4 py-1">
-                                                <div
-                                                    class="d-flex flex-column justify-content-center">
+                                        <td class="w-20 accordion-toggle" data-bs-toggle="collapse"
+                                            data-bs-target="#demo{{ $details->id }}" aria-expanded="false">
+                                            <div class="d-block px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center text-center">
                                                     <h6 class="mb-0 text-sm">{{$details->grade->name}}</h6>
                                                     <p class="text-xs text-secondary mb-0"></p>
                                                 </div>
@@ -70,13 +68,89 @@
                                             <div class="d-block px-2 py-1">
                                                 <div class="d-flex justify-content-center">
                                                     <a type="button"
-                                                       href="{{ route('course.edit', ['id' => $details->id]) }}"
+                                                       href="{{ route('equipment.edit', ['id' => $details->id]) }}"
                                                        class="btn bg-gradient-info my-1 mb-1 ms-6">Sửa</a>
                                                     <button type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1"
-                                                            onclick="DeleteConfirm('{{route('course.delete', ['id' => $details->id])}}')">
+                                                            onclick="DeleteConfirm('{{route('equipment.delete', ['id' => $details->id])}}')">
                                                         Xoá
                                                     </button>
                                                 </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="12" class="hiddenRow">
+                                            <div class="accordion-body collapse" id="demo{{ $details->id }}"
+                                                 style="height: 0" aria-expanded="false">
+                                                <table class="table mb-0">
+                                                    @if(!empty($details->courseDetails[0]))
+                                                        <thead>
+                                                        <tr class="d-flex px-3">
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-10">
+                                                                Bài học số
+                                                            </th>
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-40">
+                                                                Tên bài học
+                                                            </th>
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
+                                                                Cần thiết bị
+                                                            </th>
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20"></th>
+                                                        </tr>
+                                                        </thead>
+                                                    @endif
+                                                    <tbody>
+                                                    @foreach($details->courseDetails ?? [] as $courseDetails)
+                                                        <tr class="d-flex">
+                                                            <td class="w-10 text-wrap">
+                                                                <div class="d-block px-4 py-1">
+                                                                    <div
+                                                                        class="d-flex flex-column justify-content-center text-center">
+                                                                        <h6 class="mb-0 text-sm">{{$courseDetails->lesson}}</h6>
+                                                                        <p class="text-xs text-secondary mb-0"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="w-40 text-wrap">
+                                                                <div class="d-flex px-4 py-1">
+                                                                    <div
+                                                                        class="d-flex flex-column justify-content-center">
+                                                                        <h6 class="mb-0 text-sm">{{$courseDetails->describe ?? 'Chưa phân bổ'}}</h6>
+                                                                        <p class="text-xs text-secondary mb-0"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="w-20 text-wrap">
+                                                                <div class="d-flex px-4 py-1">
+                                                                    <div
+                                                                        class="d-flex flex-column justify-content-center">
+                                                                        <h6 class="mb-0 text-sm">{{$courseDetails->need_equipment ? 'Có' : 'Không'}}</h6>
+                                                                        <p class="text-xs text-secondary mb-0"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="w-20">
+                                                                <div class="d-flex px-2 py-1">
+                                                                    <div class="d-flex justify-content-center">
+                                                                        <a type="button"
+                                                                           href="{{ route('course.details.edit', ['id' => $courseDetails->id]) }}"
+                                                                           class="btn bg-gradient-info my-1 mb-1 ms-1">Sửa</a>
+                                                                        <button type="button"
+                                                                                class="btn bg-gradient-danger my-1 mb-1 ms-1"
+                                                                                onclick="DeleteConfirm('{{route('course.details.delete', ['id' => $courseDetails->id])}}')">
+                                                                            Xoá
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    <div class="pt-3 px-5">
+                                                        <a href="{{ route('course.details.store', ['id' => $details->id]) }}" type="button"
+                                                           class="btn bg-gradient-info">Thêm mới</a>
+                                                    </div>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </td>
                                     </tr>
@@ -131,7 +205,7 @@
                 var DeleteConfirm = (url) => {
                     swalWithBootstrapButtons.fire({
                         title: 'Bạn có chắc không?',
-                        text: "Bạn không thể khôi phục lại thiết bị đã xoá!",
+                        text: "Bạn không thể khôi phục lại chi tiết môn học đã xoá!",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonText: 'Có, Hãy xoá đi!',
@@ -150,7 +224,7 @@
                                 success: function () {
                                     swalWithBootstrapButtons.fire({
                                         title: 'Đã xoá!',
-                                        text: "Thiết bị của bạn đã xoá.",
+                                        text: "Chi tiết môn học của bạn đã xoá.",
                                         icon: 'success',
                                         backdrop: false,
                                     }).then((result) => {
@@ -172,7 +246,7 @@
                         ) {
                             swalWithBootstrapButtons.fire({
                                 title: 'Đã huỷ',
-                                text: 'Thiết bị của bạn đã an toàn :)',
+                                text: 'Chi tiết môn học của bạn đã an toàn :)',
                                 icon: 'error',
                                 backdrop: false,
                             })
@@ -217,8 +291,12 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire({
-                    title: `Đã nhập thiết bị bằng file excel thành công`,
+                    title: `Đã nhập chi tiết môn học bằng file excel thành công`,
                     backdrop: false,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
                 })
             }
         })
