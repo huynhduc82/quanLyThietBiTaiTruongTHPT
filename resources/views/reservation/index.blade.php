@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('title')
-    Mượn trả thiết bị
+    Đặt trước thiết bị
 @endsection
 
 @section('content')

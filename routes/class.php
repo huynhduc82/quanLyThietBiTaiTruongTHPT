@@ -19,7 +19,7 @@ Route::group([
     Route::post('/{id}', [
         'uses' => 'Class\ClassController@edit'
     ]);
-    Route::post('/import-class', [
+    Route::post('/import-class/excel', [
         'uses' => 'Class\ClassController@importClass'
     ])->name('class.import.excel');
     Route::delete('/{id}', [

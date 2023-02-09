@@ -68,7 +68,7 @@
                                             Thời gian báo hỏng
                                         </th>
                                         <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-15 p-2 pt-3">
-                                            Người báo hỏng
+                                            Người sửa chữa
                                         </th>
                                         <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-10 p-2 pt-3">
                                             Thời gian sửa chữa

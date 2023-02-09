@@ -8,6 +8,7 @@ use App\Repositories\Contracts\Equipment\IEquipmentRepo;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class EquipmentRepo extends BaseEloquentRepository implements IEquipmentRepo
 {
@@ -92,5 +93,39 @@ class EquipmentRepo extends BaseEloquentRepository implements IEquipmentRepo
         ;
 
         return $query->with($include)->first();
+    }
+
+    public function countEquipment()
+    {
+        $query = $this->model->newQuery();
+
+        return $query->count();
+    }
+
+    public function static($start, $end, $type = 'day')
+    {
+        $selectDate = '';
+        $result = [];
+        try {
+            if ($type == "day") {
+                $selectDate = "to_char(created_at, 'dd-mm-yyyy') AS date ";
+
+            } else if ($type == "month") {
+                $selectDate = "to_char(created_at, 'mm') AS date ";
+
+            } else {
+                $selectDate = "to_char(created_at, 'yyyy') AS date ";
+            }
+            $result = $this->model->newQuery()->whereBetween('created_at', array($start, $end))
+                ->groupBy('date')
+                ->orderBy('date')
+                ->get(array(
+                    DB::raw($selectDate),
+                    DB::raw("COUNT(*) as result")
+                ));
+        } catch (\Exception $ex) {
+            $result = [];
+        }
+        return $result;
     }
 }

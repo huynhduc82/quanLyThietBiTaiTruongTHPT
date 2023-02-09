@@ -14,11 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group([
-    'prefix' => '/',
+    'prefix' => '/dashboard',
 ], function (){
-    Route::get('/', function () {
-        return view('dashboard/index');
-    })->name('dashboard.index');
+    Route::get('',[
+        'uses' => 'Dashboard\DashboardController@indexView'
+    ])->name('dashboard.index');
+    Route::get('/static/{start}/{end}',[
+        'uses' => 'Dashboard\DashboardController@static'
+    ])->name('dashboard.static');
+    Route::get('/',[
+        'uses' => 'Dashboard\DashboardController@indexView'
+    ])->name('dashboard.index');
     Route::get('/403', function () {
         return view('layout/403');
     })->name('403');
