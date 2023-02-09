@@ -22,7 +22,7 @@ class RoomController extends Controller
 
         $data = $this->roomServices->index($include);
 
-        return view('room/index')->with(compact('data'));
+        return view('room/store')->with(compact('data'));
     }
 
     public function editView($id)
@@ -31,9 +31,9 @@ class RoomController extends Controller
 
         ];
 
-        $data = $this->roomServices->index($include);
+        $data = $this->roomServices->details($id, $include);
 
-        return view('room/index')->with(compact('data'));
+        return view('room/edit')->with(compact('data'));
     }
 
     public function indexView()

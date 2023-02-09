@@ -10,6 +10,7 @@ use App\Transformers\Equipment\EquipmentTransformers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Grades\GradeController;
 
 
 class CourseController extends Controller
@@ -26,20 +27,17 @@ class CourseController extends Controller
 
         ];
 
-        $data = $this->courseService->index($include);
+        $gradeData = app(GradeController::class)->index();
 
-        return view('course/index')->with(compact('data'));
+        return view('course/store')->with(compact('gradeData'));
     }
 
     public function editView($id)
     {
-        $include = [
-
-        ];
-
-        $data = $this->courseService->index($include);
-
-        return view('course/index')->with(compact('data'));
+       
+            $data = $this->courseService->details($id);
+        
+            return view('course/edit')->with(compact('data'));
     }
 
     public function indexView()

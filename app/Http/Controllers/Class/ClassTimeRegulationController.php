@@ -28,7 +28,9 @@ class ClassTimeRegulationController extends Controller
 
     public function editView($id): Factory|View|Application
     {
-        return view('classtime/edit');
+        $data = $this->classTimeRegulationService->details($id);
+    
+        return view('classtime/edit')->with(compact('data'));
     }
 
     public function indexView(): Factory|View|Application

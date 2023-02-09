@@ -11,7 +11,7 @@
                 <h3>Thêm mới khối lớp</h3>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
-                <form id="frm-equipment">
+                <form id="frm-grade">
                     <div class="form-group px-4">
                         <div class="col-9">
                             <label class="col-form-label">Tên khối lớp</label>

@@ -1,25 +1,27 @@
 let Name;
+let ID;
 
 let InputName = $("#name");
-
+let inputID = $("#id");
 let data = {}
 
 $(document).ready(function(){
     $('#frm-grade').on('submit', function (e) {
         e.preventDefault();
         Name = InputName.val();
-
+        ID = inputID.val();
         if (!Name) {
             $('#label-error').text('Bạn chưa nhập thông tin ');
             return false;
         }
         $('#label-error').text('');
+
         data.name = Name;
 
         let back_page = '/grade/index';
 
         $.ajax({
-            url: '/grade',
+            url: '/grade/edit/' + ID,
             data: JSON.stringify(data),
             dataType: 'json',
             enctype: "multipart/form-data",

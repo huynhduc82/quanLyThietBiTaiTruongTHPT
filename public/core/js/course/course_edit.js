@@ -1,25 +1,32 @@
 let Name;
+let Grade;
+let ID;
 
 let InputName = $("#name");
+let InputGrade = $("#grade");
+let inputID = $("#id");
 
 let data = {}
 
 $(document).ready(function(){
-    $('#frm-grade').on('submit', function (e) {
+    $('#frm-course').on('submit', function (e) {
         e.preventDefault();
         Name = InputName.val();
-
+        Grade = InputGrade.val();
+        ID = inputID.val();
         if (!Name) {
             $('#label-error').text('Bạn chưa nhập thông tin ');
             return false;
         }
         $('#label-error').text('');
+
+        data.grade_id=Grade;
         data.name = Name;
 
-        let back_page = '/grade/index';
+        let back_page = '/course/index';
 
         $.ajax({
-            url: '/grade',
+            url: '/course',
             data: JSON.stringify(data),
             dataType: 'json',
             enctype: "multipart/form-data",

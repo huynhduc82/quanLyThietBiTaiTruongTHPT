@@ -1,25 +1,38 @@
-let Name;
+let Lesson;
+let StartTime
+let EndTime;
 
-let InputName = $("#name");
+let InputLesson = $("#lesson");
+let InputEndTime = $("#end");
+let InputStartTime = $("#start")
+
 
 let data = {}
 
 $(document).ready(function(){
-    $('#frm-grade').on('submit', function (e) {
+    $('#frm-class-time').on('submit', function (e) {
         e.preventDefault();
-        Name = InputName.val();
-
-        if (!Name) {
-            $('#label-error').text('Bạn chưa nhập thông tin ');
+        Lesson = InputLesson.val();
+        EndTime = InputEndTime.val();
+        StartTime = InputStartTime.val();
+        if (!EndTime) {
+            $('#label-error').text('Bạn chưa chọn thời gian ');
+            return false;
+        }
+        if (!StartTime) {
+            $('#label-error').text('Bạn chưa chọn thời gian ');
             return false;
         }
         $('#label-error').text('');
-        data.name = Name;
 
-        let back_page = '/grade/index';
+        data.start = StartTime;
+        data.lesson = Lesson;
+        data.end = EndTime;
+
+        let back_page = '/class/time/index';
 
         $.ajax({
-            url: '/grade',
+            url: '/class/time',
             data: JSON.stringify(data),
             dataType: 'json',
             enctype: "multipart/form-data",

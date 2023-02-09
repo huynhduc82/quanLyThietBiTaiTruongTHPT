@@ -31,6 +31,10 @@ class RoomServices extends BaseService
     {
 
     }
+    public function details($id, $include)
+    {
+        return $this->repository->details($id, $include);
+    }
 
 
     public function update()

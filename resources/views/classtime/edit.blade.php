@@ -11,23 +11,29 @@
                 <h3>    Chỉnh sửa giờ học</h3>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
-                <form id="frm-equipment">
+                <form id="frm-class-time">
+                    <div class="form-group px-4">
+                        <div class="col-9">
+                            <label class="col-form-label">ID</label>
+                            <input type="text" class="form-control" placeholder="Bài học" id="id" value="{{ $data->id }}" disabled="disabled">
+                        </div>
+                    </div>
                     <div class="form-group px-4">
                         <div class="col-9">
                             <label class="col-form-label">Bài học</label>
-                            <input type="text" class="form-control" placeholder="Bài học" id="name">
+                            <input type="text" class="form-control" placeholder="Bài học" id="name" value="{{ $data->lesson }}">
                         </div>
                     </div>
                     <div class="form-group px-4">
                         <div class="col-9">
                             <label class="col-form-label">Thời gian bắt đầu</label>
-                            <input type="time" class="form-control" placeholder="Thời gian bắt đầu" id="describe">
+                            <input type="time" class="form-control" placeholder="Thời gian bắt đầu" id="start" value="{{ $data->start }}">
                         </div>
                     </div>
                     <div class="form-group px-4">
                         <div class="col-9">
                             <label class="col-form-label">Thời gian kết thúc</label>
-                            <input type="time" class="form-control" placeholder="Thời gian kết thúc" id="describe">
+                            <input type="time" class="form-control" placeholder="Thời gian kết thúc" id="end" value="{{ $data->end }}">
                         </div>
                     </div>
                     <div class="d-flex justify-content-center py-1 col-9">
@@ -46,7 +52,7 @@
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('core/js/type_equipment/type_equipment_edit.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('core/js/class_time/class_time_edit.js')}}"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {

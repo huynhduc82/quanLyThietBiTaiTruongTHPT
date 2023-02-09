@@ -1,25 +1,32 @@
 let Name;
+let Rent;
 
 let InputName = $("#name");
+let InputRent = $("#rent");
 
 let data = {}
 
 $(document).ready(function(){
-    $('#frm-grade').on('submit', function (e) {
+    $('#frm-room').on('submit', function (e) {
         e.preventDefault();
         Name = InputName.val();
-
         if (!Name) {
             $('#label-error').text('Bạn chưa nhập thông tin ');
             return false;
         }
+        if($("#rent").val()==="on"){
+            Rent=true;
+        } else {
+            Rent=false;
+        }
         $('#label-error').text('');
-        data.name = Name;
 
-        let back_page = '/grade/index';
+        data.name = Name;
+        data.can_rent = Rent;
+        let back_page = '/room/index';
 
         $.ajax({
-            url: '/grade',
+            url: '/room',
             data: JSON.stringify(data),
             dataType: 'json',
             enctype: "multipart/form-data",
