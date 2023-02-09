@@ -32,10 +32,9 @@ class DashboardService extends BaseService
         $dataReturn = [];
         $dataReturn['equipment_quantity'] = app(EquipmentService::class)->countEquipment();
         $dataReturn['lend_return_time'] = app(LendReturnEquipmentService::class)->countLendReturn();
-        $dataReturn['equipment_quantity'] = app(EquipmentService::class)->countEquipment();
-        $dataReturn['lend_return_time'] = app(LendReturnEquipmentService::class)->countLendReturn();
+        $dataReturn['liquidation_time'] = app(EquipmentService::class)->countEquipment();
+        $dataReturn['maintenance_time'] = app(LendReturnEquipmentService::class)->countLendReturn();
 
-//        dd($dataReturn);
         return $dataReturn;
     }
 

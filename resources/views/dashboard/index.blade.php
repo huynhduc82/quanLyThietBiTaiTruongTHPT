@@ -16,13 +16,13 @@
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Thiết bị</p>
                                     <h5 class="font-weight-bolder mb-0">
                                         530
-                                        <span class="text-success text-sm font-weight-bolder">+5%</span>
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                                     <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+{{--                                    <img src="https://img.icons8.com/ios-glyphs/100/null/bookmark.png"/>--}}
                                 </div>
                             </div>
                         </div>
@@ -38,7 +38,6 @@
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Số lần mượn</p>
                                     <h5 class="font-weight-bolder mb-0">
                                         300
-                                        <span class="text-success text-sm font-weight-bolder">+15%</span>
                                     </h5>
                                 </div>
                             </div>
@@ -60,7 +59,6 @@
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Số lần sữa chữa</p>
                                     <h5 class="font-weight-bolder mb-0">
                                         300
-                                        <span class="text-success text-sm font-weight-bolder">+15%</span>
                                     </h5>
                                 </div>
                             </div>
@@ -82,7 +80,6 @@
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Số lần thanh lý</p>
                                     <h5 class="font-weight-bolder mb-0">
                                         300
-                                        <span class="text-success text-sm font-weight-bolder">+15%</span>
                                     </h5>
                                 </div>
                             </div>
