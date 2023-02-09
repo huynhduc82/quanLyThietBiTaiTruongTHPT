@@ -7,6 +7,7 @@ use App\Imports\ClassesImport;
 use App\Models\Class\Classes;
 use App\Services\Class\ClassService;
 use App\Services\Courses\CourseService;
+use App\Services\Grades\GradeService;
 use App\Transformers\Class\ClassTransformer;
 use App\Transformers\Course\CourseTransformer;
 use App\Transformers\Equipment\EquipmentTransformers;
@@ -26,13 +27,29 @@ class ClassController extends Controller
     public function indexView()
     {
         $include = [
-            'status',
-            'room'
         ];
 
         $data = $this->classService->index($include);
 
-        return view('equipment/index')->with(compact('data'));
+        return view('class/index')->with(compact('data'));
+    }
+
+    public function editView($id)
+    {
+        $include = [
+        ];
+
+        $data = $this->classService->details($id, $include);
+        $gradeData = app(GradeService::class)->index();
+
+        return view('class/edit')->with(compact(['data', 'gradeData']));
+    }
+
+    public function storeView()
+    {
+        $gradeData = app(GradeService::class)->index();
+
+        return view('class/store')->with(compact('gradeData'));
     }
 
     public function index()

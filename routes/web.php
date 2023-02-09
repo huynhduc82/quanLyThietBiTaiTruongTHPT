@@ -194,26 +194,49 @@ Route::group([
 //});
 
 Route::group([
-    'prefix' => '/class',
+    'prefix' => '/class-time',
 ], function (){
-    Route::get('/time/index', [
+    Route::get('/index', [
         'uses' => 'Class\ClassTimeRegulationController@indexView'
     ])->name('class.time.index');
-    Route::get('/time/store', [
+    Route::get('/store', [
         'uses' => 'Class\ClassTimeRegulationController@storeView'
     ])->name('class.time.store');
-    Route::get('/time/edit/{id}', [
+    Route::get('/edit/{id}', [
         'uses' => 'Class\ClassTimeRegulationController@editView'
     ])->name('class.time.edit');
-    Route::post('/time', [
+    Route::post('/', [
         'uses' => 'Class\ClassTimeRegulationController@store'
     ]);
-    Route::post('/time/edit/{id}', [
+    Route::post('/edit/{id}', [
         'uses' => 'Class\ClassTimeRegulationController@edit'
     ]);
-    Route::delete('/time/delete/{id}', [
+    Route::delete('/delete/{id}', [
         'uses' => 'Class\ClassTimeRegulationController@delete'
     ])->name('class.time.delete');
+});
+
+Route::group([
+    'prefix' => '/class',
+], function (){
+    Route::get('/index', [
+        'uses' => 'Class\ClassController@indexView'
+    ])->name('class.index');
+    Route::get('/store', [
+        'uses' => 'Class\ClassController@storeView'
+    ])->name('class.store');
+    Route::get('/edit/{id}', [
+        'uses' => 'Class\ClassController@editView'
+    ])->name('class.edit');
+    Route::post('', [
+        'uses' => 'Class\ClassController@store'
+    ]);
+    Route::post('/edit/{id}', [
+        'uses' => 'Class\ClassController@edit'
+    ]);
+    Route::delete('/delete/{id}', [
+        'uses' => 'Class\ClassController@delete'
+    ])->name('class.delete');
 });
 
 Route::group([
@@ -241,7 +264,7 @@ Route::group([
 
 Route::group([
     'prefix' => '/course',
-], function (){ 
+], function (){
     Route::get('/index', [
      'uses' => 'Course\CourseController@indexView'
     ])->name('course.index');
@@ -263,7 +286,7 @@ Route::group([
     Route::post('/course/edit/{id}', [
         'uses' => 'Course\CourseController@edit'
     ]);
-    
+
 });
 
 Route::group([
