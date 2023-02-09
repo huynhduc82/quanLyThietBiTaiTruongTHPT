@@ -8,6 +8,7 @@ use App\Repositories\BaseEloquentRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class MaintenanceRepo extends BaseEloquentRepository
 {
@@ -89,5 +90,32 @@ class MaintenanceRepo extends BaseEloquentRepository
         $query = $this->model->newQuery();
 
         return $query->where('id', $id)->delete();
+    }
+
+    public function static($start, $end, $type = 'day')
+    {
+        $selectDate = '';
+        $result = [];
+        try {
+            if ($type == "day") {
+                $selectDate = "to_char(created_at, 'dd-mm-yyyy') AS date ";
+
+            } else if ($type == "month") {
+                $selectDate = "to_char(created_at, 'mm') AS date ";
+
+            } else {
+                $selectDate = "to_char(created_at, 'yyyy') AS date ";
+            }
+            $result = $this->model->newQuery()->whereBetween('created_at', array($start, $end))
+                ->groupBy('date')
+                ->orderBy('date')
+                ->get(array(
+                    DB::raw($selectDate),
+                    DB::raw("COUNT(*) as result")
+                ));
+        } catch (\Exception $ex) {
+            $result = [];
+        }
+        return $result;
     }
 }

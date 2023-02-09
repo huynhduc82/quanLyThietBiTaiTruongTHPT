@@ -22,6 +22,11 @@ class MaintenanceServices extends BaseService
         return IMaintenanceRepo::class;
     }
 
+    public function static($start, $end, $type = 'day')
+    {
+        return $this->repository->static($start, $end, $type);
+    }
+
     public function filter($input = [], $include = [])
     {
         if(!empty($input['day_from']) && !empty($input['day_to'])) {

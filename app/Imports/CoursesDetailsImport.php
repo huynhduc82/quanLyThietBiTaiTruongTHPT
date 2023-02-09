@@ -29,7 +29,6 @@ class CoursesDetailsImport implements ToCollection,WithHeadingRow
                 "describe" => $row['describe'],
                 "need_equipment" => (bool)$row['need_equipment'],
             ]);
-            dump($model);
             if($row['need_equipment'] = 1)
             {
                 for ($i = 1 ; $i <= $row['total_equipment']; $i++)

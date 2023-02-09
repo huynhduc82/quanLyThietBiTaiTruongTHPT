@@ -37,6 +37,11 @@ class LiquidationService extends BaseService
         return $this->repository->filter($input, $include);
     }
 
+    public function static($start, $end, $type = 'day')
+    {
+        return $this->repository->static($start, $end, $type);
+    }
+
     public function index($include = [])
     {
         return $this->repository->index($include);

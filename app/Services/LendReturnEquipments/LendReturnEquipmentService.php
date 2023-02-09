@@ -98,10 +98,11 @@ class LendReturnEquipmentService extends BaseService
     public function approved($id = 0)
     {
         $reservation = EquipmentReservation::with('details')->find($id)->toArray();
-        if(empty($reservation->detials->equipment_details))
+        if(!empty($reservation->detials->equipment_details))
         {
             return false;
         }
+
         $reservation['status'] = LendReturnEquipment::STATUS_LENDING;
         $reservation['lender_id'] = Helpers::getUserLoginId();
         $result = $this->repository->lend(Arr::only($reservation, LendReturnEquipment::ATTRIBUTE_TO_LEND));
@@ -114,6 +115,7 @@ class LendReturnEquipmentService extends BaseService
         app(EquipmentService::class)->updateRentQuantity($input['equipment'], true);
 
         app(EquipmentReservationService::class)->updateStatus($id, EquipmentReservation::STATUS_APPROVED);
+        return true;
     }
 
     public function return($input, $id)
@@ -166,6 +168,16 @@ class LendReturnEquipmentService extends BaseService
     public function details($include, $id)
     {
         return $this->repository->details($include, $id);
+    }
+
+    public function countLendReturn()
+    {
+        return $this->repository->countLendReturn();
+    }
+
+    public function static($start, $end, $type = 'day')
+    {
+        return $this->repository->static($start, $end, $type);
     }
 
     public function edit($id, $input)

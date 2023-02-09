@@ -88,7 +88,6 @@ class EquipmentService extends BaseService
         $ids = [];
         foreach ($input as $item)
         {
-            dd($item);
             $ids[] = $item['id'];
         }
         $this->repository->updateRentQuantity(Arr::flatten($param), $rent);
@@ -129,5 +128,15 @@ class EquipmentService extends BaseService
     public function getByName($name = 0, $id = 0, $include)
     {
         return $this->repository->getByName($name, $id, $include);
+    }
+
+    public function countEquipment()
+    {
+        return $this->repository->countEquipment();
+    }
+
+    public function static($start, $end, $type = 'day')
+    {
+        return $this->repository->static($start, $end, $type);
     }
 }
