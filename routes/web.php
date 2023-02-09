@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('', function () {
+    return redirect(\route('dashboard.index'));
+});
+
 Route::group([
     'prefix' => '/dashboard',
 ], function (){

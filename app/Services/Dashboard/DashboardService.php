@@ -32,9 +32,9 @@ class DashboardService extends BaseService
         $dataReturn = [];
         $dataReturn['equipment_quantity'] = app(EquipmentService::class)->countEquipment();
         $dataReturn['lend_return_time'] = app(LendReturnEquipmentService::class)->countLendReturn();
-        $dayStart = Carbon::now()->startOfYear()->toDateTimeString();
-        $dayEnd = Carbon::now()->endOfYear()->toDateTimeString();
-        $dataReturn['lend_return_static'] = app(LendReturnEquipmentService::class)->static('month', $dayStart, $dayEnd);
+        $dataReturn['equipment_quantity'] = app(EquipmentService::class)->countEquipment();
+        $dataReturn['lend_return_time'] = app(LendReturnEquipmentService::class)->countLendReturn();
+
 //        dd($dataReturn);
         return $dataReturn;
     }
