@@ -20,15 +20,15 @@
                                 <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
                             </div>
                         </div>
-{{--                        <div class="col-5">--}}
-{{--                            <a href="{{ route('class.time.store') }}" type="button" class="btn bg-gradient-info">Thêm--}}
-{{--                                mới</a>--}}
+                        <div class="col-5">
+                            <a href="{{ route('class.time.store') }}" type="button" class="btn bg-gradient-info">Thêm
+                                mới</a>
 {{--                            <button class="btn bg-gradient-info mx-2"--}}
 {{--                                    onclick="importExcel('{{route('class.import.excel')}}')"--}}
 {{--                            >--}}
 {{--                                Nhập bằng file Excel--}}
 {{--                            </button>--}}
-{{--                        </div>--}}
+                        </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0 ">

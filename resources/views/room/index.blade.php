@@ -23,11 +23,11 @@
                         <div class="col-5">
                             <a href="{{ route('room.store') }}" type="button" class="btn bg-gradient-info">Thêm
                                 mới</a>
-                            <button class="btn bg-gradient-info mx-2"
-                                    onclick="importExcel('{{route('room.import.excel')}}')"
-                            >
-                                Nhập bằng file Excel
-                            </button>
+{{--                            <button class="btn bg-gradient-info mx-2"--}}
+{{--                                    onclick="importExcel('{{route('room.import.excel')}}')"--}}
+{{--                            >--}}
+{{--                                Nhập bằng file Excel--}}
+{{--                            </button>--}}
                         </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -41,7 +41,7 @@
                                         Tên phòng
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-20">
-                                        Tình Trạng
+                                        Có thể mượn
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-20 text-wrap"></th>
                                 </tr>

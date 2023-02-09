@@ -2,10 +2,16 @@
 
 namespace App\Services\SpecifyTheNumberOfEquipments;
 
+use App\Models\Equipments\Equipment;
+use App\Models\TypeOfEquipments\TypeOfEquipment;
 use App\Repositories\Contracts\SpecifyTheNumberOfEquipments\ISpecifyTheNumberOfEquipmentsRepo;
+use App\Repositories\Eloquents\Equipment\EquipmentRepo;
+use App\Repositories\Eloquents\Equipment\TypeOfEquipmentRepo;
 use App\Services\Class\ClassService;
+use App\Services\Equipment\EquipmentService;
 use App\Services\Response\BaseService;
 use App\Validators\Equipment\EquipmentValidator;
+use App\Validators\SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsValidator;
 use Illuminate\Support\Facades\DB;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
@@ -61,7 +67,7 @@ class SpecifyTheNumberOfEquipmentsService extends BaseService
 
     protected function validatorCreateUpdate(array $params = [], ?int $id = null): void
     {
-        $validator = app(EquipmentValidator::class);
+        $validator = app(SpecifyTheNumberOfEquipmentsValidator::class);
         $validator->with($params);
         if ($id) {
             $validator->setId($id);

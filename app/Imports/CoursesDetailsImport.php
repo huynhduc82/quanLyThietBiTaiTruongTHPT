@@ -23,7 +23,7 @@ class CoursesDetailsImport implements ToCollection,WithHeadingRow
             $course_id = Courses::query()->where('name', '=', $row['course'])
                 ->where('grade_id', '=', $grade_id)->first();
             $course_id = $course_id ? $course_id->id : null;
-            $model = CoursesDetails::create([
+            $model = CoursesDetails::updateOrCreate([
                 "course_id" => $course_id,
                 "lesson" => $row['lesson'],
                 "describe" => $row['describe'],
@@ -36,7 +36,7 @@ class CoursesDetailsImport implements ToCollection,WithHeadingRow
                     if($row['equipment' . $i])
                     {
                         $id = $equipment->where('name', '=', $row['equipment' . $i])->first()->id;
-                        SpecifyTheNumberOfEquipment::create([
+                        SpecifyTheNumberOfEquipment::updateOrCreate([
                             "equipment_id" => $id,
                             "course_details_id" => $model->id,
                             "quantity" => $row['quantity' . $i]

@@ -8,7 +8,7 @@
     <div class="container-fluid py-4">
         <div class="card w-70">
             <div class="card-header pb-2">
-                <h3>Chỉnh sửa số lượng</h3>
+                <h3>Chỉnh sửa quy định số lượng thiết bị</h3>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <form id="frm-number">
@@ -21,14 +21,14 @@
                     <div class="form-group px-4">
                         <div class="col-9">
                             <label class="col-form-label">Tên thiết bị</label>
-                            <input type="text" class="form-control" placeholder="Tên thiết bị" id="name" value="{{ $data->name }}">
+                            <input type="text" class="form-control" placeholder="Tên thiết bị" id="name" value="{{ $data->equipment->name }}">
                         </div>
                     </div>
 
                     <div class="form-group px-4">
                         <div class="col-9">
                             <label class="col-form-label">Số lượng</label>
-                            <input type="text" class="form-control" placeholder="Đơn vị tính" id ="unit" value="{{ $data->unit }}">
+                            <input type="text" class="form-control" placeholder="Số lượng" id ="quantity" value="{{ $data->quantity }}">
                         </div>
                     </div>
                     <div class="d-flex justify-content-center py-1 col-9">
@@ -47,7 +47,7 @@
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('core/js/type_equipment/type_equipment_edit.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('core/js/number/number_edit.js')}}"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {

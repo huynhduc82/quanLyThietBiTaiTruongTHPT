@@ -2,7 +2,14 @@
 
 namespace App\Http\Controllers\SpecifyTheNumberOfEquipments;
 
+use App\Http\Controllers\Class\ClassController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Grades\GradeController;
+use App\Models\TypeOfEquipments\TypeOfEquipment;
+use App\Repositories\Eloquents\Equipment\TypeOfEquipmentRepo;
+use App\Services\Courses\CourseDetailsService;
+use App\Services\Courses\CourseService;
+use App\Services\Equipment\TypeOfEquipmentService;
 use App\Services\SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsService;
 use App\Transformers\SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsTransformer;
 use Illuminate\Http\JsonResponse;
@@ -29,13 +36,24 @@ class SpecifyTheNumberOfEquipmentsController extends Controller
     }
     public function storeView()
     {
+        $gradeData = app(GradeController::class)->index();
+        $classData = app(ClassController::class)->index();
+        $courseData = app(CourseService::class)->index();
+        $courseDetailData = app(CourseDetailsService::class)->index();
+        $typeOfEquipmentData = app(TypeOfEquipmentRepo::class)->getModel()->newQuery()->get();
+
+        return view('specifythenumberofequipment/store')->with(compact(['courseData','courseDetailData','gradeData','classData','typeOfEquipmentData']));
+    }
+
+    public function editView($id)
+    {
         $include = [
 
         ];
 
-        $data = $this->specifyTheNumberOfEquipmentsService->index($include);
+        $data = $this->specifyTheNumberOfEquipmentsService->details($id);
 
-        return view('specifythenumberofequipment/store')->with(compact('data'));
+        return view('specifythenumberofequipment/edit')->with(compact('data'));
     }
     public function index(): JsonResponse
     {

@@ -1,10 +1,9 @@
-let Name;
-let Course;
+
+let Quantity;
 let ID;
 
 let inputID = $("#id");
-let InputName = $("#name");
-let InputCourse = $("#course");
+let InputQuantity = $("#quantity");
 
 
 let data = {}
@@ -13,21 +12,16 @@ $(document).ready(function(){
     $('#frm-number').on('submit', function (e) {
         e.preventDefault();
         ID = inputID.val();
-        Name = InputName.val();
-        Course = InputCourse.val();
-        if (!Course) {
-            $('#label-error').text('Bạn chưa chọn  ');
-            return false;
-        }
+        Quantity = InputQuantity.val();
+
         $('#label-error').text('');
 
-        data.course_details_id = Course;
-        data.name = Name;
+        data.quantity = Quantity;
 
         let back_page = '/number/index';
 
         $.ajax({
-            url: '/number',
+            url: '/api/number-equipment/' + ID,
             data: JSON.stringify(data),
             dataType: 'json',
             enctype: "multipart/form-data",
@@ -40,7 +34,7 @@ $(document).ready(function(){
             error: function (error) {
                 $('#label-error').text(error.responseJSON.message);
             },
-            type: 'POST',
+            type: 'PUT',
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }

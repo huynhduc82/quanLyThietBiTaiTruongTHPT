@@ -1,8 +1,10 @@
-let Name;
-let Course;
+let Equipment;
+let CourseDetails;
+let Quantity;
 
-let InputName = $("#name");
-let InputCourse = $("#course");
+let InputEquipment = $("#equipment");
+let InputCourseDetails = $("#courseDetails");
+let InputQuantity = $("#quantity");
 
 
 let data = {}
@@ -10,21 +12,20 @@ let data = {}
 $(document).ready(function(){
     $('#frm-number').on('submit', function (e) {
         e.preventDefault();
-        Name = InputName.val();
-        Course = InputCourse.val();
-        if (!Course) {
-            $('#label-error').text('Bạn chưa chọn  ');
-            return false;
-        }
+        Equipment = InputEquipment.val();
+        CourseDetails = InputCourseDetails.val();
+        Quantity = InputQuantity.val();
+
         $('#label-error').text('');
 
-        data.course_details_id = Course;
-        data.name = Name;
+        data.course_details_id = CourseDetails;
+        data.equipment_id = Equipment;
+        data.quantity = Quantity;
 
         let back_page = '/number/index';
 
         $.ajax({
-            url: '/number',
+            url: '/api/number-equipment',
             data: JSON.stringify(data),
             dataType: 'json',
             enctype: "multipart/form-data",

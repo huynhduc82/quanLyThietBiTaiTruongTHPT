@@ -23,11 +23,11 @@
                         <div class="col-5">
                             <a href="{{ route('equipment.number.store') }}" type="button" class="btn bg-gradient-info">Thêm
                                 mới</a>
-                            <button class="btn bg-gradient-info mx-2"
-                                    onclick="importExcel('{{route('number.import.excel')}}')"
-                            >
-                                Nhập bằng file Excel
-                            </button>
+{{--                            <button class="btn bg-gradient-info mx-2"--}}
+{{--                                    onclick="importExcel('{{route('number.import.excel')}}')"--}}
+{{--                            >--}}
+{{--                                Nhập bằng file Excel--}}
+{{--                            </button>--}}
                         </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -35,14 +35,17 @@
                             <table class="table mb-0 w-100">
                                 <thead>
                                 <tr class="d-flex">
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-30">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
                                         Tên thiết bị
                                     </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
+                                        Bài học
+                                    </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2
-                                     w-6">
+                                     w-20">
                                         Số lượng
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-7 text-wrap"></th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-20 text-wrap"></th>
                                 </tr>
                                 <tbody>
                                 @foreach($data as $details)
@@ -60,12 +63,21 @@
                                             <div class="d-flex px-4 py-1">
                                                 <div
                                                     class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{$details->course_details_id}}</h6>
+                                                    <h6 class="mb-0 text-sm">{{$details->courseDetails->describe}}</h6>
                                                     <p class="text-xs text-secondary mb-0"></p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="w-7">
+                                        <td class="w-20 text-wrap">
+                                            <div class="d-flex px-4 py-1">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{$details->quantity}}</h6>
+                                                    <p class="text-xs text-secondary mb-0"></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="w-20">
                                             <div class="d-block px-2 py-1">
                                                 <div class="d-flex justify-content-center">
                                                     <a type="button"
@@ -130,7 +142,7 @@
                 var DeleteConfirm = (url) => {
                     swalWithBootstrapButtons.fire({
                         title: 'Bạn có chắc không?',
-                        text: "Bạn không thể khôi phục lại thiết bị đã xoá!",
+                        text: "Bạn không thể khôi phục lại quy định thiết bị đã xoá!",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonText: 'Có, Hãy xoá đi!',
@@ -149,7 +161,7 @@
                                 success: function () {
                                     swalWithBootstrapButtons.fire({
                                         title: 'Đã xoá!',
-                                        text: "Thiết bị của bạn đã xoá.",
+                                        text: "Quy định thiết bị của bạn đã xoá.",
                                         icon: 'success',
                                         backdrop: false,
                                     }).then((result) => {
@@ -171,7 +183,7 @@
                         ) {
                             swalWithBootstrapButtons.fire({
                                 title: 'Đã huỷ',
-                                text: 'Thiết bị của bạn đã an toàn :)',
+                                text: 'Quy định thiết bị của bạn đã an toàn :)',
                                 icon: 'error',
                                 backdrop: false,
                             })
