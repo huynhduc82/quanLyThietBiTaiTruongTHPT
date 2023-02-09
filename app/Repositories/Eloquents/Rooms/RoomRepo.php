@@ -31,6 +31,12 @@ class RoomRepo extends BaseEloquentRepository
     {
 
     }
+    public function details($id, $include)
+    {
+        $query = $this->model->newQuery();
+
+        return $query->where('id', '=', $id)->with($include)->orderBy('id')->first();
+    }
 
 
 //    public function update()

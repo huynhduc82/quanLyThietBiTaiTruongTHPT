@@ -11,11 +11,17 @@
                 <h3>Chỉnh sửa khối lớp</h3>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
-                <form id="frm-equipment">
+                <form id="frm-grade">
+                <div class="form-group px-4">
+                        <div class="col-9">
+                            <label class="col-form-label">ID</label>
+                            <input type="text" class="form-control" placeholder="Bài học" id="id" value="{{ $data->id }}" disabled="disabled">
+                        </div>
+                    </div>
                     <div class="form-group px-4">
                         <div class="col-9">
                             <label class="col-form-label">Tên khối lớp</label>
-                            <input type="text" class="form-control" placeholder="Tên khối lớp" id="name">
+                            <input type="text" class="form-control" placeholder="Tên khối lớp" id="name" value="{{ $data->name }}">
                         </div>
                     </div>
 
@@ -35,7 +41,7 @@
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('core/js/type_equipment/type_equipment_edit.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('core/js/room/room_edit.js')}}"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {

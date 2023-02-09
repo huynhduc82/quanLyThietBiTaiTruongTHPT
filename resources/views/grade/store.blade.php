@@ -11,7 +11,7 @@
                 <h3>Thêm mới khối lớp</h3>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
-                <form id="frm-equipment">
+                <form id="frm-grade">
                     <div class="form-group px-4">
                         <div class="col-9">
                             <label class="col-form-label">Tên khối lớp</label>
@@ -36,7 +36,7 @@
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('core/js/type_equipment/type_equipment_store.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('core/js/grade/grade_store.js')}}"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {

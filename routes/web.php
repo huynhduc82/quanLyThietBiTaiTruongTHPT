@@ -202,9 +202,18 @@ Route::group([
     Route::get('/time/store', [
         'uses' => 'Class\ClassTimeRegulationController@storeView'
     ])->name('class.time.store');
-    Route::get('/time/edit', [
+    Route::get('/time/edit/{id}', [
         'uses' => 'Class\ClassTimeRegulationController@editView'
     ])->name('class.time.edit');
+    Route::post('/time', [
+        'uses' => 'Class\ClassTimeRegulationController@store'
+    ]);
+    Route::post('/time/edit/{id}', [
+        'uses' => 'Class\ClassTimeRegulationController@edit'
+    ]);
+    Route::delete('/time/delete/{id}', [
+        'uses' => 'Class\ClassTimeRegulationController@delete'
+    ])->name('class.time.delete');
 });
 
 Route::group([
@@ -214,16 +223,25 @@ Route::group([
         'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@indexView'
     ])->name('equipment.number.index');
     Route::get('/store', function () {
-        return view('specifythenumberofequipment/store');
+        return view('specifythenumberofequipment/storeView');
     })->name('equipment.number.store');
     Route::get('/edit', function () {
-        return view('specifythenumberofequipment/edit');
+        return view('specifythenumberofequipment/editView');
     })->name('equipment.number.edit');
+    Route::post('/import', [
+        'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@importCourseDetail'
+    ])->name('number.import.excel');
+    Route::delete('/number/delete/{id}', [
+        'uses' => 'Number\SpecifyTheNumberOfEquipments@delete'
+    ])->name('number.delete');
+    Route::post('', function () {
+        return view('specifythenumberofequipment/store');
+    });
 });
 
 Route::group([
     'prefix' => '/course',
-], function (){
+], function (){ 
     Route::get('/index', [
      'uses' => 'Course\CourseController@indexView'
     ])->name('course.index');
@@ -233,6 +251,19 @@ Route::group([
     Route::get('/edit', [
         'uses' => 'Course\CourseController@editView'
     ])->name('course.edit');
+    Route::post('/import', [
+        'uses' => 'Course\CourseDetailController@importCourseDetail'
+    ])->name('course.import.excel');
+    Route::delete('/time/delete/{id}', [
+        'uses' => 'Course\CourseController@delete'
+    ])->name('course.delete');
+    Route::post('', [
+        'uses' => 'Course\CourseController@store'
+    ]);
+    Route::post('/course/edit/{id}', [
+        'uses' => 'Course\CourseController@edit'
+    ]);
+    
 });
 
 Route::group([
@@ -244,9 +275,18 @@ Route::group([
     Route::get('/store', [
         'uses' => 'Rooms\RoomController@storeView'
     ])->name('room.store');
-    Route::get('/edit', [
+    Route::get('/edit/{id}', [
         'uses' => 'Rooms\RoomController@editView'
     ])->name('room.edit');
+    Route::post('/import', [
+        'uses' => 'Rooms\RoomController@importCourseDetail'
+    ])->name('room.import.excel');
+    Route::post('', [
+        'uses' => 'Rooms\RoomController@store'
+    ]);
+    Route::delete('/delete/{id}', [
+        'uses' => 'Rooms\RoomController@delete'
+    ])->name('room.delete');
 });
 
 Route::group([
@@ -261,6 +301,18 @@ Route::group([
     Route::get('/edit', [
         'uses' => 'Grades\GradeController@editView'
     ])->name('grade.edit');
+    Route::post('/import', [
+        'uses' => 'Grades\GradeController@importCourseDetail'
+    ])->name('grade.import.excel');
+    Route::delete('/grade/delete/{id}', [
+        'uses' => 'Grades\GradeController@delete'
+    ])->name('grade.delete');
+    Route::post('', [
+        'uses' => 'Grades\GradeController@store'
+    ]);
+    Route::post('/grade/{id}', [
+        'uses' => 'Grades\GradeController@edit'
+    ]);
 });
 
 Route::group([

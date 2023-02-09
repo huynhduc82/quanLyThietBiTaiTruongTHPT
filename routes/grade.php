@@ -14,8 +14,11 @@ Route::group([
     Route::post('/', [
         'uses' => 'Grades\GradeController@store'
     ]);
-    Route::post('/{id}', [
+     Route::post('/{id}', [
         'uses' => 'Grades\GradeController@edit'
+    ]);
+    Route::post('/import', [
+        'uses' => 'Grades\GradeController@importCourseDetail'
     ]);
     Route::delete('/{id}', [
         'uses' => 'Grades\GradeController@delete'

@@ -14,4 +14,7 @@ Route::group([
     Route::post('/{id}', [
         'uses' => 'Rooms\RoomController@edit'
     ]);
+    Route::post('/import', [
+        'uses' => 'Rooms\RoomController@importCourseDetail'
+    ]);
 });

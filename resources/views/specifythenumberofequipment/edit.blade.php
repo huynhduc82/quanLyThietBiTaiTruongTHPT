@@ -11,18 +11,24 @@
                 <h3>Chỉnh sửa số lượng</h3>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
-                <form id="frm-equipment">
+                <form id="frm-number">
+                <div class="form-group px-4">
+                        <div class="col-9">
+                            <label class="col-form-label">ID</label>
+                            <input type="text" class="form-control" placeholder="Bài học" id="id" value="{{ $data->id }}" disabled="disabled">
+                        </div>
+                    </div>
                     <div class="form-group px-4">
                         <div class="col-9">
                             <label class="col-form-label">Tên thiết bị</label>
-                            <input type="text" class="form-control" placeholder="Tên thiết bị" id="name">
+                            <input type="text" class="form-control" placeholder="Tên thiết bị" id="name" value="{{ $data->name }}">
                         </div>
                     </div>
 
                     <div class="form-group px-4">
                         <div class="col-9">
                             <label class="col-form-label">Số lượng</label>
-                            <input type="text" class="form-control" placeholder="Đơn vị tính" id ="unit">
+                            <input type="text" class="form-control" placeholder="Đơn vị tính" id ="unit" value="{{ $data->unit }}">
                         </div>
                     </div>
                     <div class="d-flex justify-content-center py-1 col-9">

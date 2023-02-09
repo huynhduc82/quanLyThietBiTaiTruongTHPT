@@ -24,10 +24,19 @@ class SpecifyTheNumberOfEquipmentsController extends Controller
         ];
 
         $data = $this->specifyTheNumberOfEquipmentsService->index($include);
-//        dd($data->toArray());
+//      dd($data->toArray());
         return view('specifythenumberofequipment/index')->with(compact('data'));
     }
+    public function storeView()
+    {
+        $include = [
 
+        ];
+
+        $data = $this->specifyTheNumberOfEquipmentsService->index($include);
+
+        return view('specifythenumberofequipment/store')->with(compact('data'));
+    }
     public function index(): JsonResponse
     {
         $include=[

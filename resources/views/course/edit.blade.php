@@ -11,11 +11,18 @@
                 <h3> Chỉnh sửa môn học</h3>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
-                <form id="frm-equipment">
+                <form id="frm-course">
+               
+                    </div> <div class="form-group px-4">
+                        <div class="col-9">
+                            <label class="col-form-label">ID</label>
+                            <input type="text" class="form-control" placeholder="ID" id="id" value="{{ $data->id }}" disabled="disabled">
+                        </div>
+                    </div>
                     <div class="form-group px-4">
                         <div class="col-9">
                             <label class="col-form-label">Tên môn học</label>
-                            <input type="text" class="form-control" placeholder="Tên môn học" id="name">
+                            <input type="text" class="form-control" placeholder="Tên môn học" id="name value="{{ $data->name }}">
                         </div>
                     </div>
                     <div class="d-flex justify-content-center py-1 col-9">
@@ -34,7 +41,7 @@
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('core/js/type_equipment/type_equipment_edit.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('core/js/course/course_edit.js')}}"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {

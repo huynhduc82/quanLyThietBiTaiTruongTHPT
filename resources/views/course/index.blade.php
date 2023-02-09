@@ -40,12 +40,48 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-25">
                                         Tên môn học
                                     </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-25">
+                                        Khối
+                                    </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-7 text-wrap"></th>
                                 </tr>
-
                                 <tbody>
-
-
+                                @foreach($data as $details)
+                                    <tr class="d-flex">
+                                        <td class="w-20 text-wrap">
+                                            <div class="d-flex px-4 py-1">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{$details->name}}</h6>
+                                                    <p class="text-xs text-secondary mb-0"></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="w-20 text-wrap">
+                                            <div class="d-flex px-4 py-1">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{$details->grade->name}}</h6>
+                                                    <p class="text-xs text-secondary mb-0"></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="w-7">
+                                            <div class="d-block px-2 py-1">
+                                                <div class="d-flex justify-content-center">
+                                                    <a type="button"
+                                                       href="{{ route('course.edit', ['id' => $details->id]) }}"
+                                                       class="btn bg-gradient-info my-1 mb-1 ms-6">Sửa</a>
+                                                    <button type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1"
+                                                            onclick="DeleteConfirm('{{route('course.delete', ['id' => $details->id])}}')">
+                                                        Xoá
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -83,6 +119,67 @@
 <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                })
+
+                var DeleteConfirm = (url) => {
+                    swalWithBootstrapButtons.fire({
+                        title: 'Bạn có chắc không?',
+                        text: "Bạn không thể khôi phục lại thiết bị đã xoá!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Có, Hãy xoá đi!',
+                        cancelButtonText: 'Không, Huỷ bỏ!',
+                        reverseButtons: true,
+                        backdrop: false,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: url,
+                                // dataType: 'json',
+                                enctype: "multipart/form-data",
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                success: function () {
+                                    swalWithBootstrapButtons.fire({
+                                        title: 'Đã xoá!',
+                                        text: "Thiết bị của bạn đã xoá.",
+                                        icon: 'success',
+                                        backdrop: false,
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload();
+                                        }
+                                    })
+                                },
+                                error: function (error) {
+                                },
+                                type: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            })
+                        } else if (
+                            /* Read more about handling dismissals below */
+                            result.dismiss === Swal.DismissReason.cancel
+                        ) {
+                            swalWithBootstrapButtons.fire({
+                                title: 'Đã huỷ',
+                                text: 'Thiết bị của bạn đã an toàn :)',
+                                icon: 'error',
+                                backdrop: false,
+                            })
+                        }
+                    })
+                };
+</script>
 <script>
     let importExcel = (url) => {
         Swal.fire({
