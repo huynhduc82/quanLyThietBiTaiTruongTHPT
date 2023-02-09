@@ -10,6 +10,7 @@ use App\Models\Maintenance\Maintenance;
 use App\Repositories\Contracts\Liquidation\ILiquidationRepo;
 use App\Repositories\Contracts\Maintenance\IMaintenanceRepo;
 use App\Services\Equipment\EquipmentService;
+use App\Services\Equipment\TypeOfEquipmentService;
 use App\Services\Response\BaseService;
 use App\Validators\Liquidation\LiquidationValidator;
 use App\Validators\Maintenance\MaintenanceValidators;
@@ -109,6 +110,10 @@ class LiquidationService extends BaseService
 
     public function approved($id = 0)
     {
+        $input = [];
+        $input['approved_by'] = Helpers::getUserLoginId() ?? null;
+        $input['approved_time'] = Carbon::now()->toDateTimeString();
+        $this->repository->edit($input, $id);
         return $this->repository->updateStatus(EquipmentLiquidation::STATUS_APPROVED, $id);
     }
 
@@ -118,14 +123,13 @@ class LiquidationService extends BaseService
         $result = $this->repository->updateStatus(EquipmentLiquidation::STATUS_SUCCESS, $id);
 
         if($result) {
-            $equipmentId = [];
             $model = $this->repository->newQuery()->with(['details'])->where('id', '=', $id)->first();
             foreach ($model->details as $item)
             {
-                $equipmentId[] = $item->equipment_id;
+                app(EquipmentService::class)->delete($item->equipment_id);
             }
-            app(EquipmentService::class)->updateEquipmentStatus($equipmentId, false);
         }
+        app(TypeOfEquipmentService::class)->updateAllQuantity();
         DB::commit();
 
         return $result;

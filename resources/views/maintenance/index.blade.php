@@ -106,8 +106,8 @@
                                             <td class="accordion-toggle w-15" data-bs-toggle="collapse"
                                                 data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
                                                 <div class="d-block">
-                                                    <div class="d-block flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">{{$item->pick_up_time}}</h6>
+                                                    <div class="d-block flex-column justify-content-center text-center">
+                                                        <h6 class="mb-0 text-sm">{{$item->maintenancer ? $item->maintenancer->name : 'Chưa sữa chửa'}}</h6>
                                                         <p class="text-xs text-secondary mb-0"></p>
                                                     </div>
                                                 </div>
@@ -116,7 +116,7 @@
                                                 data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
                                                 <div class="d-block">
                                                     <div class="d-flex justify-content-center text-center">
-                                                        <h6 class="mb-0 text-sm">{{$item->return_appointment_time}}</h6>
+                                                        <h6 class="mb-0 text-sm">{{$item->maintenance_time ?? 'Chưa sữa chửa'}}</h6>
                                                         <p class="text-xs text-secondary mb-0"></p>
                                                     </div>
                                                 </div>

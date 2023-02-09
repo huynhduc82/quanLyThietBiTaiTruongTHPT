@@ -31,6 +31,7 @@ class MaintenanceController extends Controller
             'details.equipments',
             'details.equipments.room',
             'user',
+            'maintenancer',
         ];
 
         $data = $this->maintenanceServices->index($include);
