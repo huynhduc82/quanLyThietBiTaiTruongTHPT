@@ -286,7 +286,19 @@ Route::group([
     Route::post('/course/edit/{id}', [
         'uses' => 'Course\CourseController@edit'
     ]);
-
+    Route::group([
+        'prefix' => '/details',
+    ], function () {
+        Route::get('/store/{id}', [
+            'uses' => 'Course\CourseDetailController@storeView'
+        ])->name('course.details.store');
+        Route::get('/edit/{id}', [
+            'uses' => 'Course\CourseDetailController@editView'
+        ])->name('course.details.edit');
+        Route::delete('/delete/{id}', [
+            'uses' => 'Course\CourseDetailController@delete'
+        ])->name('course.details.delete');
+    });
 });
 
 Route::group([

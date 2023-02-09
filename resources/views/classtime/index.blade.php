@@ -20,31 +20,31 @@
                                 <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
                             </div>
                         </div>
-                        <div class="col-5">
-                            <a href="{{ route('class.time.store') }}" type="button" class="btn bg-gradient-info">Thêm
-                                mới</a>
-                            <button class="btn bg-gradient-info mx-2"
-                                    onclick="importExcel('{{route('class.import.excel')}}')"
-                            >
-                                Nhập bằng file Excel
-                            </button>
-                        </div>
+{{--                        <div class="col-5">--}}
+{{--                            <a href="{{ route('class.time.store') }}" type="button" class="btn bg-gradient-info">Thêm--}}
+{{--                                mới</a>--}}
+{{--                            <button class="btn bg-gradient-info mx-2"--}}
+{{--                                    onclick="importExcel('{{route('class.import.excel')}}')"--}}
+{{--                            >--}}
+{{--                                Nhập bằng file Excel--}}
+{{--                            </button>--}}
+{{--                        </div>--}}
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0 ">
                             <table class="table mb-0 w-100">
                                 <thead>
                                     <tr class="d-flex">
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-4  w-30">
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-4  w-20">
                                             Bài học
                                         </th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-30 text-wrap">
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-20 text-wrap">
                                             Thời gian bắt đầu
                                         </th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-30">
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-20">
                                             Thời gian kết thúc
                                         </th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-30">
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-20">
                                         </th>
                                     </tr>
                                 <tbody>
@@ -61,7 +61,7 @@
                                             </div>
                                         </td>
                                         <td class="w-20 text-wrap">
-                                            <div class="d-flex px-4 py-1">
+                                            <div class="d-flex px-2 py-1">
                                                 <div
                                                     class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{$details->start}}</h6>
@@ -70,7 +70,7 @@
                                             </div>
                                         </td>
                                         <td class="w-20 text-wrap">
-                                            <div class="d-flex px-4 py-1">
+                                            <div class="d-flex px-2 py-1">
                                                 <div
                                                     class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{$details->end}}</h6>
@@ -78,8 +78,8 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="w-7">
-                                            <div class="d-block px-2 py-1">
+                                        <td class="w-20">
+                                            <div class="d-block px-1 py-1">
                                                 <div class="d-flex justify-content-center">
                                                     <a type="button"
                                                        href="{{ route('class.time.edit', ['id' => $details->id]) }}"

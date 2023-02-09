@@ -47,7 +47,6 @@ class CourseDetailsRepo extends BaseEloquentRepository implements IEquipmentRepo
     public function edit($input, $id): int
     {
         $query = $this->model->newQuery();
-
         return $query->where('id', $id)->update($input);
     }
 

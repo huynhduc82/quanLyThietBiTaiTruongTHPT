@@ -23,30 +23,28 @@
                         <div class="col-5">
                             <a href="{{ route('grade.store') }}" type="button" class="btn bg-gradient-info">Thêm
                                 mới</a>
-                            <button class="btn bg-gradient-info mx-2"
-                                    onclick="importExcel('{{route('grade.import.excel')}}')"
-                            >
-                                Nhập bằng file Excel
-                            </button>
+{{--                            <button class="btn bg-gradient-info mx-2"--}}
+{{--                                    onclick="importExcel('{{route('grade.import.excel')}}')"--}}
+{{--                            >--}}
+{{--                                Nhập bằng file Excel--}}
+{{--                            </button>--}}
                         </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0 ">
                             <table class="table mb-0 w-100">
                                 <thead>
-
                                 <tr class="d-flex">
-
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-25">
-                                        Tên lớp
+                                        Tên Khối
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-7 text-wrap"></th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-25 text-wrap"></th>
                                 </tr>
                                 <tbody>
                                 @foreach($data as $details)
                                     <tr class="d-flex">
-                                        <td class="w-20 text-wrap">
-                                            <div class="d-flex px-4 py-1">
+                                        <td class="w-25 text-wrap">
+                                            <div class="d-flex px-8 py-1">
                                                 <div
                                                     class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{$details->name}}</h6>
@@ -54,7 +52,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="w-7">
+                                        <td class="w-25">
                                             <div class="d-block px-2 py-1">
                                                 <div class="d-flex justify-content-center">
                                                     <a type="button"
