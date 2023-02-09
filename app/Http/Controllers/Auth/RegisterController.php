@@ -42,16 +42,16 @@ class RegisterController extends Controller
     {
         $name = Helpers::getTimeNow();
         $this->validator($request->all())->validate();
-        app(Avatar::class)->create($request->name)->save(storage_path('app/public/images/' . $name . '.png'),100);
-        $image = new File(storage_path('app/public/images/' . $name . '.png'));
-        $image = Helpers::fromFile($image);
-
-        $avatar = app(ImageInfoService::class)->uploadDrive($image, ImageInfo::COMPONENT_AVATAR);
-
-        Storage::delete('public/images/' . $name . '.png');
+//        app(Avatar::class)->create($request->name)->save(storage_path('app/public/images/' . $name . '.png'),100);
+//        $image = new File(storage_path('app/public/images/' . $name . '.png'));
+//        $image = Helpers::fromFile($image);
+//
+//        $avatar = app(ImageInfoService::class)->uploadDrive($image, ImageInfo::COMPONENT_AVATAR);
+//
+//        Storage::delete('public/images/' . $name . '.png');
 
         $param = $request->all();
-        $param['avatar'] = $avatar['image_references'];
+//        $param['avatar'] = $avatar['image_references'];
 
         event(new Registered($user = $this->create($param)));
 

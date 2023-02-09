@@ -6,9 +6,15 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="page-header max-height-500 border-radius-xl mt-4" style="background-position-y: 50%;">
-            <img src="{{$data->avatarInfo ? $data->backgroundInfo->url : null}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
-        </div>
+        @if($data->backgroundInfo)
+            <div class="page-header max-height-500 border-radius-xl mt-4" style="background-position-y: 50%;">
+                <img src="{{$data->backgroundInfo ? $data->backgroundInfo->url : null}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+            </div>
+        @else
+            <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('../assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
+                <span class="mask bg-gradient-primary opacity-6"></span>
+            </div>
+        @endif
         <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
             <div class="row gx-4">
                 <div class="col-auto">
