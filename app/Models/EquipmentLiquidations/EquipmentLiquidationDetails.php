@@ -24,7 +24,7 @@ class EquipmentLiquidationDetails extends BaseModel
 
     public function equipments() : BelongsTo
     {
-        return $this->BelongsTo(Equipment::class, 'equipment_id', 'id');
+        return $this->BelongsTo(Equipment::class, 'equipment_id', 'id')->withTrashed();
     }
 
     public function room() : BelongsTo

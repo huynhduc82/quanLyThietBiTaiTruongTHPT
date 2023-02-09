@@ -3,6 +3,7 @@
 namespace App\Services\Maintenance;
 
 use App\Helpers;
+use App\Models\Equipments\Equipment;
 use App\Repositories\Contracts\Maintenance\IMaintenanceDetailsRepo;
 use App\Repositories\Contracts\Reservations\IEquipmentReservationDetailRepo;
 use App\Services\Equipment\EquipmentService;
@@ -23,8 +24,14 @@ class MaintenanceDetailsServices extends BaseService
             $reservationDetails = [];
             $reservationDetails['maintenance_id'] = $input['maintenance_id'];
             $reservationDetails['equipment_id'] =  $item['id'];
+            $equipment = Equipment::find($item['id']);
+            $equipment->can_rent = false;
+            $equipment->save();
+
+            app(EquipmentService::class)->updateEquipmentStatus([$item['id']], false);
             $this->repository->store($reservationDetails);
         }
+
     }
 
     public function edit($input = [], $id = 0, $model = null)

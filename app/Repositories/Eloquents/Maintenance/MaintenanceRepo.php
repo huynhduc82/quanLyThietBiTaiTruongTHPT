@@ -3,8 +3,10 @@
 namespace App\Repositories\Eloquents\Maintenance;
 
 use App\Models\EquipmentReservations\EquipmentReservation;
+use App\Models\Equipments\Equipment;
 use App\Models\Maintenance\Maintenance;
 use App\Repositories\BaseEloquentRepository;
+use App\Services\Equipment\EquipmentService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -117,5 +119,15 @@ class MaintenanceRepo extends BaseEloquentRepository
             $result = [];
         }
         return $result;
+    }
+
+    public function updateEquipment($id)
+    {
+        $model = $this->model->newQuery()->where('id', $id)->with('details')->first();
+        foreach ($model->details as $detail)
+        {
+            app(EquipmentService::class)->updateEquipmentStatus([$detail->equipment_id], true);
+        }
+
     }
 }

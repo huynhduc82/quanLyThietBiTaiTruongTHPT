@@ -24,7 +24,9 @@ class Maintenance extends BaseModel
         'user_id',
         'maintenance_day',
         'status',
-        'room_id'
+        'room_id',
+        'maintenancer_id',
+        'maintenance_time',
     ];
 
     use SoftDeletes;
@@ -36,6 +38,8 @@ class Maintenance extends BaseModel
         'maintenance_day',
         'status',
         'room_id',
+        'maintenancer_id',
+        'maintenance_time',
     ];
 
     public function details() : HasMany
@@ -46,5 +50,10 @@ class Maintenance extends BaseModel
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function maintenancer() : BelongsTo
+    {
+        return $this->belongsTo(User::class, 'maintenancer_id', 'id');
     }
 }
