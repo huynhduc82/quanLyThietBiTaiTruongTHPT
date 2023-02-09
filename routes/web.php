@@ -333,7 +333,7 @@ Route::group([
     Route::get('/store', [
         'uses' => 'Grades\GradeController@storeView'
     ])->name('grade.store');
-    Route::get('/edit', [
+    Route::get('/edit/{id}', [
         'uses' => 'Grades\GradeController@editView'
     ])->name('grade.edit');
     Route::post('/import', [

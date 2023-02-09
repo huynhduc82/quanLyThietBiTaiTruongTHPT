@@ -33,7 +33,7 @@ class GradeController extends Controller
 
         ];
 
-        $data = $this->gradeServices->details($id, $include);
+        $data = $this->gradeService->details($id, $include);
 
         return view('grade/edit')->with(compact('data'));
     }
