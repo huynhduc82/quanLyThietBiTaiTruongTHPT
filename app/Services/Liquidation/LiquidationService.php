@@ -139,4 +139,9 @@ class LiquidationService extends BaseService
     {
         return $this->repository->delete($id);
     }
+
+    public function countLiquidation()
+    {
+        return $this->repository->countLiquidation();
+    }
 }
