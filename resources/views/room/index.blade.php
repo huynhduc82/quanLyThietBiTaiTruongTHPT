@@ -135,7 +135,7 @@
                 var DeleteConfirm = (url) => {
                     swalWithBootstrapButtons.fire({
                         title: 'Bạn có chắc không?',
-                        text: "Bạn không thể khôi phục lại thiết bị đã xoá!",
+                        text: "Bạn không thể khôi phục lại phòng học đã xoá!",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonText: 'Có, Hãy xoá đi!',
@@ -154,7 +154,7 @@
                                 success: function () {
                                     swalWithBootstrapButtons.fire({
                                         title: 'Đã xoá!',
-                                        text: "Thiết bị của bạn đã xoá.",
+                                        text: "Phòng học của bạn đã xoá.",
                                         icon: 'success',
                                         backdrop: false,
                                     }).then((result) => {
@@ -176,7 +176,7 @@
                         ) {
                             swalWithBootstrapButtons.fire({
                                 title: 'Đã huỷ',
-                                text: 'Thiết bị của bạn đã an toàn :)',
+                                text: 'Phòng học của bạn đã an toàn :)',
                                 icon: 'error',
                                 backdrop: false,
                             })

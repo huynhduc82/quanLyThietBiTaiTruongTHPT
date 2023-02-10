@@ -65,19 +65,19 @@ class RoomController extends Controller
         return $this->response($result);
     }
 
-    public function show($id)
+    public function edit(Request $request, $id)
     {
+        $input = $request::all();
 
+        $result = $this->roomServices->edit($input, $id);
+
+        return $this->response($result);
     }
 
-
-    public function update()
+    public function delete($id)
     {
+        $result = $this->roomServices->delete($id);
 
-    }
-
-    public function destroy($id)
-    {
-
+        return $this->response($result);
     }
 }

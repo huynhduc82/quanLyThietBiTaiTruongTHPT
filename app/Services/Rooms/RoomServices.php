@@ -37,14 +37,16 @@ class RoomServices extends BaseService
     }
 
 
-    public function update()
+    public function edit($input, $id)
     {
+        $this->validatorCreateUpdate($input, $id);
 
+        return $this->repository->edit($input, $id);
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
-
+        return $this->repository->delete($id);
     }
 
     protected function validatorCreateUpdate(array $params = [], ?int $id = null): void

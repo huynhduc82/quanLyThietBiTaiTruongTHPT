@@ -39,13 +39,15 @@ class RoomRepo extends BaseEloquentRepository
     }
 
 
-//    public function update()
-//    {
-//
-//    }
-
-    public function destroy($id)
+    public function edit($input, $id): int
     {
+        $query = $this->model->newQuery();
 
+        return $query->where('id', $id)->update($input);
+    }
+
+    public function delete($id): int
+    {
+        return $this->model->newQuery()->where('id', $id)->delete();
     }
 }

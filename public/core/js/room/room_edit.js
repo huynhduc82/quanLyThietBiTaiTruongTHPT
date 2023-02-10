@@ -4,7 +4,7 @@ let ID;
 
 let InputName = $("#name");
 let InputRent = $("#rent");
-let InputID=$("#id");
+let InputID = $("#id");
 
 let data = {}
 
@@ -12,11 +12,12 @@ $(document).ready(function(){
     $('#frm-room').on('submit', function (e) {
         e.preventDefault();
         Name = InputName.val();
+        ID = InputID.val();
         if (!Name) {
             $('#label-error').text('Bạn chưa nhập thông tin ');
             return false;
         }
-        if($("#rent").val()==="on"){
+        if($("#rent").is(":checked")){
             Rent=true;
         } else {
             Rent=false;
@@ -29,7 +30,7 @@ $(document).ready(function(){
         let back_page = '/room/index';
 
         $.ajax({
-            url: '/room',
+            url: '/api/room/' + ID,
             data: JSON.stringify(data),
             dataType: 'json',
             enctype: "multipart/form-data",
