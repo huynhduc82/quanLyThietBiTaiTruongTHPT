@@ -21,7 +21,7 @@ $(document).ready(function(){
         let back_page = '/grade/index';
 
         $.ajax({
-            url: '/grade/edit/' + ID,
+            url: '/api/grade/' + ID,
             data: JSON.stringify(data),
             dataType: 'json',
             enctype: "multipart/form-data",
