@@ -15,13 +15,13 @@
                     <div class="form-group px-4">
                         <div class="col-9">
                             <label class="col-form-label">ID</label>
-                            <input type="text" class="form-control" placeholder="Bài học" id="id" value="{{ $data->id }}" disabled="disabled">
+                            <input type="text" class="form-control" placeholder="ID" id="id" value="{{ $data->id }}" disabled="disabled">
                         </div>
                     </div>
                     <div class="form-group px-4">
                         <div class="col-9">
                             <label class="col-form-label">Bài học</label>
-                            <input type="text" class="form-control" placeholder="Bài học" id="name" value="{{ $data->lesson }}">
+                            <input type="text" class="form-control" placeholder="Bài học" id="lesson" value="{{ $data->lesson }}">
                         </div>
                     </div>
                     <div class="form-group px-4">

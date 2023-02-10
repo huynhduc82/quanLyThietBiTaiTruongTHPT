@@ -29,7 +29,7 @@ class ClassTimeRegulationController extends Controller
     public function editView($id): Factory|View|Application
     {
         $data = $this->classTimeRegulationService->details($id);
-    
+
         return view('classtime/edit')->with(compact('data'));
     }
 
