@@ -65,7 +65,7 @@
                                             <div class="d-flex px-4 py-1">
                                                 <div
                                                     class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{$details->courseDetails->describe}}</h6>
+                                                    <h6 class="mb-0 text-sm">{{$details->courseDetails ? $details->courseDetails->describe : ''}}</h6>
                                                     <p class="text-xs text-secondary mb-0"></p>
                                                 </div>
                                             </div>
