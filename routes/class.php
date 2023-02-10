@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('class-time',['uses' => 'Class\ClassTimeRegulationController@index']);
 
+
 Route::group([
-    'prefix' => 'class',
+    'prefix' => '/class',
 ], function (){
     Route::get('/',[
         'uses' => 'Class\ClassController@index'
@@ -25,4 +26,11 @@ Route::group([
     Route::delete('/{id}', [
         'uses' => 'Class\ClassController@delete'
     ]);
+    Route::group([
+        'prefix' => '/time',
+    ], function () {
+        Route::post('/store', [
+            'uses' => 'Class\ClassTimeRegulationController@store'
+        ])->middleware('auth');
+    });
 });

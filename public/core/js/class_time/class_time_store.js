@@ -29,10 +29,10 @@ $(document).ready(function(){
         data.lesson = Lesson;
         data.end = EndTime;
 
-        let back_page = '/class/time/index';
+        let back_page = '/class-time/index';
 
         $.ajax({
-            url: '/class/time',
+            url: '/api/class/time/store',
             data: JSON.stringify(data),
             dataType: 'json',
             enctype: "multipart/form-data",
