@@ -21,7 +21,9 @@
                             </div>
                         </div>
                         <div class="col-5">
-                            <a href="{{ route('maintenance.store') }}" type="button" class="btn bg-gradient-info">Báo hỏng thiết bị</a>
+                            @role('SuperAdmin|admin|manage|teacher')
+                                <a href="{{ route('maintenance.store') }}" type="button" class="btn bg-gradient-info">Báo hỏng thiết bị</a>
+                            @endrole
                         </div>
                     </div>
                     <div class="px-4 py-0 w-60">
@@ -134,21 +136,29 @@
                                                 <div class="d-block">
                                                     <div class="d-flex justify-content-center">
                                                         @if($item->status == 1)
+                                                            @role('SuperAdmin|admin|maintainer')
                                                             <button  class="btn bg-gradient-danger my-1 mb-1 ms-1" onclick="StartMaintenanceConfirm({{$item->id}})">
                                                                 Sửa Chữa
                                                             </button>
+                                                            @endrole
+                                                            @role('SuperAdmin|admin|manage')
                                                             <button class="btn bg-gradient-danger my-1 mb-1 ms-1" onclick="CancelConfirm({{$item->id}})">
                                                                 Huỷ
                                                             </button>
+                                                            @endrole
                                                         @else
                                                             @if($item->status != 3 )
+                                                                @role('SuperAdmin|admin|manage')
                                                                 <button type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1" onclick="DeleteConfirm({{$item->id}})">
                                                                     Xoá
                                                                 </button>
+                                                                @endrole
                                                             @else
+                                                                @role('SuperAdmin|admin|maintainer')
                                                                 <button type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1" onclick="EndMaintenanceConfirm({{$item->id}})">
                                                                     Hoàn tất
                                                                 </button>
+                                                                @endrole
                                                             @endif
                                                         @endif
                                                     </div>

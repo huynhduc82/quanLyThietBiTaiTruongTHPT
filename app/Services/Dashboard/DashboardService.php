@@ -2,8 +2,10 @@
 
 namespace App\Services\Dashboard;
 
+use App\Http\Controllers\RoleAndPermission\RoleAndPermissionController;
 use App\Models\EquipmentStatus\EquipmentStatus;
 use App\Models\TypeOfEquipments\TypeOfEquipment;
+use App\Models\User;
 use App\Repositories\Contracts\Courses\ICourseRepo;
 use App\Repositories\Contracts\Equipment\ITypeOfEquipmentRepo;
 use App\Services\Equipment\EquipmentService;
@@ -48,5 +50,19 @@ class DashboardService extends BaseService
         return $dataReturn;
     }
 
+    public function getRoleData()
+    {
+        return User::all();
+    }
+
+    public function getRoleDataByUser($id)
+    {
+        return User::find($id);
+    }
+
+    public function assRole($id, $input)
+    {
+        User::find($id)->syncRoles($input['role']);
+    }
 
 }

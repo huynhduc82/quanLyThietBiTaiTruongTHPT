@@ -20,6 +20,7 @@
                                 <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
                             </div>
                         </div>
+                        @role('SuperAdmin|admin|manage')
                         <div class="col-5">
                             <a href="{{ route('equipment.store') }}" type="button" class="btn bg-gradient-info">Thêm
                                 mới</a>
@@ -29,6 +30,7 @@
                                 Nhập bằng file Excel
                             </button>
                         </div>
+                        @endrole('')
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0 ">
@@ -122,6 +124,7 @@
                                         <td class="w-7">
                                             <div class="d-block px-2 py-1">
                                                 <div class="d-flex justify-content-center">
+                                                    @role('SuperAdmin|admin|manage')
                                                     <a type="button"
                                                        href="{{ route('equipment.edit', ['id' => $item->id]) }}"
                                                        class="btn bg-gradient-info my-1 mb-1 ms-6">Sửa</a>
@@ -129,6 +132,7 @@
                                                             onclick="DeleteConfirm('{{route('equipment.delete', ['id' => $item->id])}}')">
                                                         Xoá
                                                     </button>
+                                                    @endrole
                                                 </div>
                                             </div>
                                         </td>

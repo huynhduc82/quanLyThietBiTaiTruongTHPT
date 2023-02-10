@@ -20,10 +20,12 @@
                                 <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
                             </div>
                         </div>
+                        @role('SuperAdmin|admin|manage|teacher')
                         <div class="col-5">
                             <a href="{{ route('lend_return.store') }}" type="button" class="btn bg-gradient-info">Mượn
                                 thiết bị</a>
                         </div>
+                        @endrole
                     </div>
                     <div class="px-4 py-0 w-60">
                         <form id="frm-filter" action="{{ route('lend_return.get-by-day') }}" method="GET">
@@ -161,6 +163,7 @@
                                                     <a type="button"
                                                        href="{{ route('lend_return.print', ['id' => $item->id]) }}"
                                                        class="btn bg-gradient-info my-1 mb-1">In</a>
+                                                    @role('SuperAdmin|admin|manage')
                                                     @if($item->status != 2)
                                                         <a type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1"
                                                            href="{{ route('lend_return.returnView', ['id' => $item->id]) }}">
@@ -172,6 +175,7 @@
                                                             Trả
                                                         </a>
                                                     @endif
+                                                    @endrole
                                                 </div>
                                             </div>
                                         </td>

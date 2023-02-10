@@ -431,6 +431,11 @@
                                 <a class="dropdown-item" href="{{ route('profile.index') }}">
                                     <span class="font-weight-bold">Hồ sơ</span>
                                 </a>
+                                @role('SuperAdmin')
+                                <a class="dropdown-item" href="{{ route('role.index') }}">
+                                    <span class="font-weight-bold">Quản lý vai trò</span>
+                                </a>
+                                @endrole
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
