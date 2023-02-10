@@ -38,6 +38,20 @@ Route::group([
 });
 
 Route::group([
+    'prefix' => '/role',
+], function (){
+    Route::get('',[
+        'uses' => 'Dashboard\DashboardController@roleView'
+    ])->name('role.index');
+    Route::get('/edit/{id}',[
+        'uses' => 'Dashboard\DashboardController@roleEditView'
+    ])->name('role.edit');
+    Route::post('/ass-role/{id}',[
+        'uses' => 'Dashboard\DashboardController@assRole'
+    ])->name('ass.edit');
+});
+
+Route::group([
     'prefix' => '/equipment',
 ], function (){
     Route::get('/index',[
@@ -201,19 +215,19 @@ Route::group([
     ])->name('class.time.index');
     Route::get('/store', [
         'uses' => 'Class\ClassTimeRegulationController@storeView'
-    ])->name('class.time.store');
+    ])->name('class.time.store')->middleware('auth');
     Route::get('/edit/{id}', [
         'uses' => 'Class\ClassTimeRegulationController@editView'
-    ])->name('class.time.edit');
+    ])->name('class.time.edit')->middleware('auth');
     Route::post('/', [
         'uses' => 'Class\ClassTimeRegulationController@store'
-    ]);
+    ])->middleware('auth');
     Route::post('/edit/{id}', [
         'uses' => 'Class\ClassTimeRegulationController@edit'
-    ]);
+    ])->middleware('auth');
     Route::delete('/delete/{id}', [
         'uses' => 'Class\ClassTimeRegulationController@delete'
-    ])->name('class.time.delete');
+    ])->name('class.time.delete')->middleware('auth');
 });
 
 Route::group([
@@ -224,19 +238,19 @@ Route::group([
     ])->name('class.index');
     Route::get('/store', [
         'uses' => 'Class\ClassController@storeView'
-    ])->name('class.store');
+    ])->name('class.store')->middleware('auth');
     Route::get('/edit/{id}', [
         'uses' => 'Class\ClassController@editView'
-    ])->name('class.edit');
+    ])->name('class.edit')->middleware('auth');
     Route::post('', [
         'uses' => 'Class\ClassController@store'
-    ]);
+    ])->middleware('auth');
     Route::post('/edit/{id}', [
         'uses' => 'Class\ClassController@edit'
-    ]);
+    ])->middleware('auth');
     Route::delete('/delete/{id}', [
         'uses' => 'Class\ClassController@delete'
-    ])->name('class.delete');
+    ])->name('class.delete')->middleware('auth');
 });
 
 Route::group([
@@ -247,19 +261,19 @@ Route::group([
     ])->name('equipment.number.index');
     Route::get('/store', [
         'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@storeView'
-    ])->name('equipment.number.store');
+    ])->name('equipment.number.store')->middleware('auth');
     Route::get('/edit/{id}', [
         'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@editView'
-    ])->name('equipment.number.edit');
+    ])->name('equipment.number.edit')->middleware('auth');
 //    Route::post('/import', [
 //        'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@importCourseDetail'
 //    ])->name('number.import.excel');
     Route::delete('/number/delete/{id}', [
         'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@delete'
-    ])->name('number.delete');
+    ])->name('number.delete')->middleware('auth');
     Route::post('', function () {
         return view('SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@store');
-    });
+    })->middleware('auth');
 });
 
 Route::group([
@@ -270,34 +284,34 @@ Route::group([
     ])->name('course.index');
     Route::get('/store', [
         'uses' => 'Course\CourseController@storeView'
-    ])->name('course.store');
+    ])->name('course.store')->middleware('auth');
     Route::get('/edit', [
         'uses' => 'Course\CourseController@editView'
-    ])->name('course.edit');
+    ])->name('course.edit')->middleware('auth');
     Route::post('/import', [
         'uses' => 'Course\CourseDetailController@importCourseDetail'
-    ])->name('course.import.excel');
+    ])->name('course.import.excel')->middleware('auth');
     Route::delete('/time/delete/{id}', [
         'uses' => 'Course\CourseController@delete'
-    ])->name('course.delete');
+    ])->name('course.delete')->middleware('auth');
     Route::post('', [
         'uses' => 'Course\CourseController@store'
-    ]);
+    ])->middleware('auth');
     Route::post('/course/edit/{id}', [
         'uses' => 'Course\CourseController@edit'
-    ]);
+    ])->middleware('auth');
     Route::group([
         'prefix' => '/details',
     ], function () {
         Route::get('/store/{id}', [
             'uses' => 'Course\CourseDetailController@storeView'
-        ])->name('course.details.store');
+        ])->name('course.details.store')->middleware('auth');
         Route::get('/edit/{id}', [
             'uses' => 'Course\CourseDetailController@editView'
-        ])->name('course.details.edit');
+        ])->name('course.details.edit')->middleware('auth');
         Route::delete('/delete/{id}', [
             'uses' => 'Course\CourseDetailController@delete'
-        ])->name('course.details.delete');
+        ])->name('course.details.delete')->middleware('auth');
     });
 });
 
@@ -309,19 +323,19 @@ Route::group([
     ])->name('room.index');
     Route::get('/store', [
         'uses' => 'Rooms\RoomController@storeView'
-    ])->name('room.store');
+    ])->name('room.store')->middleware('auth');
     Route::get('/edit/{id}', [
         'uses' => 'Rooms\RoomController@editView'
-    ])->name('room.edit');
+    ])->name('room.edit')->middleware('auth');
     Route::post('/import', [
         'uses' => 'Rooms\RoomController@importCourseDetail'
-    ])->name('room.import.excel');
+    ])->name('room.import.excel')->middleware('auth');
     Route::post('', [
         'uses' => 'Rooms\RoomController@store'
-    ]);
+    ])->middleware('auth');
     Route::delete('/delete/{id}', [
         'uses' => 'Rooms\RoomController@delete'
-    ])->name('room.delete');
+    ])->name('room.delete')->middleware('auth');
 });
 
 Route::group([
@@ -332,22 +346,22 @@ Route::group([
     ])->name('grade.index');
     Route::get('/store', [
         'uses' => 'Grades\GradeController@storeView'
-    ])->name('grade.store');
+    ])->name('grade.store')->middleware('auth');
     Route::get('/edit/{id}', [
         'uses' => 'Grades\GradeController@editView'
-    ])->name('grade.edit');
+    ])->name('grade.edit')->middleware('auth');
     Route::post('/import', [
         'uses' => 'Grades\GradeController@importCourseDetail'
-    ])->name('grade.import.excel');
+    ])->name('grade.import.excel')->middleware('auth');
     Route::delete('/grade/delete/{id}', [
         'uses' => 'Grades\GradeController@delete'
-    ])->name('grade.delete');
+    ])->name('grade.delete')->middleware('auth');
     Route::post('', [
         'uses' => 'Grades\GradeController@store'
-    ]);
+    ])->middleware('auth');
     Route::post('/grade/{id}', [
         'uses' => 'Grades\GradeController@edit'
-    ]);
+    ])->middleware('auth');
 });
 
 Route::group([

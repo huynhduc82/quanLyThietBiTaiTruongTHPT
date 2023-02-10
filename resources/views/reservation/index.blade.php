@@ -20,10 +20,12 @@
                                 <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
                             </div>
                         </div>
+                        @role('SuperAdmin|admin|manage|teacher')
                         <div class="col-5">
                             <a href="{{ route('reservation.store') }}" type="button" class="btn bg-gradient-info">Đặt trước
                                 thiết bị</a>
                         </div>
+                        @endrole
                     </div>
                     <div class="px-4 py-0 w-60">
                         <form id="frm-filter" action="{{ route('reservation.filter') }}" method="GET">
@@ -146,13 +148,16 @@
                                             <div class="d-block">
                                                 <div class="d-flex justify-content-center">
                                                     @if($item->status == 1)
+                                                        @role('SuperAdmin|admin|manage')
                                                         <button  class="btn bg-gradient-danger my-1 mb-1 ms-1" onclick="ApprovedConfirm({{$item->id}})">
                                                             Duyệt
                                                         </button>
+                                                        @endrole
                                                         <button class="btn bg-gradient-danger my-1 mb-1 ms-1" onclick="CancelConfirm({{$item->id}})">
                                                             Huỷ
                                                         </button>
                                                     @else
+                                                        @role('SuperAdmin|admin|manage')
                                                         @if($item->status == 2 || $item->status == 4)
                                                             <button type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1" onclick="DeleteConfirm({{$item->id}})">
                                                                 Xoá
@@ -161,6 +166,7 @@
                                                         <button type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1" onclick="LendConfirm({{$item->id}})">
                                                             Cho Mượn
                                                         </button>
+                                                        @endrole
                                                     @endif
                                                     @endif
                                                 </div>

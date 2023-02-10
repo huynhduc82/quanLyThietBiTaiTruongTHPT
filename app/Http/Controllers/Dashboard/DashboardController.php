@@ -25,4 +25,25 @@ class DashboardController extends Controller
         $result = $this->dashboardService->static($start, $end);
         return $this->response($result);
     }
+
+    public function roleView()
+    {
+        $data = $this->dashboardService->getRoleData();
+        return view('role/index')->with(compact('data'));
+    }
+
+    public function roleEditView($id)
+    {
+        $data = $this->dashboardService->getRoleDataByUser($id);
+        return view('role/edit')->with(compact('data'));
+    }
+
+    public function assRole(Request $request, $id)
+    {
+        $input = $request->all();
+
+        $this->dashboardService->assRole($id, $input);
+
+        return $this->response('OK');
+    }
 }

@@ -38,7 +38,7 @@ class Equipment extends BaseModel
 
     public function status() : HasOne
     {
-        return $this->hasOne(EquipmentStatus::class, 'id', 'equipment_status_id');
+        return $this->hasOne(EquipmentStatus::class, 'id', 'equipment_status_id')->withTrashed();
     }
 
     public function room() : HasOne

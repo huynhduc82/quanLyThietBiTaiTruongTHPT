@@ -21,6 +21,7 @@
                             </div>
                         </div>
                         <div class="col-5">
+                            @role('SuperAdmin|admin|manage')
                             <a href="{{ route('class.time.store') }}" type="button" class="btn bg-gradient-info">Thêm
                                 mới</a>
 {{--                            <button class="btn bg-gradient-info mx-2"--}}
@@ -28,6 +29,7 @@
 {{--                            >--}}
 {{--                                Nhập bằng file Excel--}}
 {{--                            </button>--}}
+                            @endrole
                         </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -81,6 +83,7 @@
                                         <td class="w-20">
                                             <div class="d-block px-1 py-1">
                                                 <div class="d-flex justify-content-center">
+                                                    @role('SuperAdmin|admin|manage')
                                                     <a type="button"
                                                        href="{{ route('class.time.edit', ['id' => $details->id]) }}"
                                                        class="btn bg-gradient-info my-1 mb-1 ms-6">Sửa</a>
@@ -88,6 +91,7 @@
                                                             onclick="DeleteConfirm('{{route('class.time.delete', ['id' => $details->id])}}')">
                                                         Xoá
                                                     </button>
+                                                    @endrole
                                                 </div>
                                             </div>
                                         </td>

@@ -1,35 +1,40 @@
-let Name;
-let Rent;
 let ID;
+let Role
 
-let InputName = $("#name");
-let InputRent = $("#rent");
-let InputID=$("#id");
+let InputId = $("#id");
 
 let data = {}
 
 $(document).ready(function(){
-    $('#frm-room').on('submit', function (e) {
+    $('#frm-role').on('submit', function (e) {
         e.preventDefault();
-        Name = InputName.val();
-        if (!Name) {
-            $('#label-error').text('Bạn chưa nhập thông tin ');
-            return false;
+        ID = InputId.val();
+        if ($("#admin").is(":checked"))
+        {
+            Role = 'admin';
         }
-        if($("#rent").val()==="on"){
-            Rent=true;
-        } else {
-            Rent=false;
+        if ($("#manage").is(":checked"))
+        {
+            Role = 'manage';
         }
+        if ($("#teacher").is(":checked"))
+        {
+            Role = 'teacher';
+        }
+        if ($("#maintainer").is(":checked"))
+        {
+            Role = 'maintainer';
+        }
+
+
         $('#label-error').text('');
 
-        data.name = Name;
-        data.can_rent = Rent;
-        data.id = ID;
-        let back_page = '/room/index';
+        data.role = Role;
+
+        let back_page = '/role';
 
         $.ajax({
-            url: '/room',
+            url: '/role/ass-role/' + ID,
             data: JSON.stringify(data),
             dataType: 'json',
             enctype: "multipart/form-data",
@@ -40,7 +45,7 @@ $(document).ready(function(){
                 document.location.href = back_page;
             },
             error: function (error) {
-                $('#label-error').text(error.responseJSON.message);
+                $('#lbl-error').text(error.responseJSON.message);
             },
             type: 'POST',
             headers: {
