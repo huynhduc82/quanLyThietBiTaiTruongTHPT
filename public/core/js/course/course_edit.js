@@ -3,7 +3,7 @@ let Grade;
 let ID;
 
 let InputName = $("#name");
-let InputGrade = $("#grade");
+let InputGrade = $("#grade_id");
 let inputID = $("#id");
 
 let data = {}
@@ -20,13 +20,13 @@ $(document).ready(function(){
         }
         $('#label-error').text('');
 
-        data.grade_id=Grade;
+        data.grade_id = Grade;
         data.name = Name;
 
         let back_page = '/course/index';
 
         $.ajax({
-            url: '/course',
+            url: '/api/course/' + ID,
             data: JSON.stringify(data),
             dataType: 'json',
             enctype: "multipart/form-data",

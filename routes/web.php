@@ -285,7 +285,7 @@ Route::group([
     Route::get('/store', [
         'uses' => 'Course\CourseController@storeView'
     ])->name('course.store')->middleware('auth');
-    Route::get('/edit', [
+    Route::get('/edit/{id}', [
         'uses' => 'Course\CourseController@editView'
     ])->name('course.edit')->middleware('auth');
     Route::post('/import', [
