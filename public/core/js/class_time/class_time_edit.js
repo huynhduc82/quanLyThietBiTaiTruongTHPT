@@ -15,6 +15,7 @@ $(document).ready(function(){
     $('#frm-class-time').on('submit', function (e) {
         e.preventDefault();
         Lesson = InputLesson.val();
+        console.log(Lesson)
         EndTime = InputEndTime.val();
         StartTime = InputStartTime.val();
         ID = inputID.val();
@@ -32,10 +33,10 @@ $(document).ready(function(){
         data.lesson = Lesson;
         data.end = EndTime;
 
-        let back_page = '/class/time/index';
+        let back_page = '/class-time/index';
 
         $.ajax({
-            url: '/class/time/edit/' + ID,
+            url: '/api/class/time/edit/' + ID,
             data: JSON.stringify(data),
             dataType: 'json',
             enctype: "multipart/form-data",

@@ -32,5 +32,8 @@ Route::group([
         Route::post('/store', [
             'uses' => 'Class\ClassTimeRegulationController@store'
         ]);
+        Route::post('/edit/{id}', [
+            'uses' => 'Class\ClassTimeRegulationController@edit'
+        ]);
     });
 });
