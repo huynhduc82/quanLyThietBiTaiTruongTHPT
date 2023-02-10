@@ -71,10 +71,10 @@
                                                 <div class="d-flex justify-content-center">
                                                     @role('SuperAdmin|admin|manage')
                                                     <a type="button"
-                                                       href="{{ route('equipment.edit', ['id' => $details->id]) }}"
+                                                       href="{{ route('course.edit', ['id' => $details->id]) }}"
                                                        class="btn bg-gradient-info my-1 mb-1 ms-6">Sửa</a>
                                                     <button type="button" class="btn bg-gradient-danger my-1 mb-1 ms-1"
-                                                            onclick="DeleteConfirm('{{route('equipment.delete', ['id' => $details->id])}}')">
+                                                            onclick="DeleteConfirm('{{route('course.delete', ['id' => $details->id])}}')">
                                                         Xoá
                                                     </button>
                                                     @endrole

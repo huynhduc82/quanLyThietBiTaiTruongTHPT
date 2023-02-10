@@ -34,10 +34,9 @@ class CourseController extends Controller
 
     public function editView($id)
     {
+        $data = $this->courseService->details($id);
 
-            $data = $this->courseService->details($id);
-
-            return view('course/edit')->with(compact('data'));
+        return view('course/edit')->with(compact('data'));
     }
 
     public function indexView()
