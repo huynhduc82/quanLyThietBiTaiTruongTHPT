@@ -31,6 +31,6 @@ Route::group([
     ], function () {
         Route::post('/store', [
             'uses' => 'Class\ClassTimeRegulationController@store'
-        ])->middleware('auth');
+        ]);
     });
 });
