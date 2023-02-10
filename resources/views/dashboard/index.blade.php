@@ -15,7 +15,7 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Thiết bị</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        530
+                                        {{$data['equipment_quantity']}}
                                     </h5>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Số lần mượn</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        300
+                                        {{$data['lend_return_time']}}
                                     </h5>
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Số lần sữa chữa</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        300
+                                        {{$data['liquidation_time']}}
                                     </h5>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Số lần thanh lý</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        300
+                                        {{$data['maintenance_time']}}
                                     </h5>
                                 </div>
                             </div>
