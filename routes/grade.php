@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group([
-    'prefix' => 'grade',
+    'prefix' => '/grade',
 ], function () {
     Route::get('/', [
         'uses' => 'Grades\GradeController@index'
