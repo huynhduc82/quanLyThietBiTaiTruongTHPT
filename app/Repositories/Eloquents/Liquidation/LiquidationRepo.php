@@ -117,4 +117,11 @@ class LiquidationRepo extends BaseEloquentRepository
         }
         return $result;
     }
+
+    public function countLiquidation()
+    {
+        $query = $this->model->newQuery();
+
+        return $query->count();
+    }
 }

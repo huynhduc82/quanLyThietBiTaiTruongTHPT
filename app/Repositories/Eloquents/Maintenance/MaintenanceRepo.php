@@ -130,4 +130,11 @@ class MaintenanceRepo extends BaseEloquentRepository
         }
 
     }
+
+    public function countMaintenance()
+    {
+        $query = $this->model->newQuery();
+
+        return $query->count();
+    }
 }

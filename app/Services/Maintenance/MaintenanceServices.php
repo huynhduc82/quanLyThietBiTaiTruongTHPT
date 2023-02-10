@@ -128,4 +128,9 @@ class MaintenanceServices extends BaseService
     {
         return $this->repository->delete($id);
     }
+
+    public function countMaintenance()
+    {
+        return $this->repository->countMaintenance();
+    }
 }
