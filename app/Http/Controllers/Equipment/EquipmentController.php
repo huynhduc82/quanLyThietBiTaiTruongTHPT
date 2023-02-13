@@ -110,4 +110,9 @@ class EquipmentController extends Controller
 
         return $this->response($result);
     }
+
+    public function brokenReport(Request $request, $id)
+    {
+
+    }
 }

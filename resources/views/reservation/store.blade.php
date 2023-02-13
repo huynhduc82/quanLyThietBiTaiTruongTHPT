@@ -274,7 +274,7 @@
                     title: `Bạn đã chọn thiết bị: ${name}`
                 })
                 let newEquipment = await getNumberEquipmentByName(name)
-                newEquipment.equipment.quantity = number_of_pupils/newEquipment.equipment.quantity;
+                newEquipment.equipment.quantity = Math.ceil(number_of_pupils/newEquipment.equipment.quantity);
                 let ListEquipment = $("#listEquipment").DataTable().rows().data().toArray();
                 let data =  []
                 data.push(newEquipment.equipment)
@@ -306,7 +306,7 @@
                 success: function (data) {
                     for (let item of data['data'])
                     {
-                        item.equipment.quantity = number_of_pupils/item.quantity;
+                        item.equipment.quantity = Math.ceil(number_of_pupils/item.quantity);
                         tableEquipment.push(item.equipment);
                     }
 
