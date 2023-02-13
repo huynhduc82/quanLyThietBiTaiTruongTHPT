@@ -29,6 +29,9 @@ Route::group([
     Route::delete('/{id}', [
         'uses' => 'Equipment\EquipmentController@delete'
     ])->name('equipment_details.delete');
+    Route::post('/broken/report/{id}', [
+        'uses' => 'Equipment\EquipmentController@brokenReport'
+    ])->name('equipment_details.delete');
 });
 
 Route::group([

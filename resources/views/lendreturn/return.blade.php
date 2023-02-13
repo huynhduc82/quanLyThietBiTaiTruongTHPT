@@ -61,17 +61,18 @@ Mượn trả thiết bị
                     <div class="card-header pb-0">
                         <h2>Danh sách thiết bị</h2>
                     </div>
-{{--                    <div class="px-4 py-2">--}}
-{{--                        <button type="button" class="btn bg-gradient-info">Thêm</button>--}}
+                    <div class="px-4 py-2">
+                        <button type="button" id="brokenReport" class="btn bg-gradient-danger" disabled="disabled" onclick="brokenReport()">Báo hỏng</button>
 {{--                        <button type="button" class="btn bg-gradient-info" id="autoAdd" onclick="autoAddEquipment()">Thêm nhanh</button>--}}
 {{--                        <button type="button" class="btn bg-gradient-info">Chọn từ danh sách</button>--}}
-{{--                        --}}{{--                                <button type="button" class="btn bg-gradient-info">Thêm mới</button>--}}
-{{--                    </div>--}}
+{{--                                                        <button type="button" class="btn bg-gradient-info">Thêm mới</button>--}}
+                    </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0 ">
                             <table class="table mb-0 w-100 display" id="listEquipment">
                                 <thead>
                                 <tr>
+                                    <th class="w-5 p-0"></th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-30">
                                         Tên thiết bị
                                     </th>
@@ -90,6 +91,8 @@ Mượn trả thiết bị
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-25">
                                         Mô tả
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-0 hidden" hidden="hidden" id="id">
                                     </th>
                                 </tr>
                                 </thead>
@@ -119,6 +122,7 @@ Mượn trả thiết bị
 <script src="https://cdn.datatables.net/select/1.5.0/js/dataTables.select.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/table-to-json@1.0.0/lib/jquery.tabletojson.min.js" integrity="sha256-H8xrCe0tZFi/C2CgxkmiGksqVaxhW0PFcUKZJZo1yNU=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('core/js/lend_return/lend_return_return.js')}}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     let win = navigator.platform.indexOf('Win') > -1;
@@ -147,31 +151,102 @@ Mượn trả thiết bị
                 "price" : items.type_of_equipment.price,
                 "describe" : items.type_of_equipment.describe,
                 "type_of_equipment_id" : items.type_of_equipment.id,
+                "id" : items.id
             }
             list.push(item);
         }
+        createDataTable(list)
+    }
+
+    function createDataTable(data)
+    {
         $('#listEquipment').DataTable({
             columnDefs: [
                 { targets: 0, className:  "ps-4 select-checkbox"}
             ],
+            select: {
+                style:    'os',
+                selector: 'td:first-child'
+            },
             destroy: true,
             paging: false,
             searching: false,
             info: false,
-            data: list,
+            data: data,
             columns: [
+                {
+                    data: null,
+                    defaultContent: '',
+                    className: 'select-checkbox',
+                    orderable: false,
+                },
                 { data: 'name' },
                 { data: 'quantity' },
                 { data: 'quantity_can_rent' },
                 { data: 'unit' },
                 { data: 'price' },
                 { data: 'describe' },
+                { data: 'id',
+                    visible: false,
+                },
             ],
-            select: {
-                style:    'multi',
-                selector: 'td:first-child'
-            },
         });
+        $("#listEquipment tr").click(function() {
+            $('#brokenReport').removeAttr("disabled")
+        });
+    }
+
+
+    async function brokenReport()
+    {
+        const { value: formValues } = await Swal.fire({
+            title: 'Chi tiết báo hỏng',
+            backdrop: false,
+            html:
+                '<label for="swal-input1" class="col-form-label">Tình trạng hiện tại</label><input id="swal-input1" class="swal2-input">' +
+                '<label for="swal-input2" class="col-form-label mt-2">Phương cách đền bù</label><input id="swal-input2" class="swal2-input">',
+            focusConfirm: false,
+            preConfirm: () => {
+                return [
+                    {"status" : document.getElementById('swal-input1').value},
+                    {"method" : document.getElementById('swal-input2').value}
+                ]
+            }
+        })
+
+        if (formValues) {
+            let listEquipment = $("#listEquipment");
+            let Equipment = listEquipment.DataTable().rows({ selected: true }).data().toArray();
+            let ListEquipment = listEquipment.DataTable().rows({ selected: false }).data().toArray();
+            let ID = Equipment[0].id;
+            console.log(ID)
+            Swal.fire({'text' : JSON.stringify(formValues), backdrop: false})
+            $.ajax({
+                url: '/' +
+                    'api/number-equipment/by-course-details-id/' + id ,
+                dataType: 'json',
+                enctype: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    // for (let item of data['data'])
+                    // {
+                    //     item.equipment.quantity = Math.ceil(number_of_pupils/item.quantity);
+                    //     tableEquipment.push(item.equipment);
+                    // }
+
+                    createDataTable(ListEquipment)
+                },
+                error: function (error) {
+                    $('#submit_error').text(error.responseJSON.message);
+                },
+                type: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        }
     }
 </script>
 <script>
