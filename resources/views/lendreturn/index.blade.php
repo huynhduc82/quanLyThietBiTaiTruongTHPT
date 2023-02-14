@@ -12,12 +12,12 @@
                     <div class="card-header pb-0">
                         <h2>Mượn trả thiết bị</h2>
                     </div>
+                    <form id="frm-filter" action="{{ route('lend_return.get-by-day') }}" method="GET">
                     <div class="row px-4 py-2">
                         <div class="col-5">
                             <div class="input-group">
-                                <span class="input-group-text text-body"><i class="fas fa-search z-index-0"
-                                                                            aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
+                                <button type="submit" class="btn btn-outline-secondary m-0 p-0" type="button" id="btnSearch"><span class="input-group-text border-0 text-body z-index-0"><i class="fas fa-search" aria-hidden="true"></i></span></button>
+                                <input type="text" class="form-control px-2" placeholder="Nhập tìm kiếm..." aria-label="Nhập tìm kiếm..." aria-describedby="btnSearch" id="inputSearch" name="key">
                             </div>
                         </div>
                         @role('SuperAdmin|admin|manage|teacher')
@@ -28,7 +28,6 @@
                         @endrole
                     </div>
                     <div class="px-4 py-0 w-60">
-                        <form id="frm-filter" action="{{ route('lend_return.get-by-day') }}" method="GET">
                             <div class="border border-info rounded p-2 pb-3 row">
                                 <div class="col-3">
                                     <label class="col-form-label" for="day_from">Từ ngày</label>
@@ -59,8 +58,8 @@
 {{--                                    <label style=" color: red" class="col-form-label" id="label-error"></label>--}}
 {{--                                </div>--}}
                             </div>
-                        </form>
                     </div>
+                    </form>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0 ">
                             <table class="table mb-0 w-100" id="equipment-table">
@@ -374,67 +373,49 @@
                 })
             };
         </script>
-{{--        <script>--}}
-{{--            $('#frm-filter').on('submit', function (e) {--}}
-{{--                e.preventDefault();--}}
-{{--                let data = {};--}}
-{{--                let dayFrom = $('#day_from').val();--}}
-{{--                let dayTo = $('#day_to').val();--}}
-{{--                let returned = $('#chkReturned');--}}
-{{--                let outOfDate = $('#chkOutOfDate');--}}
-{{--                let lending = $('#chkLending');--}}
-
-{{--                if (dayFrom) {--}}
-{{--                    data.day_from = dayFrom--}}
-{{--                }--}}
-{{--                if (dayTo) {--}}
-{{--                    data.day_to = dayTo--}}
-{{--                }--}}
-{{--                if (lending.is(':checked')) {--}}
-{{--                    data.lending = true--}}
-{{--                }--}}
-{{--                if (returned.is(':checked')) {--}}
-{{--                    data.returned = true--}}
-{{--                }--}}
-{{--                if (outOfDate.is(':checked')) {--}}
-{{--                    data.out_of_date = true--}}
-{{--                }--}}
-{{--                $('#label-error').text('');--}}
-{{--                $.ajax({--}}
-{{--                    url: '/lend_return/by/day',--}}
-{{--                    dataType: 'json',--}}
-{{--                    enctype: "multipart/form-data",--}}
-{{--                    contentType: 'application/json',--}}
-{{--                    data: data,--}}
-{{--                    success: function (data) {--}}
-{{--                        $('#equipment-table').html(data.table_view)--}}
-{{--                    },--}}
-{{--                    error: function (error) {--}}
-{{--                        $('#label-error').text(error.responseJSON.message);--}}
-{{--                    },--}}
-{{--                    type: 'GET',--}}
-{{--                });--}}
-{{--            })--}}
-{{--        </script>--}}
-    <script>
-        $(document).ready(function () {
-            let urlToCheck = document.URL.toString();
-            let returned = urlToCheck.includes("returned");
-            let lending = urlToCheck.includes("lending");
-            let out_of_date = urlToCheck.includes("out_of_date");
-            if (returned){
-                $('#chkReturned').prop('checked', true);
-            }
-            if (lending){
-                $('#chkLending').prop('checked', true);
-            }
-            if (out_of_date){
-                $('#chkOutOfDate').prop('checked', true);
-            }
-        })
-    </script>
+        <script>
+            $(document).ready(function () {
+                let urlToCheck = document.URL.toString();
+                let returned = urlToCheck.includes("returned");
+                let lending = urlToCheck.includes("lending");
+                let out_of_date = urlToCheck.includes("out_of_date");
+                if (returned){
+                    $('#chkReturned').prop('checked', true);
+                }
+                if (lending){
+                    $('#chkLending').prop('checked', true);
+                }
+                if (out_of_date){
+                    $('#chkOutOfDate').prop('checked', true);
+                }
+            })
+        </script>
         <script>
             document.getElementById('title-first').innerText = 'Mượn trả'
             document.getElementById('title-second').innerText = 'Danh sách mượn trả'
         </script>
+{{--        <script>--}}
+{{--            // Get the input field--}}
+{{--            let input = document.getElementById("inputSearch");--}}
+
+{{--            // Execute a function when the user presses a key on the keyboard--}}
+{{--            input.addEventListener("keypress", function(event) {--}}
+{{--                // If the user presses the "Enter" key on the keyboard--}}
+{{--                if (event.key === "Enter") {--}}
+{{--                    // Cancel the default action, if needed--}}
+{{--                    event.preventDefault();--}}
+{{--                    // Trigger the button element with a click--}}
+{{--                    document.getElementById("btnSearch").click();--}}
+{{--                }--}}
+{{--            });--}}
+
+{{--            function search()--}}
+{{--            {--}}
+{{--                let input = document.getElementById("inputSearch").value;--}}
+{{--                if (!input) {--}}
+{{--                    alert('Bạn phải nhập tên thiết bị để tìm kiếm')--}}
+{{--                }--}}
+
+{{--            }--}}
+{{--        </script>--}}
 @endsection

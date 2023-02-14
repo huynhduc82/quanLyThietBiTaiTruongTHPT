@@ -164,4 +164,13 @@ class LendReturnEquipmentController extends Controller
         $lendReturn = $this->service->details($include, $id);
         return view('lendreturn/print')->with(compact('lendReturn'));
     }
+
+    public function brokenReport(Request $request, $id)
+    {
+        $input = $request::all();
+
+        $result = $this->service->brokenReport($input, $id);
+
+        return $this->response($result);
+    }
 }
