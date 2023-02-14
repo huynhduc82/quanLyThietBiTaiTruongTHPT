@@ -111,7 +111,7 @@ Route::group([
     ])->name('lend_return.store')->middleware('auth');
     Route::get('/by/day',[
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@getLendReturnByDay'
-    ]);
+    ])->name('lend_return.get-by-day');
     Route::get('/return/view/{id}',[
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@returnView'
     ])->name('lend_return.returnView')->middleware('auth');

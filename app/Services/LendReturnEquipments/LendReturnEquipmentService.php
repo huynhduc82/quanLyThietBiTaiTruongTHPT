@@ -8,6 +8,7 @@ use App\Models\Equipments\Equipment;
 use App\Models\LendReturnEquipments\LendReturnEquipment;
 use App\Repositories\Contracts\LendReturnEquipment\ILendReturnEquipmentRepo;
 use App\Services\Equipment\EquipmentService;
+use App\Services\EquipmentStatus\EquipmentStatusServices;
 use App\Services\Reservations\EquipmentReservationService;
 use App\Services\Response\BaseService;
 use App\Validators\LendReturnEquipments\LendEquipmentValidators;
@@ -196,5 +197,13 @@ class LendReturnEquipmentService extends BaseService
         $model = LendReturnEquipment::query()->where('id', $id)->with('details')->first();
         app(LendEquipmentDetailsService::class)->delete($model);
         return $this->repository->delete($id);
+    }
+
+    public function brokenReport($input, $id)
+    {
+        app(EquipmentStatusServices::class)->edit($input);
+//        app(::class)->edit($input);
+
+//        return $result;
     }
 }

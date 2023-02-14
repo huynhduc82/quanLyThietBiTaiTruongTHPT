@@ -46,6 +46,12 @@ class LendReturnEquipmentRepo extends BaseEloquentRepository implements ILendRet
         if  (!empty($statusForFilter)){
             $query->whereIn('status', $statusForFilter);
         }
+        if(!empty($input['key']))
+        {
+            $query->whereHas('details.typeOfEquipment', function (Builder $query) use ($input) {
+                $query->where('name', 'iLIKE', '%' . $input['key'] . '%');
+            });
+        }
 
         return $query->orderBy('id' ,'desc')->with($include)->paginate(10);
     }

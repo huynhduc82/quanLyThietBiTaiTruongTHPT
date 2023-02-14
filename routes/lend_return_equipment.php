@@ -30,13 +30,13 @@ Route::group([
     Route::get('/{id}',[
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@details'
     ]);
-    Route::get('/by/day',[
-        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@getLendReturnByDay'
-    ])->name('lend_return.get-by-day');
     Route::post('/{id}',[
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@edit'
     ]);
     Route::delete('/{id}',[
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@delete'
     ]);
+    Route::post('/broken/report/{id}', [
+        'uses' => 'Equipment\EquipmentController@brokenReport'
+    ])->name('equipment_details.delete');
 });

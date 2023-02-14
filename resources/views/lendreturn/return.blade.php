@@ -204,13 +204,12 @@ Mượn trả thiết bị
             backdrop: false,
             html:
                 '<label for="swal-input1" class="col-form-label">Tình trạng hiện tại</label><input id="swal-input1" class="swal2-input">' +
-                '<label for="swal-input2" class="col-form-label mt-2">Phương cách đền bù</label><input id="swal-input2" class="swal2-input">',
+                '<label for="swal-input2" class="col-form-label mt-2">Phương cách đền bù</label><select id="swal-input2" class="swal2-select">' +
+                '<option value="money">Tiền mặt</option>' +
+                '<option value="equipment">Thiết bị</option></select>',
             focusConfirm: false,
             preConfirm: () => {
-                return [
-                    {"status" : document.getElementById('swal-input1').value},
-                    {"method" : document.getElementById('swal-input2').value}
-                ]
+                return {"status" : document.getElementById('swal-input1').value, "recoupMethod" : document.getElementById('swal-input2').value};
             }
         })
 
@@ -219,14 +218,17 @@ Mượn trả thiết bị
             let Equipment = listEquipment.DataTable().rows({ selected: true }).data().toArray();
             let ListEquipment = listEquipment.DataTable().rows({ selected: false }).data().toArray();
             let ID = Equipment[0].id;
-            console.log(ID)
-            Swal.fire({'text' : JSON.stringify(formValues), backdrop: false})
+            let data = {}
+            data.status = formValues.status
+            data.method = formValues.recoupMethod
+            console.log(data)
+            Swal.fire({'text' : JSON.stringify(data), backdrop: false})
             $.ajax({
-                url: '/' +
-                    'api/number-equipment/by-course-details-id/' + id ,
+                url: '/api/lend-return/broken/report/' + ID ,
+                data: JSON.stringify(data),
                 dataType: 'json',
                 enctype: "multipart/form-data",
-                contentType: false,
+                contentType: 'application/json',
                 cache: false,
                 processData: false,
                 success: function (data) {
@@ -241,7 +243,7 @@ Mượn trả thiết bị
                 error: function (error) {
                     $('#submit_error').text(error.responseJSON.message);
                 },
-                type: 'GET',
+                type: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
