@@ -12,14 +12,14 @@
                     <div class="card-header pb-0">
                         <h2>Thiết bị</h2>
                     </div>
-                    <div class="row px-4 py-2">
-                        <div class="col-5">
-                            <div class="input-group">
-                                <span class="input-group-text text-body"><i class="fas fa-search"
-                                                                            aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
+                    <form id="frm-filter" action="{{ route('equipment_details.search-by-name') }}" method="GET">
+                        <div class="row px-4 py-2">
+                            <div class="col-5">
+                                <div class="input-group">
+                                    <button type="submit" class="btn btn-outline-secondary m-0 p-0" type="button" id="btnSearch"><span class="input-group-text border-0 text-body z-index-0"><i class="fas fa-search" aria-hidden="true"></i></span></button>
+                                    <input type="text" class="form-control px-2" placeholder="Nhập tìm kiếm..." aria-label="Nhập tìm kiếm..." aria-describedby="btnSearch" id="inputSearch" name="key">
+                                </div>
                             </div>
-                        </div>
                         @role('SuperAdmin|admin|manage')
                         <div class="col-5">
                             <a href="{{ route('equipment.store') }}" type="button" class="btn bg-gradient-info">Thêm

@@ -69,6 +69,9 @@ Route::group([
     Route::get('/edit-details/{id}',[
         'uses' => 'Equipment\EquipmentController@editView'
     ])->name('equipment_details.edit')->middleware('auth');
+    Route::get('/search/by/name',[
+        'uses' => 'Equipment\TypeOfEquipmentController@searchByName'
+    ])->name('equipment_details.search-by-name');
 });
 
 Route::group([

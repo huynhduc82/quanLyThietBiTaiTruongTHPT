@@ -110,4 +110,6 @@ class EquipmentController extends Controller
 
         return $this->response($result);
     }
+
+
 }
