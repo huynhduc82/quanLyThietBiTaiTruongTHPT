@@ -368,6 +368,14 @@ Route::group([
 });
 
 Route::group([
+    'prefix' => '/compensation',
+], function (){
+    Route::get('/index', [
+        'uses' => 'Recoup\RecoupController@indexView'
+    ])->name('compensation.index');
+});
+
+Route::group([
     'prefix' => '/profile',
 ], function (){
     Route::get('/index', function () {
@@ -428,6 +436,7 @@ Route::group([
 Route::post('logout',[
     'uses' => 'Auth\LoginController@logout'
 ])->name('logout');
+
 
 
 
