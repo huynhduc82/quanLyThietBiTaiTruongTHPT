@@ -89,6 +89,9 @@ Mượn trả thiết bị
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3 w-7">
                                         Giá
                                     </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3 w-7">
+                                        Mã thiết bị
+                                    </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-25">
                                         Mô tả
                                     </th>
@@ -149,6 +152,7 @@ Mượn trả thiết bị
                 "quantity_can_rent" : items.type_of_equipment.quantity_can_rent,
                 "unit" : items.type_of_equipment.unit,
                 "price" : items.type_of_equipment.price,
+                "equipmentID" : items.equipment_details,
                 "describe" : items.type_of_equipment.describe,
                 "type_of_equipment_id" : items.type_of_equipment.id,
                 "id" : items.id,
@@ -185,6 +189,7 @@ Mượn trả thiết bị
                 { data: 'quantity_can_rent' },
                 { data: 'unit' },
                 { data: 'price' },
+                { data: 'equipmentID' },
                 { data: 'describe' },
                 { data: 'id',
                     visible: false,
@@ -196,21 +201,15 @@ Mượn trả thiết bị
         });
     }
 
-
     async function brokenReport()
     {
-        function loadRoom()
-        {
-            console.log(123123123);
-        }
         const { value: formValues } = await Swal.fire({
             title: 'Chi tiết báo hỏng',
             showCloseButton: true,
             showCancelButton: true,
             backdrop: false,
             html:
-                '<label for="swal-input2" class="col-form-label mt-2 px-6">Phòng</label><select id="swal-input2" class="swal2-select mt-2" onload="loadRoom()">' +
-                '</select>' +
+                '<label for="swal-input1" class="col-form-label">Mã thiết bị hỏng</label><input id="swal-input5" class="swal2-input mt-2">' +
                 '<label for="swal-input1" class="col-form-label">Tình trạng hiện tại</label><input id="swal-input1" class="swal2-input mt-2">' +
                 '<label for="swal-input1" class="col-form-label mt-2 mb-1">Lý do đền bù</label><input id="swal-input4" class="swal2-input mt-2">' +
                 '<label for="swal-input2" class="col-form-label mt-2">Phương cách đền bù</label><select id="swal-input2" class="swal2-select mt-2">' +
@@ -221,7 +220,9 @@ Mượn trả thiết bị
             ,
             focusConfirm: false,
             preConfirm: () => {
-                return {"status" : document.getElementById('swal-input1').value, "recoupMethod" : document.getElementById('swal-input2').value, "quantity" : document.getElementById('swal-input3').value, "reason" : document.getElementById('swal-input4').value};
+                return {"status" : document.getElementById('swal-input1').value, "recoupMethod" : document.getElementById('swal-input2').value, "quantity" : document.getElementById('swal-input3').value, "reason" : document.getElementById('swal-input4').value,
+                    "equipmentId" : document.getElementById('swal-input5').value
+                };
             }
         })
 
@@ -235,9 +236,14 @@ Mượn trả thiết bị
             data.method = formValues.recoupMethod
             data.quantity = formValues.quantity
             data.reason = formValues.reason
+            data.equipment_id = formValues.equipmentId
+            Equipment[0].quantity = Equipment[0].quantity - 1;
+            if (Equipment[0].quantity >= 0) {
+                ListEquipment.push(Equipment[0])
+            }
             Swal.fire({'text' : JSON.stringify(data), backdrop: false})
             $.ajax({
-                url: '/api/lend-return/broken/report/' + ID ,
+                url: '/lend_return/broken/report/' + ID ,
                 data: JSON.stringify(data),
                 dataType: 'json',
                 enctype: "multipart/form-data",
