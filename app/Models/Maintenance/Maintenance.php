@@ -3,6 +3,7 @@
 namespace App\Models\Maintenance;
 
 use App\Models\BaseModel;
+use App\Models\Rooms\Room;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -55,5 +56,10 @@ class Maintenance extends BaseModel
     public function maintenancer() : BelongsTo
     {
         return $this->belongsTo(User::class, 'maintenancer_id', 'id');
+    }
+
+    public function room() : BelongsTo
+    {
+        return $this->belongsTo(Room::class, 'room_id', 'id');
     }
 }

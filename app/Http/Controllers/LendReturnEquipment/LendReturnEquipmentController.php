@@ -29,6 +29,7 @@ class LendReturnEquipmentController extends Controller
         $include = [
             'details',
             'details.equipments',
+            'details.equipments.status',
             'user',
             'lender',
             'returner',

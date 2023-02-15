@@ -19,4 +19,16 @@ class EquipmentStatusRepo extends BaseEloquentRepository
 
         return $query->create($input);
     }
+
+    public function updateStatusDetails($input, $id, $status): int
+    {
+        $query = $this->model->newQuery();
+        $param = ['condition_details' => $input];
+        if ($status != EquipmentStatus::STATUS_OK)
+        {
+            $param = array_merge($param,['can_continue_to_use' => false]);
+        }
+        $param['status'] = EquipmentStatus::STATUS_BROKEN;
+        return $query->where('id', $id)->update($param);
+    }
 }

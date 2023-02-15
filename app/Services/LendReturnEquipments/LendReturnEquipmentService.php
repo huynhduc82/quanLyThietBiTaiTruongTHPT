@@ -5,10 +5,15 @@ namespace App\Services\LendReturnEquipments;
 use App\Helpers;
 use App\Models\EquipmentReservations\EquipmentReservation;
 use App\Models\Equipments\Equipment;
+use App\Models\EquipmentStatus\EquipmentStatus;
 use App\Models\LendReturnEquipments\LendReturnEquipment;
+use App\Models\LendReturnEquipments\LendReturnEquipmentDetails;
+use App\Models\Recoups\Recoup;
 use App\Repositories\Contracts\LendReturnEquipment\ILendReturnEquipmentRepo;
 use App\Services\Equipment\EquipmentService;
 use App\Services\EquipmentStatus\EquipmentStatusServices;
+use App\Services\Maintenance\MaintenanceServices;
+use App\Services\Recoup\RecoupService;
 use App\Services\Reservations\EquipmentReservationService;
 use App\Services\Response\BaseService;
 use App\Validators\LendReturnEquipments\LendEquipmentValidators;
@@ -201,9 +206,25 @@ class LendReturnEquipmentService extends BaseService
 
     public function brokenReport($input, $id)
     {
-        app(EquipmentStatusServices::class)->edit($input);
-//        app(::class)->edit($input);
+        $equipment = LendReturnEquipmentDetails::find($id)->equipments->first();
+        DB::beginTransaction();
+        app(EquipmentStatusServices::class)->updateStatusDetails($input['status'], $equipment->id, EquipmentStatus::STATUS_BROKEN);
+        $param['equipment_id'] = $equipment->id;
+        $param['reason'] = $input['reason'];
+        $param['recoup_method'] = $input['method'];
+        if ($input['method'] === Recoup::MONEY_METHOD)
+        {
+            $param['amount_of_money'] = $input['quantity'];
+        } else {
+            $param['quantity'] = $input['quantity'];
+        }
+        app(RecoupService::class)->store($param);
 
+        app(MaintenanceServices::class)->store();
+
+        app(EquipmentService::class)->updateEquipmentStatus([$equipment->id], false);
+
+        DB::commit();
 //        return $result;
     }
 }

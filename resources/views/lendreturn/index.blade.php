@@ -228,7 +228,7 @@
                                                                 <div class="d-flex px-4 py-1">
                                                                     <div
                                                                         class="d-flex flex-column justify-content-center">
-{{--                                                                        <h6 class="mb-0 text-sm">{{$equipment->status->condition_details}}</h6>--}}
+                                                                        <h6 class="mb-0 text-sm">{{ $details->equipments->first() ? $details->equipments->first()->status->condition_details : '' }}</h6>
                                                                         <p class="text-xs text-secondary mb-0"></p>
                                                                     </div>
                                                                 </div>
@@ -237,7 +237,17 @@
                                                                 <div class="d-flex px-4 py-1">
                                                                     <div
                                                                         class="d-flex flex-column justify-content-center">
-{{--                                                                        <h6 class="mb-0 text-sm">{{$equipment->can_rent != 1 ? 'Đang cho mượn' : 'Có thể mượn' }}</h6>--}}
+                                                                        <h6 class="mb-0 text-sm">
+                                                                            @if($details->equipments->first())
+                                                                                @switch ($details->equipments->first()->status->status)
+                                                                                    @case (1) Hư hỏng @break
+                                                                                    @case (2) Đang sửa chửa @break
+                                                                                    @case (0) OK @break
+                                                                                    @default
+                                                                                @endswitch
+                                                                            @else
+                                                                            @endif
+                                                                        </h6>
                                                                         <p class="text-xs text-secondary mb-0"></p>
                                                                     </div>
                                                                 </div>

@@ -50,20 +50,8 @@ $(document).ready(function(){
             $('#label-error').text('Bạn chưa chọn thời gian trả dự kiến');
             return false;
         }
-        if (ListEquipmentId.length <= 0) {
-            $('#label-error').text('Bạn chưa xác nhận tình trạng thiết bị');
-            return false;
-        }
-        // if (!Email) {
-        //     $('#submit_error').text('Bạn chưa nhập Email');
-        //     return false;
-        // }
-        // if (!Password) {
-        //     $('#submit_error').text('Bạn chưa nhập Mật khẩu');
-        //     return false;
-        // }
-        // if (!PasswordConfirmation) {
-        //     $('#submit_error').text('Bạn chưa nhập Nhập lại mật khẩu');
+        // if (ListEquipmentId.length <= 0) {
+        //     $('#label-error').text('Bạn chưa xác nhận tình trạng thiết bị');
         //     return false;
         // }
         $('#label-error').text('');
