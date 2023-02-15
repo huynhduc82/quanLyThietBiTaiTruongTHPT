@@ -94,7 +94,7 @@
                                         <td class="text-wrap accordion-toggle w-15" data-bs-toggle="collapse"
                                             data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
                                             <div class="d-block">
-                                                <div class="d-block justify-content-center">
+                                                <div class="d-block justify-content-center text-center">
                                                     <h6 class="mb-0 text-sm">{{$item->user ? $item->user->name : ''}}</h6>
                                                     <p class="text-xs text-secondary mb-0"></p>
                                                 </div>

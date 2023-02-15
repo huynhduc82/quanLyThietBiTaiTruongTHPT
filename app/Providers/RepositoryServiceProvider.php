@@ -15,7 +15,9 @@ use App\Repositories\Eloquents\Classes;
 use App\Repositories\Eloquents\Grades;
 use App\Repositories\Eloquents\Maintenance;
 use App\Repositories\Eloquents\Liquidation;
+use App\Repositories\Eloquents\Recoup;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Contracts\Recoup as IRecoup;
 use App\Repositories\Contracts\Liquidation as ILiquidation;
 use App\Repositories\Contracts\Grades as IGrade;
 use App\Repositories\Contracts\Maintenance as IMaintenance;
@@ -125,5 +127,11 @@ class RepositoryServiceProvider extends ServiceProvider
          */
         ILiquidation\ILiquidationRepo::class => Liquidation\LiquidationRepo::class,
         ILiquidation\ILiquidationDetailsRepo::class => Liquidation\LiquidationDetailsRepo::class,
+        /*
+         * ------------------------------------------------------------
+         * Recoup
+         * ------------------------------------------------------------
+         */
+        IRecoup\IRecoupRepo::class => Recoup\RecoupRepo::class,
     ];
 }

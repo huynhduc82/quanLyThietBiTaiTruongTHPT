@@ -9,6 +9,9 @@ class Recoup extends BaseModel
 {
     use SoftDeletes;
 
+    const MONEY_METHOD = 'money';
+    const EQUIPMENT_METHOD = 'equipment';
+
     protected $table = 'recoup';
 
     protected $fillable = [

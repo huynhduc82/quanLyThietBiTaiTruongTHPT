@@ -37,6 +37,6 @@ Route::group([
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@delete'
     ]);
     Route::post('/broken/report/{id}', [
-        'uses' => 'Equipment\EquipmentController@brokenReport'
+        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@brokenReport'
     ])->name('equipment_details.delete');
 });

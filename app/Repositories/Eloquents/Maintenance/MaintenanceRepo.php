@@ -20,11 +20,11 @@ class MaintenanceRepo extends BaseEloquentRepository
         return Maintenance::class;
     }
 
-    public function index($include = []): Collection|array
+    public function index($include = []): LengthAwarePaginator
     {
         $query = $this->model->newQuery();
 
-        return $query->with($include)->orderBy('id')->get();
+        return $query->with($include)->orderBy('id', 'DESC')->paginate(10);
     }
 
     public function filter($input = [], $include = []): LengthAwarePaginator

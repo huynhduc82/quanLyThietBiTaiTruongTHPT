@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Validators\LendReturnEquipments;
+namespace App\Validators\Recoup;
 
 use App\Models\User;
 use App\Validators\AbstractValidator;
@@ -9,25 +9,12 @@ use App\Validators\Contracts\IValidatorRuleCreate;
 use App\Validators\Contracts\IValidatorRuleUpdate;
 use Illuminate\Validation\Rule;
 
-class ReturnEquipmentValidators extends AbstractValidator implements IValidatorMessage, IValidatorRuleCreate, IValidatorRuleUpdate
+class RecoupValidator extends AbstractValidator implements IValidatorMessage, IValidatorRuleCreate, IValidatorRuleUpdate
 {
     public function ruleCreate(): array
     {
         // TODO: Implement ruleCreate() method.
         return [
-//            'equipment' => [
-//                'required',
-//                'array'
-//            ],
-//            'equipment.*.type_of_equipment_id' => [
-//                'required',
-//                'int',
-////                Rule::exists(TypeOfEquipment::class, 'id')->whereNull('deleted_at'),
-//            ],
-//            'equipment.*.quantity' => [
-//                'required',
-//                'int',
-//            ],
         ];
     }
 

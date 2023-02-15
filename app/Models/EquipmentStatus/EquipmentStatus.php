@@ -15,6 +15,11 @@ class EquipmentStatus extends BaseModel
     const DETAILS_MIN_LENGTH = 3;
     const DETAILS_MAX_LENGTH = 254;
 
+    const STATUS_OK = 0;
+    const STATUS_BROKEN = 1;
+    const STATUS_MAINTAINING = 2;
+    const STATUS_CANNOT_CONTINUE_TO_USE = 3;
+
     use SoftDeletes;
 
     protected $table = 'equipment_status';
@@ -23,6 +28,7 @@ class EquipmentStatus extends BaseModel
         'condition_details',
         'can_continue_to_use',
         'number_of_repairs',
+        'status',
     ];
 
     public function equipments() : BelongsTo

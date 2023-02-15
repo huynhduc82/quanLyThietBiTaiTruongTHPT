@@ -31,4 +31,9 @@ class EquipmentStatusServices extends BaseService
         }
         $validator->passesOrFail($id === null ? ValidatorInterface::RULE_CREATE : ValidatorInterface::RULE_UPDATE);
     }
+
+    public function updateStatusDetails($input, $id, $status)
+    {
+        return $this->repository->updateStatusDetails($input, $id, $status);
+    }
 }

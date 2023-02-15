@@ -41,7 +41,7 @@
                             <div class="form-group px-4 col-6">
                                 <label class="col-form-label">Mã Giáo Viên</label>
                                 <input type="text" class="form-control"
-                                       placeholder="{{Auth::user()->id ?? 'Nhập mã giáo viên'}}" id="teacherId">
+                                       placeholder="Nhập mã giáo viên" id="teacherId" onchange="fillTeacherName()">
                             </div>
                             <div class="form-group px-4 col-6">
                                 <label class="col-form-label">Thời Gian Mượn </label>
@@ -50,7 +50,7 @@
                             <div class="form-group px-4 col-6">
                                 <label class="col-form-label">Tên Giáo Viên </label>
                                 <input type="text" class="form-control"
-                                       placeholder="{{Auth::user()->name ?? 'Nhập mã giáo viên'}}" id="teacherName">
+                                       placeholder="Nhập mã giáo viên" id="teacherName">
                             </div>
                             <div class="form-group px-4 col-6">
                                 <label class="col-form-label">Môn học</label>
@@ -442,6 +442,35 @@
                 }
             })
         };
+
+        function fillTeacherName()
+        {
+            let id = Number($('#teacherId').val());
+            $.ajax({
+                url: '/api/user/' + id ,
+                dataType: 'json',
+                enctype: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    if(!data['data']) {
+                        $('#label-error').text('Mã giáo viên không tồn tại');
+                        $('#teacherName').val('')
+                    } else {
+                        $('#label-error').text('')
+                        $('#teacherName').val(data['data'].name)
+                    }
+                },
+                error: function (error) {
+                    $('#submit_error').text(error.responseJSON.message);
+                },
+                type: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        }
     </script>
     <!-- Github buttons -->
     <script async defer src="{{asset('https://buttons.github.io/buttons.js')}}"></script>

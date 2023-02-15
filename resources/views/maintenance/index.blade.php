@@ -76,6 +76,9 @@
                                             Thời gian sửa chữa
                                         </th>
                                         <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-10 p-2 pt-3">
+                                            Phòng
+                                        </th>
+                                        <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-10 p-2 pt-3">
                                             Trạng thái
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-15 pt-3">
@@ -119,6 +122,15 @@
                                                 <div class="d-block">
                                                     <div class="d-flex justify-content-center text-center">
                                                         <h6 class="mb-0 text-sm">{{$item->maintenance_time ?? 'Chưa sữa chửa'}}</h6>
+                                                        <p class="text-xs text-secondary mb-0"></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="accordion-toggle w-10" data-bs-toggle="collapse"
+                                                data-bs-target="#demo{{ $item->id }}" aria-expanded="false">
+                                                <div class="d-block">
+                                                    <div class="d-flex justify-content-center text-center">
+                                                        <h6 class="mb-0 text-sm">{{$item->room->name}}</h6>
                                                         <p class="text-xs text-secondary mb-0"></p>
                                                     </div>
                                                 </div>
@@ -179,9 +191,9 @@
                                                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
                                                                     Chi tiết trình trạng
                                                                 </th>
-                                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
-                                                                    Phòng
-                                                                </th>
+{{--                                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">--}}
+{{--                                                                    Phòng--}}
+{{--                                                                </th>--}}
                                                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
                                                                     Số lần sửa chữa
                                                                 </th>
@@ -209,15 +221,15 @@
                                                                         </div>
                                                                     </div>
                                                                 </td>
-                                                                <td class="w-20 text-wrap">
-                                                                    <div class="d-flex px-3 py-1">
-                                                                        <div
-                                                                            class="d-flex flex-column justify-content-center">
-                                                                            <h6 class="mb-0 text-sm">{{$details->equipments->room->name}}</h6>
-                                                                            <p class="text-xs text-secondary mb-0"></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
+{{--                                                                <td class="w-20 text-wrap">--}}
+{{--                                                                    <div class="d-flex px-3 py-1">--}}
+{{--                                                                        <div--}}
+{{--                                                                            class="d-flex flex-column justify-content-center">--}}
+{{--                                                                            <h6 class="mb-0 text-sm">{{$details->equipments->room->name}}</h6>--}}
+{{--                                                                            <p class="text-xs text-secondary mb-0"></p>--}}
+{{--                                                                        </div>--}}
+{{--                                                                    </div>--}}
+{{--                                                                </td>--}}
                                                                 <td class="w-20 text-wrap">
                                                                     <div class="d-flex px-4 py-1">
                                                                         <div
@@ -240,7 +252,7 @@
                             </table>
                         </div>
                     </div>
-                    {{--                    {!! $data->links('layout.paginate') !!}--}}
+                                        {!! $data->links('layout.paginate') !!}
                 </div>
             </div>
         </div>

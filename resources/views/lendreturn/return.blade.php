@@ -151,7 +151,7 @@ Mượn trả thiết bị
                 "price" : items.type_of_equipment.price,
                 "describe" : items.type_of_equipment.describe,
                 "type_of_equipment_id" : items.type_of_equipment.id,
-                "id" : items.id
+                "id" : items.id,
             }
             list.push(item);
         }
@@ -199,17 +199,29 @@ Mượn trả thiết bị
 
     async function brokenReport()
     {
+        function loadRoom()
+        {
+            console.log(123123123);
+        }
         const { value: formValues } = await Swal.fire({
             title: 'Chi tiết báo hỏng',
+            showCloseButton: true,
+            showCancelButton: true,
             backdrop: false,
             html:
-                '<label for="swal-input1" class="col-form-label">Tình trạng hiện tại</label><input id="swal-input1" class="swal2-input">' +
-                '<label for="swal-input2" class="col-form-label mt-2">Phương cách đền bù</label><select id="swal-input2" class="swal2-select">' +
-                '<option value="money">Tiền mặt</option>' +
-                '<option value="equipment">Thiết bị</option></select>',
+                '<label for="swal-input2" class="col-form-label mt-2 px-6">Phòng</label><select id="swal-input2" class="swal2-select mt-2" onload="loadRoom()">' +
+                '</select>' +
+                '<label for="swal-input1" class="col-form-label">Tình trạng hiện tại</label><input id="swal-input1" class="swal2-input mt-2">' +
+                '<label for="swal-input1" class="col-form-label mt-2 mb-1">Lý do đền bù</label><input id="swal-input4" class="swal2-input mt-2">' +
+                '<label for="swal-input2" class="col-form-label mt-2">Phương cách đền bù</label><select id="swal-input2" class="swal2-select mt-2">' +
+                    '<option value="money">Tiền mặt</option>' +
+                    '<option value="equipment">Thiết bị</option>' +
+                '</select>' +
+                '<label for="swal-input1" class="col-form-label mt-2 mb-1">Số tiền hoặc số lượng</label><input id="swal-input3" class="swal2-input mt-2">'
+            ,
             focusConfirm: false,
             preConfirm: () => {
-                return {"status" : document.getElementById('swal-input1').value, "recoupMethod" : document.getElementById('swal-input2').value};
+                return {"status" : document.getElementById('swal-input1').value, "recoupMethod" : document.getElementById('swal-input2').value, "quantity" : document.getElementById('swal-input3').value, "reason" : document.getElementById('swal-input4').value};
             }
         })
 
@@ -221,7 +233,8 @@ Mượn trả thiết bị
             let data = {}
             data.status = formValues.status
             data.method = formValues.recoupMethod
-            console.log(data)
+            data.quantity = formValues.quantity
+            data.reason = formValues.reason
             Swal.fire({'text' : JSON.stringify(data), backdrop: false})
             $.ajax({
                 url: '/api/lend-return/broken/report/' + ID ,
@@ -232,12 +245,6 @@ Mượn trả thiết bị
                 cache: false,
                 processData: false,
                 success: function (data) {
-                    // for (let item of data['data'])
-                    // {
-                    //     item.equipment.quantity = Math.ceil(number_of_pupils/item.quantity);
-                    //     tableEquipment.push(item.equipment);
-                    // }
-
                     createDataTable(ListEquipment)
                 },
                 error: function (error) {
