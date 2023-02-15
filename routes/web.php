@@ -124,6 +124,9 @@ Route::group([
     Route::get('/print/{id}', [
         'uses' => 'LendReturnEquipment\LendReturnEquipmentController@printView'
     ])->name('lend_return.print');
+    Route::post('/broken/report/{id}', [
+        'uses' => 'LendReturnEquipment\LendReturnEquipmentController@brokenReport'
+    ])->name('lend_return.broken.report');
 });
 
 Route::group([

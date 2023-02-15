@@ -23,6 +23,7 @@ use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Prettus\Validator\Contracts\ValidatorInterface;
+use function League\Uri\UriTemplate\toString;
 
 class LendReturnEquipmentService extends BaseService
 {
@@ -206,7 +207,8 @@ class LendReturnEquipmentService extends BaseService
 
     public function brokenReport($input, $id)
     {
-        $equipment = LendReturnEquipmentDetails::find($id)->equipments->first();
+        $equipment = Equipment::find($input['equipment_id'])->first();
+
         DB::beginTransaction();
         app(EquipmentStatusServices::class)->updateStatusDetails($input['status'], $equipment->id, EquipmentStatus::STATUS_BROKEN);
         $param['equipment_id'] = $equipment->id;
@@ -220,7 +222,11 @@ class LendReturnEquipmentService extends BaseService
         }
         app(RecoupService::class)->store($param);
 
-        app(MaintenanceServices::class)->store();
+        $dataToMaintenance = [];
+        $dataToMaintenance['equipment'] = [['id' => $equipment->id]];
+        $dataToMaintenance['room_id'] = (string)$equipment->room->id ?? null;
+
+        app(MaintenanceServices::class)->store($dataToMaintenance);
 
         app(EquipmentService::class)->updateEquipmentStatus([$equipment->id], false);
 

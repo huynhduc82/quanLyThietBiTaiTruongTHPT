@@ -63,8 +63,8 @@ class LendReturnEquipmentController extends Controller
             'returner'
         ];
         $lendReturn = $this->service->details($include, $id);
-//        dd($lendReturn);
-        return view('lendreturn/return')->with(compact('lendReturn'));
+        $roomData = app(RoomServices::class)->index();
+        return view('lendreturn/return')->with(compact('lendReturn','roomData'));
     }
 
     public function index()
