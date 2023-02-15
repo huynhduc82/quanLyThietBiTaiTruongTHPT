@@ -76,4 +76,11 @@ class TypeOfEquipmentRepo extends BaseEloquentRepository implements ITypeOfEquip
 
         return $query->where('id', $id)->delete();
     }
+
+    public function searchByName($input = [], $include = []): LengthAwarePaginator
+    {
+        $query = $this->model->newQuery()->where('name', 'iLIKE', '%' . $input['key'] . '%');
+
+        return $query->orderBy('id' ,'desc')->with($include)->paginate(10);
+    }
 }

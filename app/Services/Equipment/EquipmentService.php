@@ -9,6 +9,7 @@ use App\Repositories\Contracts\Equipment\IEquipmentRepo;
 use App\Services\EquipmentStatus\EquipmentStatusServices;
 use App\Services\Response\BaseService;
 use App\Validators\Equipment\EquipmentValidator;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Prettus\Validator\Contracts\ValidatorInterface;

@@ -111,4 +111,21 @@ class TypeOfEquipmentController extends Controller
     {
         return $this->typeOfEquipmentService->updateAllQuantity();
     }
+
+    public function searchByName(\Illuminate\Support\Facades\Request $request)
+    {
+        $include=[
+            'equipments',
+            'imagesInfo',
+            'equipments.status',
+            'equipments.room'
+        ];
+
+
+        $input = $request::all();
+
+        $data = $this->typeOfEquipmentService->searchByName($input, $include);
+
+        return view('equipment/index', compact('data'));
+    }
 }

@@ -3,8 +3,10 @@
 namespace App\Repositories\Eloquents\Equipment;
 
 use App\Models\Equipments\Equipment;
+use App\Models\LendReturnEquipments\LendReturnEquipment;
 use App\Repositories\BaseEloquentRepository;
 use App\Repositories\Contracts\Equipment\IEquipmentRepo;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
