@@ -3,6 +3,8 @@
 namespace App\Models\Recoups;
 
 use App\Models\BaseModel;
+use App\Models\Equipments\Equipment;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Recoup extends BaseModel
@@ -21,4 +23,9 @@ class Recoup extends BaseModel
         'quantity',
         'amount_of_money'
     ];
+
+    public function equipment() : BelongsTo
+    {
+        return $this->belongsTo(Equipment::class, 'equipment_id', 'id');
+    }
 }
