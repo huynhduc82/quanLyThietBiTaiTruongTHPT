@@ -5,6 +5,7 @@ namespace App\Repositories\Eloquents\SpecifyTheNumberOfEquipments;
 use App\Models\SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipment;
 use App\Repositories\BaseEloquentRepository;
 use App\Repositories\Contracts\Equipment\IEquipmentRepo;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -81,5 +82,14 @@ class SpecifyTheNumberOfEquipmentsRepo extends BaseEloquentRepository implements
     public function delete($id): int
     {
         return $this->model->newQuery()->where('id', $id)->delete();
+    }
+
+    public function searchByName($input = [], $include = []): LengthAwarePaginator
+    {
+        $query = $this->model->newQuery()->whereHas('equipment', function ($query) use ($input){
+            return $query->where('name', 'iLIKE', '%' . $input['key'] . '%');
+        })->with($include);
+
+        return $query->orderBy('id' ,'desc')->with($include)->paginate(10);
     }
 }
