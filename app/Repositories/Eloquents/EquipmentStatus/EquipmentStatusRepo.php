@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquents\EquipmentStatus;
 
 use App\Models\EquipmentStatus\EquipmentStatus;
 use App\Repositories\BaseEloquentRepository;
+use Illuminate\Database\Eloquent\Builder;
 
 class EquipmentStatusRepo extends BaseEloquentRepository
 {
@@ -30,5 +31,12 @@ class EquipmentStatusRepo extends BaseEloquentRepository
         }
         $param['status'] = EquipmentStatus::STATUS_BROKEN;
         return $query->where('id', $id)->update($param);
+    }
+
+    public function updateStatus($id, $status)
+    {
+        $query = $this->model->newQuery()->whereHas('equipments', function (Builder $query) use ($id) {
+            $query->where('id', '=', $id);
+        })->update(['status' => $status]);
     }
 }

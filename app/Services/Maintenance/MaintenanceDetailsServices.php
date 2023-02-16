@@ -4,9 +4,12 @@ namespace App\Services\Maintenance;
 
 use App\Helpers;
 use App\Models\Equipments\Equipment;
+use App\Models\EquipmentStatus\EquipmentStatus;
+use App\Models\TypeOfEquipments\TypeOfEquipment;
 use App\Repositories\Contracts\Maintenance\IMaintenanceDetailsRepo;
 use App\Repositories\Contracts\Reservations\IEquipmentReservationDetailRepo;
 use App\Services\Equipment\EquipmentService;
+use App\Services\EquipmentStatus\EquipmentStatusServices;
 use App\Services\Response\BaseService;
 
 class MaintenanceDetailsServices extends BaseService
@@ -66,5 +69,15 @@ class MaintenanceDetailsServices extends BaseService
         }
 
         app(EquipmentService::class)->updateRentQuantity($details, false);
+    }
+
+    public function updateEquipmentStatus($id, $status)
+    {
+        $model = $this->repository->getModel()->newQuery()->where('maintenance_id', '=', $id)
+            ->with('equipments')->first();
+        foreach ($model->equipments as $equipment)
+        {
+            app(EquipmentStatusServices::class)->updateStatus($equipment->id, $status);
+        }
     }
 }

@@ -156,6 +156,9 @@ Route::group([
     Route::post('/end/{id}',[
         'uses' => 'Maintenance\MaintenanceController@endMaintenance'
     ])->name('maintenance.lend')->middleware('auth');
+    Route::post('/details/update/{id}',[
+        'uses' => 'Maintenance\MaintenanceController@updateDetails'
+    ])->name('maintenance.update-details')->middleware('auth');
 });
 
 Route::group([

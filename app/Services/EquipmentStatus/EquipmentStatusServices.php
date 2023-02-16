@@ -2,7 +2,9 @@
 
 namespace App\Services\EquipmentStatus;
 
+use App\Models\EquipmentStatus\EquipmentStatus;
 use App\Repositories\Contracts\EquipmentStatus\IEquipmentStatusRepo;
+use App\Services\Equipment\EquipmentService;
 use App\Services\Response\BaseService;
 use App\Validators\EquipmentStatus\EquipmentStatusValidators;
 use Prettus\Validator\Contracts\ValidatorInterface;
@@ -35,5 +37,18 @@ class EquipmentStatusServices extends BaseService
     public function updateStatusDetails($input, $id, $status)
     {
         return $this->repository->updateStatusDetails($input, $id, $status);
+    }
+
+    public function updateStatus($id, $status)
+    {
+        $this->repository->updateStatus($id, $status);
+
+        if ($status != EquipmentStatus::STATUS_OK) {
+            $isTrue = true;
+        } else {
+            $isTrue = false;
+        }
+
+        app(EquipmentService::class)->updateEquipmentStatus([$id], $isTrue);
     }
 }
