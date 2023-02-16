@@ -21,7 +21,7 @@
                     <div class="form-group px-4">
                         <div class="col-9">
                             <label class="col-form-label">Khối</label>
-                            <label class="col-form-label" for="room"></label>
+                            <label class="col-form-label" for="room">Tên phòng</label>
                             <select type="text" class="form-select"  id="grade">
                                 @foreach($gradeData as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
