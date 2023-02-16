@@ -12,7 +12,7 @@
                     <div class="card-header pb-0">
                         <h2>Danh mục đền bù thiết bị</h2>
                     </div>
-                    <form id="frm-filter" action="{{ route('equipment_details.search-by-name') }}" method="GET">
+                    <form id="frm-filter" action="{{ route('compensation.search-by-name') }}" method="GET">
                         <div class="row px-4 py-2">
                             <div class="col-5">
                                 <div class="input-group">
