@@ -237,8 +237,11 @@ Route::group([
     Route::delete('/delete/{id}', [
         'uses' => 'Class\ClassTimeRegulationController@delete'
     ])->name('class.time.delete')->middleware('auth');
+    Route::get('/search/by/name',[
+        'uses' => 'Class\ClassTimeRegulationController@searchByName'
+    ])->name('classTime.search-by-name');
 });
-
+ 
 Route::group([
     'prefix' => '/class',
 ], function (){
@@ -260,6 +263,9 @@ Route::group([
     Route::delete('/delete/{id}', [
         'uses' => 'Class\ClassController@delete'
     ])->name('class.delete')->middleware('auth');
+    Route::get('/search/by/name',[
+        'uses' => 'Class\ClassController@searchByName'
+    ])->name('class.search-by-name');
 });
 
 Route::group([
@@ -283,6 +289,9 @@ Route::group([
     Route::post('', function () {
         return view('SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@store');
     })->middleware('auth');
+    Route::get('/search/by/name',[
+        'uses' => 'SpecifyTheNumberOfEquipments\SpecifyTheNumberOfEquipmentsController@searchByName'
+    ])->name('number.search-by-name');
 });
 
 Route::group([
@@ -309,6 +318,10 @@ Route::group([
     Route::post('/course/edit/{id}', [
         'uses' => 'Course\CourseController@edit'
     ])->middleware('auth');
+    Route::get('/search/by/name',[
+     'uses' => 'Course\CourseController@searchByName'
+    ])->name('course.search-by-name');
+
     Route::group([
         'prefix' => '/details',
     ], function () {
@@ -321,7 +334,7 @@ Route::group([
         Route::delete('/delete/{id}', [
             'uses' => 'Course\CourseDetailController@delete'
         ])->name('course.details.delete')->middleware('auth');
-    });
+        });
 });
 
 Route::group([
@@ -345,6 +358,9 @@ Route::group([
     Route::delete('/delete/{id}', [
         'uses' => 'Rooms\RoomController@delete'
     ])->name('room.delete')->middleware('auth');
+    Route::get('/search/by/name',[
+        'uses' => 'Rooms\RoomController@searchByName'
+    ])->name('room.search-by-name');
 });
 
 Route::group([
@@ -371,6 +387,9 @@ Route::group([
     Route::post('/grade/{id}', [
         'uses' => 'Grades\GradeController@edit'
     ])->middleware('auth');
+    Route::get('/search/by/name',[
+        'uses' => 'Grades\GradeController@searchByName'
+    ])->name('grade.search-by-name');
 });
 
 Route::group([
@@ -379,6 +398,9 @@ Route::group([
     Route::get('/index', [
         'uses' => 'Recoup\RecoupController@indexView'
     ])->name('compensation.index');
+    Route::get('/search/by/name',[
+        'uses' => 'Recoup\RecoupController@searchByName'
+    ])->name('compensation.search-by-name');
 });
 
 Route::group([

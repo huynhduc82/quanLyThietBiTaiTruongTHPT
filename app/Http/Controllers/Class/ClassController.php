@@ -107,4 +107,12 @@ class ClassController extends Controller
 
         return $this->response(123);
     }
+
+    public function getByName($name, $id)
+    {
+        $include = ['type'];
+        $result = $this->classService->getByName($name, $id, $include);
+
+        return $this->response($result);
+    }
 }

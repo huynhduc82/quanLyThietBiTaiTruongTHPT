@@ -110,4 +110,16 @@ class CourseController extends Controller
 
         return $this->response($result);
     }
+
+    public function searchByName(\Illuminate\Support\Facades\Request $request)
+    {
+        $include=[
+        ];
+
+        $input = $request::all();
+
+        $data = $this->courseService->searchByName($input, $include);
+
+        return view('course/index', compact('data'));
+    }
 }

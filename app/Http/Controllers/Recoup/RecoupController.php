@@ -45,4 +45,15 @@ class RecoupController extends Controller
         return $this->response($this->transform($result, RecoupTransformer::class, $include));
     }
 
+    public function searchByName(\Illuminate\Support\Facades\Request $request)
+    {
+        $include=[
+        ];
+
+        $input = $request::all();
+
+        $data = $this->RecoupService->searchByName($input, $include);
+
+        return view('recoup/index', compact('data'));
+    }
 }

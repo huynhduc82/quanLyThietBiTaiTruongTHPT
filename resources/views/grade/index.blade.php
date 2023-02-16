@@ -12,14 +12,15 @@
                     <div class="card-header pb-0">
                         <h2>Quản lý khối lớp</h2>
                     </div>
-                    <div class="row px-4 py-2">
-                        <div class="col-5">
-                            <div class="input-group">
-                                <span class="input-group-text text-body"><i class="fas fa-search"
-                                                                            aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
+                    <form id="frm-filter" action="{{ route('equipment_details.search-by-name') }}" method="GET">
+                        <div class="row px-4 py-2">
+                            <div class="col-5">
+                                <div class="input-group">
+                                    <button type="submit" class="btn btn-outline-secondary m-0 p-0" type="button" id="btnSearch"><span class="input-group-text border-0 text-body z-index-0"><i class="fas fa-search" aria-hidden="true"></i></span></button>
+                                    <input type="text" class="form-control px-2" placeholder="Nhập tìm kiếm..." aria-label="Nhập tìm kiếm..." aria-describedby="btnSearch" id="inputSearch" name="key">
+                                </div>
                             </div>
-                        </div>
+                    </form>
                         <div class="col-5">
                             @role('SuperAdmin|admin|manage')
                             <a href="{{ route('grade.store') }}" type="button" class="btn bg-gradient-info">Thêm
@@ -121,7 +122,7 @@
                 var DeleteConfirm = (url) => {
                     swalWithBootstrapButtons.fire({
                         title: 'Bạn có chắc không?',
-                        text: "Bạn không thể khôi phục lại thiết bị đã xoá!",
+                        text: "Bạn không thể khôi phục lại khối lớp đã xoá!",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonText: 'Có, Hãy xoá đi!',
@@ -140,7 +141,7 @@
                                 success: function () {
                                     swalWithBootstrapButtons.fire({
                                         title: 'Đã xoá!',
-                                        text: "Thiết bị của bạn đã xoá.",
+                                        text: "Khối lớp của bạn đã xoá.",
                                         icon: 'success',
                                         backdrop: false,
                                     }).then((result) => {
@@ -162,7 +163,7 @@
                         ) {
                             swalWithBootstrapButtons.fire({
                                 title: 'Đã huỷ',
-                                text: 'Thiết bị của bạn đã an toàn :)',
+                                text: 'Khối lớp của bạn đã an toàn :)',
                                 icon: 'error',
                                 backdrop: false,
                             })
