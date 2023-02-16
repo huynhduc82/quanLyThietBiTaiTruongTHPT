@@ -49,4 +49,11 @@ class GradeRepo extends BaseEloquentRepository implements IEquipmentRepo
     {
         return $this->model->newQuery()->where('id', $id)->delete();
     }
+
+    public function searchByName($input = [], $include = [])
+    {
+        $query = $this->model->newQuery()->where('name', 'iLIKE', '%' . $input['key'] . '%');
+
+        return $query->orderBy('id' ,'desc')->with($include)->paginate(10);
+    }
 }
