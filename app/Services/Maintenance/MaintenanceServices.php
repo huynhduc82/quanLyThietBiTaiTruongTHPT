@@ -5,9 +5,11 @@ namespace App\Services\Maintenance;
 use App\Helpers;
 use App\Models\EquipmentReservations\EquipmentReservation;
 use App\Models\Equipments\Equipment;
+use App\Models\EquipmentStatus\EquipmentStatus;
 use App\Models\Maintenance\Maintenance;
 use App\Repositories\Contracts\Maintenance\IMaintenanceRepo;
 use App\Services\Equipment\EquipmentService;
+use App\Services\EquipmentStatus\EquipmentStatusServices;
 use App\Services\Response\BaseService;
 use App\Validators\Maintenance\MaintenanceValidators;
 use Carbon\Carbon;
@@ -112,6 +114,7 @@ class MaintenanceServices extends BaseService
         $input['maintenancer_id'] = Helpers::getUserLoginId() ?? null;
         $input['maintenance_time'] = Carbon::now()->toDateTimeString();
         $this->repository->edit($input, $id);
+        app(MaintenanceDetailsServices::class)->updateEquipmentStatus($id, EquipmentStatus::STATUS_MAINTAINING);
         return $this->repository->updateStatus(Maintenance::STATUS_MAINTAINING, $id);
     }
 
@@ -132,5 +135,15 @@ class MaintenanceServices extends BaseService
     public function countMaintenance()
     {
         return $this->repository->countMaintenance();
+    }
+
+    public function updateDetails($id, $input)
+    {
+        if ($input['success']) {
+            app(EquipmentStatusServices::class)->updateStatus($id, EquipmentStatus::STATUS_OK);
+        }
+        else {
+            app(EquipmentStatusServices::class)->updateStatus($id, EquipmentStatus::STATUS_CANNOT_CONTINUE_TO_USE);
+        }
     }
 }

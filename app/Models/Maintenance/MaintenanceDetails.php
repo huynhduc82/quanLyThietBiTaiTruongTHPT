@@ -36,8 +36,13 @@ class MaintenanceDetails extends BaseModel
 //            'equipment_id');
 //    }
 
-    public function equipments() : BelongsTo
+    public function equipment() : BelongsTo
     {
         return $this->BelongsTo(Equipment::class, 'equipment_id', 'id')->withTrashed();
+    }
+
+    public function equipments() : HasMany
+    {
+        return $this->hasMany(Equipment::class, 'id', 'equipment_id')->withTrashed();
     }
 }

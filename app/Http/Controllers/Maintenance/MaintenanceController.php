@@ -28,14 +28,13 @@ class MaintenanceController extends Controller
     {
         $include = [
             'details',
-            'details.equipments',
-            'details.equipments.room',
+            'details.equipment',
+            'details.equipment.room',
             'user',
             'maintenancer',
         ];
 
         $data = $this->maintenanceServices->index($include);
-
         return view('maintenance/index')->with(compact('data'));
     }
 
@@ -146,6 +145,14 @@ class MaintenanceController extends Controller
     public function endMaintenance($id)
     {
         $result = $this->maintenanceServices->endMaintenance($id);
+
+        return $this->response($result);
+    }
+
+    public function updateDetails(Request $request, $id)
+    {
+        $input = $request::all();
+        $result = $this->maintenanceServices->updateDetails($id, $input);
 
         return $this->response($result);
     }

@@ -153,11 +153,6 @@
                                                                 Sửa Chữa
                                                             </button>
                                                             @endrole
-                                                            @role('SuperAdmin|admin|manage')
-                                                            <button class="btn bg-gradient-danger my-1 mb-1 ms-1" onclick="CancelConfirm({{$item->id}})">
-                                                                Huỷ
-                                                            </button>
-                                                            @endrole
                                                         @else
                                                             @if($item->status != 3 )
                                                                 @role('SuperAdmin|admin|manage')
@@ -191,11 +186,13 @@
                                                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
                                                                     Chi tiết trình trạng
                                                                 </th>
-{{--                                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">--}}
-{{--                                                                    Phòng--}}
-{{--                                                                </th>--}}
+                                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
+                                                                    Tình trạng
+                                                                </th>
                                                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
                                                                     Số lần sửa chữa
+                                                                </th>
+                                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-wrap w-20">
                                                                 </th>
                                                             </tr>
                                                             </thead>
@@ -207,7 +204,7 @@
                                                                     <div class="d-flex px-4 py-1">
                                                                         <div
                                                                             class="d-flex flex-column justify-content-center">
-                                                                            <h6 class="mb-0 text-sm">{{$details->equipments->name}}</h6>
+                                                                            <h6 class="mb-0 text-sm">{{$details->equipment->name}}</h6>
                                                                             <p class="text-xs text-secondary mb-0"></p>
                                                                         </div>
                                                                     </div>
@@ -216,28 +213,58 @@
                                                                     <div class="d-flex px-4 py-1">
                                                                         <div
                                                                             class="d-flex flex-column justify-content-center">
-                                                                            <h6 class="mb-0 text-sm">{{$details->equipments->status->condition_details}}</h6>
+                                                                            <h6 class="mb-0 text-sm">{{$details->equipment->status->condition_details}}</h6>
                                                                             <p class="text-xs text-secondary mb-0"></p>
                                                                         </div>
                                                                     </div>
                                                                 </td>
-{{--                                                                <td class="w-20 text-wrap">--}}
-{{--                                                                    <div class="d-flex px-3 py-1">--}}
-{{--                                                                        <div--}}
-{{--                                                                            class="d-flex flex-column justify-content-center">--}}
-{{--                                                                            <h6 class="mb-0 text-sm">{{$details->equipments->room->name}}</h6>--}}
-{{--                                                                            <p class="text-xs text-secondary mb-0"></p>--}}
-{{--                                                                        </div>--}}
-{{--                                                                    </div>--}}
-{{--                                                                </td>--}}
+                                                                <td class="w-20 text-wrap">
+                                                                    <div class="d-flex px-3 py-1">
+                                                                        <div class="d-flex flex-column justify-content-center">
+                                                                            <h6 class="mb-0 text-sm">
+                                                                            @if($details->equipment->status)
+                                                                                @switch ($details->equipment->status->status)
+                                                                                    @case (1) Hư hỏng @break
+                                                                                    @case (2) Đang sửa chửa @break
+                                                                                    @case (3) Không thể sử dụng tiếp @break
+                                                                                    @case (0) OK @break
+                                                                                    @default
+                                                                                @endswitch
+                                                                            @else
+                                                                            @endif
+                                                                            </h6>
+                                                                            <p class="text-xs text-secondary mb-0"></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
                                                                 <td class="w-20 text-wrap">
                                                                     <div class="d-flex px-4 py-1">
                                                                         <div
                                                                             class="d-flex flex-column justify-content-center">
-                                                                            <h6 class="mb-0 text-sm">{{$details->equipments->status->number_of_repairs}}</h6>
+                                                                            <h6 class="mb-0 text-sm">{{$details->equipment->status->number_of_repairs}}</h6>
                                                                             <p class="text-xs text-secondary mb-0"></p>
                                                                         </div>
                                                                     </div>
+                                                                </td>
+                                                                <td class="w-20">
+                                                                    @role('SuperAdmin|admin|maintainer')
+                                                                    @if ($details->equipment->status->status === 2 && $item->status === 3)
+                                                                    <div class="d-flex px-2 py-1">
+                                                                        <div class="d-flex justify-content-center">
+                                                                            <button type="button"
+                                                                                    class="btn bg-gradient-info my-1 mb-1 ms-1"
+                                                                                    onclick="DetailEquipmentConfirm({{$details->equipment->id}}, true)">
+                                                                                Hoàn tất
+                                                                            </button>
+                                                                            <button type="button"
+                                                                                    class="btn bg-gradient-danger my-1 mb-1 ms-1"
+                                                                                    onclick="DetailEquipmentConfirm({{$details->equipment->id}}, false)">
+                                                                                Không thể sửa
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                    @endif
+                                                                    @endrole
                                                                 </td>
                                                             </tr>
                                                         @endforeach
@@ -519,6 +546,63 @@
                         }
                     })
                 };
+                let DetailEquipmentConfirm = (id, isTrue) => {
+                    let data = {}
+                    data.success = isTrue
+                    let url = '/maintenance/details/update/' + id
+                    swalWithBootstrapButtons.fire({
+                        title: 'Bạn có chắc không?',
+                        text: isTrue ? "Bạn chắc chắn là đã sửa chữa xong thiết bị này không?" : "Bạn chắc chắn là thiết bị này không thể sửa chữa được không?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Có, Tôi đã hoàn thành!',
+                        cancelButtonText: 'Không, Huỷ bỏ!',
+                        reverseButtons: true,
+                        backdrop: false,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: url,
+                                data: JSON.stringify(data),
+                                dataType: 'json',
+                                enctype: "multipart/form-data",
+                                contentType: 'application/json',
+                                cache: false,
+                                processData: false,
+                                success: function () {
+                                    swalWithBootstrapButtons.fire({
+                                        title: 'Đã hoàn thành!',
+                                        text: isTrue ? "Bạn đã sữa chửa xong thiết bị này" : "Bạn đã xác nhận thiết bị này không thể sử dụng tiếp",
+                                        icon: 'success',
+                                        backdrop: false,
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload();
+                                        }
+                                    })
+                                },
+                                error: function (error) {
+                                },
+                                type: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            })
+
+                        } else if (
+                            /* Read more about handling dismissals below */
+                            result.dismiss === Swal.DismissReason.cancel
+                        ) {
+                            swalWithBootstrapButtons.fire({
+                                title: 'Đã huỷ',
+                                text: 'Thiết bị chưa được sửa chữa xong!',
+                                icon: 'error',
+                                backdrop: false,
+                            })
+                        }
+                    })
+                };
+            </script>
             </script>
             <script>
                 $(document).ready(function () {

@@ -324,7 +324,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Danh mục đền bù thiết bị</span>
+                    <span class="nav-link-text ms-1">Đền bù thiết bị</span>
                 </a>
             </li>
             <li class="nav-item mt-3">

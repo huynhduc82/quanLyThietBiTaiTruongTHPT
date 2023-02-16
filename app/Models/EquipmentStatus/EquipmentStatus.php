@@ -33,6 +33,6 @@ class EquipmentStatus extends BaseModel
 
     public function equipments() : BelongsTo
     {
-        return $this->belongsTo(Equipment::class, 'equipment_status_id', 'id');
+        return $this->belongsTo(Equipment::class, 'id', 'equipment_status_id');
     }
 }
