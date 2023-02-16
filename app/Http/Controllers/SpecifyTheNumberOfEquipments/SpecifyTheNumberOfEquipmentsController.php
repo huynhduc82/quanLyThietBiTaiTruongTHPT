@@ -144,4 +144,6 @@ class SpecifyTheNumberOfEquipmentsController extends Controller
 
         return $this->response($result);
     }
+
+
 }

@@ -58,4 +58,9 @@ class RoomServices extends BaseService
         }
         $validator->passesOrFail($id === null ? ValidatorInterface::RULE_CREATE : ValidatorInterface::RULE_UPDATE);
     }
+
+    public function searchByName($input = [], $include = [])
+    {
+        return $this->repository->searchByName($input, $include);
+    }
 }

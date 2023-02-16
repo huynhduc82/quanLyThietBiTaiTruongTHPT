@@ -60,4 +60,9 @@ class CourseDetailsService extends BaseService
         return $this->repository->delete($id);
     }
 
+    public function getByName($name = 0, $id = 0, $include)
+    {
+        return $this->repository->getByName($name, $id, $include);
+    }
+
 }

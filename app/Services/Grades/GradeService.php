@@ -55,4 +55,9 @@ class GradeService extends BaseService
         return $this->repository->delete($id);
     }
 
+    public function searchByName($input = [], $include = [])
+    {
+        return $this->repository->searchByName($input, $include);
+    }
+
 }
