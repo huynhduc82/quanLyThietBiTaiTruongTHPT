@@ -88,4 +88,9 @@ class SpecifyTheNumberOfEquipmentsService extends BaseService
 
         return ceil($numberOfPupils/$numberEquipment);
     }
+
+    public function searchByName($input = [], $include = [])
+    {
+        return $this->repository->searchByName($input, $include);
+    }
 }

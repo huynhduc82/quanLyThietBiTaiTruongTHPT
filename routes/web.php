@@ -239,9 +239,9 @@ Route::group([
     ])->name('class.time.delete')->middleware('auth');
     Route::get('/search/by/name',[
         'uses' => 'Class\ClassTimeRegulationController@searchByName'
-    ])->name('classTime.search-by-name');
+    ])->name('class.time.search-by-name');
 });
- 
+
 Route::group([
     'prefix' => '/class',
 ], function (){

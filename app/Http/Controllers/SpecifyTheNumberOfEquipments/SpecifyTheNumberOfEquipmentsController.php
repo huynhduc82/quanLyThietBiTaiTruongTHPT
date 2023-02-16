@@ -145,5 +145,16 @@ class SpecifyTheNumberOfEquipmentsController extends Controller
         return $this->response($result);
     }
 
+    public function searchByName(\Illuminate\Support\Facades\Request $request)
+    {
+        $include=[
+        ];
 
+
+        $input = $request::all();
+
+        $data = $this->specifyTheNumberOfEquipmentsService->searchByName($input, $include);
+
+        return view('specifythenumberofequipment/index', compact('data'));
+    }
 }

@@ -115,4 +115,17 @@ class ClassController extends Controller
 
         return $this->response($result);
     }
+
+    public function searchByName(\Illuminate\Support\Facades\Request $request)
+    {
+        $include=[
+        ];
+
+
+        $input = $request::all();
+
+        $data = $this->classService->searchByName($input, $include);
+
+        return view('room/index', compact('data'));
+    }
 }
