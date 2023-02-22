@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Equipment;
 
 use App\Http\Controllers\Controller;
-use App\Imports\CoursesDetailMultiSheetImport;
-use App\Imports\EquipmentImport;
+use App\Jobs\ImportEquipmentJob;
 use App\Services\Equipment\TypeOfEquipmentService;
 use App\Transformers\Equipment\TypeOfEquipmentTransformers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class TypeOfEquipmentController extends Controller
 {
@@ -101,8 +100,8 @@ class TypeOfEquipmentController extends Controller
     public function importEquipment(Request $request): JsonResponse
     {
         $file = $request->all()['file'];
-
-        Excel::import(new EquipmentImport(), $file);
+        $path = Storage::putFile('file-import', $file, false);
+        ImportEquipmentJob::dispatch($path);
 
         return $this->response(123);
     }
