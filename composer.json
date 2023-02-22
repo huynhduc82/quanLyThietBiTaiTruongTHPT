@@ -17,6 +17,7 @@
         "league/fractal": "^0.20.1",
         "maatwebsite/excel": "^3.1",
         "masbug/flysystem-google-drive-ext": "^2.2",
+        "predis/predis": "^2.1",
         "prettus/l5-repository": "^2.8",
         "psr/simple-cache": "2.0",
         "spatie/laravel-fractal": "^6.0",
