@@ -472,8 +472,8 @@ Route::post('logout',[
 //$this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 //$this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 //$this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
-//$this->get('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
-//$this->post('password/confirm', 'Auth\ConfirmPasswordController@confirm');
+//$this->get('password/ 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
+//$this->post('password/confirconfirm',m', 'Auth\ConfirmPasswordController@confirm');
 //$this->get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 //$this->get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
 //$this->post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');

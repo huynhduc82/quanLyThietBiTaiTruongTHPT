@@ -2,6 +2,7 @@
 
 namespace App\Services\Reservations;
 
+use App\Events\ReservationEvent;
 use App\Helpers;
 use App\Models\EquipmentReservations\EquipmentReservation;
 use App\Models\Equipments\Equipment;
@@ -12,6 +13,7 @@ use App\Validators\Reservations\EquipmentReservationValidators;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
 class EquipmentReservationService extends BaseService
@@ -64,6 +66,7 @@ class EquipmentReservationService extends BaseService
             app(EquipmentReservationDetailService::class)->store($input);
 
             app(EquipmentService::class)->updateRentQuantity($input['equipment'], true);
+            event(new ReservationEvent($result));
 
 //            DB::commit();
             return 'OK';
