@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\ReservationEvent;
+use App\Listeners\Reservation\MailReservationSuccessToManageListener;
+use App\Listeners\Reservation\MailReservationSuccessToUserListener;
+use App\Listeners\Reservation\NotificationReservationSuccessToManageListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -16,6 +20,11 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        ReservationEvent::class => [
+//            NotificationReservationSuccessToManageListener::class,
+//            MailReservationSuccessToManageListener::class,
+            MailReservationSuccessToUserListener::class,
         ],
     ];
 

@@ -8,8 +8,6 @@ use App\Models\TypeOfEquipments\TypeOfEquipment;
 use App\Services\Equipment\TypeOfEquipmentService;
 use App\Services\EquipmentStatus\EquipmentStatusServices;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;

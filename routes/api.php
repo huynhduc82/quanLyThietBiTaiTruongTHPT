@@ -27,3 +27,4 @@ require 'reservation.php';
 require 'course.php';
 require 'user.php';
 require 'specify_the_number_of_equipments.php';
+require 'mail.php';
