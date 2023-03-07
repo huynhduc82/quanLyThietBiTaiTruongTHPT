@@ -25,9 +25,10 @@ class ReservationSuccessMail extends Mailable implements ShouldQueue
             return $this
                 ->to($this->model->user->email)
                 ->subject(__('message.title.reservation'))
-                ->markdown('emails.test')
+                ->markdown('emails.reservation.reservation_success')
                 ->with([
-                    'name' => $this->model->user->name
+                    'name' => $this->model->user->name,
+                    'model' => $this->model,
                 ]);
         } catch (Exception $exception) {
             dd($exception);
