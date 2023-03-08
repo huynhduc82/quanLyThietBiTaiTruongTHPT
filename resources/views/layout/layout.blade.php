@@ -412,9 +412,12 @@
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+{{--                    <div class="input-group">--}}
+{{--                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>--}}
+{{--                        <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">--}}
+{{--                    </div>--}}
                     <div class="input-group">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
+                        <a class="btn btn-outline-info m-0 p-2 text-transform-none" href="{{ route('chat.index') }}">Chat với Quản lý</a>
                     </div>
                 </div>
                 <ul class="navbar-nav  justify-content-end">

@@ -16,7 +16,9 @@ use App\Repositories\Eloquents\Grades;
 use App\Repositories\Eloquents\Maintenance;
 use App\Repositories\Eloquents\Liquidation;
 use App\Repositories\Eloquents\Recoup;
+use App\Repositories\Eloquents\Chat;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Contracts\Chat as IChat;
 use App\Repositories\Contracts\Recoup as IRecoup;
 use App\Repositories\Contracts\Liquidation as ILiquidation;
 use App\Repositories\Contracts\Grades as IGrade;
@@ -133,5 +135,11 @@ class RepositoryServiceProvider extends ServiceProvider
          * ------------------------------------------------------------
          */
         IRecoup\IRecoupRepo::class => Recoup\RecoupRepo::class,
+        /*
+         * ------------------------------------------------------------
+         * Chat
+         * ------------------------------------------------------------
+         */
+        IChat\IChatRepo::class => Chat\ChatRepo::class,
     ];
 }

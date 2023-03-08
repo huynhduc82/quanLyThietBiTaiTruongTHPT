@@ -8910,6 +8910,10 @@ fieldset:disabled .btn {
   width: 95% !important;
 }
 
+.w-98 {
+    width: 98% !important;
+}
+
 .w-100 {
   width: 100% !important;
 }
@@ -10504,6 +10508,10 @@ fieldset:disabled .btn {
   text-transform: lowercase !important;
 }
 
+.text-transform-none {
+    text-transform: none !important;
+}
+
 .text-uppercase {
   text-transform: uppercase !important;
 }
@@ -10609,6 +10617,10 @@ fieldset:disabled .btn {
 
 .bg-success {
   background-color: #82d616 !important;
+}
+
+.bg-chat {
+    background-color: #f9015f !important;
 }
 
 .bg-info {
@@ -11016,6 +11028,10 @@ fieldset:disabled .btn {
   max-height: 500px !important;
 }
 
+.max-height-530 {
+    max-height: 515px !important;
+}
+
 .max-height-600 {
   max-height: 600px !important;
 }
@@ -11142,6 +11158,10 @@ fieldset:disabled .btn {
 
 .max-width-500 {
   max-width: 500px !important;
+}
+
+.max-width-1150 {
+    max-width: 1150px !important;
 }
 
 @media (min-width: 576px) {
@@ -20256,6 +20276,7 @@ fieldset:disabled .btn {
   margin-left: -1rem;
 }
 
+
 .badge.bg-primary {
   background: #cb0c9f;
 }
@@ -26656,4 +26677,52 @@ tr.hide-table-padding td {
 
 .hiddenRow {
     padding: 0 !important;
+}
+
+.chat-container {
+    height: 640px;
+    display: flex !important;
+    flex-direction: column;
+}
+
+.chat-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.message-avatar {
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.message:not(:last-child) {
+    margin-bottom: 3px !important;
+}
+
+.message-text {
+    word-wrap: break-word;
+    max-width: 1180px;
+}
+
+.message-text-contain {
+    overflow: hidden;
+    margin-left: 5px;
+}
+
+.message-text-contain-reverse {
+    overflow: hidden;
+    margin-right: 5px;
+}
+
+.message-contain {
+    overflow-y:auto;
+}
+
+.message-avatar-contain {
+    margin-bottom: auto;
+    margin-top: auto;
 }

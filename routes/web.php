@@ -393,6 +393,42 @@ Route::group([
 });
 
 Route::group([
+    'prefix' => '/chat',
+], function (){
+    Route::get('/index', [
+        'uses' => 'Chat\ChatController@indexView'
+    ])->name('chat.index')->middleware('auth');
+    Route::get('/messages', [
+        'uses' => 'Chat\ChatController@index'
+    ])->middleware('auth');
+    Route::post('/messages', [
+        'uses' => 'Chat\ChatController@store'
+    ])->middleware('auth');
+//    Route::get('/store', [
+//        'uses' => 'Grades\GradeController@storeView'
+//    ])->name('grade.store')->middleware('auth');
+//    Route::get('/edit/{id}', [
+//        'uses' => 'Grades\GradeController@editView'
+//    ])->name('grade.edit')->middleware('auth');
+//    Route::post('/import', [
+//        'uses' => 'Grades\GradeController@importCourseDetail'
+//    ])->name('grade.import.excel')->middleware('auth');
+//    Route::delete('/grade/delete/{id}', [
+//        'uses' => 'Grades\GradeController@delete'
+//    ])->name('grade.delete')->middleware('auth');
+//    Route::post('', [
+//        'uses' => 'Grades\GradeController@store'
+//    ])->middleware('auth');
+//    Route::post('/grade/{id}', [
+//        'uses' => 'Grades\GradeController@edit'
+//    ])->middleware('auth');
+//    Route::get('/search/by/name',[
+//        'uses' => 'Grades\GradeController@searchByName'
+//    ])->name('grade.search-by-name');
+});
+
+
+Route::group([
     'prefix' => '/compensation',
 ], function (){
     Route::get('/index', [
