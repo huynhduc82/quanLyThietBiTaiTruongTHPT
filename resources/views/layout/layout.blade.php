@@ -443,12 +443,8 @@
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                @if(Auth::user()->load('avatarInfo')->avatarInfo)
-                                    <img src="{{Auth::user()->load('avatarInfo')->avatarInfo->url}}" alt="avatar" width="35px" height="35px" style="border-radius: 50%; object-fit: cover">
-                                @else
-                                    <i class="fa fa-user me-sm-1"></i>
-                                @endif
-                                    <span class="d-sm-inline d-none">{{ Auth::user()->name }}</span>
+                                <img src="{{Auth::user()->load('avatarInfo')->avatarInfo->url ?? asset('assets/img/default-avatar.jpg')}}" alt="avatar" width="35px" height="35px" style="border-radius: 50%; object-fit: cover">
+                                <span class="d-sm-inline d-none">{{ Auth::user()->name }}</span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -568,6 +564,7 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 @yield('footer_scripts')
 <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+<script type="module" src="{{ asset('/js/app.js') }}"></script>
 </body>
 <script src="{{ asset('assets/js/soft-ui-main.js') }}"></script>
 <script src="{{ asset('assets/js/soft-ui.js') }}"></script>

@@ -18,11 +18,11 @@ class ChatRepo extends BaseEloquentRepository implements IEquipmentRepo
         return ChatMessage::class;
     }
 
-    public function index(array $include = []): Collection
+    public function index(array $include = [], $limit): Collection
     {
         $query = $this->model->newQuery();
-
-        return $query->with($include)->orderBy('id')->get();
+        $count = $this->model->count();
+        return $query->with($include)->skip($count-$limit)->take($limit)->orderBy('id')->get();
     }
 
     public function details($id, array $include = []): Model|Builder|null

@@ -15,9 +15,9 @@ class ChatServices extends BaseService
         return IChatRepo::class;
     }
 
-    public function index(array $include = [])
+    public function index(array $include, $limit)
     {
-        return $this->repository->index($include);
+        return $this->repository->index($include, $limit);
     }
 
     public function details($id = 0, $include = [])

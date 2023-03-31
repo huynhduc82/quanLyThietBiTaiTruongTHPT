@@ -8910,8 +8910,8 @@ fieldset:disabled .btn {
   width: 95% !important;
 }
 
-.w-98 {
-    width: 98% !important;
+.w-82 {
+    width: 82% !important;
 }
 
 .w-100 {
@@ -11034,6 +11034,10 @@ fieldset:disabled .btn {
 
 .max-height-600 {
   max-height: 600px !important;
+}
+
+.max-height-635 {
+    max-height: 635px !important;
 }
 
 .max-height-vh-10 {
@@ -26703,9 +26707,12 @@ tr.hide-table-padding td {
     margin-bottom: 3px !important;
 }
 
+.user:is(:first-child) {
+    margin-top: 5px !important;
+}
+
 .message-text {
     word-wrap: break-word;
-    max-width: 1180px;
 }
 
 .message-text-contain {
@@ -26726,3 +26733,20 @@ tr.hide-table-padding td {
     margin-bottom: auto;
     margin-top: auto;
 }
+
+.send-icon {
+    font-size: 25px;
+}
+
+.online-circle {
+    background: #66d432;
+    position: relative;
+    z-index: 100;
+    height: 16px;
+    width: 16px;
+    margin-left: 35px;
+    margin-top: -15px;
+    border-radius: 50%;
+    border: solid #ffffff;
+}
+

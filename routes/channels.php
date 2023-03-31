@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+//Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
+//    return (int) $user->id === (int) $id;
+//});
+
+Broadcast::channel('chatroom', function (\App\Models\User $user, string $id) {
+    return $user->id === $id;
+});
+
+Broadcast::channel('room.{id}', function ($user, $id) {
+    return $user->id === (int)$id;
 });
